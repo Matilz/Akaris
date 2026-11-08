@@ -1732,6 +1732,12 @@
                     </button>
                 </div>
 
+                <!-- Ready Script: choose the script with your key filled in, or the template with YOUR KEY -->
+                <div id="readyVariant" class="exec-switch hidden translate-z-lift" style="align-self:center;margin-bottom:0" role="tablist" aria-label="Script type">
+                    <button type="button" id="rvKey" class="exec-sw active" role="tab" aria-selected="true" onclick="setReadyVariant('key')">WITH MY KEY</button>
+                    <button type="button" id="rvPlace" class="exec-sw" role="tab" aria-selected="false" onclick="setReadyVariant('placeholder')">YOUR KEY</button>
+                </div>
+
                 <!-- Step 1: Subscribe YouTube Button -->
                 <button 
                     id="subBtn"
@@ -2836,13 +2842,16 @@
         }
 
         // ===== Get Key tab: two modes (plain key / ready-to-run script) =====
+        var readyVariant = 'key', readyCounting = false, readyTimer = 0;
+        var READY_IDLE_BOX = '', READY_IDLE_BTN = '';
         function readyScriptText() {
-            return `_G.Script_Key= "${targetKey}"\nloadstring(game:HttpGet("${SCRIPT_URL}"))()`;
+            return `_G.Script_Key= "${readyVariant === 'key' ? targetKey : 'YOUR KEY'}"\nloadstring(game:HttpGet("${SCRIPT_URL}"))()`;
         }
         function setKeyMode(mode) {
             const script = mode === 'script';
             ['keyBox', 'copyKeyBtn'].forEach(id => document.getElementById(id).classList.toggle('hidden', script));
             document.getElementById('readyBox').classList.toggle('hidden', !script);
+            document.getElementById('readyVariant').classList.toggle('hidden', !script);
             document.getElementById('pasteKeyBlock').classList.toggle('hidden', script);
             const rb = document.getElementById('copyReadyBtn');
             rb.classList.toggle('hidden', !script);
@@ -2853,28 +2862,57 @@
                 b.setAttribute('aria-selected', on ? 'true' : 'false');
             });
         }
-        function readyCountdown(timer) {
-            const r = document.getElementById('readyDisplay');
-            r.textContent = `GETTING SCRIPT (${timer}S)...`;
-            r.className = "relative code-box border-amber-500/60 rounded-2xl p-4 text-center text-xs text-amber-300 font-extrabold leading-relaxed select-all whitespace-pre-wrap break-all overflow-hidden animate-pulse";
+        function setReadyVariant(v) {
+            readyVariant = v;
+            [['rvKey', v === 'key'], ['rvPlace', v === 'placeholder']].forEach(([id, on]) => {
+                const b = document.getElementById(id);
+                b.classList.toggle('active', on);
+                b.setAttribute('aria-selected', on ? 'true' : 'false');
+            });
+            refreshReady();
         }
-        function readyReveal() {
-            const r = document.getElementById('readyDisplay');
+        function readyVis() {             /* className rewrites must not change whether the button is shown */
+            const b = document.getElementById('copyReadyBtn'), script = document.getElementById('kmScript').classList.contains('active');
+            b.classList.toggle('hidden', !script); b.classList.toggle('flex', script);
+        }
+        function readyShowScript() {      /* green box + enabled copy button */
+            const r = document.getElementById('readyDisplay'), b = document.getElementById('copyReadyBtn');
             r.textContent = readyScriptText();
             r.className = "relative bg-black/95 border-emerald-400/80 rounded-2xl p-4 text-left text-xs text-emerald-300 font-black leading-relaxed select-all whitespace-pre-wrap break-all overflow-hidden shadow-[inset_0_0_20px_rgba(16,185,129,0.3)]";
             document.getElementById('readyGlow').classList.remove('hidden');
-            const b = document.getElementById('copyReadyBtn');
             b.disabled = false;
-            b.classList.remove('bg-neutral-900/80', 'text-neutral-600', 'cursor-not-allowed', 'border-neutral-800');
-            b.classList.add('btn-emerald', 'text-white', 'cursor-pointer', 'border-emerald-300/40');
+            b.className = READY_IDLE_BTN.replace('bg-neutral-900/80', 'btn-emerald').replace('text-neutral-600', 'text-white').replace('cursor-not-allowed', 'cursor-pointer').replace('border-neutral-800', 'border-emerald-300/40');
+            readyVis();
         }
+        function readyShowLocked() {
+            const r = document.getElementById('readyDisplay'), b = document.getElementById('copyReadyBtn');
+            document.getElementById('readyGlow').classList.add('hidden');
+            if (readyCounting) {
+                r.textContent = `GETTING SCRIPT (${readyTimer}S)...`;
+                r.className = "relative code-box border-amber-500/60 rounded-2xl p-4 text-center text-xs text-amber-300 font-extrabold leading-relaxed select-all whitespace-pre-wrap break-all overflow-hidden animate-pulse";
+            } else {
+                r.textContent = 'AKARI-XXXX-XXXXX-XXXXXX';
+                r.className = READY_IDLE_BOX;
+            }
+            b.disabled = true; b.className = READY_IDLE_BTN; readyVis();
+        }
+        function refreshReady() {
+            if (!READY_IDLE_BOX) { READY_IDLE_BOX = document.getElementById('readyDisplay').className; READY_IDLE_BTN = document.getElementById('copyReadyBtn').className.replace(/(^|\s)(hidden|flex)(?=\s|$)/g, ' ').trim(); }
+            if (isKeyUnlocked) readyShowScript(); else readyShowLocked();   /* both variants stay locked until Subscribe is done */
+        }
+        function readyCountdown(timer) {
+            if (!READY_IDLE_BOX) { READY_IDLE_BOX = document.getElementById('readyDisplay').className; READY_IDLE_BTN = document.getElementById('copyReadyBtn').className.replace(/(^|\s)(hidden|flex)(?=\s|$)/g, ' ').trim(); }
+            readyCounting = true; readyTimer = timer;
+            readyShowLocked();
+        }
+        function readyReveal() { readyCounting = false; refreshReady(); }
         function copyReady(e) {
             if (e) e.stopPropagation();
             if (!isKeyUnlocked) return;
             const t = document.getElementById('readyBtnText');
             copyTextRobust(readyScriptText(), () => {}, () => showNotify("CLIPBOARD", "COPY BLOCKED - SELECT THE SCRIPT AND COPY MANUALLY", false));
             t.textContent = "SCRIPT COPIED!";
-            showNotify("SCRIPT EXECUTOR", "READY SCRIPT COPIED TO CLIPBOARD", true);
+            showNotify("SCRIPT EXECUTOR", readyVariant === 'key' ? "READY SCRIPT COPIED TO CLIPBOARD" : "SCRIPT COPIED - PUT YOUR KEY IN PLACE OF YOUR KEY", true);
             setTimeout(() => { t.textContent = "2. COPY READY SCRIPT"; }, 2000);
         }
 
@@ -4399,20 +4437,91 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
                  y: sh.fy * H + Math.cos(t * sh.sp * 0.8 + sh.ph) * sh.ay * kk + (sh.oy || 0) + (sh.dy || 0) };
     }
     var kk = 1;
-    /* pointing at a crystal makes it shy away, then spring back (no rotation) */
+    /* crystals no longer dodge the pointer; they only spring back after a small recoil */
     function react(sh, t, dt) {
         var cn = center(sh, t), dx = cn.x - px, dy = cn.y - py, d = Math.sqrt(dx * dx + dy * dy) || 1;
         var r = Math.max(sh.len, sh.rad) * kk * gOf(sh) * 1.15 + 14;
         sh.ox = sh.ox || 0; sh.oy = sh.oy || 0; sh.vx = sh.vx || 0; sh.vy = sh.vy || 0; sh.sv = sh.sv || 0; sh.sa = sh.sa || 0;
-        if (d < r) {
-            var f = 1 - d / r;
-            sh.vx += dx / d * f * 3.4 * dt; sh.vy += dy / d * f * 3.4 * dt;
-        }
         sh.vx += -sh.ox * 0.035 * dt; sh.vy += -sh.oy * 0.035 * dt;
         var damp = Math.pow(0.9, dt);
         sh.vx *= damp; sh.vy *= damp; sh.sv *= Math.pow(0.95, dt);
         sh.ox += sh.vx * dt; sh.oy += sh.vy * dt; sh.sa += sh.sv * 0.12 * dt;
     }
+    /* Click a crystal: it shatters into pieces that float apart, then fly back together and re-form after about 3 seconds */
+    var SHATTER_MS = 3000, UI_CLICK = 'button, a, input, textarea, select, label, [role="dialog"], .modal-backdrop, .theme-menu';
+    function rnd(a, b) { return a + Math.random() * (b - a); }
+    function axes(sh) { var st = Math.sin(sh.tilt), ct = Math.cos(sh.tilt); return { ax: -st, ay: ct, bx: ct, by: st }; }   /* long axis / short axis on screen */
+    function pickCrystal(x, y) {
+        var t = (performance.now() - t0) / 1000, list = shards.concat(active), best = null, bd = 1e9;
+        for (var i = 0; i < list.length; i++) {
+            var sh = list[i], g = gOf(sh); if (sh.shat || g < 0.6) continue;
+            var cn = center(sh, t), A = axes(sh), dx = x - cn.x, dy = y - cn.y;
+            var u = dx * A.ax + dy * A.ay, v = dx * A.bx + dy * A.by;
+            var L1 = sh.len * kk * g + 20, R1 = sh.rad * kk * g + 20, m = Math.abs(u) / L1 + Math.abs(v) / R1;
+            if (m <= 1 && m < bd) { bd = m; best = sh; }
+        }
+        return best;
+    }
+    function inFrame(x, y) { for (var i = 0; i < rects.length; i++) { var R = rects[i]; if (x > R.left && x < R.right && y > R.top && y < R.bottom) return true; } return false; }
+    function shatter(sh, now) {
+        var g = gOf(sh), A = axes(sh), n = Math.round(6 + Math.min(14, sh.len / 9)), frags = [], i;
+        for (i = 0; i < n; i++) {
+            var u = rnd(-0.85, 0.85) * sh.len * kk * g, v = rnd(-0.6, 0.6) * sh.rad * kk * g * (1 - Math.abs(u) / (sh.len * kk * g + 1));
+            var hx = A.ax * u + A.bx * v, hy = A.ay * u + A.by * v, ang = Math.atan2(hy, hx) + rnd(-0.9, 0.9);
+            var s0 = Math.min(34, rnd(0.12, 0.3) * sh.len * kk * g + 5);
+            frags.push({ hx: hx, hy: hy, dx: Math.cos(ang), dy: Math.sin(ang), dist: rnd(0.8, 1.5) * (sh.len * kk * g * 0.55 + 60),
+                         s: s0, rot: rnd(0, 6.28), spin: rnd(-6, 6), ph: rnd(0, 6.28), lit: rnd(0.15, 1), hue: 266 + rnd(-6, 16),
+                         v1: [rnd(0.5, 0.75), rnd(0.45, 0.7)], v2: [-rnd(0.55, 0.8), rnd(0.35, 0.6)] });
+        }
+        sh.shat = { t0: now, frags: frags };
+    }
+    function shatterStep(now) {
+        var list = shards.concat(active);
+        list.forEach(function (sh) {
+            if (sh.pop) { var v = Math.max(0, 1 - (now - sh.pop) / 800); sh.gl = Math.max(sh.gl || 0, v); if (v <= 0) sh.pop = 0; }
+            if (sh.shat && now - sh.shat.t0 >= SHATTER_MS) { sh.shat = null; sh.pop = now; }
+        });
+    }
+    function prof(tt) {                                   /* 0 = joined, 1 = fully scattered */
+        if (tt < 0.22) return easeOut(tt / 0.22);
+        if (tt < 0.55) return 1;
+        return 1 - ease2((tt - 0.55) / 0.45);
+    }
+    function drawShatter(sh, now, t, k, g) {
+        var tt = (now - sh.shat.t0) / SHATTER_MS, p = prof(tt), cn = center(sh, t), fr = sh.shat.frags, i;
+        if (tt < 0.25) {                                  /* flash at the moment it breaks */
+            var fa = 1 - tt / 0.25, R = sh.len * k * g + 50, gf = c.createRadialGradient(cn.x, cn.y, 0, cn.x, cn.y, R);
+            gf.addColorStop(0, 'rgba(250,232,255,' + (0.85 * fa).toFixed(3) + ')'); gf.addColorStop(0.45, 'rgba(192,132,252,' + (0.45 * fa).toFixed(3) + ')'); gf.addColorStop(1, 'rgba(168,85,247,0)');
+            c.save(); c.globalCompositeOperation = 'lighter'; c.fillStyle = gf; c.beginPath(); c.arc(cn.x, cn.y, R, 0, 6.2832); c.fill(); c.restore();
+        }
+        c.save();
+        c.shadowColor = 'rgba(168,85,247,0.8)'; c.shadowBlur = 14 * k;
+        for (i = 0; i < fr.length; i++) {
+            var f = fr[i], fx = cn.x + f.hx + f.dx * f.dist * p + Math.sin(tt * 9 + f.ph) * 6 * p, fy = cn.y + f.hy + f.dy * f.dist * p + Math.cos(tt * 8 + f.ph) * 6 * p;
+            var a = f.rot + f.spin * p, ca = Math.cos(a), sa = Math.sin(a), s = f.s;
+            var pts = [[0, -s], [f.v1[0] * s, f.v1[1] * s], [f.v2[0] * s, f.v2[1] * s]].map(function (q) { return [fx + q[0] * ca - q[1] * sa, fy + q[0] * sa + q[1] * ca]; });
+            var gr = c.createLinearGradient(pts[0][0], pts[0][1], (pts[1][0] + pts[2][0]) / 2, (pts[1][1] + pts[2][1]) / 2);
+            gr.addColorStop(0, 'hsla(' + f.hue + ',90%,' + (30 + f.lit * 42) + '%,0.95)'); gr.addColorStop(1, 'hsla(' + (f.hue - 12) + ',85%,' + (12 + f.lit * 22) + '%,0.95)');
+            c.beginPath(); c.moveTo(pts[0][0], pts[0][1]); c.lineTo(pts[1][0], pts[1][1]); c.lineTo(pts[2][0], pts[2][1]); c.closePath();
+            c.fillStyle = gr; c.fill();
+            c.lineWidth = 1; c.strokeStyle = 'rgba(221,190,255,' + (0.35 + f.lit * 0.5).toFixed(2) + ')'; c.stroke();
+        }
+        c.restore();
+    }
+    function onCrystalDown(e) {
+        if (!on || document.documentElement.getAttribute('data-theme') !== 'blackhole') return;
+        if (e.target && e.target.closest && e.target.closest(UI_CLICK)) return;
+        if (inFrame(e.clientX, e.clientY)) return;
+        var sh = pickCrystal(e.clientX, e.clientY);
+        if (sh) shatter(sh, performance.now());
+    }
+    window.addEventListener('pointerdown', onCrystalDown, true);
+    var crHover = false;
+    window.addEventListener('pointermove', function (e) {
+        var h = on && document.documentElement.getAttribute('data-theme') === 'blackhole' && !inFrame(e.clientX, e.clientY) && !(e.target.closest && e.target.closest(UI_CLICK)) && !!pickCrystal(e.clientX, e.clientY);
+        if (h !== crHover) { crHover = h; document.documentElement.style.cursor = h ? 'pointer' : ''; }
+    }, { passive: true });
+
     /* Light pulse: every 5-6 s a beam of light travels from one crystal to another, and the one it reaches flares up and shines out */
     var TRAVEL_MS = 1100, BURST_MS = 2000;
     var pulse = { phase: 0, src: null, dst: null, t: 0, cs: 0, next: 0, last: null };
@@ -4421,14 +4530,19 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         var i, age, u;
         for (i = 0; i < shards.length; i++) shards[i].gl = 0;
         if (pulse.phase === 0 && now >= pulse.next) {
-            var src = pulse.last || shards[Math.floor(Math.random() * shards.length)], dst;
-            do { dst = shards[Math.floor(Math.random() * shards.length)]; } while (dst === src);
-            pulse.src = src; pulse.dst = dst; pulse.phase = 1; pulse.t = now; pulse.cs = now;
+            var ok = shards.filter(function (q) { return !q.shat; });
+            if (ok.length < 2) { pulse.next = now + 500; }
+            else {
+                var src = pulse.last && !pulse.last.shat ? pulse.last : ok[Math.floor(Math.random() * ok.length)], dst;
+                do { dst = ok[Math.floor(Math.random() * ok.length)]; } while (dst === src);
+                pulse.src = src; pulse.dst = dst; pulse.phase = 1; pulse.t = now; pulse.cs = now;
+            }
         }
         if (pulse.phase === 1) {
             age = now - pulse.t;
             pulse.src.gl = Math.max(0, 0.55 * (1 - age / 500));
-            if (age >= TRAVEL_MS) { pulse.phase = 2; pulse.t = now; pulse.last = pulse.dst; }
+            if (pulse.dst.shat) { pulse.phase = 0; pulse.next = now + 1000; }
+            else if (age >= TRAVEL_MS) { pulse.phase = 2; pulse.t = now; pulse.last = pulse.dst; }
         }
         if (pulse.phase === 2) {
             age = now - pulse.t; u = age / BURST_MS;
@@ -4545,6 +4659,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         scanFrames();
         lifeStep(now);
         pulseStep(now);
+        shatterStep(now);
         shards.concat(active).forEach(function (sh) { react(sh, t, dt); });
         c.save();
         if (rects.length) {   // never paint inside the script frame
@@ -4552,7 +4667,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
             rects.forEach(function (R) { c.rect(R.left, R.top, R.right - R.left, R.bottom - R.top); });
             c.clip('evenodd');
         }
-        shards.concat(active).forEach(function (sh) { var g = gOf(sh); if (g > 0.003) draw(sh, t, k * g); });
+        shards.concat(active).forEach(function (sh) { var g = gOf(sh); if (sh.shat) drawShatter(sh, now, t, k, g); else if (g > 0.003) draw(sh, t, k * g); });
         active.forEach(function (sh) {
             if (!sh.fl || sh.fl.a <= 0.01) return;
             var f = sh.fl, r = 26 * k * (1.4 - f.a * 0.6), gr = c.createRadialGradient(f.x, f.y, 0, f.x, f.y, r);
@@ -4580,6 +4695,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         on = !on;
         try { localStorage.setItem('akariCrystal', on ? 'on' : 'off'); } catch (err) {}
         sync();
+        shards.forEach(function (q) { q.shat = null; q.pop = 0; });
         if (on) { active = []; start(); } else { if (raf) cancelAnimationFrame(raf); raf = 0; active = []; c.clearRect(0, 0, W, H); }
     };
     size(); sync(); start();
