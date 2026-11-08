@@ -1747,12 +1747,6 @@
                     </button>
                 </div>
 
-                <!-- Ready Script: choose the script with your key filled in, or the template with YOUR KEY -->
-                <div id="readyVariant" class="exec-switch hidden translate-z-lift" style="align-self:center;margin-bottom:0" role="tablist" aria-label="Script type">
-                    <button type="button" id="rvKey" class="exec-sw active" role="tab" aria-selected="true" onclick="setReadyVariant('key')">WITH MY KEY</button>
-                    <button type="button" id="rvPlace" class="exec-sw" role="tab" aria-selected="false" onclick="setReadyVariant('placeholder')">YOUR KEY</button>
-                </div>
-
                 <!-- Step 1: Subscribe YouTube Button -->
                 <button 
                     id="subBtn"
@@ -2857,16 +2851,15 @@
         }
 
         // ===== Get Key tab: two modes (plain key / ready-to-run script) =====
-        var readyVariant = 'key', readyCounting = false, readyTimer = 0;
+        var readyCounting = false, readyTimer = 0;
         var READY_IDLE_BOX = '', READY_IDLE_BTN = '';
         function readyScriptText() {
-            return `_G.Script_Key= "${readyVariant === 'key' ? targetKey : 'YOUR KEY'}"\nloadstring(game:HttpGet("${SCRIPT_URL}"))()`;
+            return `_G.Script_Key= "YOUR KEY"\nloadstring(game:HttpGet("${SCRIPT_URL}"))()`;
         }
         function setKeyMode(mode) {
             const script = mode === 'script';
             ['keyBox', 'copyKeyBtn'].forEach(id => document.getElementById(id).classList.toggle('hidden', script));
             document.getElementById('readyBox').classList.toggle('hidden', !script);
-            document.getElementById('readyVariant').classList.toggle('hidden', !script);
             document.getElementById('pasteKeyBlock').classList.toggle('hidden', script);
             const rb = document.getElementById('copyReadyBtn');
             rb.classList.toggle('hidden', !script);
@@ -2876,15 +2869,6 @@
                 b.classList.toggle('active', on);
                 b.setAttribute('aria-selected', on ? 'true' : 'false');
             });
-        }
-        function setReadyVariant(v) {
-            readyVariant = v;
-            [['rvKey', v === 'key'], ['rvPlace', v === 'placeholder']].forEach(([id, on]) => {
-                const b = document.getElementById(id);
-                b.classList.toggle('active', on);
-                b.setAttribute('aria-selected', on ? 'true' : 'false');
-            });
-            refreshReady();
         }
         function readyVis() {             /* className rewrites must not change whether the button is shown */
             const b = document.getElementById('copyReadyBtn'), script = document.getElementById('kmScript').classList.contains('active');
@@ -2927,7 +2911,7 @@
             const t = document.getElementById('readyBtnText');
             copyTextRobust(readyScriptText(), () => {}, () => showNotify("CLIPBOARD", "COPY BLOCKED - SELECT THE SCRIPT AND COPY MANUALLY", false));
             t.textContent = "SCRIPT COPIED!";
-            showNotify("SCRIPT EXECUTOR", readyVariant === 'key' ? "READY SCRIPT COPIED TO CLIPBOARD" : "SCRIPT COPIED - PUT YOUR KEY IN PLACE OF YOUR KEY", true);
+            showNotify("SCRIPT EXECUTOR", "SCRIPT COPIED - PUT YOUR KEY IN PLACE OF YOUR KEY", true);
             setTimeout(() => { t.textContent = "2. COPY READY SCRIPT"; }, 2000);
         }
 
@@ -3571,7 +3555,7 @@
         try { localStorage.removeItem('akariPremium'); } catch (e) {}
 
         const PREMIUM_SCRIPT = `_G.Premiums_Only  = true
-_G.Script_Keys = "AKARI-PEJ189-09JKU7A1"
+_G.Script_Keys = "AKARI-H5D2T9-CMUSURN-OBVX5A"
 loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))()`;
 
         function copyPremium(e) {
