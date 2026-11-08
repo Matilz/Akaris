@@ -811,6 +811,21 @@
         #volcanoFx { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         @media (prefers-reduced-motion: reduce) { #volcanoGlow, .vc-ember, .vc-smoke, .vc-lava, .vc-crater { animation: none; } .vc-ember { opacity: 0.6; } }
 
+        /* ===== Custom scrollbar (follows the theme colours) ===== */
+        :root { --sb1: #d8b4fe; --sb2: #7e22ce; --sb-edge: rgba(168,85,247,0.35); --sb-track: #0a0314; }
+        html[data-theme="halloween"], html[data-theme="volcano"] { --sb1: #fdba74; --sb2: #c2410c; --sb-edge: rgba(249,115,22,0.4); --sb-track: #140803; }
+        html[data-theme="christmas"] { --sb1: #fca5a5; --sb2: #b91c1c; --sb-edge: rgba(239,68,68,0.4); --sb-track: #14060a; }
+        html[data-theme="hacker"] { --sb1: #86efac; --sb2: #15803d; --sb-edge: rgba(34,197,94,0.4); --sb-track: #03100a; }
+        ::-webkit-scrollbar { width: 11px; height: 11px; }
+        ::-webkit-scrollbar-track { background: linear-gradient(90deg, rgba(0,0,0,0.85), var(--sb-track)); border-left: 1px solid var(--sb-edge); }
+        ::-webkit-scrollbar-thumb { border-radius: 999px; border: 2.5px solid transparent; background-clip: padding-box;
+            background-image: linear-gradient(180deg, var(--sb1), var(--sb2) 55%, var(--sb1)); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), inset 0 0 8px rgba(255,255,255,0.25); min-height: 46px; }
+        ::-webkit-scrollbar-thumb:hover { background-image: linear-gradient(180deg, #fff, var(--sb1) 40%, var(--sb2)); }
+        ::-webkit-scrollbar-thumb:active { background-image: linear-gradient(180deg, var(--sb1), var(--sb1)); }
+        ::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+        ::-webkit-scrollbar-corner { background: var(--sb-track); }
+        @supports not selector(::-webkit-scrollbar) { * { scrollbar-width: thin; scrollbar-color: var(--sb2) var(--sb-track); } }
+
         /* ===== Themes ===== */
         :root { --theme-hue: 0deg; }
         html[data-theme="halloween"] { --theme-hue: 112deg; }
