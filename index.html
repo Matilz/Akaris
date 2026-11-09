@@ -1189,10 +1189,19 @@
             box-shadow: 0 0 14px rgba(192, 132, 252, 0.9);
             animation: splashLoad 3s linear forwards;
         }
+        #akariSplash .splash-url {
+            position: absolute; left: 0; right: 0; text-align: center;
+            bottom: calc(20vh - 34px + env(safe-area-inset-bottom, 0px));
+            font: 600 clamp(10px, 3.1vw, 13px) 'Fira Code', ui-monospace, monospace; letter-spacing: 0.08em;
+            color: rgba(233, 213, 255, 0.78); text-shadow: 0 0 12px rgba(168, 85, 247, 0.8);
+            -webkit-user-select: none; user-select: none; padding: 0 16px; word-break: break-all;
+            animation: splashRise 1s 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        #akariSplash.hide .splash-url { animation: none; opacity: 0; transition: opacity 0.6s ease; }
         @keyframes splashLoad { from { width: 0; } to { width: 100%; } }
         @keyframes splashRise { from { opacity: 0; transform: translateY(14px) scale(0.96); } to { opacity: 1; transform: none; } }
         @keyframes splashBreathe { 0% { transform: scale(0.7); opacity: 0; } 40% { opacity: 1; } 100% { transform: scale(1.1); opacity: 0.85; } }
-        @media (prefers-reduced-motion: reduce) { #akariSplash, #akariSplash .splash-glow, #akariSplash .splash-word, #akariSplash.hide .splash-word, #akariSplash .splash-word span, #akariSplash.hide .splash-word span { animation: none; transition: none; } }
+        @media (prefers-reduced-motion: reduce) { #akariSplash, #akariSplash .splash-glow, #akariSplash .splash-word, #akariSplash .splash-url, #akariSplash.hide .splash-word, #akariSplash .splash-word span, #akariSplash.hide .splash-word span { animation: none; transition: none; } }
 
         /* ===== Premium toggle: click-anywhere Blackhole ===== */
         .bh-toggle-row {
@@ -1386,6 +1395,7 @@
         <div class="splash-glow"></div>
         <h1 class="splash-word"><span style="--i:0">𝒜</span><span style="--i:1">𝓀</span><span style="--i:2">𝒶</span><span style="--i:3">𝓇</span><span style="--i:4">𝒾</span></h1>
         <div class="splash-bar" aria-hidden="true"><i></i></div>
+        <div class="splash-url">https://matilz.github.io/Akaris</div>
     </div>
     <script>
         /* Akari intro: show for 3 seconds, then fade out */
