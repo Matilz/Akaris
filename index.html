@@ -379,6 +379,12 @@
             font: 800 13px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.04em; color: #e9d5ff; background: rgba(88,28,135,0.4); border: 1px solid rgba(216,180,254,0.35); transition: background .2s ease, border-color .2s ease, transform .2s ease; }
         .uni-act:hover { background: rgba(126,34,206,0.6); border-color: rgba(233,213,255,0.7); transform: translateY(-1px); }
         .uni-act-play { color: #fff; background: linear-gradient(135deg, rgba(147,51,234,0.7), rgba(88,28,135,0.8)); }
+        .uni-keybadge { position: absolute; right: 30px; bottom: 30px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 10px; font: 800 11px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.06em; color: #fff;
+            background: rgba(10,4,20,0.78); border: 1px solid rgba(216,180,254,0.55); box-shadow: 0 0 14px rgba(168,85,247,0.5); backdrop-filter: blur(6px); }
+        .uni-keybadge svg { color: #e9d5ff; }
+        .uni-switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+        .uni-switch-lab { font: 800 12px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.1em; color: #d8b4fe; }
+        .uni-change { flex: 0 0 auto; padding: 9px 16px; }
         .uni-steps { display: none; margin: 0; padding: 14px 16px 14px 34px; border-radius: 14px; font: 600 13px/1.7 'Plus Jakarta Sans', sans-serif; color: #e9d5ff; background: rgba(0,0,0,0.4); border: 1px dashed rgba(216,180,254,0.35); }
         .uni-steps.open { display: block; }
         .uni-back { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; cursor: pointer; font: 800 12px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.12em;
@@ -3329,7 +3335,10 @@
     SaveSetting = false,
     AutoExecute = false
 }
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/MainPremium.lua"))()`
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/MainPremium.lua"))()`,
+                label: 'GravityHub', key: false,
+                more: [{ label: 'VectorHub', key: true, code: `getgenv().Key="Your Key";
+loadstring(game:HttpGet('https://vectorhub.space'))()` }]
             }
         ];
         function uniThumb(it, cls) {
@@ -3345,6 +3354,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFr
             }
             return box;
         }
+        const uniSel = {};
+        function uniAll(it) { return [{ label: it.label || 'Script 1', code: it.script, key: it.key }].concat(it.more || []); }
+        function uniCur(i) { const a = uniAll(UNIVERSAL_SCRIPTS[i]); return a[(uniSel[i] || 0) % a.length]; }
         function showUniversalList() {
             const list = document.getElementById('universalList'); list.innerHTML = '';
             document.getElementById('universalDesc').textContent = 'Pick a map to get its script.';
@@ -3375,6 +3387,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFr
             const hero = el('div', 'uni-hero');
             const pic = uniThumb(it, 'uni-pic uni-pic-lg'); hero.appendChild(pic);
             hero.appendChild(el('span', 'uni-badge', 'MAP ' + (i + 1)));
+            const keyB = el('span', 'uni-keybadge');
+            keyB.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"></circle><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"></path></svg><span>Key System</span>';
+            hero.appendChild(keyB);
             /* right: info card */
             const info = el('div', 'uni-info');
             info.appendChild(el('h3', 'uni-title', it.name + ' Script'));
@@ -3393,7 +3408,18 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFr
             ['Copy the script below.', 'Open ' + it.name + ' in Roblox.', 'Open your executor, paste the script and press Execute.'].forEach(t => steps.appendChild(el('li', '', t)));
             how.onclick = (ev) => { ev.stopPropagation(); steps.classList.toggle('open'); };
             info.appendChild(steps);
-            const pre = el('pre', 'code-box uni-code', it.script);
+            const all = uniAll(it);
+            const pre = el('pre', 'code-box uni-code', uniCur(i).code);
+            keyB.style.display = uniCur(i).key ? '' : 'none';
+            if (all.length > 1) {
+                const bar = el('div', 'uni-switch');
+                const lab = el('span', 'uni-switch-lab');
+                const chg = el('button', 'uni-act uni-change'); chg.type = 'button';
+                chg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"></path></svg><span>Change</span>';
+                const upd = () => { const n = (uniSel[i] || 0) % all.length; lab.textContent = 'SCRIPT ' + (n + 1) + '/' + all.length + ' - ' + all[n].label; pre.textContent = all[n].code; keyB.style.display = all[n].key ? '' : 'none'; };
+                chg.onclick = (ev) => { ev.stopPropagation(); uniSel[i] = ((uniSel[i] || 0) + 1) % all.length; upd(); };
+                upd(); bar.appendChild(lab); bar.appendChild(chg); info.appendChild(bar);
+            }
             const btn = el('button', 'tilt-btn btn-purple-glow uni-copy'); btn.type = 'button';
             btn.innerHTML = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 002-2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>COPY SCRIPT</span>';
             btn.onclick = (ev) => copyUniversal(ev, i, btn);
@@ -3411,7 +3437,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFr
             if (e) e.stopPropagation();
             const it = UNIVERSAL_SCRIPTS[i]; if (!it) return;
             const t = btn.querySelector('span');
-            copyTextRobust(it.script, () => {
+            copyTextRobust(uniCur(i).code, () => {
                 t.textContent = 'COPIED!'; setTimeout(() => { t.textContent = 'COPY SCRIPT'; }, 2000);
                 showNotify('UNIVERSAL SCRIPT', it.name.toUpperCase() + ' SCRIPT COPIED', true);
             }, () => showNotify('CLIPBOARD', 'COPY BLOCKED - SELECT THE SCRIPT AND COPY MANUALLY', false));
