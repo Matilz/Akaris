@@ -408,6 +408,13 @@
         #universalRow { display: flex; justify-content: center; margin-bottom: 10px; }
         #universalBtn:hover { z-index: 25; }
 
+        /* ===== Crystal mouse cursor ===== */
+        @media (hover: hover) and (pointer: fine) {
+            html, body { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2732%27%20height%3D%2732%27%20viewBox%3D%270%200%2032%2032%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27a%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23e9d5ff%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%237e22ce%27%2F%3E%3C%2FlinearGradient%3E%3Cfilter%20id%3D%27g%27%20x%3D%27-50%25%27%20y%3D%27-50%25%27%20width%3D%27200%25%27%20height%3D%27200%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%271.2%27%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Cpath%20d%3D%27M16%202%20L26%2012%20L16%2030%20L6%2012Z%27%20fill%3D%27%23a855f7%27%20opacity%3D%27.75%27%20filter%3D%27url%28%23g%29%27%2F%3E%3Cpath%20d%3D%27M16%202%20L26%2012%20L16%2030%20L6%2012Z%27%20fill%3D%27url%28%23a%29%27%20stroke%3D%27%23f3e8ff%27%20stroke-width%3D%271.2%27%20stroke-linejoin%3D%27round%27%2F%3E%3Cpath%20d%3D%27M6%2012%20H26%20M16%202%20L12%2012%20L16%2030%20M16%202%20L20%2012%20L16%2030%27%20fill%3D%27none%27%20stroke%3D%27%23f5d0fe%27%20stroke-opacity%3D%27.7%27%20stroke-width%3D%27.9%27%20stroke-linejoin%3D%27round%27%2F%3E%3Cpath%20d%3D%27M12%2012%20L16%202%20L20%2012Z%27%20fill%3D%27%23fff%27%20opacity%3D%27.45%27%2F%3E%3C%2Fsvg%3E") 16 2, auto; }
+            a, button, label, summary, select, [onclick], [role="button"], [class*="btn"], [class*="tilt"], .exec-sw, .uni-map, .uni-act, .modal-close, input[type="checkbox"], input[type="radio"], input[type="range"] { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2736%27%20height%3D%2736%27%20viewBox%3D%270%200%2032%2032%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27a%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23fff%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23c026d3%27%2F%3E%3C%2FlinearGradient%3E%3Cfilter%20id%3D%27g%27%20x%3D%27-50%25%27%20y%3D%27-50%25%27%20width%3D%27200%25%27%20height%3D%27200%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%272.2%27%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Cpath%20d%3D%27M16%202%20L26%2012%20L16%2030%20L6%2012Z%27%20fill%3D%27%23a855f7%27%20opacity%3D%27.75%27%20filter%3D%27url%28%23g%29%27%2F%3E%3Cpath%20d%3D%27M16%202%20L26%2012%20L16%2030%20L6%2012Z%27%20fill%3D%27url%28%23a%29%27%20stroke%3D%27%23fff%27%20stroke-width%3D%271.2%27%20stroke-linejoin%3D%27round%27%2F%3E%3Cpath%20d%3D%27M6%2012%20H26%20M16%202%20L12%2012%20L16%2030%20M16%202%20L20%2012%20L16%2030%27%20fill%3D%27none%27%20stroke%3D%27%23f5d0fe%27%20stroke-opacity%3D%27.7%27%20stroke-width%3D%27.9%27%20stroke-linejoin%3D%27round%27%2F%3E%3Cpath%20d%3D%27M12%2012%20L16%202%20L20%2012Z%27%20fill%3D%27%23fff%27%20opacity%3D%27.45%27%2F%3E%3C%2Fsvg%3E") 18 2, pointer !important; }
+            input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), textarea { cursor: text !important; }
+        }
+
         /* ===== Universal Script: premium polish ===== */
         @property --uni-ang { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
         @keyframes uniRise { from { opacity: 0; transform: translateY(18px) scale(.97); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
@@ -3467,6 +3474,27 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/r
                     { label: 'Bonk Hub', key: false, code: `loadstring(game:HttpGet("https://bonkhub.online/loader.lua", true))()` }
                 ]
             }
+            ,{
+                name: '99 Night In The Forest',
+                place: '79546208627805',          /* Roblox place ID, used for the map picture */
+                label: 'Somtank Hub', key: false,
+                script: `loadstring(game:HttpGet("https://loader.somtank.space/loader/99-v1.lua"))()`,
+                more: [
+                    { label: 'Bonk Hub', key: false, code: `loadstring(game:HttpGet("https://bonkhub.online/loader.lua", true))()` },
+                    { label: 'Speed Hub X', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()` },
+                    { label: 'Vector Hub', key: false, code: `loadstring(game:HttpGet("https://vectorhub.space"))()` },
+                    { label: 'Voidware', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/VapeVoidware/VW-Add/main/loader.lua", true))()` },
+                    { label: 'HoHo Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()` },
+                    { label: 'FoxName', key: false, best: true, code: `loadstring(game:HttpGet("https://foxname.top/loader"))()` },
+                    { label: 'RScript', key: false, code: `getgenv().Provider = "rscript"
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf72141537a85458e5a7.lua"))()` },
+                    { label: 'Luminon', key: false, code: `loadstring(game:HttpGet("http://luminon.top/loader.lua"))()` },
+                    { label: 'Wis Hub', key: false, code: `loadstring(game:HttpGet("https://api.wishub.cloud/files/loader.lua"))()` },
+                    { label: 'Rifton', key: false, code: `loadstring(game:HttpGet("https://rifton.top/loader.lua"))()` },
+                    { label: 'NoLag', key: false, code: `loadstring(game:HttpGet("https://nolag.wtf/script.lua"))()` },
+                    { label: 'Ronix Hub', key: false, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
+                ]
+            }
         ];
         function uniThumb(it, cls) {
             const box = document.createElement('div'); box.className = cls;
@@ -4161,6 +4189,13 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         const hatCtx = hatCanvas.getContext('2d');
         sizePyCanvas();
 
+        let pySpin = null;
+        addEventListener('pointerdown', function (ev) {
+            const r = pyCanvas.getBoundingClientRect();
+            if (!r.width || ev.clientX < r.left || ev.clientX > r.right || ev.clientY < r.top || ev.clientY > r.bottom) return;
+            if (getComputedStyle(pyCanvas).visibility === 'hidden' || pyCanvas.offsetParent === null) return;
+            pySpin = { t0: performance.now(), dur: 650, last: 0 };
+        }, true);
         function drawPyramid(c, cx, cy, scale) {
             const projected = [];
             pyramid.vertices.forEach(v => {
@@ -4396,6 +4431,11 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
 
             // pyramid emblem
             pyramid.rotY += 0.007;
+            if (pySpin) {                                   /* click: one fast 360 turn, easing out */
+                const k = Math.min(1, (performance.now() - pySpin.t0) / pySpin.dur), e = 1 - Math.pow(1 - k, 3);
+                pyramid.rotY += (e - pySpin.last) * Math.PI * 2; pySpin.last = e;
+                if (k >= 1) pySpin = null;
+            }
             pyramid.rotX = 0.25 + Math.sin(Date.now() * 0.0007) * 0.08;
             const dpr = window.devicePixelRatio || 1;
             pyCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -5498,6 +5538,51 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
     }, { passive: true });
     size(); window.addEventListener('resize', size);
     raf = requestAnimationFrame(frame);
+})();
+</script>
+<script>
+/* Crystal cursor: small sparkle burst on click */
+(function () {
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cv = document.createElement('canvas');
+    cv.setAttribute('aria-hidden', 'true');
+    cv.style.cssText = 'position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483000;';
+    var ctx = cv.getContext('2d'), dpr = 1, W = 0, H = 0, ps = [], raf = 0;
+    function fit() { dpr = Math.min(window.devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; }
+    fit(); addEventListener('resize', fit);
+    document.body.appendChild(cv);
+    var COLS = ['#ffffff', '#f5d0fe', '#e9d5ff', '#c084fc', '#d8b4fe'];
+    function star(x, y, r, rot) {
+        ctx.beginPath();
+        for (var k = 0; k < 8; k++) {
+            var a = rot + k * Math.PI / 4, rr = (k % 2 === 0) ? r : r * 0.28;
+            ctx[k ? 'lineTo' : 'moveTo'](x + Math.cos(a) * rr, y + Math.sin(a) * rr);
+        }
+        ctx.closePath(); ctx.fill();
+    }
+    function burst(x, y) {
+        for (var i = 0; i < 9; i++) {
+            var a = Math.random() * Math.PI * 2, sp = 1.2 + Math.random() * 2.4;
+            ps.push({ x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 0.4, r: 2.2 + Math.random() * 3, rot: Math.random() * 3, vr: (Math.random() - 0.5) * 0.3,
+                life: 0, max: 26 + Math.random() * 16, c: COLS[(Math.random() * COLS.length) | 0] });
+        }
+        if (!raf) raf = requestAnimationFrame(tick);
+    }
+    function tick() {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+        for (var i = ps.length - 1; i >= 0; i--) {
+            var p = ps[i]; p.life++;
+            if (p.life > p.max) { ps.splice(i, 1); continue; }
+            p.x += p.vx; p.y += p.vy; p.vx *= 0.93; p.vy = p.vy * 0.93 + 0.04; p.rot += p.vr;
+            var t = p.life / p.max, tw = 0.6 + 0.4 * Math.sin(p.life * 0.9);
+            ctx.globalAlpha = (1 - t) * tw; ctx.fillStyle = p.c; ctx.shadowColor = '#c084fc'; ctx.shadowBlur = 8;
+            star(p.x, p.y, p.r * (1 - t * 0.5), p.rot);
+        }
+        ctx.globalAlpha = 1; ctx.shadowBlur = 0;
+        raf = ps.length ? requestAnimationFrame(tick) : 0;
+        if (!ps.length) ctx.clearRect(0, 0, W, H);
+    }
+    addEventListener('pointerdown', function (e) { if (e.pointerType === 'touch') return; burst(e.clientX, e.clientY + 2); }, true);
 })();
 </script>
 </body>
