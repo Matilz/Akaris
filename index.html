@@ -379,9 +379,19 @@
             font: 800 13px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.04em; color: #e9d5ff; background: rgba(88,28,135,0.4); border: 1px solid rgba(216,180,254,0.35); transition: background .2s ease, border-color .2s ease, transform .2s ease; }
         .uni-act:hover { background: rgba(126,34,206,0.6); border-color: rgba(233,213,255,0.7); transform: translateY(-1px); }
         .uni-act-play { color: #fff; background: linear-gradient(135deg, rgba(147,51,234,0.7), rgba(88,28,135,0.8)); }
-        .uni-keybadge { position: absolute; right: 30px; bottom: 30px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 10px; font: 800 11px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.06em; color: #fff;
+        .uni-titlerow { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .uni-keybadge { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 10px; font: 800 11px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.06em; color: #fff;
             background: rgba(10,4,20,0.78); border: 1px solid rgba(216,180,254,0.55); box-shadow: 0 0 14px rgba(168,85,247,0.5); backdrop-filter: blur(6px); }
         .uni-keybadge svg { color: #e9d5ff; }
+        @keyframes uniCrown { 0%,100% { box-shadow: 0 0 12px rgba(251,191,36,.5); } 50% { box-shadow: 0 0 26px rgba(253,224,71,.95); } }
+        .uni-best { flex: 0 0 auto; position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 10px; font: 900 11px 'Plus Jakarta Sans', sans-serif; letter-spacing: .12em; color: #3b2300;
+            background: linear-gradient(135deg, #fde68a, #f59e0b 55%, #b45309); border: 1px solid rgba(254,243,199,.85); animation: uniCrown 2.2s ease-in-out infinite; }
+        .uni-best svg { filter: drop-shadow(0 1px 0 rgba(255,255,255,.5)); }
+        .uni-best::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent); animation: uniShine 2.8s ease-in-out infinite; }
+        .uni-keyrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 12px; border-radius: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(216,180,254,0.35); color: #e9d5ff; }
+        .uni-keyrow-lab { font: 800 11px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.12em; color: #d8b4fe; }
+        .uni-keyrow-val { flex: 1 1 auto; font: 700 14px ui-monospace, Menlo, Consolas, monospace; color: #fff; word-break: break-all; }
+        .uni-keycopy { flex: 0 0 auto; padding: 8px 14px; }
         .uni-switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
         .uni-switch-lab { font: 800 12px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.1em; color: #d8b4fe; }
         .uni-change { flex: 0 0 auto; padding: 9px 16px; }
@@ -397,6 +407,65 @@
         @media (max-width: 520px) { #universalModal .modal-card { padding: 28px 18px !important; } #universalModal .sc-title { font-size: 1.6rem; } .uni-card { padding: 16px; } .uni-name { font-size: 19px; } .uni-code { padding: 16px; font-size: 13px; } .uni-copy { padding: 18px; font-size: 14px; } }
         #universalRow { display: flex; justify-content: center; margin-bottom: 10px; }
         #universalBtn:hover { z-index: 25; }
+
+        /* ===== Universal Script: premium polish ===== */
+        @property --uni-ang { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+        @keyframes uniRise { from { opacity: 0; transform: translateY(18px) scale(.97); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+        @keyframes uniSpin { to { --uni-ang: 360deg; } }
+        @keyframes uniFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        @keyframes uniShine { from { transform: translateX(-130%) skewX(-20deg); } to { transform: translateX(260%) skewX(-20deg); } }
+        @keyframes uniPulse { 0%,100% { box-shadow: 0 0 10px rgba(168,85,247,.45); } 50% { box-shadow: 0 0 22px rgba(216,180,254,.85); } }
+        @keyframes uniBlink { 50% { opacity: .25; } }
+        #universalList > * { animation: uniRise .55s cubic-bezier(.2,.8,.2,1) both; }
+        .uni-grid .uni-map { animation: uniRise .55s cubic-bezier(.2,.8,.2,1) both; }
+        .uni-grid .uni-map:nth-child(2) { animation-delay: .06s; } .uni-grid .uni-map:nth-child(3) { animation-delay: .12s; } .uni-grid .uni-map:nth-child(4) { animation-delay: .18s; }
+        .uni-detail .uni-info { animation-delay: .12s; }
+        /* spinning gradient border */
+        .uni-map, .uni-hero, .uni-info { position: relative; isolation: isolate; }
+        .uni-map::before, .uni-hero::before, .uni-info::before {
+            content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px; z-index: -1; pointer-events: none;
+            background: conic-gradient(from var(--uni-ang), transparent 0deg, rgba(168,85,247,.0) 60deg, #c084fc 120deg, #f5d0fe 150deg, #c084fc 180deg, transparent 240deg, transparent 360deg);
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+            animation: uniSpin 6s linear infinite; opacity: .85; }
+        .uni-map::before { opacity: 0; transition: opacity .3s ease; animation-duration: 3.5s; }
+        .uni-map:hover::before, .uni-map:focus-visible::before { opacity: 1; }
+        /* map cards */
+        .uni-map { overflow: hidden; }
+        .uni-map::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 38%; z-index: 2; pointer-events: none; opacity: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent); }
+        .uni-map:hover::after { opacity: 1; animation: uniShine .9s ease; }
+        .uni-map .uni-pic img, .uni-map .uni-fb { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+        .uni-map:hover .uni-pic img { transform: scale(1.09); } .uni-map:hover .uni-fb { transform: scale(1.12); }
+        .uni-pic::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 55%, rgba(10,4,20,.65)); }
+        /* detail view */
+        .uni-hero { overflow: hidden; }
+        .uni-hero::after { content: ''; position: absolute; left: 50%; top: 40%; width: 80%; aspect-ratio: 1; transform: translate(-50%,-50%); z-index: -1; border-radius: 50%; pointer-events: none;
+            background: radial-gradient(circle, rgba(168,85,247,.4), transparent 68%); filter: blur(18px); animation: uniFloat 5s ease-in-out infinite; }
+        .uni-hero .uni-pic-lg { box-shadow: 0 18px 40px rgba(0,0,0,.55), 0 0 0 1px rgba(216,180,254,.25); }
+        .uni-title { background: linear-gradient(90deg, #fff, #e9d5ff 45%, #c084fc); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; filter: drop-shadow(0 0 14px rgba(168,85,247,.55)); }
+        .uni-game { display: inline-flex; align-items: center; gap: 8px; }
+        .uni-game::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 10px #4ade80; animation: uniBlink 1.8s ease-in-out infinite; }
+        .uni-keybadge { animation: uniPulse 2.4s ease-in-out infinite; }
+        .uni-act { position: relative; overflow: hidden; }
+        .uni-act::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; pointer-events: none; opacity: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent); }
+        .uni-act:hover::after { opacity: 1; animation: uniShine .8s ease; }
+        .uni-switch { padding: 10px 12px 10px 16px; border-radius: 14px; background: linear-gradient(90deg, rgba(88,28,135,.35), rgba(0,0,0,.25)); border: 1px solid rgba(216,180,254,.22); }
+        /* terminal-style code box */
+        .uni-code { position: relative; padding-top: 58px !important; background: linear-gradient(180deg, rgba(8,3,18,.92), rgba(18,8,34,.92)) !important; border: 1px solid rgba(168,85,247,.4) !important;
+            box-shadow: inset 0 0 40px rgba(88,28,135,.25), 0 8px 24px rgba(0,0,0,.4); }
+        .uni-code::before { content: 'LUA  ·  EXECUTOR READY'; position: absolute; left: 0; right: 0; top: 0; height: 38px; padding: 0 16px 0 72px; display: flex; align-items: center;
+            font: 800 10px 'Plus Jakarta Sans', sans-serif; letter-spacing: .18em; color: rgba(216,180,254,.75); background: rgba(88,28,135,.28); border-bottom: 1px solid rgba(168,85,247,.3);
+            border-radius: 20px 20px 0 0; }
+        .uni-code::after { content: ''; position: absolute; left: 18px; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: #f87171;
+            box-shadow: 16px 0 0 #fbbf24, 32px 0 0 #4ade80; }
+        .uni-copy { position: relative; overflow: hidden; }
+        .uni-copy::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 30%; pointer-events: none; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); animation: uniShine 3.2s ease-in-out infinite; }
+        @keyframes uniOut { to { opacity: 0; transform: translateX(-26px); filter: blur(5px); } }
+        @keyframes uniIn { from { opacity: 0; transform: translateX(26px); filter: blur(5px); } to { opacity: 1; transform: none; filter: none; } }
+        .uni-out { animation: uniOut .17s ease-in forwards !important; }
+        .uni-in { animation: uniIn .4s cubic-bezier(.2,.9,.25,1) both !important; }
+        .uni-change svg { transition: transform .45s cubic-bezier(.2,.9,.25,1); } .uni-change:active svg { transform: rotate(180deg); }
+        @media (prefers-reduced-motion: reduce) { #universalModal * , #universalModal *::before, #universalModal *::after { animation: none !important; } }
         #tabSupportBtn:hover, #tabSupportBtn.active, #signinBtn:hover, #productBtn:hover, #executorBtn:hover, #randomBtn:hover { z-index: 25; }
         /* ===== Brand: top-left of the pyramid area inside the card ===== */
         .brand {
@@ -3336,14 +3405,67 @@
     AutoExecute = false
 }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/MainPremium.lua"))()`,
-                label: 'GravityHub', key: false,
+                label: 'Gravity Hub', key: false, best: true,
                 more: [{ label: 'VectorHub', key: true, code: `getgenv().Key="Your Key";
 loadstring(game:HttpGet('https://vectorhub.space'))()` },
                 { label: 'WhiteX', key: false, code: `script_key = "" -- default is FREEMIUM]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/BF-Main.luau"))()` },
                 { label: 'CokkaHub', key: true, code: `_G.Key = "Your Key" -- If you do not want to obtain the key again, please enter key here.
 loadstring(game:HttpGet"https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua")()` },
-                { label: 'BonkHub', key: true, code: `loadstring(game:HttpGet("https://bonkhub.online/Loader.lua",true))()` }]
+                { label: 'BonkHub', key: true, code: `loadstring(game:HttpGet("https://bonkhub.online/Loader.lua",true))()` },
+                { label: 'TeddyHub', key: false, code: `repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/TeddyHub.lua"))()` },
+                { label: 'DragonHub', key: false, code: `repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+getgenv().team = "Pirates" -- Pirates or Marines
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dragonhubdev/dragonwitheveryone/refs/heads/main/Main-BF.lua"))()` },
+                { label: 'Orbit.cc', key: true, freeKey: 'keyFileQ', code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Abyssal-lol/Orbit.cc/refs/heads/main/Loader.lua"))()` },
+                { label: 'Voidon', key: false, code: `loadstring(game:HttpGet("https://www.voidon.top/api/loader"))()` },
+                { label: 'Vinh Hub', key: false, code: `repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+getgenv().team = "Pirates" -- Pirates or Marines
+loadstring(game:HttpGet("https://raw.githubusercontent.com/vinh129150/hack/refs/heads/main/Bloxfruits.lua"))()` },
+                { label: 'Tay Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/VTDROBLOX/Animehub/refs/heads/main/Tayhub.lua"))()` },
+                { label: 'Sigma Hub', key: false, code: `getgenv().Team="Pirates"--Pirates/Marines
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaHubDangCap/BloxFruit/refs/heads/main/MainBloxFruit.lua"))()` },
+                { label: 'Zee Hub', key: false, code: `loadstring(game:HttpGet("https://zuwz.me/Ls-Zee-Hub"))()` },
+                { label: 'Zen Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Itz-Npg/Roblox-Script/main/zenhubbf.lua", true))()` },
+                { label: 'Bear Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Huylovemy/Bearhudz/refs/heads/main/Bearhud.lua"))()` },
+                { label: 'DEKT Hub', key: false, code: `getgenv().SCRIPT_KEY = "KEYLESS"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DEKTHAT0XX/all_hub/refs/heads/main/DEKTAI.lua"))()` },
+                { label: 'Spectrum', key: false, code: `loadstring(game:HttpGet('https://api.spectrumcheat.com/loader.lua'))()` },
+                { label: 'Relz Hub', key: false, code: `loadstring(game:HttpGet("https://relzhub.com/loader"))()` },
+                { label: 'Quartyz', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/xQuartyx/QuartyzScript/main/Loader.lua", true))()` },
+                { label: 'Quantum Onyx', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"))()` },
+                { label: 'Gamer8410', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/gamer8410/dont-see-/refs/heads/main/loader.lua"))()` },
+                { label: 'BlueX Hub', key: false, code: `_G.AutoTranslate = true
+_G.SaveConfig = true
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()` },
+                { label: 'NoLag', key: true, code: `loadstring(game:HttpGet("https://nolag.wtf/script.lua"))()` },
+                { label: 'HoHo Hub', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()` },
+                { label: 'Alchemy', key: true, code: `loadstring(game:HttpGet("https://getalchemy.net/n"))()` },
+                { label: 'Banana Hub', key: false, best: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/bloxfruitsnokey/Banana/refs/heads/main/Banana/v1.luau"))()` },
+                { label: 'Ronix Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }]
+            }
+            ,{
+                name: 'King Legacy',
+                place: '4520749081',          /* Roblox place ID, used for the map picture */
+                label: 'Vector Hub', key: true,
+                script: `loadstring(game:HttpGet("https://vectorhub.space"))()`,
+                more: [
+                    { label: 'Axon Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/lostinnowheres/Loader/refs/heads/main/Loader.Lua"))()` },
+                    { label: 'Zee Hub', key: false, code: `loadstring(game:HttpGet('https://zuwz.me/Ls-Zee-Hub-KL'))()` },
+                    { label: 'Zen Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/itz-axiom/Zen-hub-King-legacy-/refs/heads/main/zenhub_full_obfuscated%20(1).lua.txt"))()` },
+                    { label: 'HoHo Hub', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()` },
+                    { label: 'Ronix Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
+                ]
+            }
+            ,{
+                name: 'Meme Sea',
+                place: '3756501373',          /* Roblox place ID, used for the map picture */
+                label: 'Meme Sea Hub', key: false,
+                script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/n0namevnnek-web/Meme-sea/refs/heads/main/Key.lua"))()`,
+                more: [
+                    { label: 'Bonk Hub', key: false, code: `loadstring(game:HttpGet("https://bonkhub.online/loader.lua", true))()` }
+                ]
             }
         ];
         function uniThumb(it, cls) {
@@ -3360,7 +3482,7 @@ loadstring(game:HttpGet"https://raw.githubusercontent.com/UserDevEthical/Loadstr
             return box;
         }
         const uniSel = {};
-        function uniAll(it) { return [{ label: it.label || 'Script 1', code: it.script, key: it.key }].concat(it.more || []); }
+        function uniAll(it) { return [{ label: it.label || 'Script 1', code: it.script, key: it.key, freeKey: it.freeKey, best: it.best }].concat(it.more || []); }
         function uniCur(i) { const a = uniAll(UNIVERSAL_SCRIPTS[i]); return a[(uniSel[i] || 0) % a.length]; }
         function showUniversalList() {
             const list = document.getElementById('universalList'); list.innerHTML = '';
@@ -3394,10 +3516,12 @@ loadstring(game:HttpGet"https://raw.githubusercontent.com/UserDevEthical/Loadstr
             hero.appendChild(el('span', 'uni-badge', 'MAP ' + (i + 1)));
             const keyB = el('span', 'uni-keybadge');
             keyB.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"></circle><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"></path></svg><span>Key System</span>';
-            hero.appendChild(keyB);
             /* right: info card */
             const info = el('div', 'uni-info');
-            info.appendChild(el('h3', 'uni-title', it.name + ' Script'));
+            const trow = el('div', 'uni-titlerow'); trow.appendChild(el('h3', 'uni-title', it.name + ' Script')); const crownB = el('span', 'uni-best');
+            crownB.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 7.5l4.8 4.2L12 4l4.7 7.7 4.8-4.2-1.9 11H4.4z"></path><rect x="4.4" y="20" width="15.2" height="2" rx="1"></rect></svg><span>THE BEST</span>';
+            trow.appendChild(crownB); trow.appendChild(keyB); info.appendChild(trow);
+            crownB.style.display = uniCur(i).best ? '' : 'none';
             info.appendChild(el('div', 'uni-game', it.name));
             const row = el('div', 'uni-actions');
             if (it.place) {
@@ -3416,18 +3540,38 @@ loadstring(game:HttpGet"https://raw.githubusercontent.com/UserDevEthical/Loadstr
             const all = uniAll(it);
             const pre = el('pre', 'code-box uni-code', uniCur(i).code);
             keyB.style.display = uniCur(i).key ? '' : 'none';
+            let syncKey = () => {};
             if (all.length > 1) {
                 const bar = el('div', 'uni-switch');
                 const lab = el('span', 'uni-switch-lab');
                 const chg = el('button', 'uni-act uni-change'); chg.type = 'button';
                 chg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"></path></svg><span>Change</span>';
-                const upd = () => { const n = (uniSel[i] || 0) % all.length; lab.textContent = 'SCRIPT ' + (n + 1) + '/' + all.length + ' - ' + all[n].label; pre.textContent = all[n].code; keyB.style.display = all[n].key ? '' : 'none'; };
-                chg.onclick = (ev) => { ev.stopPropagation(); uniSel[i] = ((uniSel[i] || 0) + 1) % all.length; upd(); };
+                const upd = () => { const n = (uniSel[i] || 0) % all.length; lab.textContent = 'SCRIPT ' + (n + 1) + '/' + all.length + ' - ' + all[n].label; pre.textContent = all[n].code; keyB.style.display = all[n].key ? '' : 'none'; crownB.style.display = all[n].best ? '' : 'none'; syncKey(); };
+                let swapT = null;
+                chg.onclick = (ev) => {
+                    ev.stopPropagation(); uniSel[i] = ((uniSel[i] || 0) + 1) % all.length;
+                    const fx = [pre, lab, keyB, crownB, kr]; clearTimeout(swapT);
+                    fx.forEach(n => { n.classList.remove('uni-in'); n.classList.add('uni-out'); });
+                    swapT = setTimeout(() => {
+                        upd();
+                        fx.forEach(n => { n.classList.remove('uni-out'); void n.offsetWidth; n.classList.add('uni-in'); });
+                    }, 170);
+                };
                 upd(); bar.appendChild(lab); bar.appendChild(chg); info.appendChild(bar);
             }
             const btn = el('button', 'tilt-btn btn-purple-glow uni-copy'); btn.type = 'button';
             btn.innerHTML = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 002-2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>COPY SCRIPT</span>';
             btn.onclick = (ev) => copyUniversal(ev, i, btn);
+            const kr = el('div', 'uni-keyrow');
+            kr.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"></circle><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"></path></svg><span class="uni-keyrow-lab">FREE KEY</span><code class="uni-keyrow-val"></code>';
+            const kcopy = el('button', 'uni-act uni-keycopy'); kcopy.type = 'button'; kcopy.innerHTML = '<span>Copy key</span>';
+            kcopy.onclick = (ev) => { ev.stopPropagation(); const k = uniCur(i).freeKey; if (!k) return; const t = kcopy.querySelector('span');
+                copyTextRobust(k, () => { t.textContent = 'Copied!'; setTimeout(() => { t.textContent = 'Copy key'; }, 2000); showNotify('FREE KEY', 'KEY COPIED', true); },
+                    () => showNotify('CLIPBOARD', 'COPY BLOCKED - SELECT THE KEY AND COPY MANUALLY', false)); };
+            kr.appendChild(kcopy);
+            syncKey = () => { const k = uniCur(i).freeKey; kr.style.display = k ? '' : 'none'; kr.querySelector('.uni-keyrow-val').textContent = k || ''; };
+            syncKey();
+            info.appendChild(kr);
             info.appendChild(pre); info.appendChild(btn);
             wrap.appendChild(hero); wrap.appendChild(info);
             list.appendChild(back); list.appendChild(wrap);
