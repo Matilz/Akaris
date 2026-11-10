@@ -347,14 +347,48 @@
         #executorBtn { border-radius: 0; margin-left: -1px; }
         #randomBtn { border-radius: 0; margin-left: -1px; }
         #universalBtn { border-radius: 16px; padding-left: 22px; padding-right: 22px; }
-        #universalModal .sc-title { font-size: 1.6rem; }
-        .uni-card { display: flex; flex-direction: column; gap: 12px; padding: 16px; border-radius: 20px; background: rgba(0,0,0,0.38); border: 1px solid rgba(168,85,247,0.3); box-shadow: inset 0 1px 1px rgba(255,255,255,0.08); }
+        #universalModal .sc-title { font-size: 2.1rem; }
+        #universalModal .sc-desc { font-size: 14px; }
+        #universalModal .sc-icon { width: 58px; height: 58px; } #universalModal .sc-icon svg { width: 28px; height: 28px; }
+        .uni-card { display: flex; flex-direction: column; gap: 16px; padding: 24px; border-radius: 24px; background: rgba(0,0,0,0.38); border: 1px solid rgba(168,85,247,0.3); box-shadow: inset 0 1px 1px rgba(255,255,255,0.08); }
         .uni-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-        .uni-name { font: 800 17px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.04em; color: #f3e8ff; text-shadow: 0 0 14px rgba(168,85,247,0.7); }
-        .uni-tag { font: 800 10px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.14em; padding: 4px 10px; border-radius: 999px; color: #e9d5ff; background: rgba(88,28,135,0.55); border: 1px solid rgba(216,180,254,0.4); }
-        .uni-code { margin: 0; padding: 16px; border-radius: 16px; text-align: left; font-size: 12.5px; line-height: 1.6; font-weight: 600; color: #e9d5ff; white-space: pre-wrap; word-break: break-all; -webkit-user-select: text; user-select: text; }
-        .uni-copy { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px; border-radius: 16px; cursor: pointer; color: #fff; font: 900 13px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.1em; border: 1px solid rgba(216,180,254,0.35); }
-        @media (max-width: 520px) { #universalModal .modal-card { padding: 28px 18px !important; } }
+        .uni-head-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+        .uni-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; }
+        .uni-map { display: flex; flex-direction: column; gap: 12px; padding: 14px; border-radius: 22px; cursor: pointer; text-align: left; -webkit-tap-highlight-color: transparent;
+            background: rgba(0,0,0,0.38); border: 1px solid rgba(168,85,247,0.32); box-shadow: inset 0 1px 1px rgba(255,255,255,0.08); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+        .uni-map:hover, .uni-map:focus-visible { transform: translateY(-4px); border-color: rgba(233,213,255,0.7); box-shadow: 0 0 28px rgba(168,85,247,0.5), inset 0 1px 1px rgba(255,255,255,0.18); outline: none; }
+        .uni-pic { position: relative; width: 100%; aspect-ratio: 1; border-radius: 16px; overflow: hidden; display: grid; place-items: center;
+            background: linear-gradient(145deg, #4c1d95, #1e1035); border: 1px solid rgba(192,132,252,0.45); box-shadow: 0 0 16px rgba(168,85,247,0.35); }
+        .uni-pic-sm { width: 64px; flex-shrink: 0; border-radius: 14px; }
+        .uni-fb { font: 900 26px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.04em; color: rgba(233,213,255,0.85); }
+        .uni-pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: #12091f; }
+        .uni-map-name { font: 800 20px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.03em; color: #f3e8ff; text-shadow: 0 0 14px rgba(168,85,247,0.7); }
+        .uni-map .uni-tag { align-self: flex-start; }
+        .uni-detail { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 760px) { .uni-detail { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr); align-items: start; } }
+        .uni-hero { position: relative; padding: 16px; border-radius: 24px; background: rgba(0,0,0,0.38); border: 1px solid rgba(168,85,247,0.3); box-shadow: inset 0 1px 1px rgba(255,255,255,0.08); }
+        .uni-pic-lg { aspect-ratio: 1; border-radius: 18px; }
+        .uni-pic-lg .uni-fb { font-size: 44px; }
+        .uni-badge { position: absolute; left: 30px; bottom: 30px; padding: 6px 14px; border-radius: 999px; font: 800 11px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.12em; color: #fff;
+            background: linear-gradient(135deg, #9333ea, #6b21a8); border: 1px solid rgba(233,213,255,0.5); box-shadow: 0 0 14px rgba(168,85,247,0.6); }
+        .uni-info { display: flex; flex-direction: column; gap: 14px; padding: 24px; border-radius: 24px; background: rgba(0,0,0,0.38); border: 1px solid rgba(168,85,247,0.3); box-shadow: inset 0 1px 1px rgba(255,255,255,0.08); min-width: 0; }
+        .uni-title { margin: 0; font: 800 clamp(22px, 4vw, 30px) 'Plus Jakarta Sans', sans-serif; line-height: 1.2; color: #f3e8ff; text-shadow: 0 0 16px rgba(168,85,247,0.6); }
+        .uni-game { font: 700 14px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.04em; color: rgba(216,180,254,0.85); }
+        .uni-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+        .uni-act { flex: 1 1 160px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 16px; border-radius: 14px; cursor: pointer; text-decoration: none;
+            font: 800 13px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.04em; color: #e9d5ff; background: rgba(88,28,135,0.4); border: 1px solid rgba(216,180,254,0.35); transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+        .uni-act:hover { background: rgba(126,34,206,0.6); border-color: rgba(233,213,255,0.7); transform: translateY(-1px); }
+        .uni-act-play { color: #fff; background: linear-gradient(135deg, rgba(147,51,234,0.7), rgba(88,28,135,0.8)); }
+        .uni-steps { display: none; margin: 0; padding: 14px 16px 14px 34px; border-radius: 14px; font: 600 13px/1.7 'Plus Jakarta Sans', sans-serif; color: #e9d5ff; background: rgba(0,0,0,0.4); border: 1px dashed rgba(216,180,254,0.35); }
+        .uni-steps.open { display: block; }
+        .uni-back { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; cursor: pointer; font: 800 12px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.12em;
+            color: #e9d5ff; background: rgba(88,28,135,0.45); border: 1px solid rgba(216,180,254,0.4); transition: background .2s ease, transform .2s ease; }
+        .uni-back:hover { background: rgba(126,34,206,0.6); transform: translateX(-2px); }
+        .uni-name { font: 800 24px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.04em; color: #f3e8ff; text-shadow: 0 0 14px rgba(168,85,247,0.7); }
+        .uni-tag { font: 800 12px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.14em; padding: 6px 14px; border-radius: 999px; color: #e9d5ff; background: rgba(88,28,135,0.55); border: 1px solid rgba(216,180,254,0.4); }
+        .uni-code { margin: 0; padding: 24px; border-radius: 20px; text-align: left; font-size: 16px; line-height: 1.7; font-weight: 600; color: #e9d5ff; white-space: pre-wrap; word-break: break-all; -webkit-user-select: text; user-select: text; }
+          .uni-copy { width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 22px; border-radius: 20px; cursor: pointer; color: #fff; font: 900 16px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.1em; border: 1px solid rgba(216,180,254,0.35); }
+        @media (max-width: 520px) { #universalModal .modal-card { padding: 28px 18px !important; } #universalModal .sc-title { font-size: 1.6rem; } .uni-card { padding: 16px; } .uni-name { font-size: 19px; } .uni-code { padding: 16px; font-size: 13px; } .uni-copy { padding: 18px; font-size: 14px; } }
         #universalRow { display: flex; justify-content: center; margin-bottom: 10px; }
         #universalBtn:hover { z-index: 25; }
         #tabSupportBtn:hover, #tabSupportBtn.active, #signinBtn:hover, #productBtn:hover, #executorBtn:hover, #randomBtn:hover { z-index: 25; }
@@ -2554,7 +2588,7 @@
     </div>
 
     <div id="universalModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Universal Script" onclick="if(event.target===this)closeUniversal()">
-        <div class="themed modal-card" style="max-width:780px;padding:40px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto">
+        <div class="themed modal-card" style="max-width:940px;padding:40px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto">
             <button type="button" class="modal-close" onclick="closeUniversal()" aria-label="Close">&times;</button>
             <div class="glow-line"></div>
             <div class="flex flex-col gap-4">
@@ -2562,7 +2596,7 @@
                     <div class="sc-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18M12 3c2.6 2.6 4 5.7 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.7-4-9s1.4-6.4 4-9z"></path></svg></div>
                     <div class="sc-titles">
                         <h2 class="sc-title">Universal Script</h2>
-                        <p class="sc-desc">One script for supported games. Copy it and run it in your executor.</p>
+                        <p class="sc-desc" id="universalDesc">Pick a map to get its script.</p>
                     </div>
                 </div>
                 <div id="universalList" class="flex flex-col gap-4 translate-z-lift"></div>
@@ -3287,6 +3321,7 @@
         const UNIVERSAL_SCRIPTS = [
             {
                 name: 'Blox Fruit',
+                place: '2753915549',          /* Roblox place ID, used for the map picture */
                 script: `GravityHub = {
     Key = "",
     Team = "Pirates",
@@ -3297,26 +3332,78 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/MainPremium.lua"))()`
             }
         ];
+        function uniThumb(it, cls) {
+            const box = document.createElement('div'); box.className = cls;
+            const fb = document.createElement('span'); fb.className = 'uni-fb'; fb.textContent = it.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+            box.appendChild(fb);
+            if (it.place) {
+                const im = document.createElement('img');
+                im.src = 'https://www.roblox.com/asset-thumbnail/image?assetId=' + it.place + '&width=420&height=420&format=png';
+                im.alt = it.name + ' map'; im.loading = 'lazy'; im.decoding = 'async'; im.referrerPolicy = 'no-referrer';
+                im.onerror = () => im.remove();
+                box.appendChild(im);
+            }
+            return box;
+        }
+        function showUniversalList() {
+            const list = document.getElementById('universalList'); list.innerHTML = '';
+            document.getElementById('universalDesc').textContent = 'Pick a map to get its script.';
+            const grid = document.createElement('div'); grid.className = 'uni-grid';
+            if (!UNIVERSAL_SCRIPTS.length) { const p = document.createElement('div'); p.className = 'code-box rounded-2xl p-4 text-xs text-purple-300/70 font-semibold'; p.textContent = '-- more maps coming soon'; list.appendChild(p); return; }
+            UNIVERSAL_SCRIPTS.forEach((it, i) => {
+                const card = document.createElement('button'); card.type = 'button'; card.className = 'uni-map';
+                card.appendChild(uniThumb(it, 'uni-pic'));
+                const nm = document.createElement('span'); nm.className = 'uni-map-name'; nm.textContent = it.name;
+                const tg = document.createElement('span'); tg.className = 'uni-tag'; tg.textContent = 'OPEN SCRIPT';
+                card.appendChild(nm); card.appendChild(tg);
+                card.onclick = (ev) => { ev.stopPropagation(); showUniversalScript(i); };
+                grid.appendChild(card);
+            });
+            list.appendChild(grid);
+        }
+        function showUniversalScript(i) {
+            const it = UNIVERSAL_SCRIPTS[i]; if (!it) return;
+            const list = document.getElementById('universalList'); list.innerHTML = '';
+            document.getElementById('universalDesc').textContent = it.name + ' - copy the script and run it in your executor.';
+            const el = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt) n.textContent = txt; return n; };
+            const back = el('button', 'uni-back'); back.type = 'button';
+            back.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg><span>ALL MAPS</span>';
+            back.onclick = (ev) => { ev.stopPropagation(); showUniversalList(); };
+
+            const wrap = el('div', 'uni-detail');
+            /* left: the map picture card */
+            const hero = el('div', 'uni-hero');
+            const pic = uniThumb(it, 'uni-pic uni-pic-lg'); hero.appendChild(pic);
+            hero.appendChild(el('span', 'uni-badge', 'MAP ' + (i + 1)));
+            /* right: info card */
+            const info = el('div', 'uni-info');
+            info.appendChild(el('h3', 'uni-title', it.name + ' Script'));
+            info.appendChild(el('div', 'uni-game', it.name));
+            const row = el('div', 'uni-actions');
+            if (it.place) {
+                const play = el('a', 'uni-act uni-act-play'); play.href = 'https://www.roblox.com/games/' + it.place; play.target = '_blank'; play.rel = 'noopener noreferrer';
+                play.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"></circle><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor"></path></svg><span>Play game</span>';
+                row.appendChild(play);
+            }
+            const how = el('button', 'uni-act'); how.type = 'button';
+            how.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 8l10 5 10-5-10-5zM6 10.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"></path></svg><span>How to run this script</span>';
+            row.appendChild(how);
+            info.appendChild(row);
+            const steps = el('ol', 'uni-steps');
+            ['Copy the script below.', 'Open ' + it.name + ' in Roblox.', 'Open your executor, paste the script and press Execute.'].forEach(t => steps.appendChild(el('li', '', t)));
+            how.onclick = (ev) => { ev.stopPropagation(); steps.classList.toggle('open'); };
+            info.appendChild(steps);
+            const pre = el('pre', 'code-box uni-code', it.script);
+            const btn = el('button', 'tilt-btn btn-purple-glow uni-copy'); btn.type = 'button';
+            btn.innerHTML = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 002-2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>COPY SCRIPT</span>';
+            btn.onclick = (ev) => copyUniversal(ev, i, btn);
+            info.appendChild(pre); info.appendChild(btn);
+            wrap.appendChild(hero); wrap.appendChild(info);
+            list.appendChild(back); list.appendChild(wrap);
+        }
         function openUniversal(e) {
             if (e) e.stopPropagation();
-            const list = document.getElementById('universalList');
-            list.innerHTML = '';
-            if (!UNIVERSAL_SCRIPTS.length) {
-                const p = document.createElement('div'); p.className = 'code-box rounded-2xl p-4 text-xs text-purple-300/70 font-semibold'; p.textContent = '-- more scripts coming soon'; list.appendChild(p);
-            }
-            UNIVERSAL_SCRIPTS.forEach((it, i) => {
-                const card = document.createElement('div'); card.className = 'uni-card';
-                const head = document.createElement('div'); head.className = 'uni-head';
-                const nm = document.createElement('span'); nm.className = 'uni-name'; nm.textContent = it.name;
-                const tag = document.createElement('span'); tag.className = 'uni-tag'; tag.textContent = 'MAP ' + (i + 1);
-                head.appendChild(nm); head.appendChild(tag);
-                const pre = document.createElement('pre'); pre.className = 'code-box uni-code'; pre.textContent = it.script;
-                const btn = document.createElement('button'); btn.type = 'button';
-                btn.className = 'tilt-btn btn-purple-glow uni-copy';
-                btn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 002-2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>COPY SCRIPT</span>';
-                btn.onclick = (ev) => copyUniversal(ev, i, btn);
-                card.appendChild(head); card.appendChild(pre); card.appendChild(btn); list.appendChild(card);
-            });
+            showUniversalList();
             document.getElementById('universalModal').classList.add('open');
         }
         function closeUniversal() { document.getElementById('universalModal').classList.remove('open'); }
