@@ -818,6 +818,18 @@
             #executorModal .exec-status, #executorModal .exec-badge { font-size: 9px; padding: 4px 8px; letter-spacing: 0.08em; }
         }
 
+
+        /* ===== UNC / sUNC score bars ===== */
+        .exec-scores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+        .exec-score { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(216,180,254,0.3); box-shadow: inset 0 1px 1px rgba(255,255,255,0.1); }
+        .exec-score-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+        .exec-score-lab { font: 800 10px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.14em; color: #d8b4fe; }
+        .exec-score-val { font: 900 16px 'Plus Jakarta Sans', sans-serif; color: #fff; text-shadow: 0 0 10px rgba(168,85,247,0.7); }
+        .exec-score-bar { height: 5px; border-radius: 999px; overflow: hidden; background: rgba(88,28,135,0.45); }
+        .exec-score-bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #7e22ce, #c084fc 60%, #f0abfc); box-shadow: 0 0 10px rgba(192,132,252,0.8); }
+        .exec-score.hi .exec-score-val { color: #4ade80; text-shadow: 0 0 10px rgba(74,222,128,0.6); }
+        .exec-score.hi .exec-score-bar i { background: linear-gradient(90deg, #059669, #34d399 60%, #86efac); box-shadow: 0 0 10px rgba(52,211,153,0.8); }
+
         /* ===== Premium Executor buttons ===== */
         .exec-link, .exec-copy { position: relative; overflow: hidden; isolation: isolate; -webkit-tap-highlight-color: transparent; }
         .exec-link {
@@ -2293,19 +2305,19 @@
                 <button type="button" class="exec-sw" data-p="mobile" role="tab" aria-selected="false" onclick="setExecPlatform('mobile')"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg>MOBILE</button>
             </div>
             <div class="exec-list" data-platform="windows">
-                <button type="button" class="exec-copy" onclick="copyExecText('Version-f0ea5da9412f4e35', this)" title="Copy WINDOWS version">
+                <button type="button" class="exec-copy" onclick="copyExecText('Version-4ea8e85481e34f46', this)" title="Copy WINDOWS version">
                     <span class="exec-copy-top"><span class="exec-copy-os"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span><span class="exec-status keep-color exec-mini"><i></i><b>ONLINE</b></span></span>
-                    <span class="exec-copy-row"><span class="exec-copy-text">Version-f0ea5da9412f4e35</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+                    <span class="exec-copy-row"><span class="exec-copy-text">Version-4ea8e85481e34f46</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
                 </button>
-                <button type="button" class="exec-copy" onclick="copyExecText('Version-2fc79d515be6449d', this)" title="Copy MACBOOK version">
+                <button type="button" class="exec-copy" onclick="copyExecText('Version-8001f8762ae44efe', this)" title="Copy MACBOOK version">
                     <span class="exec-copy-top"><span class="exec-copy-os"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M2.5 19h19l-1.5-4H4z"/></svg>MACBOOK</span><span class="exec-status keep-color exec-mini"><i></i><b>ONLINE</b></span></span>
-                    <span class="exec-copy-row"><span class="exec-copy-text">Version-2fc79d515be6449d</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+                    <span class="exec-copy-row"><span class="exec-copy-text">Version-8001f8762ae44efe</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
                 </button>
                 <button type="button" class="exec-copy" onclick="copyExecText('2.744.1081', this)" title="Copy MOBILE version">
                     <span class="exec-copy-top"><span class="exec-copy-os"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg>MOBILE</span><span class="exec-status keep-color exec-mini"><i></i><b>ONLINE</b></span></span>
                     <span class="exec-copy-row"><span class="exec-copy-text">2.744.1081</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
                 </button>
-                <div class="exec-card exec-card-best" data-status="online" data-platform="windows">
+                <div class="exec-card exec-card-best" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
                     <div class="exec-head">
                         <span class="exec-name exec-best"><span class="exec-crown keep-color" title="The Best"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 11H5L3 7zm2.2 13h13.6v2H5.2v-2z"/></svg></span>Volt</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2332,7 +2344,7 @@
                         <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
                     </div>
                 </div>
-<div class="exec-card exec-card-best" data-status="online" data-platform="windows">
+<div class="exec-card exec-card-best" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
                     <div class="exec-head">
                         <span class="exec-name exec-best"><span class="exec-crown keep-color" title="The Best"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 11H5L3 7zm2.2 13h13.6v2H5.2v-2z"/></svg></span>Potassium</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2359,7 +2371,7 @@
                         <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
                     </div>
                 </div>
-<div class="exec-card" data-status="online" data-platform="windows">
+<div class="exec-card" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
                     <div class="exec-head">
                         <span class="exec-name">Wave</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2381,7 +2393,7 @@
                         </a>
                     </div>
                 </div>
-<div class="exec-card exec-card-best" data-status="online" data-platform="windows">
+<div class="exec-card exec-card-best" data-status="online" data-platform="windows" data-unc="98" data-sunc="96">
                     <div class="exec-head">
                         <span class="exec-name exec-best"><span class="exec-crown keep-color" title="The Best"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 11H5L3 7zm2.2 13h13.6v2H5.2v-2z"/></svg></span>Lucid</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2403,7 +2415,7 @@
                         </a>
                     </div>
                 </div>
-<div class="exec-card" data-status="online" data-platform="windows">
+<div class="exec-card" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
                     <div class="exec-head">
                         <span class="exec-name">Project Real</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2430,7 +2442,7 @@
                         <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
                     </div>
                 </div>
-                <div class="exec-card" data-status="online" data-platform="windows">
+                <div class="exec-card" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
                     <div class="exec-head">
                         <span class="exec-name">Madium</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2457,7 +2469,7 @@
                         <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
                     </div>
                 </div>
-                <div class="exec-card" data-status="online" data-platform="windows">
+                <div class="exec-card" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
                     <div class="exec-head">
                         <span class="exec-name">Velocity</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2484,7 +2496,7 @@
                         <span class="exec-feat exec-feat-no"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Raknet Library</span>
                     </div>
                 </div>
-<div class="exec-card" data-status="online" data-platform="windows">
+<div class="exec-card" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
                     <div class="exec-head">
                         <span class="exec-name">SirHurt</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2511,7 +2523,7 @@
                         <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
                     </div>
                 </div>
-<div class="exec-card" data-status="online" data-platform="windows">
+<div class="exec-card" data-status="online" data-platform="windows" data-unc="66" data-sunc="59">
                     <div class="exec-head">
                         <span class="exec-name">Solara</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2537,7 +2549,7 @@
                         <span class="exec-feat exec-feat-no"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Raknet Library</span>
                     </div>
                 </div>
-<div class="exec-card" data-status="online" data-platform="windows">
+<div class="exec-card" data-status="online" data-platform="windows" data-unc="84" data-sunc="40">
                     <div class="exec-head">
                         <span class="exec-name">Xeno</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2563,7 +2575,7 @@
                         <span class="exec-feat exec-feat-no"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Raknet Library</span>
                     </div>
                 </div>
-                <div class="exec-card exec-card-best" data-status="online" data-platform="mobile">
+                <div class="exec-card exec-card-best" data-status="online" data-platform="mobile" data-unc="99" data-sunc="100">
                     <div class="exec-head">
                         <span class="exec-name exec-best"><span class="exec-crown keep-color" title="The Best"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 11H5L3 7zm2.2 13h13.6v2H5.2v-2z"/></svg></span>Delta</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2590,7 +2602,7 @@
                         <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
                     </div>
                 </div>
-<div class="exec-card exec-card-best" data-status="online" data-platform="mobile">
+<div class="exec-card exec-card-best" data-status="online" data-platform="mobile" data-unc="99" data-sunc="100">
                     <div class="exec-head">
                         <span class="exec-name exec-best"><span class="exec-crown keep-color" title="The Best"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 11H5L3 7zm2.2 13h13.6v2H5.2v-2z"/></svg></span>Arceus X Neo</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2616,7 +2628,7 @@
                         <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
                     </div>
                 </div>
-<div class="exec-card exec-card-best" data-status="online" data-platform="macbook">
+<div class="exec-card exec-card-best" data-status="online" data-platform="macbook" data-unc="99" data-sunc="100">
                     <div class="exec-head">
                         <span class="exec-name exec-best"><span class="exec-crown keep-color" title="The Best"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 11H5L3 7zm2.2 13h13.6v2H5.2v-2z"/></svg></span>MacSploit</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -2643,7 +2655,7 @@
                         <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
                     </div>
                 </div>
-<div class="exec-card" data-status="online" data-platform="macbook">
+<div class="exec-card" data-status="online" data-platform="macbook" data-unc="99" data-sunc="100">
                     <div class="exec-head">
                         <span class="exec-name">Opiumware</span>
                         <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
@@ -3349,6 +3361,27 @@
             });
         }
         refreshExecutorStatus();
+
+        // UNC / sUNC scores: add data-unc="99" data-sunc="100" to an .exec-card to show them
+        function renderExecScores() {
+            document.querySelectorAll('.exec-card').forEach(c => {
+                if (c.querySelector('.exec-scores')) return;
+                const items = [['sUNC', c.dataset.sunc], ['UNC', c.dataset.unc]].filter(x => x[1] !== undefined && x[1] !== '');
+                if (!items.length) return;
+                const box = document.createElement('div');
+                box.className = 'exec-scores';
+                items.forEach(([lab, raw]) => {
+                    const v = Math.max(0, Math.min(100, parseFloat(raw) || 0));
+                    const d = document.createElement('div');
+                    d.className = 'exec-score';
+                    d.innerHTML = '<div class="exec-score-top"><span class="exec-score-lab">' + lab + '</span><span class="exec-score-val">' + v + '%</span></div><div class="exec-score-bar"><i style="width:' + v + '%"></i></div>';
+                    box.appendChild(d);
+                });
+                const links = c.querySelector('.exec-links');
+                if (links) links.insertAdjacentElement('afterend', box); else c.appendChild(box);
+            });
+        }
+        renderExecScores();
 
         function copyExecText(text, btn) {
             const label = btn && btn.querySelector('.exec-copy-text');
