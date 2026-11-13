@@ -7,6 +7,7 @@
     <title>Akari Hub</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js" async></script>
     <!-- Modern Clean Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;700;900&family=Playfair+Display:ital,wght@0,700;1,500;1,700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
     <style>
@@ -353,6 +354,30 @@
         .uni-card { display: flex; flex-direction: column; gap: 16px; padding: 24px; border-radius: 24px; background: rgba(0,0,0,0.38); border: 1px solid rgba(168,85,247,0.3); box-shadow: inset 0 1px 1px rgba(255,255,255,0.08); }
         .uni-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
         .uni-head-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+
+        /* ===== Map search bar (Select Script page) ===== */
+        .uni-search { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+        .uni-search-row { display: flex; align-items: center; gap: 0; border-radius: 16px; background: rgba(8,4,22,.72); border: 1px solid rgba(216,180,254,.4); box-shadow: inset 0 1px 1px rgba(255,255,255,.08), 0 0 22px rgba(124,58,237,.18); overflow: hidden; transition: border-color .2s, box-shadow .2s; }
+        .uni-search-row:focus-within { border-color: #c084fc; box-shadow: inset 0 1px 1px rgba(255,255,255,.1), 0 0 0 3px rgba(168,85,247,.28), 0 0 28px rgba(168,85,247,.35); }
+        .uni-search-ico { flex: 0 0 auto; margin: 0 10px 0 16px; color: #a78bfa; display: flex; }
+        .uni-search-in { flex: 1 1 auto; min-width: 0; background: transparent; border: 0; outline: 0; color: #f3e8ff; font: 600 14px 'Plus Jakarta Sans', sans-serif; padding: 15px 8px 15px 0; }
+        .uni-search-in::placeholder { color: rgba(196,181,253,.5); }
+        .uni-search-clear { flex: 0 0 auto; display: none; border: 0; background: transparent; color: #c4b5fd; font-size: 20px; line-height: 1; padding: 0 12px; cursor: pointer; }
+        .uni-search-clear.show { display: block; }
+        .uni-search-go { flex: 0 0 auto; align-self: stretch; border: 0; cursor: pointer; padding: 0 20px; font: 800 13px 'Plus Jakarta Sans', sans-serif; color: #1a0b2e; background: linear-gradient(180deg, #d8b4fe, #a78bfa); }
+        .uni-search-go:hover { filter: brightness(1.08); }
+        .uni-strict { display: inline-flex; align-items: center; gap: 10px; width: fit-content; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
+        .uni-strict input { position: absolute; opacity: 0; pointer-events: none; }
+        .uni-strict-sw { position: relative; width: 38px; height: 22px; border-radius: 999px; background: rgba(88,28,135,.55); border: 1px solid rgba(216,180,254,.35); transition: background .2s; }
+        .uni-strict-sw::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #e9d5ff; transition: transform .2s; }
+        .uni-strict input:checked + .uni-strict-sw { background: linear-gradient(90deg, #7e22ce, #a855f7); }
+        .uni-strict input:checked + .uni-strict-sw::after { transform: translateX(16px); background: #fff; }
+        .uni-strict input:focus-visible + .uni-strict-sw { outline: 2px solid #c084fc; outline-offset: 2px; }
+        .uni-strict-txt { display: flex; flex-direction: column; line-height: 1.15; font: 800 12px 'Plus Jakarta Sans', sans-serif; color: #e9d5ff; }
+        .uni-strict-txt small { font-weight: 600; font-size: 10px; color: rgba(196,181,253,.6); }
+        .uni-count { font: 700 11px 'Plus Jakarta Sans', sans-serif; letter-spacing: .06em; color: rgba(196,181,253,.7); }
+        .uni-empty { padding: 26px 16px; text-align: center; border-radius: 18px; border: 1px dashed rgba(216,180,254,.3); color: rgba(216,180,254,.75); font: 700 13px 'Plus Jakarta Sans', sans-serif; }
+        @media (max-width: 520px) { .uni-search-go { padding: 0 14px; } }
         .uni-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; }
         .uni-map { display: flex; flex-direction: column; gap: 12px; padding: 14px; border-radius: 22px; cursor: pointer; text-align: left; -webkit-tap-highlight-color: transparent;
             background: rgba(0,0,0,0.38); border: 1px solid rgba(168,85,247,0.32); box-shadow: inset 0 1px 1px rgba(255,255,255,0.08); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
@@ -360,6 +385,13 @@
         .uni-pic { position: relative; width: 100%; aspect-ratio: 1; border-radius: 16px; overflow: hidden; display: grid; place-items: center;
             background: linear-gradient(145deg, #4c1d95, #1e1035); border: 1px solid rgba(192,132,252,0.45); box-shadow: 0 0 16px rgba(168,85,247,0.35); }
         .uni-pic-sm { width: 64px; flex-shrink: 0; border-radius: 14px; }
+        .uni-ico { position: absolute; top: 8px; left: 8px; z-index: 3; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 12px; line-height: 1; background: rgba(10,4,24,.72); border: 1px solid rgba(216,180,254,.45); box-shadow: 0 0 14px rgba(168,85,247,.45); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+        .uni-pic-lg .uni-ico { width: 44px; height: 44px; top: 12px; left: 12px; border-radius: 14px; }
+        .uni-fb.uni-fb-svg { display: flex; color: #e9d5ff; filter: drop-shadow(0 0 14px rgba(168,85,247,.75)); }
+        .uni-fb.uni-fb-svg svg { width: 72px; height: 72px; stroke-width: 1.5; }
+        .uni-pic-lg .uni-fb.uni-fb-svg svg { width: 112px; height: 112px; }
+        .uni-ico { color: #e9d5ff; }
+        .uni-ico svg { width: 20px; height: 20px; } .uni-pic-lg .uni-ico svg { width: 26px; height: 26px; }
         .uni-fb { font: 900 26px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.04em; color: rgba(233,213,255,0.85); }
         .uni-pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: #12091f; }
         .uni-map-name { font: 800 20px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.03em; color: #f3e8ff; text-shadow: 0 0 14px rgba(168,85,247,0.7); }
@@ -394,6 +426,9 @@
         .uni-keycopy { flex: 0 0 auto; padding: 8px 14px; }
         .uni-switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
         .uni-switch-lab { font: 800 12px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.1em; color: #d8b4fe; }
+        .uni-nav { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+        .uni-prev { flex: 0 0 auto; padding: 9px 12px; }
+        .uni-prev svg { transition: transform .3s cubic-bezier(.2,.9,.25,1); } .uni-prev:active svg { transform: translateX(-3px); }
         .uni-change { flex: 0 0 auto; padding: 9px 16px; }
         .uni-steps { display: none; margin: 0; padding: 14px 16px 14px 34px; border-radius: 14px; font: 600 13px/1.7 'Plus Jakarta Sans', sans-serif; color: #e9d5ff; background: rgba(0,0,0,0.4); border: 1px dashed rgba(216,180,254,0.35); }
         .uni-steps.open { display: block; }
@@ -3495,6 +3530,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/r
                     { label: 'Zee Hub', key: false, code: `loadstring(game:HttpGet('https://zuwz.me/Ls-Zee-Hub-KL'))()` },
                     { label: 'Zen Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/itz-axiom/Zen-hub-King-legacy-/refs/heads/main/zenhub_full_obfuscated%20(1).lua.txt"))()` },
                     { label: 'HoHo Hub', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()` },
+                    { label: 'NTT Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/NTT-HUB/Script/refs/heads/main/main"))()` },
                     { label: 'Ronix Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
                 ]
             }
@@ -3505,6 +3541,14 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/r
                 script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/n0namevnnek-web/Meme-sea/refs/heads/main/Key.lua"))()`,
                 more: [
                     { label: 'Bonk Hub', key: true, code: `loadstring(game:HttpGet("https://bonkhub.online/loader.lua", true))()` }
+                ]
+            }
+            ,{
+                name: 'Steal An Egg',
+                label: 'Chili Hub', key: false, best: true,
+                script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/tienkhanh1/spicy/main/Chilli.lua"))()`,
+                more: [
+                    { label: 'Ronix Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
                 ]
             }
             ,{
@@ -3541,13 +3585,275 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
                     { label: 'Rifton', key: true, code: `loadstring(game:HttpGet("https://rifton.top/loader.lua"))()` },
                     { label: 'Vector Hub', key: true, code: `loadstring(game:HttpGet("https://vectorhub.space"))()` },
                     { label: 'Airflow', key: true, code: `loadstring(game:HttpGet("https://airflowscript.com/loader"))()` },
-                    { label: 'Ronix Hub', key: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
+                    { label: 'Ronix Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
+                ]
+            },
+            {
+                name: 'Sailor Piece',
+                script: `loadstring(game:HttpGet("https://pastebin.com/raw/RZK9XdtH"))()`,
+                label: 'RobloxFreeScript Hub', key: true,
+                more: [
+                    { label: 'Speed Hub X', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()` },
+                    { label: 'RC Hub', key: true, code: `loadstring(game:HttpGet("https://vss.pandadevelopment.net/virtual/file/2768ea6419cb4d73"))()` },
+                    { label: 'Express Hub', key: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/d8824b23a4d9f2e0d62b4e69397d206b.lua"))()` },
+                    { label: 'Axon Hub', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/lostinnowheres/Loader/refs/heads/main/Loader.Lua"))()` },
+                    { label: 'Vector Hub', key: true, code: `loadstring(game:HttpGet("https://vectorhub.space"))()` },
+                    { label: 'Chiyo Hub', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/kaisenlmao/loader/refs/heads/main/chiyo.lua"))()` },
+                    { label: 'Cerberus', key: true, code: `discordMember = true
+loadstring(game:HttpGet("https://www.getcerberus.com/free-loader"))()` },
+                    { label: 'Void Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidDeveloper67/Void-Hub/refs/heads/main/VoidHub.lua", true))()` },
+                    { label: 'TWVZ Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ZhangJunZ84/twvzyyds/refs/heads/main/sailorpiece.lua"))()` },
+                    { label: 'Alchemy', key: true, code: `loadstring(game:HttpGet("https://getalchemy.net/r"))()` },
+                    { label: 'Mola Hub', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Andrazx23/molahub/refs/heads/main/main.lua"))()` },
+                    { label: 'Next Hub', key: true, code: `loadstring(game:HttpGet("https://nexthub-script.up.railway.app/script/loader.lua"))()` },
+                    { label: 'Itz-Npg Loader', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Itz-Npg/Roblox-Script/main/mainloader.lua", true))()` },
+                    { label: 'Lumin', key: true, code: `loadstring(game:HttpGet("http://luminon.top/loader.lua"))()` },
+                    { label: 'Airflow', key: true, code: `loadstring(game:HttpGet("https://airflowscript.com/loader"))()` },
+                    { label: 'Spectrum', key: true, code: `loadstring(game:HttpGet('https://api.spectrumcheat.com/loader.lua'))()` },
+                    { label: 'HoHo Hub', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()` },
+                    { label: 'Ronix Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
+                ]
+            }
+            ,{
+                name: 'Bite By Night',
+                label: 'Bren Scripts', key: false,
+                script: `loadstring(game:HttpGet("https://gist.githubusercontent.com/BrenScriprs/e5bad919e79dca5dfb03c777c3d33637/raw/BiteByNight.lua"))()`,
+                more: [
+                    { label: 'Cerberus', key: true, code: `inDiscord=true
+loadstring(game:HttpGet("https://www.getcerberus.com/loader.lua"))()` },
+                    { label: 'Chiyo Hub', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/kaisenlmao/loader/refs/heads/main/chiyo.lua"))()` },
+                    { label: 'Alchemy', key: true, code: `loadstring(game:HttpGet("https://getalchemy.net/r"))()` },
+                    { label: 'Airflow', key: true, code: `loadstring(game:HttpGet("https://airflowscript.com/loader"))()` },
+                    { label: 'Ronix Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
+                ]
+            }
+            ,{
+                name: 'Murder Mystery 2',
+                label: 'RobloxFreeScript Hub', key: true,
+                script: `loadstring(game:HttpGet("https://pastebin.com/raw/RZK9XdtH"))()`,
+                more: [
+                    { label: 'Airflow', key: true, code: `loadstring(game:HttpGet("https://airflowscript.com/loader"))()` },
+                    { label: 'Script 3', key: false, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/5946add9ab91f1e04cb005346a8b1968.lua"))()` },
+                    { label: 'Vertex', key: false, code: `loadstring(game:HttpGet('https://raw.smokingscripts.org/vertex.lua'))()` },
+                    { label: 'Somtank', key: false, code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/M4VOWJ8IAKSR5WFRCCJ7AW5IW/ScrFr/refs/heads/main/MM2'))()` },
+                    { label: 'Lumin', key: true, code: `loadstring(game:HttpGet("http://luminon.top/loader.lua"))()` },
+                    { label: 'Foxname', key: false, code: `loadstring(game:HttpGet("https://foxname.top/loader"))()` },
+                    { label: 'HoHo Hub', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()` },
+                    { label: 'Axon Hub', key: true, code: `getgenv().Provider = "rscript"
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf72141537a85458e5a7.lua"))()` },
+                    { label: 'Unknown Hub', key: false, code: `loadstring(game:HttpGet("https://unknownhub.win/api/projects/54474b4c5d5a4f459909c4cb70e7b4f3/loader"))()` },
+                    { label: 'BonkHub', key: true, code: `loadstring(game:HttpGet("https://bonkhub.online/loader.lua", true))()` },
+                    { label: 'Voidon', key: false, code: `loadstring(game:HttpGet("https://www.voidon.top/api/loader"))()` },
+                    { label: 'NoLag', key: false, code: `loadstring(game:HttpGet("https://nolag.wtf/script.lua"))()` },
+                    { label: 'Chili Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/tienkhanh1/spicy/main/Chilli.lua"))()` },
+                    { label: 'Ronix Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
+                ]
+            }
+            ,{
+                name: 'Arsenal',
+                place: '286090429',          /* Roblox place ID, used for the map picture */
+                label: 'Felipe Hub', key: false,
+                script: `loadstring(game:HttpGet("https://rawscripts.net/raw/Arsenal-Felipehub-keyless-50826"))()`,
+                more: [
+                    { label: 'BonkHub', key: true, code: `loadstring(game:HttpGet("https://bonkhub.online/loader.lua", true))()` },
+                    { label: 'ZR Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/zrhubs/Arsenal-1/refs/heads/main/Arsenal%201"))()` },
+                    { label: 'Script 4', key: false, code: `loadstring(game:HttpGet("https://pastefy.app/3pRyePB8/raw"))()` }
+                ]
+            }
+            ,{
+                name: '[ FPS ] Flick Shot',
+                label: 'RobloxFreeScript Hub', key: true,
+                script: `loadstring(game:HttpGet("https://pastebin.com/raw/RZK9XdtH"))()`,
+                more: [
+                    { label: 'Nobulem', key: false, code: `loadstring(game:HttpGet("https://nobulem.wtf/loader.lua"))()` },
+                    { label: 'UNX', key: true, freeKey: 'gay-goof-lmfao', code: `loadstring(game:HttpGet("https://api.getunx.cc/UNX.lua"))()` },
+                    { label: 'Ronix Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
+                ]
+            }
+            ,{
+                name: 'Hide And Seek',
+                label: 'Script 1', key: false,
+                script: `loadstring(game:HttpGet("https://pastebin.com/raw/U90VtzZA"))()`,
+                more: [
+                    { label: 'Hallow Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Moligrafi001/Hallow-Hub/main/Loader.lua",true))()` }
+                ]
+            }
+            ,{
+                name: 'Blood Zone',
+                label: 'Misty Dany Hub', key: false,
+                script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/lorcevinfinlog-dot/Project-Misty-Dany/refs/heads/main/Project%20Misty/The%20Blood%20Zone/Misty_Dany%20Hub-Blood%20Zone%20V2.txt"))()`,
+                more: [
+                    { label: 'DMA Scripts', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/dma-scripts/script/refs/heads/main/bloodzonev2"))()` }
+                ]
+            }
+            ,{
+                name: 'Blox Strike',
+                label: 'Thegxx Hub', key: false,
+                script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Themiga/ThegxxHubScripts/refs/heads/main/BloxStrike.lua"))()`,
+                more: [
+                    { label: 'NeverLose', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Xranbfg132/NeverLose/refs/heads/main/main.lua"))()` }
+                ]
+            }
+            ,{
+                name: 'Rivals Gun',
+                label: 'RobloxFreeScript Hub', key: true,
+                script: `loadstring(game:HttpGet("https://pastebin.com/raw/RZK9XdtH"))()`,
+                more: [
+                    { label: 'Script 2', key: true, code: `loadstring(game:HttpGet("https://pastebin.com/raw/sLP4uEPd"))()` },
+                    { label: 'Dano Hub', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/danoentoy-dev/Something/refs/heads/main/Rivals.Lua"))()` },
+                    { label: 'Lumin', key: true, code: `loadstring(game:HttpGet("http://luminon.top/loader.lua"))()` },
+                    { label: 'Axon Hub', key: true, code: `getgenv().Provider = "rscript"
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf72141537a85458e5a7.lua"))()` },
+                    { label: 'Unknown Hub', key: true, code: `loadstring(game:HttpGet("https://unknownhub.win/api/projects/54474b4c5d5a4f459909c4cb70e7b4f3/loader"))()` },
+                    { label: 'Kiciahook', key: true, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/kiciahook/kiciahook/refs/heads/main/loader.luau"))()` },
+                    { label: 'Cerberus', key: true, code: `inDiscord=true
+loadstring(game:HttpGet("https://www.getcerberus.com/loader.lua"))()` },
+                    { label: 'Ronix Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
+                ]
+            }
+            ,{
+                name: 'Finish The Word',
+                label: 'Word Solver', key: false,
+                script: `loadstring(game:HttpGet("https://rawscripts.net/raw/Finish-The-Word!-NEW-PETS-Auto-Answer-and-Word-Solver-236322"))()`
+            }
+            ,{
+                name: 'Prison Life',
+                label: 'Mafia Hub', key: false,
+                script: `loadstring(game:HttpGet('https://raw.githubusercontent.com/C9Hayley/C9-Client/refs/heads/main/Verison%3A%20v0.5.5'))()`,
+                more: [
+                    { label: 'Novax Hub', key: true, freeKey: 'G457', code: `loadstring(game:HttpGet("https://novaxhub.vercel.app/loader"))()` }
+                ]
+            }
+            ,{
+                name: 'Be A Lucky Block',
+                label: 'Reverb Hub', key: false,
+                script: `loadstring(game:HttpGet("https://reverbloader.pages.dev/Loader.lua"))()`,
+                more: [
+                    { label: 'Gumanba Scripts', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/BeaLuckyBlock"))()` }
+                ]
+            }
+            ,{
+                name: 'Climb And Plunge',
+                label: 'Albiola Hub', key: false,
+                script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Albiola-Hub/Climb-And-Plunge/refs/heads/main/script"))()`
+            }
+            ,{
+                name: 'Cali Shootout',
+                label: 'Express Hub', key: true,
+                script: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/d8824b23a4d9f2e0d62b4e69397d206b.lua"))()`,
+                more: [
+                    { label: 'Mikey Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxScriptHub/MikeyHub-V2/main/Loader/Main"))()` },
+                    { label: 'Blood Dev Hub', key: false, code: `loadstring(game:HttpGet("https://pastebin.com/raw/ZspDwft5"))()` }
+                ]
+            }
+            ,{
+                name: 'Build a Boat For Treasure',
+                label: 'Orbit Hub', key: true,
+                script: `loadstring(game:HttpGet("https://orbitsc.net/babft"))()`,
+                more: [
+                    { label: 'BonkHub', key: true, code: `loadstring(game:HttpGet("https://bonkhub.online/Loader.lua",true))()` },
+                    { label: 'Luau Pro', key: false, code: `loadstring(game:HttpGet("https://luau.pro/loader"))()` },
+                    { label: 'Novax Hub', key: true, freeKey: 'G457', code: `loadstring(game:HttpGet("https://novaxhub.vercel.app/loader"))()` },
+                    { label: 'Ronix Hub', key: true, best: true, code: `loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()` }
+                ]
+            }
+            ,{
+                name: '100 Day At Sea',
+                label: 'DY Hub', key: true, freeKey: 'cuzdyhub',
+                script: `loadstring(game:HttpGet('https://raw.githubusercontent.com/RealDYHUB/Main/refs/heads/main/Loader'))()`
+            }
+            ,{
+                name: 'Ability Wars',
+                label: 'Auto Rhythm Music', key: true, freeKey: 'AutoMusic',
+                script: `loadstring(game:HttpGet("https://gist.githubusercontent.com/qzenka107/672093bfb8761aaa89f6e272ec8da416/raw/76358cc3c653d4f337e9cfcb0164ee0da5c3ce96/Ability%2520Wars%2520Auto%2520Rhythm%2520Music"))()`,
+                more: [
+                    { label: 'Vystro Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Chromeyc/roblox/refs/heads/main/Vystro%20Hub/Games/main.lua"))()` },
+                    { label: 'Incognito Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/IncognitoScripts/AbilityWars/main/AbilityWarsGui", true))()` }
+                ]
+            }
+            ,{
+                name: 'Elemental Power Tycoon',
+                label: 'Ouxi Hub', key: false,
+                script: `loadstring(game:HttpGet('https://pastebin.com/raw/M3JPxZrn'))()`,
+                more: [
+                    { label: 'Magic & Spell Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/dogwiener24/Elemental-powers-tycoon/refs/heads/main/elemental"))()` }
+                ]
+            }
+            ,{
+                name: 'Lucky Block Battleground',
+                label: 'Yummy Hub', key: false,
+                script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Yummy-1z/brabra/refs/heads/main/Script.lua"))()`,
+                more: [
+                    { label: 'Auto Spawn Blocks', key: false, code: `while true do
+    game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+
+game:GetService("ReplicatedStorage"):WaitForChild("SpawnLuckyBlock"):FireServer()
+
+local args = {
+    Enum.KeyCode.Q
+}
+game:GetService("Players").LocalPlayer:WaitForChild("Backpack"):WaitForChild("IvoryPeriastron"):WaitForChild("Remote"):FireServer(unpack(args))
+
+game:GetService("ReplicatedStorage"):WaitForChild("SpawnRainbowBlock"):FireServer()
+
+Wait()
+end` },
+                    { label: 'Harlen Hub', key: false, code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Harlenhub/Harlen-Scripts-New-/main/harlenscripts"))()` },
+                    { label: 'Script 4', key: false, code: `loadstring(game:HttpGet("https://pastebin.com/raw/JbWJ7R7i", true))()` },
+                    { label: 'BonkHub', key: true, code: `loadstring(game:HttpGet("https://bonkhub.online/loader.lua", true))()` }
                 ]
             }
         ];
+        /* Icon per map (SVG paths, 24x24 line style). Add an `icon: '<path .../>'` field to a map to override. */
+        const UNI_ICONS = {
+            'Blox Fruit': '<path d="M12 8c-1.6-1.2-4.2-1.2-5.7.6C4.6 10.600 4.700 14 6.800 17c1.200 1.800 2.600 3.200 5.200 3.200s4-1.400 5.200-3.200c2.100-3 2.200-6.400.5-8.400C16.200 6.800 13.600 6.800 12 8z"/><path d="M12 8c0-2.200.9-3.800 2.800-4.800"/><path d="M14.800 3.200c1.800-.2 3 .4 3.800 1.600-1.600 1-3 1.200-3.800-.1z"/>',
+            'King Legacy': '<path d="M3 8l4.500 4L12 5l4.500 7L21 8l-2 11H5L3 8z"/><path d="M5 21.500h14"/>',
+            'Meme Sea': '<circle cx="12" cy="12" r="9"/><circle cx="8.800" cy="9.500" r=".6" fill="currentColor"/><circle cx="15.200" cy="9.500" r=".6" fill="currentColor"/><path d="M7.500 13.500h9a4.500 4.500 0 01-9 0z"/>',
+            '99 Night In The Forest': '<path d="M12 2.500l5 7h-3l4 6h-5v5h-2v-5H6l4-6H7l5-7z"/><path d="M3 21.500h18"/>',
+            'Survive Zombie Arena': '<path d="M12 3a8 8 0 00-5 14.200V20h10v-2.800A8 8 0 0012 3z"/><circle cx="9" cy="11.500" r="1.600"/><circle cx="15" cy="11.500" r="1.600"/><path d="M10 20v-2.500M14 20v-2.500M12 14.500l-.8 1.500h1.600z"/>',
+            'Sailor Piece': '<circle cx="12" cy="5" r="2.200"/><path d="M12 7.200V21M7.500 11h9M4.500 14.500c.4 3.800 3.500 6.500 7.500 6.500s7.100-2.700 7.500-6.500M4.500 14.500l-1.800 1.600M4.500 14.500l1.800 1.600M19.500 14.500l-1.800 1.600M19.500 14.500l1.800 1.600"/>',
+            'Bite By Night': '<path d="M20 14.500A8.500 8.500 0 019.500 4a8.500 8.500 0 1010.500 10.500z"/><path d="M15.500 5.500l.6 1.400 1.400.6-1.400.6-.6 1.400-.6-1.400-1.400-.6 1.400-.6z"/>',
+            'Murder Mystery 2': '<g transform="rotate(40 12 12)"><path d="M12 1.500l2.800 10h-5.600z"/><path d="M7.500 11.500h9M12 11.500V22"/></g>',
+            'Arsenal': '<path d="M2.500 7.500h16.500v4.500h-7l-1.200 5.500H6.600L7.800 12H2.500V7.500z"/><path d="M19 9.500h2.500M14 7.500V6"/>',
+            '[ FPS ] Flick Shot': '<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="1.600" fill="currentColor"/><path d="M12 2v4.500M12 17.500V22M2 12h4.500M17.500 12H22"/>',
+            'Hide And Seek': '<path d="M2 12s3.800-7 10-7 10 7 10 7-3.800 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r=".8" fill="currentColor"/>',
+            'Blood Zone': '<path d="M12 2.800s6.200 6.600 6.200 11.200a6.200 6.200 0 01-12.400 0C5.800 9.400 12 2.800 12 2.800z"/><path d="M8.800 14.500a3.300 3.300 0 002.600 3.100"/>',
+            'Blox Strike': '<path d="M12 2.500l8.500 4.800v9.400L12 21.500l-8.500-4.800V7.300L12 2.500z"/><path d="M12 12L3.800 7.200M12 12l8.200-4.800M12 12v9.200"/>',
+            'Finish The Word': '<path d="M3 18L7.500 6 12 18M4.800 14h5.400"/><path d="M15 18v-7.500a2.500 2.500 0 015 0V18M15 14.500h5"/>',
+            'Prison Life': '<rect x="4.500" y="11" width="15" height="10" rx="2"/><path d="M8 11V7.500a4 4 0 018 0V11M12 15v2"/>',
+            'Be A Lucky Block': '<circle cx="9" cy="9" r="3.500"/><circle cx="15" cy="9" r="3.500"/><circle cx="9" cy="15" r="3.500"/><circle cx="15" cy="15" r="3.500"/><path d="M12 12l5 9"/>',
+            'Climb And Plunge': '<path d="M2.500 20.500l6.500-11 4 6.500 2.500-4 6 8.500z"/><path d="M9 9.500l1.800 2.800"/>',
+            'Cali Shootout': '<path d="M7 18v-6a5 5 0 0110 0v6"/><path d="M5 21h14M12 3v1.500M4.500 6l1 1M19.500 6l-1 1"/>',
+            'Steal An Egg': '<path d="M12 2.500c-3.600 0-6.500 5.800-6.500 10.500a6.500 6.500 0 0013 0C18.500 8.300 15.600 2.500 12 2.500z"/><path d="M8.500 14c.3 1.800 1.600 3 3.500 3"/>',
+            'Build a Boat For Treasure': '<path d="M12 3v13M12 4c3 2 5.500 6 6 12h-6M12 8c-2 1.500-3.500 4-4 8h4"/><path d="M3 18h18l-2.500 3h-13z"/>',
+            '100 Day At Sea': '<path d="M2 8c2.500 0 2.500 2 5 2s2.500-2 5-2 2.500 2 5 2 2.500-2 5-2M2 13c2.500 0 2.500 2 5 2s2.500-2 5-2 2.500 2 5 2 2.500-2 5-2M2 18c2.500 0 2.500 2 5 2s2.500-2 5-2 2.500 2 5 2 2.500-2 5-2"/>',
+            'Ability Wars': '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+            'Elemental Power Tycoon': '<path d="M12 2.500c.5 3-1.500 4.500-3 6.500-1.300 1.700-2.500 3.300-2.500 5.800a5.500 5.500 0 0011 0c0-2-1-3.500-2-4.800-.4 1.200-1 2-2 2.300.800-3 .3-6.500-1.500-9.800z"/>',
+            'Lucky Block Battleground': '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7M7.500 8a2.500 2.500 0 010-5C11 3 12 8 12 8s1-5 4.500-5a2.500 2.500 0 010 5"/>',
+            'Rivals Gun': '<path d="M4.500 4.500l10.500 10.500M19.500 4.500L9 15M13 17.500l4.500-4.500M11 13.500L6.500 18M15 15l4 4M9 15l-4 4"/>'
+        };
+        /* Lucide icon name per map (https://lucide.dev/icons). Falls back to the built-in SVG above if Lucide fails to load. */
+        const UNI_LUCIDE = { 'Blox Fruit': 'apple', 'King Legacy': 'crown', 'Meme Sea': 'laugh', '99 Night In The Forest': 'tree-pine', 'Survive Zombie Arena': 'skull', 'Sailor Piece': 'anchor', 'Bite By Night': 'moon-star', 'Murder Mystery 2': 'sword', 'Arsenal': 'crosshair', '[ FPS ] Flick Shot': 'target', 'Hide And Seek': 'eye-off', 'Blood Zone': 'droplet', 'Blox Strike': 'box', 'Rivals Gun': 'swords', 'Finish The Word': 'type', 'Prison Life': 'lock', 'Be A Lucky Block': 'clover', 'Climb And Plunge': 'mountain', 'Cali Shootout': 'siren', 'Steal An Egg': 'egg', 'Build a Boat For Treasure': 'sailboat', '100 Day At Sea': 'waves', 'Ability Wars': 'zap', 'Elemental Power Tycoon': 'flame', 'Lucky Block Battleground': 'gift' };
+        function uniIcon(it) { return it.icon || UNI_ICONS[it.name] || (it.lucide || UNI_LUCIDE[it.name]) || ''; }
+        function uniLucide(it, size) {
+            try {
+                const nm = it.lucide || UNI_LUCIDE[it.name]; const L = window.lucide;
+                if (!nm || !L || !L.icons || !L.createElement) return '';
+                const pas = nm.replace(/(^|-)(\w)/g, (m, a, c) => c.toUpperCase());
+                const node = L.icons[pas] || L.icons[nm]; if (!node) return '';
+                const svg = L.createElement(node);
+                svg.setAttribute('width', size); svg.setAttribute('height', size); svg.setAttribute('stroke-width', '1.7'); svg.setAttribute('aria-hidden', 'true');
+                return svg.outerHTML;
+            } catch (e) { return ''; }
+        }
+        function uniSvg(inner, size) {
+            return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + '</svg>';
+        }
+        function uniIconHtml(it, size) { const L = uniLucide(it, size); if (L) return L; const raw = it.icon || UNI_ICONS[it.name]; return raw ? uniSvg(raw, size) : ''; }
         function uniThumb(it, cls) {
             const box = document.createElement('div'); box.className = cls;
-            const fb = document.createElement('span'); fb.className = 'uni-fb'; fb.textContent = it.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+            const fb = document.createElement('span'); fb.className = 'uni-fb'; fb.textContent = it.name.split(/\s+/).filter(w => /[A-Za-z0-9]/.test(w)).map(w => w.replace(/[^A-Za-z0-9]/g, '')[0]).join('').slice(0, 2).toUpperCase();
+            const ic = uniIcon(it); if (ic) { fb.innerHTML = uniIconHtml(it, 64); fb.classList.add('uni-fb-svg'); }
             box.appendChild(fb);
             if (it.place) {
                 const im = document.createElement('img');
@@ -3556,26 +3862,59 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
                 im.onerror = () => im.remove();
                 box.appendChild(im);
             }
+            if (ic) { const chip = document.createElement('span'); chip.className = 'uni-ico'; chip.innerHTML = uniIconHtml(it, 20); chip.setAttribute('aria-hidden', 'true'); box.appendChild(chip); }
             return box;
         }
         const uniSel = {};
         function uniAll(it) { return [{ label: it.label || 'Script 1', code: it.script, key: it.key, freeKey: it.freeKey, best: it.best }].concat(it.more || []); }
         function uniCur(i) { const a = uniAll(UNIVERSAL_SCRIPTS[i]); return a[(uniSel[i] || 0) % a.length]; }
+        let uniQuery = '', uniStrict = false;
+        function uniMatch(it, q) {
+            q = q.trim().toLowerCase(); if (!q) return true;
+            const name = it.name.toLowerCase();
+            if (uniStrict) return name === q || name.split(/[^a-z0-9]+/).filter(Boolean).join(' ').indexOf(q) === 0 || name.indexOf(q) === 0;
+            const hay = (name + ' ' + uniAll(it).map(x => x.label).join(' ')).toLowerCase();
+            return q.split(/\s+/).every(t => hay.indexOf(t) !== -1);
+        }
         function showUniversalList() {
             const list = document.getElementById('universalList'); list.innerHTML = '';
             document.getElementById('universalDesc').textContent = 'Pick a map to get its script.';
-            const grid = document.createElement('div'); grid.className = 'uni-grid';
             if (!UNIVERSAL_SCRIPTS.length) { const p = document.createElement('div'); p.className = 'code-box rounded-2xl p-4 text-xs text-purple-300/70 font-semibold'; p.textContent = '-- more maps coming soon'; list.appendChild(p); return; }
-            UNIVERSAL_SCRIPTS.forEach((it, i) => {
-                const card = document.createElement('button'); card.type = 'button'; card.className = 'uni-map';
-                card.appendChild(uniThumb(it, 'uni-pic'));
-                const nm = document.createElement('span'); nm.className = 'uni-map-name'; nm.textContent = it.name;
-                const tg = document.createElement('span'); tg.className = 'uni-tag'; tg.textContent = 'OPEN SCRIPT';
-                card.appendChild(nm); card.appendChild(tg);
-                card.onclick = (ev) => { ev.stopPropagation(); showUniversalScript(i); };
-                grid.appendChild(card);
-            });
-            list.appendChild(grid);
+            /* search bar */
+            const box = document.createElement('div'); box.className = 'uni-search';
+            box.innerHTML = '<div class="uni-search-row"><span class="uni-search-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></span>'
+                + '<input type="text" class="uni-search-in" placeholder="Search by map or hub, e.g. Blox Fruit" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Search maps">'
+                + '<button type="button" class="uni-search-clear" aria-label="Clear search">&times;</button>'
+                + '<button type="button" class="uni-search-go">Search</button></div>'
+                + '<label class="uni-strict"><input type="checkbox"><span class="uni-strict-sw"></span><span class="uni-strict-txt">Strict search<small>match the map name from the start</small></span></label>'
+                + '<div class="uni-count"></div>';
+            list.appendChild(box);
+            const inp = box.querySelector('.uni-search-in'), clr = box.querySelector('.uni-search-clear'), cnt = box.querySelector('.uni-count'), chk = box.querySelector('.uni-strict input');
+            inp.value = uniQuery; chk.checked = uniStrict;
+            const holder = document.createElement('div'); list.appendChild(holder);
+            const draw = () => {
+                holder.innerHTML = ''; clr.classList.toggle('show', !!inp.value);
+                const grid = document.createElement('div'); grid.className = 'uni-grid'; let n = 0;
+                UNIVERSAL_SCRIPTS.forEach((it, i) => {
+                    if (!uniMatch(it, uniQuery)) return; n++;
+                    const card = document.createElement('button'); card.type = 'button'; card.className = 'uni-map';
+                    card.appendChild(uniThumb(it, 'uni-pic'));
+                    const nm = document.createElement('span'); nm.className = 'uni-map-name'; nm.textContent = it.name;
+                    const tg = document.createElement('span'); tg.className = 'uni-tag'; tg.textContent = 'OPEN SCRIPT';
+                    card.appendChild(nm); card.appendChild(tg);
+                    card.onclick = (ev) => { ev.stopPropagation(); showUniversalScript(i); };
+                    grid.appendChild(card);
+                });
+                cnt.textContent = uniQuery.trim() ? (n + ' of ' + UNIVERSAL_SCRIPTS.length + ' maps') : (UNIVERSAL_SCRIPTS.length + ' maps');
+                if (n) holder.appendChild(grid);
+                else { const e = document.createElement('div'); e.className = 'uni-empty'; e.textContent = 'No maps found for "' + uniQuery.trim() + '"'; holder.appendChild(e); }
+            };
+            inp.oninput = () => { uniQuery = inp.value; draw(); };
+            inp.onkeydown = (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); uniQuery = inp.value; draw(); inp.blur(); } };
+            box.querySelector('.uni-search-go').onclick = (ev) => { ev.stopPropagation(); uniQuery = inp.value; draw(); };
+            clr.onclick = (ev) => { ev.stopPropagation(); inp.value = ''; uniQuery = ''; draw(); inp.focus(); };
+            chk.onchange = () => { uniStrict = chk.checked; draw(); };
+            draw();
         }
         function showUniversalScript(i) {
             const it = UNIVERSAL_SCRIPTS[i]; if (!it) return;
@@ -3625,8 +3964,10 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
                 chg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"></path></svg><span>Change</span>';
                 const upd = () => { const n = (uniSel[i] || 0) % all.length; lab.textContent = 'SCRIPT ' + (n + 1) + '/' + all.length + ' - ' + all[n].label; pre.textContent = all[n].code; keyB.style.display = all[n].key ? '' : 'none'; crownB.style.display = all[n].best ? '' : 'none'; syncKey(); };
                 let swapT = null;
-                chg.onclick = (ev) => {
-                    ev.stopPropagation(); uniSel[i] = ((uniSel[i] || 0) + 1) % all.length;
+                const prv = el('button', 'uni-act uni-prev'); prv.type = 'button'; prv.title = 'Previous script'; prv.setAttribute('aria-label', 'Previous script');
+                prv.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"></path></svg><span>Back</span>';
+                const go = (ev, d) => {
+                    ev.stopPropagation(); uniSel[i] = ((uniSel[i] || 0) + d + all.length) % all.length;
                     const fx = [pre, lab, keyB, crownB, kr]; clearTimeout(swapT);
                     fx.forEach(n => { n.classList.remove('uni-in'); n.classList.add('uni-out'); });
                     swapT = setTimeout(() => {
@@ -3634,7 +3975,9 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
                         fx.forEach(n => { n.classList.remove('uni-out'); void n.offsetWidth; n.classList.add('uni-in'); });
                     }, 170);
                 };
-                upd(); bar.appendChild(lab); bar.appendChild(chg); info.appendChild(bar);
+                chg.onclick = (ev) => go(ev, 1); prv.onclick = (ev) => go(ev, -1);
+                const nav = el('div', 'uni-nav'); nav.appendChild(prv); nav.appendChild(chg);
+                upd(); bar.appendChild(lab); bar.appendChild(nav); info.appendChild(bar);
             }
             const btn = el('button', 'tilt-btn btn-purple-glow uni-copy'); btn.type = 'button';
             btn.innerHTML = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 002-2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>COPY SCRIPT</span>';
