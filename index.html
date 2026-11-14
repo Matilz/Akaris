@@ -700,6 +700,57 @@
         @keyframes pdKeyRise { from { opacity: 0; transform: translateY(26px) scale(0.97); filter: blur(8px); } to { opacity: 1; transform: none; filter: blur(0); } }
         @keyframes pdKeyFade { from { opacity: 0; transform: translateY(12px); filter: blur(4px); } to { opacity: 1; transform: none; filter: blur(0); } }
         @media (prefers-reduced-motion: reduce) { .pd-keycard, .pd-keycard .pd-key-top, .pd-keycard .pd-key-text, .pd-keycard .pd-keycopy { animation: none; } }
+
+        /* ===== key card extras: spinning border, decrypt reveal, shimmer, sparkles, copy effects ===== */
+        @property --pk-ang { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+        @keyframes pkSpin { to { --pk-ang: 360deg; } }
+        @keyframes pkGlow { 0%, 100% { box-shadow: 0 0 24px rgba(147,51,234,0.25), inset 0 0 30px rgba(126,34,206,0.12); } 50% { box-shadow: 0 0 46px rgba(192,132,252,0.5), inset 0 0 40px rgba(168,85,247,0.22); } }
+        @keyframes pkSweep { 0% { transform: translateX(-130%) skewX(-20deg); } 45%, 100% { transform: translateX(340%) skewX(-20deg); } }
+        @keyframes pkIcoPop { 0% { transform: scale(0) rotate(-120deg); opacity: 0; } 60% { transform: scale(1.25) rotate(12deg); opacity: 1; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+        @keyframes pkRing { 0% { transform: scale(0.9); opacity: 0.7; } 100% { transform: scale(1.9); opacity: 0; } }
+        @keyframes pkFlash { 0% { box-shadow: 0 0 0 rgba(233,213,255,0); background: rgba(0,0,0,0.6); } 30% { box-shadow: 0 0 34px rgba(233,213,255,0.9), inset 0 0 26px rgba(216,180,254,0.55); background: rgba(88,28,135,0.55); } 100% { box-shadow: 0 0 0 rgba(233,213,255,0); background: rgba(0,0,0,0.6); } }
+        @keyframes pkSpark { 0% { transform: translate(0,0) scale(0.2) rotate(0deg); opacity: 0; } 15% { opacity: 1; } 55% { transform: translate(calc(var(--dx) * 0.7), calc(var(--dy) * 0.7)) scale(1.15) rotate(calc(var(--r) * 0.6)); opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)) scale(0.3) rotate(var(--r)); opacity: 0; } }
+        @keyframes pkRip { to { transform: scale(4); opacity: 0; } }
+        @keyframes pkCheck { from { stroke-dashoffset: 26; } to { stroke-dashoffset: 0; } }
+        @keyframes pkBtnPop { 0% { transform: scale(1); } 40% { transform: scale(0.95); } 70% { transform: scale(1.04); } 100% { transform: scale(1); } }
+
+        .pd-keycard { position: relative; isolation: isolate; animation: pdKeyRise 0.8s cubic-bezier(0.16,1,0.3,1) both, pkGlow 3.4s ease-in-out 0.9s infinite; }
+        .pd-keycard::before { content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px; z-index: -1; pointer-events: none;
+            background: conic-gradient(from var(--pk-ang), transparent 0deg, transparent 80deg, #c084fc 140deg, #f5d0fe 175deg, #c084fc 210deg, transparent 270deg, transparent 360deg);
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+            animation: pkSpin 5s linear infinite; }
+        .pk-hero { aspect-ratio: 16 / 5; border-radius: 16px; border: 1px solid rgba(192,132,252,0.35); box-shadow: 0 0 26px rgba(147,51,234,0.35); animation: pdKeyFade 0.7s ease 0.05s backwards; }
+        .pk-hero svg.pd-art { animation: pkHeroDrift 9s ease-in-out infinite; transform-origin: 22% 50%; }
+        @keyframes pkHeroDrift { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.08) rotate(1.5deg); } }
+        @media (prefers-reduced-motion: reduce) { .pk-hero, .pk-hero svg.pd-art { animation: none; } }
+        .pd-key-ico { position: relative; animation: pkIcoPop 0.8s 0.2s cubic-bezier(0.34,1.56,0.64,1) both; }
+        .pd-key-ico::after { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(216,180,254,0.8); pointer-events: none; animation: pkRing 2.4s ease-out 1s infinite; }
+
+        .pd-key-text { position: relative; overflow: hidden; cursor: pointer; transition: border-color .25s ease, box-shadow .25s ease, text-shadow .25s ease, transform .25s ease, color .25s ease; }
+        .pd-key-text::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 38%; pointer-events: none;
+            background: linear-gradient(100deg, transparent, rgba(255,255,255,0.22), transparent); transform: translateX(-130%) skewX(-20deg); animation: pkSweep 4s ease-in-out 1.8s infinite; }
+        .pd-key-text:hover { border-color: rgba(233,213,255,0.85); box-shadow: 0 0 24px rgba(168,85,247,0.5), inset 0 0 20px rgba(168,85,247,0.2); text-shadow: 0 0 12px rgba(216,180,254,0.85); transform: translateY(-1px); }
+        .pd-key-text.scr { color: #a78bfa; border-style: solid; border-color: rgba(216,180,254,0.75); box-shadow: 0 0 22px rgba(168,85,247,0.5), inset 0 0 18px rgba(126,34,206,0.3); }
+        .pd-key-text .lk { color: #fff; text-shadow: 0 0 10px rgba(233,213,255,0.95); }
+        .pd-key-text.flash { animation: pkFlash 0.8s ease; }
+
+        .pd-keycard .pd-keycopy { position: relative; overflow: hidden; isolation: isolate; animation: pdKeyFade 0.7s ease 0.8s backwards; -webkit-tap-highlight-color: transparent; }
+        .pd-keycopy::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 34%; z-index: -1; pointer-events: none;
+            background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent); transform: translateX(-130%) skewX(-20deg); animation: pkSweep 3.2s ease-in-out 2.2s infinite; }
+        .pd-keycopy:active { transform: scale(0.97); }
+        .pd-keycopy.done { animation: pkBtnPop 0.5s ease; box-shadow: 0 0 34px rgba(233,213,255,0.95), 0 6px 18px rgba(168,85,247,0.6), inset 0 1px 1px #fff; }
+        .pd-keycopy .pk-ico { display: inline-flex; }
+        .pd-keycopy .pk-ico svg path.ck { stroke-dasharray: 26; animation: pkCheck 0.45s ease forwards; }
+        .pk-rip { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.6); transform: scale(0); animation: pkRip 0.7s ease-out forwards; pointer-events: none; z-index: -1; }
+        .pk-spark { position: absolute; z-index: 5; pointer-events: none; width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+            background: radial-gradient(circle, #fff 0%, #f5d0fe 45%, #c084fc 100%); clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+            animation: pkSpark 0.95s cubic-bezier(0.15,0.7,0.3,1) forwards; }
+        .pk-spark.gold { background: radial-gradient(circle, #fff 0%, #fde68a 50%, #f59e0b 100%); }
+        @media (prefers-reduced-motion: reduce) {
+            .pd-keycard, .pd-keycard::before, .pd-key-ico, .pd-key-ico::after, .pd-key-text::after, .pd-keycopy::after, .pd-keycard .pd-keycopy { animation: none; }
+            .pd-key-ico::after { opacity: 0; }
+            .pk-spark, .pk-rip { display: none; }
+        }
         /* ===== product detail page ===== */
         .pd-detail { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.3fr); gap: 30px; align-items: start; }
         .pd-detail-art { display: flex; flex-direction: column; gap: 18px; }
@@ -4243,6 +4294,89 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             fill.style.width = '100%';
             setTimeout(function () { if (document.body.contains(box)) buyProduct(ci, i); }, 3000);
         }
+        const PK_COPY_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+        const PK_CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path class="ck" d="M4 12.5l5 5L20 6.5"/></svg>';
+        const PK_REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        /* sparkle burst inside the key card, centred on page point (x, y) */
+        function pdBurst(x, y, n, spread) {
+            const card = document.querySelector('.pd-keycard');
+            if (!card || PK_REDUCE) return;
+            const r = card.getBoundingClientRect();
+            for (let k = 0; k < n; k++) {
+                const s = document.createElement('span');
+                const a = Math.random() * 6.2832, d = spread * (0.45 + Math.random() * 0.75);
+                s.className = 'pk-spark' + (Math.random() < 0.22 ? ' gold' : '');
+                s.style.left = (x - r.left) + 'px'; s.style.top = (y - r.top) + 'px';
+                s.style.setProperty('--dx', (Math.cos(a) * d).toFixed(1) + 'px');
+                s.style.setProperty('--dy', (Math.sin(a) * d - 14).toFixed(1) + 'px');
+                s.style.setProperty('--s', (7 + Math.random() * 11).toFixed(1) + 'px');
+                s.style.setProperty('--r', ((Math.random() - 0.5) * 360).toFixed(0) + 'deg');
+                s.style.animationDelay = (Math.random() * 0.1).toFixed(2) + 's';
+                s.addEventListener('animationend', function () { s.remove(); });
+                card.appendChild(s);
+            }
+        }
+        /* the key "decrypts": random characters roll, then lock in from left to right */
+        function pdDecrypt(el, finalText, delay) {
+            if (PK_REDUCE) return;
+            const P = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', n = finalText.length;
+            const plen = finalText.indexOf('-') + 1;                     /* the prefix stays put */
+            const total = 1100 + n * 16;
+            let t0 = 0, lastTick = 0;
+            el.textContent = finalText.replace(/[A-Z0-9]/g, '·').replace(/^·+/, finalText.slice(0, Math.max(0, plen - 1)));
+            setTimeout(function () {
+                if (!document.body.contains(el)) return;
+                el.classList.add('scr'); t0 = performance.now();
+                (function tick(now) {
+                    if (!document.body.contains(el)) return;
+                    const el2 = now - t0;
+                    if (el2 >= total) {
+                        el.classList.remove('scr'); el.textContent = finalText;
+                        const r = el.getBoundingClientRect();
+                        pdBurst(r.left + r.width / 2, r.top + r.height / 2, 16, Math.max(70, r.width * 0.42));
+                        return;
+                    }
+                    if (now - lastTick > 42) {
+                        lastTick = now;
+                        let html = '';
+                        for (let i = 0; i < n; i++) {
+                            const ch = finalText[i];
+                            if (ch === '-' || i < plen || el2 >= total * 0.3 + (i / n) * total * 0.7) html += '<span class="lk">' + ch + '</span>';
+                            else html += P[Math.floor(Math.random() * P.length)];
+                        }
+                        el.innerHTML = html;
+                    }
+                    requestAnimationFrame(tick);
+                })(performance.now());
+            }, delay);
+        }
+        /* click a single key box to copy just that key */
+        function pdCopyOne(box, key, ev) {
+            if (box.classList.contains('scr')) return;
+            copyTextRobust(key, function () {
+                box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash');
+                pdBurst(ev.clientX, ev.clientY, 10, 60);
+                showNotify("KEY", "KEY COPIED TO CLIPBOARD", true);
+            }, function () { showNotify("CLIPBOARD", "COPY BLOCKED - SELECT THE KEY MANUALLY", false); });
+        }
+        /* effects when the Copy button succeeds: ripple, check mark, flash, sparkles */
+        function pdCopyFx(btn, ev) {
+            if (!btn) return;
+            const ico = document.getElementById('pdKeyIco');
+            if (ico) { ico.innerHTML = PK_CHECK_SVG; setTimeout(function () { if (ico.isConnected) ico.innerHTML = PK_COPY_SVG; }, 1600); }
+            btn.classList.remove('done'); void btn.offsetWidth; btn.classList.add('done');
+            setTimeout(function () { btn.classList.remove('done'); }, 1600);
+            document.querySelectorAll('.pd-key-text').forEach(function (b, k) {
+                setTimeout(function () { b.classList.remove('flash'); void b.offsetWidth; b.classList.add('flash'); }, k * 90);
+            });
+            const r = btn.getBoundingClientRect();
+            const cx = ev && ev.clientX ? ev.clientX : r.left + r.width / 2;
+            const rip = document.createElement('span'), size = Math.max(r.width, r.height);
+            rip.className = 'pk-rip'; rip.style.width = rip.style.height = size + 'px';
+            rip.style.left = (cx - r.left - size / 2) + 'px'; rip.style.top = ((ev && ev.clientY ? ev.clientY : r.top + r.height / 2) - r.top - size / 2) + 'px';
+            btn.appendChild(rip); setTimeout(function () { rip.remove(); }, 750);
+            pdBurst(cx, r.top + r.height / 2, 18, 110);
+        }
         function buyProduct(ci, i) {
             const c = PRODUCT_CATEGORIES[ci], it = c.items[i];
             const grid = document.getElementById('productGrid');
@@ -4251,17 +4385,24 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             grid.className = 'pd-keywrap';
             grid.dataset.qty = String(qty);
             grid.innerHTML = '<div class="pd-keycard">'
+                + '<span class="pd-banner pd-tint pk-hero">' + pdArt(c.theme, 480, 150, 'pkh') + '<span class="pd-banner-text"><b>' + c.title + '</b><i>' + it.duration + '</i></span></span>'
                 + '<div class="pd-key-top"><span class="pd-key-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg></span>'
                 + '<span class="pd-key-title">Your key' + (qty > 1 ? 's' : '') + '<small>' + it.duration + (qty > 1 ? ' × ' + qty : '') + '</small></span>'
                 + '<span class="pd-online"><span class="pd-online-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a15 15 0 0120 0"/><path d="M5.5 12.5a10 10 0 0113 0"/><path d="M9 16a5 5 0 016 0"/><circle cx="12" cy="19.5" r="1" fill="currentColor"/></svg></span>Online</span></div>'
                 + '<div id="pdKeyText" class="pd-key-list"></div>'
-                + '<button type="button" id="pdKeyBtn" class="pd-keycopy" onclick="copyProductKey(' + ci + ',' + i + ')">'
-                + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>'
+                + '<button type="button" id="pdKeyBtn" class="pd-keycopy" onclick="copyProductKey(' + ci + ',' + i + ',event)">'
+                + '<span class="pk-ico" id="pdKeyIco">' + PK_COPY_SVG + '</span>'
                 + '<span id="pdKeyLabel">' + (qty > 1 ? 'Copy Keys' : 'Copy Key') + '</span></button></div>';
             const list = document.getElementById('pdKeyText');
-            for (let n = 0; n < qty; n++) { const d = document.createElement('div'); d.className = 'pd-key-text'; d.style.setProperty('--k', n); d.textContent = it.key; list.appendChild(d); }
+            for (let n = 0; n < qty; n++) {
+                const d = document.createElement('div'); d.className = 'pd-key-text'; d.style.setProperty('--k', n);
+                d.title = 'Click to copy'; d.textContent = it.key;
+                d.addEventListener('click', function (ev) { pdCopyOne(d, it.key, ev); });
+                list.appendChild(d);
+                pdDecrypt(d, it.key, 450 + n * 260);
+            }
         }
-        function copyProductKey(ci, i) {
+        function copyProductKey(ci, i, ev) {
             const grid = document.getElementById('productGrid');
             const qty = parseInt(grid.dataset.qty, 10) || 1;
             const text = Array(qty).fill(PRODUCT_CATEGORIES[ci].items[i].key).join('\n');
@@ -4269,6 +4410,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             const idle = qty > 1 ? 'Copy Keys' : 'Copy Key';
             const ok = function () {
                 if (label) { label.textContent = 'Copied!'; setTimeout(function () { label.textContent = idle; }, 1600); }
+                pdCopyFx(document.getElementById('pdKeyBtn'), ev);
                 showNotify("KEY", "COPIED TO CLIPBOARD", true);
             };
             const legacy = function () {
