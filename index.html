@@ -615,7 +615,7 @@
             box-shadow: inset 0 1px 1px rgba(255,255,255,0.22), inset 0 0 70px rgba(147,51,234,0.28); }
         .pd-scroll { position: relative; z-index: 1; overflow-y: auto; padding: 34px; min-height: 0; }
         #productModal .modal-close { z-index: 3; }
-        html[data-theme] #productModal :is(.pd-tint svg.pd-art, .pd-verify, .pd-feat-ico, .pd-cat, .pd-plan, .pd-plan-thumb, .pd-panel, .pd-stepper, .pd-codebox, .pd-label, .pd-key-text, .pd-keycard, .pd-key-ico, .pd-key-title small, .pd-key-text, .pd-keycopy, .modal-close, .pd-back, .pd-ico, .pd-count, .pd-stock:not(.ok), .pd-name small),
+        html[data-theme] #productModal :is(.pd-tint svg.pd-art, .pd-tint svg.pd-box,.pd-verify, .pd-feat-ico, .pd-cat, .pd-plan, .pd-plan-thumb, .pd-panel, .pd-stepper, .pd-codebox, .pd-label, .pd-key-text, .pd-keycard, .pd-key-ico, .pd-key-title small, .pd-key-text, .pd-keycopy, .modal-close, .pd-back, .pd-ico, .pd-count, .pd-stock:not(.ok), .pd-name small),
         html[data-theme] .pd-card::after, html[data-theme] .pd-buy::before { filter: hue-rotate(var(--theme-hue)); }
 
         .pd-head { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; padding-right: 40px; }
@@ -663,6 +663,35 @@
             background: linear-gradient(180deg, #ffffff 10%, #e9d5ff 50%, #c084fc 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)) drop-shadow(0 0 10px rgba(192,132,252,0.55)); }
         .pd-tile-price { position: absolute; right: 10px; bottom: 10px; padding: 6px 14px; border-radius: 14px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.18); font: 900 clamp(15px, 2.3vw, 19px) 'Plus Jakarta Sans', sans-serif; color: #fff; }
+        /* ===== product box (3D-looking Akari Premium box) ===== */
+        svg.pd-box { position: absolute; left: 50%; top: 47%; height: 88%; width: auto; aspect-ratio: 200 / 240; z-index: 1; overflow: visible;
+            --rx: 0deg; --ry: 0deg;
+            transform: translate(-50%, -50%) perspective(700px) rotateX(var(--rx)) rotateY(var(--ry)); transform-style: preserve-3d;
+            transition: transform .14s ease-out, filter .35s ease; will-change: transform;
+            animation: pdBoxFloat 5s ease-in-out infinite;
+            filter: drop-shadow(0 14px 18px rgba(0,0,0,0.55)) drop-shadow(0 0 18px rgba(168,85,247,0.55)); }
+        svg.pd-box.tilting { transition: transform .06s linear, filter .35s ease; }
+        .pd-item:hover svg.pd-box, .pd-detail-art:hover svg.pd-box, .pd-card:hover svg.pd-box { filter: drop-shadow(0 16px 22px rgba(0,0,0,0.6)) drop-shadow(0 0 30px rgba(216,180,254,0.85)); }
+        .pd-detail-art svg.pd-box { top: 46%; height: 90%; }
+        @keyframes pdBoxFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+        @media (prefers-reduced-motion: reduce) { svg.pd-box { animation: none; } }
+        /* shimmering, sparkling purple prices */
+        .pd-glit, .pd-price, #pdPrice, .pd-totalrow b, .pd-plan-txt em { position: relative; display: inline-block;
+            background: linear-gradient(110deg, #7e22ce 0%, #c084fc 28%, #ffffff 50%, #c084fc 72%, #7e22ce 100%); background-size: 260% 100%;
+            -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+            animation: pdPriceShine 2.4s linear infinite, pdPriceGlow 2.2s ease-in-out infinite; }
+        .pd-glit::before, .pd-glit::after, .pd-price::before, .pd-price::after, #pdPrice::before, #pdPrice::after, .pd-totalrow b::before, .pd-totalrow b::after, .pd-plan-txt em::before, .pd-plan-txt em::after {
+            content: '\2726'; position: absolute; font-family: Arial, sans-serif; font-style: normal; font-weight: 400; letter-spacing: 0; line-height: 1; pointer-events: none;
+            background: none; color: #f5d0fe; -webkit-text-fill-color: #f5d0fe; text-shadow: 0 0 6px #fff, 0 0 12px #c084fc; opacity: 0; animation: pdPriceTwinkle 1.9s ease-in-out infinite; }
+        .pd-glit::before, .pd-price::before, #pdPrice::before, .pd-totalrow b::before, .pd-plan-txt em::before { top: -7px; left: -9px; font-size: 0.5em; }
+        .pd-glit::after, .pd-price::after, #pdPrice::after, .pd-totalrow b::after, .pd-plan-txt em::after { bottom: -5px; right: -10px; font-size: 0.6em; animation-delay: 0.95s; }
+        .pd-totalrow b s { -webkit-text-fill-color: rgba(216,180,254,0.5); }
+        .pd-tile-price .pd-glit { font-size: inherit; }
+        @keyframes pdPriceShine { 0% { background-position: 160% 0; } 100% { background-position: -100% 0; } }
+        @keyframes pdPriceGlow { 0%, 100% { filter: drop-shadow(0 0 3px rgba(168,85,247,0.55)); } 50% { filter: drop-shadow(0 0 10px rgba(216,180,254,0.95)); } }
+        @keyframes pdPriceTwinkle { 0%, 100% { opacity: 0; transform: scale(0.2) rotate(0deg); } 45%, 55% { opacity: 1; transform: scale(1.15) rotate(45deg); } }
+        @media (prefers-reduced-motion: reduce) { .pd-glit, .pd-price, #pdPrice, .pd-totalrow b, .pd-plan-txt em { animation: none; background-position: 50% 0; }
+            .pd-glit::before, .pd-glit::after, .pd-price::before, .pd-price::after, #pdPrice::before, #pdPrice::after, .pd-totalrow b::before, .pd-totalrow b::after, .pd-plan-txt em::before, .pd-plan-txt em::after { animation: none; opacity: 0.8; } }
         .pd-keywrap { display: flex; justify-content: center; padding: 10px 0 6px; }
         .pd-keycard { width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 16px; padding: 22px; border-radius: 22px; background: rgba(10,4,18,0.7); }
         .pd-key-top { display: flex; align-items: center; gap: 12px; }
@@ -4128,24 +4157,52 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
                 + '<filter id="' + id + 'b2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="' + r * 0.06 + '"/></filter>'
                 + '</defs>'
                 + '<rect width="' + w + '" height="' + h + '" fill="url(#' + id + 'bg)"/>' + stars
-                + '<g transform="translate(' + cx + ' ' + cy + ') rotate(-12)">'
-                /* glow */
-                + '<ellipse rx="' + A * 1.05 + '" ry="' + B * 1.6 + '" fill="none" stroke="' + pal[1] + '" stroke-width="' + r * 0.5 + '" opacity="0.75" filter="url(#' + id + 'b1)"/>'
-                /* back of the disk */
-                + '<ellipse rx="' + A + '" ry="' + B + '" fill="none" stroke="url(#' + id + 'd)" stroke-width="' + r * 0.2 + '" opacity="0.95" filter="url(#' + id + 'b2)"/>'
-                + '<ellipse rx="' + A * 0.9 + '" ry="' + B * 0.88 + '" fill="none" stroke="' + pal[3] + '" stroke-width="' + r * 0.05 + '" opacity="0.9"/>'
-                /* lensed light bending over the top and under the bottom */
-                + '<path d="M' + -L + ' 0 A' + L + ' ' + LB + ' 0 0 1 ' + L + ' 0" fill="none" stroke="' + pal[2] + '" stroke-width="' + r * 0.2 + '" opacity="0.85" filter="url(#' + id + 'b2)"/>'
-                + '<path d="M' + -L * 0.98 + ' 0 A' + L * 0.98 + ' ' + LB * 0.98 + ' 0 0 1 ' + L * 0.98 + ' 0" fill="none" stroke="#fff" stroke-width="' + r * 0.05 + '"/>'
-                + '<path d="M' + -L * 0.9 + ' 0 A' + L * 0.9 + ' ' + LB * 0.62 + ' 0 0 0 ' + L * 0.9 + ' 0" fill="none" stroke="' + pal[2] + '" stroke-width="' + r * 0.09 + '" opacity="0.7" filter="url(#' + id + 'b2)"/>'
-                /* event horizon + photon ring */
-                + '<circle r="' + r * 0.9 + '" fill="#000"/>'
-                + '<circle r="' + r * 0.9 + '" fill="none" stroke="#fff" stroke-width="' + r * 0.05 + '" opacity="0.95"/>'
-                + '<circle r="' + r * 0.9 + '" fill="none" stroke="' + pal[2] + '" stroke-width="' + r * 0.16 + '" opacity="0.6" filter="url(#' + id + 'b2)"/>'
-                /* front of the disk crossing the hole */
-                + '<path d="M' + -A + ' 0 A' + A + ' ' + B + ' 0 0 0 ' + A + ' 0" fill="none" stroke="url(#' + id + 'd)" stroke-width="' + r * 0.22 + '" stroke-linecap="round" filter="url(#' + id + 'b2)"/>'
-                + '<path d="M' + -A * 0.96 + ' 0 A' + A * 0.96 + ' ' + B * 0.96 + ' 0 0 0 ' + A * 0.96 + ' 0" fill="none" stroke="#fff" stroke-width="' + r * 0.06 + '" stroke-linecap="round"/>'
-                + '</g></svg>';
+                + '<circle cx="' + cx + '" cy="' + cy + '" r="' + r * 3.2 + '" fill="' + pal[1] + '" opacity="0.28" filter="url(#' + id + 'b1)"/>'
+                + '<circle cx="' + cx + '" cy="' + cy + '" r="' + r * 1.6 + '" fill="' + pal[2] + '" opacity="0.22" filter="url(#' + id + 'b1)"/>'
+                + '</svg>';
+        }
+        /* Product box: an original Akari Premium box drawn in SVG (spine + front face with the pyramid emblem) */
+        function pdBox(theme, id, label, gray) {
+            const pal = PD_PAL[theme] || PD_PAL.purple;
+            const sp = '<g transform="rotate(-90 47 124)"><text x="47" y="127" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-weight="900" font-size="9" letter-spacing="2.4" fill="#f5d0fe">AKARI PREMIUM</text></g>';
+            const pyr = '<g stroke-linejoin="round" stroke-linecap="round" fill="none">'
+                + '<path d="M52 46 L20 104 L60 118 L84 104 Z" fill="url(#' + id + 'pf)" stroke="none" opacity="0.55"/>'
+                + '<path d="M52 46 L20 104 M52 46 L84 104 M52 46 L60 118 M20 104 L60 118 L84 104" stroke="' + pal[3] + '" stroke-width="3.4" opacity="0.35" filter="url(#' + id + 'bl)"/>'
+                + '<path d="M52 46 L20 104 M52 46 L84 104 M52 46 L60 118 M20 104 L60 118 L84 104" stroke="#fff" stroke-width="1.5"/>'
+                + '<path d="M20 104 L84 104" stroke="' + pal[2] + '" stroke-width="1" stroke-dasharray="3 3"/>'
+                + '<circle cx="52" cy="46" r="2.8" fill="#f472b6" stroke="none"/></g>';
+            return '<svg class="pd-box" viewBox="0 0 200 240" aria-hidden="true"' + (gray ? ' style="filter:grayscale(1) drop-shadow(0 14px 18px rgba(0,0,0,0.55))"' : '') + '>'
+                + '<defs>'
+                + '<linearGradient id="' + id + 'ff" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + pal[1] + '"/><stop offset="0.5" stop-color="' + pal[0] + '"/><stop offset="1" stop-color="#0a0414"/></linearGradient>'
+                + '<linearGradient id="' + id + 'sf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#12062a"/><stop offset="1" stop-color="' + pal[0] + '"/></linearGradient>'
+                + '<linearGradient id="' + id + 'pf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + pal[2] + '"/><stop offset="1" stop-color="' + pal[1] + '" stop-opacity="0"/></linearGradient>'
+                + '<linearGradient id="' + id + 'tx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="' + pal[3] + '"/></linearGradient>'
+                + '<linearGradient id="' + id + 'bn" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="' + pal[1] + '"/><stop offset="0.5" stop-color="' + pal[2] + '"/><stop offset="1" stop-color="' + pal[1] + '"/></linearGradient>'
+                + '<filter id="' + id + 'bl" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.2"/></filter>'
+                + '</defs>'
+                /* floor shadow + glow */
+                + '<ellipse cx="102" cy="226" rx="84" ry="9" fill="#000" opacity="0.5"/>'
+                + '<ellipse cx="102" cy="224" rx="70" ry="6" fill="' + pal[2] + '" opacity="0.28" filter="url(#' + id + 'bl)"/>'
+                /* spine */
+                + '<path d="M34 44 L60 34 L60 206 L34 196 Z" fill="url(#' + id + 'sf)" stroke="' + pal[2] + '" stroke-width="1.2" stroke-linejoin="round"/>'
+                + sp
+                /* front face */
+                + '<path d="M60 34 L164 26 L164 198 L60 206 Z" fill="url(#' + id + 'ff)" stroke="' + pal[3] + '" stroke-width="1.4" stroke-linejoin="round"/>'
+                + '<g transform="matrix(1 -0.0769 0 1 60 34)">'
+                + '<rect x="5" y="5" width="94" height="162" rx="3" fill="none" stroke="' + pal[2] + '" stroke-width="1.2" opacity="0.8"/>'
+                + '<path d="M5 24 L99 24 M5 150 L99 150" stroke="' + pal[2] + '" stroke-width="0.8" opacity="0.5"/>'
+                + '<text x="52" y="21" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-weight="900" font-style="italic" font-size="19" letter-spacing="3" fill="url(#' + id + 'tx)">AKARI</text>'
+                + '<text x="52" y="35" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-weight="800" font-size="6.2" letter-spacing="2.4" fill="' + pal[3] + '">PREMIUM SCRIPTS</text>'
+                + '<g transform="translate(0 -2)">' + pyr + '</g>'
+                + '<rect x="14" y="130" width="76" height="14" rx="7" fill="url(#' + id + 'bn)" stroke="#fff" stroke-opacity="0.7" stroke-width="0.8"/>'
+                + '<text x="52" y="140.2" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-weight="900" font-size="8.6" letter-spacing="1.4" fill="#2e0a4f">' + label + '</text>'
+                + '<text x="52" y="162" text-anchor="middle" font-family="Fira Code,monospace" font-weight="600" font-size="5" letter-spacing="1" fill="' + pal[3] + '" opacity="0.8">KEY SYSTEM · v2</text>'
+                + '</g>'
+                /* glossy edge highlight */
+                + '<path d="M60 34 L164 26" stroke="#fff" stroke-opacity="0.85" stroke-width="1.6" stroke-linecap="round"/>'
+                + '<path d="M60 34 L60 206" stroke="#fff" stroke-opacity="0.35" stroke-width="1"/>'
+                + '<path d="M66 40 L110 36 L66 120 Z" fill="#fff" opacity="0.07"/>'
+                + '</svg>';
         }
         function pdHead(back, title, backFn) {
             const h = document.getElementById('productHead');
@@ -4163,6 +4220,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
                 const n = c.items.length;
                 return '<button type="button" class="pd-card" onclick="showProductItems(' + i + ')">'
                     + '<span class="pd-banner' + (c.theme === 'gold' ? '' : ' pd-tint') + '">' + pdArt(c.theme, 300, 100, 'pdc' + i)
+                    + pdBox(c.theme, 'pdbc' + i, (c.items[0] ? 'PREMIUM' : ''), false)
                     + '<span class="pd-banner-text"><b>' + c.title + '</b><i>' + c.tag + '</i></span></span>'
                     + '<span class="pd-name">' + c.name + '</span>'
                     + '<span class="pd-count">' + PD_CART + n + ' product' + (n === 1 ? '' : 's') + '</span>'
@@ -4178,9 +4236,8 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
                 const out = it.stock <= 0;
                 return '<div class="pd-card pd-item' + (out ? ' is-out' : '') + '">'
                     + '<span class="pd-tile' + (c.theme === 'gold' ? '' : ' pd-tint') + '">' + pdArt(c.theme, 200, 200, 'pdi' + ci + '-' + i, out)
-                    + '<span class="pd-tile-game">' + it.game + '</span>'
-                    + '<span class="pd-tile-dur">' + it.duration + '</span>'
-                    + '<span class="pd-tile-price">' + it.price + '฿</span></span>'
+                    + pdBox(c.theme, 'pdbi' + ci + '-' + i, it.duration.toUpperCase(), out)
+                    + '<span class="pd-tile-price"><span class="pd-glit">' + it.price + '฿</span></span></span>'
                     + '<span class="pd-name">' + it.name + '</span>'
                     + '<span class="pd-meta"><b class="pd-price">' + it.price + '฿</b><span class="pd-stock' + (out ? '' : ' ok') + '">' + it.stock + ' in stock</span></span>'
                     + '<button type="button" class="pd-buy' + '' + '" ' + (out ? 'disabled' : 'onclick="showProductDetail(' + ci + ',' + i + ')"') + '>' + (out ? 'Out of stock' : '<span class="pd-buy-txt">Buy now</span>') + '</button>'
@@ -4216,7 +4273,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
                 return '<div class="pd-feat"><span class="pd-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + f.i + '</svg></span><b>' + f.t + '</b><span>' + f.d + '</span></div>';
             }).join('');
             grid.innerHTML = '<div class="pd-detail-art"><span class="pd-tile' + (c.theme === 'gold' ? '' : ' pd-tint') + '">' + pdArt(c.theme, 200, 200, 'pdx' + ci + '-' + i)
-                + '<span class="pd-tile-game">' + it.game + '</span><span class="pd-tile-tag">' + it.duration + '</span></span>'
+                + pdBox(c.theme, 'pdbx' + ci + '-' + i, it.duration.toUpperCase(), out) + '<span class="pd-tile-tag">' + it.duration + '</span></span>'
                 + '<div class="pd-feats">' + feats + '</div></div>'
                 + '<div class="pd-detail-info">'
                 + '<div class="pd-cat">' + c.tag + '</div>'
@@ -4437,6 +4494,36 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             document.getElementById('productModal').classList.add('open');
         }
         function closeProduct() { document.getElementById('productModal').classList.remove('open'); }
+        /* the box tilts toward the mouse (and touch) while the pointer is over its picture */
+        (function () {
+            const grid = document.getElementById('productGrid');
+            if (!grid || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+            const MAX = 22;
+            function tiltBox(e) {
+                const area = e.target.closest && e.target.closest('.pd-tile, .pd-banner');
+                if (!area) return;
+                const box = area.querySelector('svg.pd-box'); if (!box) return;
+                const r = area.getBoundingClientRect();
+                const nx = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
+                const ny = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2));
+                box.classList.add('tilting');
+                box.style.setProperty('--ry', (nx * MAX).toFixed(1) + 'deg');
+                box.style.setProperty('--rx', (-ny * MAX).toFixed(1) + 'deg');
+            }
+            function resetBox(area) {
+                const box = area && area.querySelector && area.querySelector('svg.pd-box'); if (!box) return;
+                box.classList.remove('tilting');
+                box.style.setProperty('--rx', '0deg'); box.style.setProperty('--ry', '0deg');
+            }
+            grid.addEventListener('pointermove', tiltBox);
+            grid.addEventListener('pointerdown', tiltBox);
+            grid.addEventListener('pointerout', function (e) {
+                const area = e.target.closest && e.target.closest('.pd-tile, .pd-banner');
+                if (area && !(e.relatedTarget && area.contains(e.relatedTarget))) resetBox(area);
+            });
+            grid.addEventListener('pointerup', function (e) { if (e.pointerType === 'touch') { const a = e.target.closest && e.target.closest('.pd-tile, .pd-banner'); resetBox(a); } });
+        })();
+
 
         function openExecutor(e) {
             if (e) e.stopPropagation();
