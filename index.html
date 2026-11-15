@@ -667,12 +667,18 @@
         svg.pd-box { position: absolute; left: 50%; top: 47%; height: 88%; width: auto; aspect-ratio: 200 / 240; z-index: 1; overflow: visible;
             --rx: 0deg; --ry: 0deg;
             transform: translate(-50%, -50%) perspective(700px) rotateX(var(--rx)) rotateY(var(--ry)); transform-style: preserve-3d;
-            transition: transform .14s ease-out, filter .35s ease; will-change: transform;
+            transition: filter .35s ease; will-change: transform;
             animation: pdBoxFloat 5s ease-in-out infinite;
             filter: drop-shadow(0 14px 18px rgba(0,0,0,0.55)) drop-shadow(0 0 18px rgba(168,85,247,0.55)); }
-        svg.pd-box.tilting { transition: transform .06s linear, filter .35s ease; }
         .pd-item:hover svg.pd-box, .pd-detail-art:hover svg.pd-box, .pd-card:hover svg.pd-box { filter: drop-shadow(0 16px 22px rgba(0,0,0,0.6)) drop-shadow(0 0 30px rgba(216,180,254,0.85)); }
         .pd-detail-art svg.pd-box { top: 46%; height: 90%; }
+        .pd-tile-price, .pd-tile-tag { z-index: 2; }
+        .pd-banner svg.pd-box { left: 20%; top: 50%; height: 104%; }
+        .pd-banner-text { position: relative; z-index: 2; }
+        .pd-grid.pd-cats > .pd-card:only-child .pd-banner svg.pd-box { left: 22%; height: 108%; }
+        /* key page hero: keep the whole box (and its floor shadow) inside the banner */
+        .pk-hero svg.pd-box { left: 24%; top: 51%; height: 92%; }
+        .pk-hero { overflow: hidden; }
         @keyframes pdBoxFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
         @media (prefers-reduced-motion: reduce) { svg.pd-box { animation: none; } }
         /* shimmering, sparkling purple prices */
@@ -4442,7 +4448,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             grid.className = 'pd-keywrap';
             grid.dataset.qty = String(qty);
             grid.innerHTML = '<div class="pd-keycard">'
-                + '<span class="pd-banner pd-tint pk-hero">' + pdArt(c.theme, 480, 150, 'pkh') + '<span class="pd-banner-text"><b>' + c.title + '</b><i>' + it.duration + '</i></span></span>'
+                + '<span class="pd-banner pd-tint pk-hero">' + pdArt(c.theme, 480, 150, 'pkh') + pdBox(c.theme, 'pdbk', it.duration.toUpperCase(), false) + '<span class="pd-banner-text"><b>' + c.title + '</b><i>' + it.duration + '</i></span></span>'
                 + '<div class="pd-key-top"><span class="pd-key-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg></span>'
                 + '<span class="pd-key-title">Your key' + (qty > 1 ? 's' : '') + '<small>' + it.duration + (qty > 1 ? ' × ' + qty : '') + '</small></span>'
                 + '<span class="pd-online"><span class="pd-online-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a15 15 0 0120 0"/><path d="M5.5 12.5a10 10 0 0113 0"/><path d="M9 16a5 5 0 016 0"/><circle cx="12" cy="19.5" r="1" fill="currentColor"/></svg></span>Online</span></div>'
@@ -4494,34 +4500,52 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             document.getElementById('productModal').classList.add('open');
         }
         function closeProduct() { document.getElementById('productModal').classList.remove('open'); }
-        /* the box tilts toward the mouse (and touch) while the pointer is over its picture */
+        /* the box glides toward the mouse: each frame it eases a fraction of the way to the target angle */
         (function () {
             const grid = document.getElementById('productGrid');
             if (!grid || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
-            const MAX = 22;
-            function tiltBox(e) {
-                const area = e.target.closest && e.target.closest('.pd-tile, .pd-banner');
-                if (!area) return;
+            const MAX = 20, EASE = 0.14;
+            const st = new WeakMap(); /* svg -> {rx, ry, tx, ty} */
+            const live = new Set();
+            let raf = 0;
+            function state(box) { let o = st.get(box); if (!o) { o = { rx: 0, ry: 0, tx: 0, ty: 0 }; st.set(box, o); } return o; }
+            function frame() {
+                raf = 0;
+                live.forEach(function (box) {
+                    if (!box.isConnected) { live.delete(box); return; }
+                    const o = state(box);
+                    o.rx += (o.tx - o.rx) * EASE; o.ry += (o.ty - o.ry) * EASE;
+                    if (Math.abs(o.tx - o.rx) < 0.02 && Math.abs(o.ty - o.ry) < 0.02) {
+                        o.rx = o.tx; o.ry = o.ty;
+                        if (o.tx === 0 && o.ty === 0) live.delete(box);
+                    }
+                    box.style.setProperty('--rx', o.rx.toFixed(2) + 'deg');
+                    box.style.setProperty('--ry', o.ry.toFixed(2) + 'deg');
+                });
+                if (live.size) raf = requestAnimationFrame(frame);
+            }
+            function kick(box) { live.add(box); if (!raf) raf = requestAnimationFrame(frame); }
+            function areaOf(e) { return e.target.closest && e.target.closest('.pd-tile, .pd-banner'); }
+            function aim(e) {
+                const area = areaOf(e); if (!area) return;
                 const box = area.querySelector('svg.pd-box'); if (!box) return;
-                const r = area.getBoundingClientRect();
+                const r = area.getBoundingClientRect(), o = state(box);
                 const nx = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
                 const ny = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2));
-                box.classList.add('tilting');
-                box.style.setProperty('--ry', (nx * MAX).toFixed(1) + 'deg');
-                box.style.setProperty('--rx', (-ny * MAX).toFixed(1) + 'deg');
+                o.ty = nx * MAX; o.tx = -ny * MAX; kick(box);
             }
-            function resetBox(area) {
+            function release(area) {
                 const box = area && area.querySelector && area.querySelector('svg.pd-box'); if (!box) return;
-                box.classList.remove('tilting');
-                box.style.setProperty('--rx', '0deg'); box.style.setProperty('--ry', '0deg');
+                const o = state(box); o.tx = 0; o.ty = 0; kick(box);
             }
-            grid.addEventListener('pointermove', tiltBox);
-            grid.addEventListener('pointerdown', tiltBox);
+            grid.addEventListener('pointermove', aim);
+            grid.addEventListener('pointerdown', aim);
             grid.addEventListener('pointerout', function (e) {
-                const area = e.target.closest && e.target.closest('.pd-tile, .pd-banner');
-                if (area && !(e.relatedTarget && area.contains(e.relatedTarget))) resetBox(area);
+                const area = areaOf(e);
+                if (area && !(e.relatedTarget && area.contains(e.relatedTarget))) release(area);
             });
-            grid.addEventListener('pointerup', function (e) { if (e.pointerType === 'touch') { const a = e.target.closest && e.target.closest('.pd-tile, .pd-banner'); resetBox(a); } });
+            grid.addEventListener('pointerup', function (e) { if (e.pointerType === 'touch') release(areaOf(e)); });
+            grid.addEventListener('pointercancel', function (e) { release(areaOf(e)); });
         })();
 
 
