@@ -348,7 +348,6 @@
         #themeBtn { border-radius: 0; }
         #productBtn { border-radius: 999px 0 0 999px; }
         #executorBtn { border-radius: 0; margin-left: -1px; }
-        #randomBtn { border-radius: 0; margin-left: -1px; }
         #universalBtn { border-radius: 16px; padding-left: 22px; padding-right: 22px; }
         #universalModal .sc-title { font-size: 2.1rem; }
         #universalModal .sc-desc { font-size: 14px; }
@@ -503,7 +502,7 @@
         .uni-in { animation: uniIn .4s cubic-bezier(.2,.9,.25,1) both !important; }
         .uni-change svg { transition: transform .45s cubic-bezier(.2,.9,.25,1); } .uni-change:active svg { transform: rotate(180deg); }
         @media (prefers-reduced-motion: reduce) { #universalModal * , #universalModal *::before, #universalModal *::after { animation: none !important; } }
-        #tabSupportBtn:hover, #tabSupportBtn.active, #signinBtn:hover, #productBtn:hover, #executorBtn:hover, #randomBtn:hover { z-index: 25; }
+        #tabSupportBtn:hover, #tabSupportBtn.active, #signinBtn:hover, #productBtn:hover, #executorBtn:hover { z-index: 25; }
         /* ===== Brand: top-left of the pyramid area inside the card ===== */
         .brand {
             position: absolute; top: 1.5rem; left: 1.5rem; z-index: 5;
@@ -1148,7 +1147,7 @@
         .theme-item.active .ti-check { opacity: 1; }
 
         @media (max-width: 480px) {
-            #tabSupportBtn, #signinBtn, #productBtn, #executorBtn, #themeBtn, #randomBtn, #universalBtn { white-space: nowrap; font-size: 9px; letter-spacing: 0.03em; gap: 5px; }
+            #tabSupportBtn, #signinBtn, #productBtn, #executorBtn, #themeBtn, #universalBtn { white-space: nowrap; font-size: 9px; letter-spacing: 0.03em; gap: 5px; }
             #tabSupportBtn { padding: 8px 9px 8px 12px; }
             #tabSupportBtn svg { width: 13px; height: 13px; }
             #signinBtn { padding: 8px 9px 8px 7px; max-width: 108px; }
@@ -1156,34 +1155,30 @@
             #themeBtn { padding: 8px 11px 8px 8px; }
             #executorBtn { padding: 8px 8px 8px 8px; }
             #productBtn { padding: 8px 8px 8px 8px; }
-            #randomBtn { padding: 8px 8px; }
-            #randomBtn svg { width: 13px; height: 13px; }
             #executorBtn svg { width: 13px; height: 13px; }
             #themeBtn svg { width: 13px; height: 13px; }
         }
 
         /* compact tab row (desktop) */
         @media (min-width: 481px) {
-            #tabSupportBtn, #signinBtn, #productBtn, #executorBtn, #themeBtn, #randomBtn, #universalBtn { white-space: nowrap; font-size: 10px; letter-spacing: 0.06em; gap: 6px; }
+            #tabSupportBtn, #signinBtn, #productBtn, #executorBtn, #themeBtn, #universalBtn { white-space: nowrap; font-size: 10px; letter-spacing: 0.06em; gap: 6px; }
             #tabSupportBtn { padding: 8px 12px 8px 16px; }
-            #tabSupportBtn svg, #productBtn svg, #executorBtn svg, #themeBtn svg, #randomBtn svg, #universalBtn svg { width: 13px; height: 13px; }
+            #tabSupportBtn svg, #productBtn svg, #executorBtn svg, #themeBtn svg, #universalBtn svg { width: 13px; height: 13px; }
             #signinBtn { padding: 8px 12px 8px 8px; max-width: 120px; }
             #signinBtn .signin-avatar { width: 18px; height: 18px; }
             #executorBtn { padding: 8px 12px; }
             #productBtn { padding: 8px 12px; }
-            #randomBtn { padding: 8px 12px; }
             #themeBtn { padding: 8px 15px 8px 11px; }
         }
 
         @media (max-width: 440px) {
-            #tabSupportBtn, #signinBtn, #productBtn, #executorBtn, #themeBtn, #randomBtn { font-size: 8px; letter-spacing: 0; gap: 3px; }
+            #tabSupportBtn, #signinBtn, #productBtn, #executorBtn, #themeBtn { font-size: 8px; letter-spacing: 0; gap: 3px; }
             #tabSupportBtn { padding: 7px 6px 7px 9px; }
-            #tabSupportBtn svg, #productBtn svg, #executorBtn svg, #themeBtn svg, #randomBtn svg { width: 11px; height: 11px; }
+            #tabSupportBtn svg, #productBtn svg, #executorBtn svg, #themeBtn svg { width: 11px; height: 11px; }
             #signinBtn { padding: 7px 6px 7px 5px; max-width: 86px; }
             #signinBtn .signin-avatar { width: 15px; height: 15px; }
             #executorBtn { padding: 7px 6px; }
             #productBtn { padding: 7px 6px; }
-            #randomBtn { padding: 7px 6px; }
             #themeBtn { padding: 7px 9px 7px 6px; }
         }
         @media (max-width: 385px) {
@@ -1191,9 +1186,8 @@
             #tabSupportBtn { padding-left: 11px; }
         }
         @media (max-width: 340px) {
-            #randomBtn svg { display: none; }
             #tabSupportBtn { padding-right: 5px; }
-            #productBtn, #executorBtn, #randomBtn { padding-left: 5px; padding-right: 5px; }
+            #productBtn, #executorBtn { padding-left: 5px; padding-right: 5px; }
         }
 
         /* ===== Sign In (optional, local only) ===== */
@@ -1240,7 +1234,7 @@
         }
 
         /* Purple circle icon (same style as Sign In) on the other tabs */
-        #tabSupportBtn svg, #productBtn svg, #executorBtn svg, #themeBtn svg, #randomBtn svg {
+        #tabSupportBtn svg, #productBtn svg, #executorBtn svg, #themeBtn svg {
             width: 18px; height: 18px; padding: 3px; flex-shrink: 0;
             border-radius: 50%; color: #fff;
             background: linear-gradient(135deg, #c084fc, #7e22ce);
@@ -1248,7 +1242,7 @@
             filter: none;
         }
         @media (max-width: 440px) {
-            #tabSupportBtn svg, #productBtn svg, #executorBtn svg, #themeBtn svg, #randomBtn svg { width: 15px; height: 15px; padding: 2.5px; }
+            #tabSupportBtn svg, #productBtn svg, #executorBtn svg, #themeBtn svg { width: 15px; height: 15px; padding: 2.5px; }
         }
         .signin-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
@@ -1668,33 +1662,6 @@
         #crystalCanvas { opacity: 0 !important; display: none !important; }
         html[data-theme="blackhole"] #crystalCanvas { opacity: 1; }
 
-        /* ===== Random Key tab ===== */
-        .rk-wrap { display: flex; flex-direction: column; gap: 22px; }
-        .rk-cols { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        .rk-col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-        @media (min-width: 760px) { .rk-cols { grid-template-columns: 1fr 1fr; gap: 32px; } }
-        @media (max-width: 520px) { #randomModal .modal-card { padding: 28px 18px !important; } }
-        #randomModal .rk-chip { padding: 12px 12px; font-size: 11px; }
-        #randomModal .rk-out { min-height: 120px; font-size: clamp(14px, 3.4vw, 20px); }
-        #randomModal .rk-hist { max-height: 240px; }
-        .rk-chip { padding: 9px 10px; border-radius: 12px; cursor: pointer; text-align: center; font: 800 10px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.06em; color: rgba(216,180,254,0.7);
-            background: rgba(0,0,0,0.5); border: 1px solid rgba(168,85,247,0.25); transition: all .25s ease; -webkit-tap-highlight-color: transparent; }
-        .rk-chip small { display: block; margin-top: 3px; font: 500 9px 'Fira Code', monospace; letter-spacing: 0; opacity: .7; }
-        .rk-chip:hover { border-color: rgba(233,213,255,0.55); color: #f3e8ff; }
-        .rk-chip.on { color: #fff; border-color: rgba(233,213,255,0.65); background: linear-gradient(160deg, rgba(168,85,247,0.45), rgba(88,28,135,0.55)); box-shadow: 0 0 16px rgba(168,85,247,0.35), inset 0 1px 1px rgba(255,255,255,0.3); }
-        .rk-label { font: 800 10px 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.16em; color: rgba(216,180,254,0.85); text-transform: uppercase; }
-        .rk-out { min-height: 74px; display: flex; align-items: center; justify-content: center; text-align: center; word-break: break-all; padding: 16px; border-radius: 16px;
-            font: 700 clamp(13px, 3.4vw, 17px) 'Fira Code', monospace; letter-spacing: 0.04em; color: #e9d5ff; background: rgba(7,2,14,0.94); border: 1px dashed rgba(216,180,254,0.45); box-shadow: inset 0 2px 12px rgba(0,0,0,0.85);
-            -webkit-user-select: text; user-select: text; }
-        .rk-out.idle { color: rgba(192,132,252,0.5); font-weight: 600; }
-        .rk-out.spin { color: #c4b5fd; border-style: solid; border-color: rgba(216,180,254,0.8); box-shadow: inset 0 2px 12px rgba(0,0,0,0.85), 0 0 22px rgba(168,85,247,0.55); }
-        .rk-out.spin .rk-lock { color: #fff; text-shadow: 0 0 10px rgba(216,180,254,0.9); }
-        #rkGen.busy, #rkBatch.busy { opacity: .6; pointer-events: none; }
-        .rk-hist { display: flex; flex-direction: column; gap: 6px; max-height: 150px; overflow-y: auto; padding-right: 2px; }
-        .rk-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; border-radius: 10px; background: rgba(0,0,0,0.5); border: 1px solid rgba(168,85,247,0.2); }
-        .rk-item span { font: 600 11px 'Fira Code', monospace; color: #d8b4fe; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; -webkit-user-select: text; user-select: text; }
-        .rk-item button { flex-shrink: 0; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; cursor: pointer; color: #e9d5ff; background: rgba(168,85,247,0.18); border: 1px solid rgba(216,180,254,0.3); }
-        .rk-item button:hover { background: rgba(168,85,247,0.4); }
 
         /* ===== Click black hole (appears where you click, then fades) ===== */
         #blackholeCanvas {
@@ -1880,11 +1847,11 @@
         @media (prefers-reduced-motion: reduce) { .os-copy .os-fx::after, .os-online b { animation: none; } .os-star, .os-ring { display:none; } }
 
         /* ===== Tabs open as a centered in-page view (no dimmed popup) ===== */
-        #scriptModal, #freeKeyModal, #universalModal, #productModal, #executorModal, #randomModal { top: 58px; z-index: 55; align-items: flex-start; padding: 24px 16px 32px; overflow-y: auto; background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; transition: opacity .3s ease, visibility .3s; }
-        #scriptModal > .modal-card, #freeKeyModal > .modal-card, #universalModal > .modal-card, #productModal > .modal-card, #executorModal > .modal-card, #randomModal > .modal-card, #signinModal > .modal-card { margin: auto; transform: none !important; transition: opacity .35s ease; box-shadow: 0 0 50px rgba(147,51,234,.35), inset 0 1px 1px rgba(255,255,255,.2); }
-        #scriptModal .modal-card, #freeKeyModal .modal-card, #universalModal .modal-card, #productModal .modal-card, #executorModal .modal-card, #randomModal .modal-card, #signinModal .modal-card { max-height: none !important; }
+        #scriptModal, #freeKeyModal, #universalModal, #productModal, #executorModal { top: 58px; z-index: 55; align-items: flex-start; padding: 24px 16px 32px; overflow-y: auto; background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; transition: opacity .3s ease, visibility .3s; }
+        #scriptModal > .modal-card, #freeKeyModal > .modal-card, #universalModal > .modal-card, #productModal > .modal-card, #executorModal > .modal-card, #signinModal > .modal-card { margin: auto; transform: none !important; transition: opacity .35s ease; box-shadow: 0 0 50px rgba(147,51,234,.35), inset 0 1px 1px rgba(255,255,255,.2); }
+        #scriptModal .modal-card, #freeKeyModal .modal-card, #universalModal .modal-card, #productModal .modal-card, #executorModal .modal-card, #signinModal .modal-card { max-height: none !important; }
         #topNav .theme-btn.tn-active { box-shadow: 0 0 0 2px rgba(245,208,254,.9), 0 0 30px rgba(192,132,252,.95), inset 0 1px 1px rgba(255,255,255,.9) !important; }
-        @media (max-width: 640px) { #scriptModal, #freeKeyModal, #universalModal, #productModal, #executorModal, #randomModal { top: 54px; padding: 14px 8px 24px; } }
+        @media (max-width: 640px) { #scriptModal, #freeKeyModal, #universalModal, #productModal, #executorModal { top: 54px; padding: 14px 8px 24px; } }
 
         /* ===== Get Key page ===== */
         .fk-task { display:flex; align-items:center; gap:14px; padding: 14px 16px; margin-bottom: 12px; border-radius: 16px; border:1px solid rgba(192,132,252,.4); background: rgba(147,51,234,.1); transition: border-color .3s, box-shadow .3s, opacity .3s; }
@@ -2122,7 +2089,7 @@
         @media (max-width: 520px) { #musicBtn { left: 8px; bottom: 8px; padding: 5px; opacity: .85; } #musicBtn .mz-eq { width: 26px; height: 26px; padding: 5px 6px; } #musicBtn .mz-txt { display:none; } }
         @media (prefers-reduced-motion: reduce) { #musicBtn.on .mz-eq i { animation: none; transform: scaleY(.7); } }
 
-        #osWinP .os-code { min-height: 0; } @media (max-width: 820px) { #osWinP .os-note { flex:0 0 auto !important; justify-content:center; } #osWinP .os-acts { width:100%; } }
+        @media (max-width: 820px) { #osWinP .os-note { flex:0 0 auto !important; justify-content:center; } #osWinP .os-acts { width:100%; } }
         @media (max-width: 520px) { #osWinP .os-acts { flex-direction:column; align-items:stretch; } #osWinP .os-acts > * { flex:0 0 auto; width:100%; justify-content:center; } .os-reset { border-radius:18px; } }
         #osWinP .os-foot { flex-wrap:wrap; } #osWinP .os-note { flex:1 1 150px; min-width:0; }
         .os-acts { display:inline-flex; align-items:center; gap:10px; flex-wrap:nowrap; justify-content:flex-end; margin-left:auto; }
@@ -2130,8 +2097,89 @@
         .os-reset > span { display:inline-flex; align-items:center; gap:7px; } .os-reset svg { width:15px; height:15px; transition: transform .5s ease; }
         .os-reset:hover { transform: translateY(-1px); background: rgba(126,34,206,.6); box-shadow: 0 0 22px rgba(192,132,252,.7); } .os-reset:hover svg { transform: rotate(-180deg); }
         .os-reset small { font: 600 9.5px 'Plus Jakarta Sans',sans-serif; color:#fb7185; letter-spacing:.01em; }
-        .os-reset.arm { border-color: rgba(251,113,133,.8); background: rgba(190,18,60,.35); box-shadow: 0 0 18px rgba(251,113,133,.55); }
         @media (max-width: 820px) { .os-acts { justify-content:stretch; } .os-acts > * { flex:1 1 100%; justify-content:center; } }
+
+        /* ===== Mobile mode: a little lighter than PC, still looks the same ===== */
+        html.lite *, html.lite *::before, html.lite *::after { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+        html.lite [data-theme] .themed, html.lite .themed { filter: none !important; }
+        html.lite #matrixCanvas, html.lite #volcanoFx, html.lite #santaCanvas, html.lite #crystalCanvas, html.lite #volcanoLayer { display: none !important; }
+        html.lite #toastBanner { background: rgb(36,10,66) !important; }
+        html.lite #topNav { background: rgba(10,4,20,.96) !important; }
+
+        /* Reset HWID Key (Get Key): icon turns on hover and spins while resetting, like the other reset buttons */
+        @keyframes rhSpin { to { transform: rotate(-360deg); } }
+        #fkReset .rh-main svg { width:17px; height:17px; flex:none; transition: transform .5s ease; }
+        #fkReset:hover:not(:disabled) .rh-main svg { transform: rotate(-180deg); }
+        #fkReset.busy .rh-main svg { animation: rhSpin .7s linear infinite !important; transition:none; }
+
+        /* ===== Script / Redeem Premium tab switch: a glowing pill glides between the two tabs ===== */
+        @keyframes otShine { 0% { background-position: -120% 0, 0 0; } 100% { background-position: 260% 0, 0 0; } }
+        @keyframes otPop { 0% { transform: scale(.6) rotate(-25deg); } 60% { transform: scale(1.3) rotate(8deg); } 100% { transform: none; } }
+        @keyframes otTw { 0%,100% { opacity:0; transform: scale(.3) rotate(0); } 50% { opacity:1; transform: scale(1) rotate(90deg); } }
+        @keyframes otRing { to { transform: rotate(360deg); } }
+        @keyframes otDrift { 0% { transform: translateY(0) scale(.4); opacity:0; } 20% { opacity:1; } 100% { transform: translateY(-26px) scale(1); opacity:0; } }
+        .os-tabs { position:relative; isolation:isolate; gap:0 !important; padding:7px !important; border-radius:22px !important; border:0 !important; background: linear-gradient(180deg, rgba(10,4,20,.97), rgba(24,8,42,.92)) !important; box-shadow: 0 0 30px rgba(147,51,234,.4), inset 0 2px 12px rgba(0,0,0,.75) !important; }
+        /* spinning light that runs around the border (PC) */
+        .os-tabs-ring { position:absolute; inset:0; border-radius:inherit; padding:1.5px; z-index:-1; pointer-events:none; overflow:hidden; background: rgba(216,180,254,.28); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+        .os-tabs-ring::before { content:''; position:absolute; left:50%; top:50%; width:140%; aspect-ratio:1; margin: -70% 0 0 -70%; background: conic-gradient(from 0deg, transparent 0 60%, #c084fc 75%, #fff 88%, #c084fc 95%, transparent); animation: otRing 3.6s linear infinite; }
+        .os-tabs::before { content:''; position:absolute; z-index:0; left:7px; top:7px; bottom:7px; width: calc((100% - 14px) / 2); border-radius:16px; border:1px solid rgba(250,232,255,.9);
+            background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.6) 48%, transparent 66%) 0 0 / 60% 100% no-repeat, linear-gradient(150deg,#ecc4ff,#a855f7 55%,#7e22ce);
+            box-shadow: 0 0 34px rgba(192,132,252,.95), 0 6px 18px rgba(88,28,135,.7), inset 0 1px 1px rgba(255,255,255,.85); animation: otShine 3s linear infinite; transition: transform .55s cubic-bezier(.25,1.3,.4,1); }
+        .os-tabs[data-t="prem"]::before { transform: translateX(100%); }
+        .os-tabs button { position:relative; z-index:1; border:0 !important; background:transparent !important; box-shadow:none !important; border-radius:16px !important; color: rgba(216,196,245,.75) !important; text-shadow:none !important; padding-top:15px !important; padding-bottom:15px !important; transition: color .3s ease, transform .15s ease, letter-spacing .3s ease !important; }
+        .os-tabs button:hover { color:#fff !important; text-shadow: 0 0 12px rgba(216,180,254,.9) !important; } .os-tabs button:active { transform: scale(.96); }
+        .os-tabs button.active { color:#2e0a4f !important; font-weight:800; letter-spacing:.02em; text-shadow: 0 1px 0 rgba(255,255,255,.45) !important; }
+        .os-tabs button.active svg { animation: otPop .55s cubic-bezier(.2,1.4,.3,1); filter: drop-shadow(0 0 4px rgba(255,255,255,.8)); }
+        .os-tabs button.active::after { content:'\2726'; position:absolute; right:12%; top:14%; font-size:11px; color:#fff; text-shadow: 0 0 8px #fff; animation: otTw 1.8s ease-in-out infinite; pointer-events:none; }
+        .os-tabs .ot-p { position:absolute; bottom:8px; width:4px; height:4px; border-radius:50%; background:#fae8ff; box-shadow: 0 0 8px #e9d5ff; pointer-events:none; z-index:2; animation: otDrift 2.4s ease-out infinite; }
+        .os-tabs .ot-p:nth-of-type(2) { animation-delay:.5s; } .os-tabs .ot-p:nth-of-type(3) { animation-delay:1s; } .os-tabs .ot-p:nth-of-type(4) { animation-delay:1.6s; }
+        html.lite .os-tabs-ring::before, html.lite .os-tabs .ot-p { animation: none; display:none; }
+        @media (prefers-reduced-motion: reduce) { .os-tabs::before, .os-tabs button.active::after, .os-tabs button.active svg, .os-tabs-ring::before, .os-tabs .ot-p { animation:none; } }
+
+        /* ===== PC / Mobile picker ===== */
+        @keyframes mgIn { from { opacity:0; transform: translateY(22px) scale(.96); } to { opacity:1; transform:none; } }
+        @keyframes mgFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        @keyframes mgSpin { to { transform: rotate(360deg); } }
+        @keyframes mgTw { 0%,100% { opacity:.25; } 50% { opacity:1; } }
+        @keyframes mgScan { from { transform: translateY(-100%); } to { transform: translateY(100vh); } }
+        @keyframes mgShine { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        @keyframes mgLoad { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+        #modeGate { position:fixed; inset:0; z-index: 99999; display:none; align-items:center; justify-content:center; padding:20px; overflow-y:auto; background: radial-gradient(circle at 50% 35%, rgba(88,28,135,.5), rgba(5,1,12,.98) 68%), #05010c; transition: opacity .5s ease; }
+        #modeGate.show { display:flex; } #modeGate.out { opacity:0; pointer-events:none; }
+        .mg-stars { position:fixed; inset:0; pointer-events:none; background-image: radial-gradient(1.5px 1.5px at 12% 22%, #f5d0fe, transparent), radial-gradient(1px 1px at 78% 14%, #fff, transparent), radial-gradient(2px 2px at 88% 66%, #e9d5ff, transparent), radial-gradient(1px 1px at 30% 80%, #fff, transparent), radial-gradient(1.5px 1.5px at 60% 48%, #d8b4fe, transparent), radial-gradient(1px 1px at 5% 60%, #fff, transparent), radial-gradient(2px 2px at 45% 10%, #f5d0fe, transparent), radial-gradient(1px 1px at 93% 90%, #fff, transparent), radial-gradient(1.5px 1.5px at 22% 46%, #e9d5ff, transparent), radial-gradient(1px 1px at 70% 85%, #fff, transparent); animation: mgTw 3.4s ease-in-out infinite; }
+        .mg-aura { position:fixed; left:50%; top:46%; width:min(120vw,900px); aspect-ratio:1; margin: calc(min(120vw,900px) / -2) 0 0 calc(min(120vw,900px) / -2); border-radius:50%; pointer-events:none; opacity:.4; background: conic-gradient(from 0deg, transparent, rgba(168,85,247,.6), transparent 30%, rgba(236,72,153,.35), transparent 60%, rgba(147,51,234,.6), transparent); filter: blur(60px); animation: mgSpin 24s linear infinite; }
+        .mg-scan { position:fixed; left:0; right:0; top:0; height:120px; pointer-events:none; background: linear-gradient(180deg, transparent, rgba(192,132,252,.08), transparent); animation: mgScan 6s linear infinite; }
+        .mg-box { position:relative; width:100%; max-width:700px; text-align:center; animation: mgIn .7s cubic-bezier(.2,1,.3,1); }
+        .mg-pyr { width:54px; height:54px; margin:0 auto 6px; display:block; color:#e9d5ff; filter: drop-shadow(0 0 12px #c084fc) drop-shadow(0 0 26px rgba(147,51,234,.9)); animation: mgFloat 3.6s ease-in-out infinite; }
+        .mg-brand { margin:0; font: italic 700 clamp(32px,8vw,52px)/1.1 'Playfair Display',Georgia,serif; color:transparent; background: linear-gradient(100deg,#e9d5ff 20%,#fff 40%,#c084fc 60%,#e9d5ff 80%) 0 0/200% 100%; -webkit-background-clip:text; background-clip:text; filter: drop-shadow(0 0 18px rgba(192,132,252,.85)); animation: mgShine 4s linear infinite; }
+        .mg-sub { margin:14px 0 30px; display:flex; align-items:center; justify-content:center; gap:14px; font: 800 11px 'JetBrains Mono',monospace; letter-spacing:.34em; color:#d8b4fe; }
+        .mg-sub::before, .mg-sub::after { content:''; height:1px; width: min(90px,16vw); background: linear-gradient(90deg, transparent, #c084fc); } .mg-sub::after { transform: scaleX(-1); }
+        .mg-row { display:grid; grid-template-columns: 1fr 1fr; gap:18px; perspective: 900px; }
+        .mg-card { --mx:50%; --my:50%; position:relative; overflow:hidden; isolation:isolate; cursor:pointer; padding: 30px 16px 22px; border-radius:24px; border:0; color:#fff; font-family:'Plus Jakarta Sans',sans-serif; background:transparent; box-shadow: 0 0 30px rgba(147,51,234,.4); transform-style: preserve-3d; transition: transform .25s ease, box-shadow .3s ease, opacity .4s ease, filter .4s ease; }
+        .mg-spin { position:absolute; z-index:-2; left:50%; top:50%; width:220%; aspect-ratio:1; margin: -110% 0 0 -110%; background: conic-gradient(from 0deg, #3b0764, #c084fc, #fae8ff, #c084fc, #3b0764 50%, #7e22ce, #3b0764); animation: mgSpin 5s linear infinite; }
+        .mg-fill { position:absolute; z-index:-1; inset:2px; border-radius:22px; background: radial-gradient(circle at var(--mx) var(--my), rgba(192,132,252,.38), transparent 55%), linear-gradient(160deg, rgba(48,14,84,.97), rgba(8,3,18,.98)); }
+        .mg-card:hover { box-shadow: 0 0 56px rgba(192,132,252,.85); } .mg-card:hover .mg-ico { transform: scale(1.1) rotate(-4deg); }
+        .mg-card.rec::after { content:'Recommended'; position:absolute; top:12px; right:12px; padding:3px 9px; border-radius:99px; font: 800 9px 'JetBrains Mono',monospace; letter-spacing:.06em; text-transform:uppercase; color:#2e0a4f; background: linear-gradient(150deg,#fae8ff,#c084fc); box-shadow: 0 0 12px rgba(216,180,254,.8); }
+        .mg-ico { width:80px; height:80px; margin:6px auto 16px; border-radius:24px; display:grid; place-items:center; color:#2e0a4f; background: linear-gradient(150deg,#fae8ff,#c084fc 55%,#9333ea); box-shadow: 0 0 32px rgba(192,132,252,.9), inset 0 1px 1px rgba(255,255,255,.85); animation: mgFloat 3.2s ease-in-out infinite; transition: transform .3s cubic-bezier(.2,1.4,.3,1); }
+        .mg-card + .mg-card .mg-ico { animation-delay: -1.4s; }
+        .mg-ico svg { width:40px; height:40px; }
+        .mg-name { font-weight:800; font-size:28px; letter-spacing:.04em; text-shadow: 0 0 16px rgba(192,132,252,.9); }
+        .mg-desc { margin:6px auto 14px; max-width:22ch; font-weight:600; font-size:12.5px; line-height:1.5; color: rgba(221,205,248,.72); }
+        .mg-chips { display:flex; justify-content:center; gap:6px; flex-wrap:wrap; } .mg-chips b { padding:4px 9px; border-radius:8px; font: 800 9.5px 'JetBrains Mono',monospace; letter-spacing:.08em; color:#e9d5ff; background: rgba(168,85,247,.2); border:1px solid rgba(216,180,254,.35); }
+        .mg-note { margin-top:24px; font: 600 11.5px 'Plus Jakarta Sans',sans-serif; color: rgba(196,181,253,.55); }
+        .mg-load { height:0; opacity:0; margin-top:0; transition: opacity .3s; } .mg-load span { display:block; font: 800 11px 'JetBrains Mono',monospace; letter-spacing:.3em; color:#f5d0fe; text-shadow:0 0 10px #c084fc; }
+        .mg-load i { display:block; height:4px; margin:10px auto 0; max-width:300px; border-radius:99px; background: rgba(216,180,254,.18); overflow:hidden; } .mg-load u { display:block; height:100%; transform-origin:left; transform:scaleX(0); background: linear-gradient(90deg,#c084fc,#fae8ff); box-shadow:0 0 12px #e9d5ff; }
+        #modeGate.go .mg-load { height:auto; opacity:1; margin-top:22px; } #modeGate.go .mg-load u { animation: mgLoad .9s cubic-bezier(.3,.7,.2,1) forwards; } #modeGate.go .mg-note { display:none; }
+        #modeGate.go .mg-card:not(.chosen) { opacity:.2; pointer-events:none; transform: scale(.94); }
+        #modeGate.go .mg-card:not(.chosen) .mg-spin, #modeGate.go .mg-aura, #modeGate.go .mg-scan { animation-play-state: paused; }
+        #modeGate.go .mg-card.chosen { transform: scale(1.05); box-shadow: 0 0 80px rgba(233,213,255,.95); pointer-events:none; }
+        @media (max-width: 480px) { .mg-row { gap:10px; } .mg-card { padding: 26px 8px 18px; border-radius:20px; } .mg-fill { border-radius:18px; } .mg-ico { width:62px; height:62px; border-radius:19px; } .mg-ico svg { width:31px; height:31px; } .mg-name { font-size:22px; } .mg-card.rec::after { top:8px; right:8px; font-size:7.5px; padding:2px 6px; } .mg-chips b { font-size:8.5px; padding:3px 6px; } .mg-desc { font-size:11.5px; } }
+        html.lite .mg-aura { filter:none; animation:none; opacity:.25; background: radial-gradient(circle, rgba(168,85,247,.55), transparent 65%); } html.lite .mg-scan { display:none; } html.lite .mg-brand { filter:none; } html.lite .mg-spin { animation-duration: 8s; }
+        @media (prefers-reduced-motion: reduce) { .mg-aura, .mg-scan, .mg-spin, .mg-ico, .mg-pyr, .mg-brand, .mg-stars { animation: none; } }
+        #modeBtn { position:fixed; left:18px; bottom:66px; z-index:9000; display:flex; align-items:center; gap:7px; padding:7px 13px; border-radius:99px; cursor:pointer; border:1px solid rgba(216,180,254,.6); color:#f3e8ff; font: 800 11px 'Plus Jakarta Sans',sans-serif; background: rgba(46,10,79,.9); box-shadow: 0 0 14px rgba(147,51,234,.5); }
+        #modeBtn svg { width:14px; height:14px; } #modeBtn:hover { background: rgba(88,28,135,.95); }
+        @media (max-width: 520px) { #modeBtn { left:8px; bottom:56px; padding:6px 10px; } }
+
     </style>
 </head>
 <body class="relative flex flex-col items-center justify-center p-4 bg-grid" style="justify-content: safe center;">
@@ -2142,6 +2190,29 @@
         <div class="splash-url">https://matilz.github.io/Akaris</div>
     </div>
     <script>
+/* Device mode. PC = full graphics. Mobile = slightly lighter (lower resolution, ~40 fps, no blur effects). Chosen on first visit and remembered. */
+(function () {
+    var ua = navigator.userAgent || '';
+    var phone = /Android|iPhone|iPad|iPod|Mobile|Silk|Opera Mini|IEMobile/i.test(ua) || (navigator.maxTouchPoints > 1 && window.matchMedia && matchMedia('(pointer:coarse)').matches && Math.min(screen.width, screen.height) <= 900);
+    var saved = null; try { saved = localStorage.getItem('akariMode'); } catch (e) {}
+    if (saved !== 'pc' && saved !== 'mobile') saved = null;
+    var mode = saved || (phone ? 'mobile' : 'pc');
+    if (/[?&]full\b/.test(location.search)) mode = 'pc';
+    window.AKARI_MODE = mode; window.AKARI_MODE_SAVED = !!saved;
+    window.setAkariMode = function (m) { try { localStorage.setItem('akariMode', m); } catch (e) {} location.reload(); };
+    if (mode !== 'mobile') return;
+    var root = document.documentElement; root.classList.add('lite'); window.AKARI_LITE = true;
+    try { var real = window.devicePixelRatio || 1; Object.defineProperty(window, 'devicePixelRatio', { get: function () { return Math.min(real, 1.5); }, configurable: true }); } catch (e) {}
+    var raf = window.requestAnimationFrame.bind(window), caf = window.cancelAnimationFrame.bind(window), map = {}, uid = 0;
+    window.requestAnimationFrame = function (cb) {
+        var id = ++uid, start = performance.now();
+        (function go() { map[id] = raf(function (t) { if (performance.now() - start < 22) { go(); return; } delete map[id]; cb(t); }); })();
+        return id;
+    };
+    window.cancelAnimationFrame = function (id) { if (map[id] != null) { caf(map[id]); delete map[id]; } };
+})();
+</script>
+<script>
         /* Akari intro: show for 3 seconds, then fade out */
         (function () {
             var el = document.getElementById('akariSplash');
@@ -2155,6 +2226,27 @@
 
 
     <!-- Cyber Floating Toast Notification -->
+    <div id="modeGate" role="dialog" aria-modal="true" aria-label="Choose device mode">
+        <div class="mg-stars"></div><div class="mg-aura"></div><div class="mg-scan"></div>
+        <div class="mg-box">
+            <svg class="mg-pyr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M32 6L6 50l26 8 26-8L32 6Z"/><path d="M32 6v52M6 50l26-10 26 10"/></svg>
+            <h1 class="mg-brand">&#x1D49C;&#x1D4C0;&#x1D4B6;&#x1D4C7;&#x1D4BE; &#x1D43B;&#x1D4CA;&#x1D4B7;</h1>
+            <p class="mg-sub"><span>SELECT YOUR DEVICE</span></p>
+            <div class="mg-row">
+                <button type="button" class="mg-card" id="mgPc" onclick="pickMode('pc')"><i class="mg-spin"></i><i class="mg-fill"></i>
+                    <div class="mg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="12.5" rx="2"/><path d="M8 20.5h8M12 16.5v4"/></svg></div>
+                    <div class="mg-name">PC</div><div class="mg-desc">Full graphics and all the effects</div>
+                    <div class="mg-chips"><b>FULL FX</b><b>60 FPS</b><b>HD</b></div></button>
+                <button type="button" class="mg-card" id="mgMobile" onclick="pickMode('mobile')"><i class="mg-spin"></i><i class="mg-fill"></i>
+                    <div class="mg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
+                    <div class="mg-name">Mobile</div><div class="mg-desc">Slightly lighter graphics for smooth scrolling</div>
+                    <div class="mg-chips"><b>LITE FX</b><b>~40 FPS</b><b>SMOOTH</b></div></button>
+            </div>
+            <p class="mg-note">You can change this any time with the mode button.</p>
+            <div class="mg-load" id="mgLoad"><span id="mgLoadTxt">LOADING</span><i><u></u></i></div>
+        </div>
+    </div>
+    <button id="modeBtn" type="button" onclick="setAkariMode(window.AKARI_MODE === 'mobile' ? 'pc' : 'mobile')" title="Switch PC / Mobile mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4-4 4M21 7H8M7 21l-4-4 4-4M3 17h13"/></svg><span id="modeTxt">Mode: PC</span></button>
     <button id="musicBtn" type="button" onclick="toggleMusic()" aria-label="Toggle music" title="Music">
         <span class="mz-eq"><i></i><i></i><i></i></span><span class="mz-txt" id="musicTxt">Music: Off</span>
     </button>
@@ -2517,10 +2609,7 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 4h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"></path></svg>
             <span>Executor</span>
         </button>
-                <button id="randomBtn" type="button" class="theme-btn" onclick="openRandom(event)" aria-haspopup="dialog">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5M5.6 15a8 8 0 0013.8 2M18.4 9A8 8 0 004.6 7"></path></svg>
-            <span>Random key</span>
-        </button>
+
             </div>
         </div>
     </nav>
@@ -3001,86 +3090,6 @@
         </div>
     </div>
 
-    <div id="randomModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Random Key" onclick="if(event.target===this)closeRandom()">
-        <div class="themed modal-card" style="max-width:860px;padding:40px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto">
-            <button type="button" class="modal-close" onclick="closeRandom()" aria-label="Close">&times;</button>
-            <div class="glow-line"></div>
-            <div class="rk-wrap">
-
-                <div class="sc-head translate-z-lift">
-                    <div class="sc-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5M5.6 15a8 8 0 0013.8 2M18.4 9A8 8 0 004.6 7"></path></svg></div>
-                    <div class="sc-titles">
-                        <h2 class="sc-title">Random Key</h2>
-                        <p class="sc-desc">Generate random keys in your own format. Keys are made in your browser only.</p>
-                    </div>
-                </div>
-
-                <div class="rk-cols"><div class="rk-col">
-<div class="flex flex-col gap-2 translate-z-lift">
-                    <div class="flex justify-between items-center"><span class="rk-label">Key Prefix</span><span id="rkPrefixPrev" class="text-[11px] font-extrabold text-purple-300">AKARI</span></div>
-                    <input id="rkPrefix" class="modal-input" type="text" value="AKARI" maxlength="10" placeholder="e.g. AKARI, VIP" autocomplete="off" spellcheck="false" />
-                </div>
-
-                <div class="flex flex-col gap-2 translate-z-lift">
-                    <span class="rk-label">Pattern</span>
-                    <div class="grid grid-cols-2 gap-2">
-                        <button type="button" class="rk-chip on" data-rk-pat="f1">Standard<small>6 - 7 - 6</small></button>
-                        <button type="button" class="rk-chip" data-rk-pat="f2">Extended<small>9 - 9 - 10</small></button>
-                        <button type="button" class="rk-chip" data-rk-pat="f3">Compact<small>4 - 4 - 4 - 4</small></button>
-                        <button type="button" class="rk-chip" data-rk-pat="custom">Custom<small>your lengths</small></button>
-                    </div>
-                    <div id="rkCustom" class="hidden flex-col gap-2 p-3 rounded-xl bg-black/50 border border-purple-500/20">
-                        <div class="flex justify-between text-[11px] text-purple-300/80"><span>Blocks</span><b id="rkBlocksVal" class="text-purple-200">3</b></div>
-                        <input id="rkBlocks" type="range" min="1" max="5" value="3" class="w-full accent-purple-500" />
-                        <div class="flex justify-between text-[11px] text-purple-300/80"><span>Chars per block</span><b id="rkCharsVal" class="text-purple-200">8</b></div>
-                        <input id="rkChars" type="range" min="4" max="12" value="8" class="w-full accent-purple-500" />
-                    </div>
-                </div>
-
-                <div class="flex flex-col gap-2 translate-z-lift">
-                    <span class="rk-label">Characters</span>
-                    <div class="grid grid-cols-3 gap-2">
-                        <button type="button" class="rk-chip on" data-rk-chr="up">ABC</button>
-                        <button type="button" class="rk-chip" data-rk-chr="low">abc</button>
-                        <button type="button" class="rk-chip on" data-rk-chr="num">123</button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-2 translate-z-lift">
-                    <button type="button" id="rkGen" class="sc-btn sc-btn-main" style="padding:12px 10px">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg><span>Generate</span>
-                    </button>
-                    <button type="button" id="rkBatch" class="sc-btn sc-btn-ghost" style="padding:12px 10px">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5"></path></svg><span>Batch x10</span>
-                    </button>
-                </div>
-
-                </div><div class="rk-col">
-<div class="flex flex-col gap-2 translate-z-lift">
-                    <div class="flex justify-between items-center"><span class="rk-label">Output</span><span id="rkEntropy" class="text-[10px] font-bold text-purple-400/70">ENTROPY: -- BITS</span></div>
-                    <div id="rkOut" class="rk-out idle">Press Generate</div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <button type="button" id="rkCopy" class="sc-btn sc-btn-main" style="padding:10px"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 002-2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span id="rkCopyText">Copy Key</span></button>
-                        <button type="button" id="rkTest" class="sc-btn sc-btn-ghost" style="padding:10px"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12l2 2 4-4m5.6-4A12 12 0 0112 3a12 12 0 01-8.6 3A12 12 0 003 12c0 5.5 3.7 10.2 9 11.5 5.3-1.3 9-6 9-11.5 0-2-.4-4-1-5.8z"></path></svg><span id="rkTestText">Check Key</span></button>
-                    </div>
-                </div>
-
-                <div class="flex flex-col gap-2 translate-z-lift">
-                    <div class="flex justify-between items-center">
-                        <span class="rk-label">History <b id="rkCount" class="text-purple-300">0</b></span>
-                        <div class="flex gap-2">
-                            <button type="button" id="rkCopyAll" class="rk-chip" style="padding:5px 10px">Copy all</button>
-                            <button type="button" id="rkExport" class="rk-chip" style="padding:5px 10px">Export .txt</button>
-                            <button type="button" id="rkClear" class="rk-chip" style="padding:5px 10px">Clear</button>
-                        </div>
-                    </div>
-                    <div id="rkHist" class="rk-hist"><div class="text-center text-[11px] text-purple-400/50 py-4">No keys generated yet</div></div>
-                </div>
-</div></div>
-            </div>
-        </div>
-    </div>
-
     <div id="scriptModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="osTitle" onclick="if(event.target===this)closeOurScript()">
         <div class="themed modal-card os-card">
             <button type="button" class="modal-close" onclick="closeOurScript()" aria-label="Close">&times;</button>
@@ -3089,7 +3098,7 @@
             <p class="os-sub">Copy one line, then paste it into your executor while in-game.</p>
             <div class="os-grid">
                 <div class="os-main">
-                    <div class="os-tabs" role="tablist">
+                    <div class="os-tabs" role="tablist" id="osTabs" data-t="free"><i class="os-tabs-ring"></i><i class="ot-p" style="left:18%"></i><i class="ot-p" style="left:32%"></i><i class="ot-p" style="left:62%"></i><i class="ot-p" style="left:80%"></i>
                         <button type="button" id="osTabFree" class="active" role="tab" onclick="osTab('free')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg>Script</button>
                         <button type="button" id="osTabPrem" role="tab" onclick="osTab('prem')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9l4-6Z"/><path d="M2 9h20M12 21 8 9l4-6 4 6-4 12"/></svg>Redeem Premium</button>
                     </div>
@@ -3122,7 +3131,7 @@
                         </div>
                         <div class="os-win os-prem" id="osWinP" hidden>
                             <div class="os-bar"><span class="os-dots"><i></i><i></i><i></i></span><span class="os-file">Akari-Premium.lua</span><span class="os-online"><b></b>Premium</span></div>
-                            <pre class="os-code"><code id="osCodeP"></code></pre>
+                            <pre class="os-code os-binpre" id="osPreP"><code id="osCodeP"></code><span class="os-tag">ENCRYPTED · TAP COPY TO REVEAL</span></pre>
                             <div class="os-foot"><span class="os-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8M18 2v4h-4M6 22v-4h4"/></svg>Premium unlocked. Updates automatically.</span>
                                 <span class="os-acts"><button id="osCopyP" type="button" class="os-copy" onclick="copyOurScript(event,true)"><span class="os-fx"></span><svg id="osCopyIcoP" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><span id="osCopyTxtP">Copy</span></button><button id="osResetP" type="button" class="os-reset" onclick="osResetScript()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v5h5M5.6 15a8 8 0 1 0 1.4-7"/></svg><span id="osResetTxt">Reset HWID Script</span><small>Warning: you will need to redeem a key again</small></button></span></div>
                         </div>
@@ -3728,12 +3737,6 @@
                 b.setAttribute('aria-selected', on ? 'true' : 'false');
             });
         }
-
-        function openRandom(e) {
-            if (e) e.stopPropagation();
-            document.getElementById('randomModal').classList.add('open');
-        }
-        function closeRandom() { document.getElementById('randomModal').classList.remove('open'); }
 
         /* Universal Script window: one entry per map. Add more { name, script } objects to this list. */
         const UNIVERSAL_SCRIPTS = [
@@ -4809,7 +4812,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
         function closeExecutor() { document.getElementById('executorModal').classList.remove('open'); }
 
         document.addEventListener('keydown', (ev) => {
-            if (ev.key === 'Escape') { closeExecutor(); closeProduct(); closeRandom(); closeUniversal(); if (typeof closeBackpack === 'function') closeBackpack(); if (typeof closeFreeKey === 'function') closeFreeKey(); if (typeof closeOurScript === 'function' && !osRedeeming) closeOurScript(); }
+            if (ev.key === 'Escape') { closeExecutor(); closeProduct(); closeUniversal(); if (typeof closeBackpack === 'function') closeBackpack(); if (typeof closeFreeKey === 'function') closeFreeKey(); if (typeof closeOurScript === 'function' && !osRedeeming) closeOurScript(); }
         });
 
         let isPremium = false;
@@ -4817,7 +4820,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
         // ===== Redeem Premium (button next to "online") =====
         const PREMIUM_KEY = "AKARI-JS8AN2-G10K3VC-AMN6UH";
         const PREMIUM_SCRIPT = `_G.Premiums_Only  = true
-_G.Script_Keys = "AKARI-H5D2T9-CMUSURN-OBVX5A"
+_G.Script_Keys = "AKARI-JS8AN2-G10K3VC-AMN6UH"
 loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))()`;
         let isVerifyingRedeem = false, normalCodeHtml = '';
 
@@ -4847,10 +4850,14 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
             }
         }
         // encrypted-looking binary that flips bits, and "decrypts" into the real script on copy
-        let osBits = '011011010101'.split(''), osRevealT = null;
+        let osBits = '011011010101'.split(''), osBitsP = '0110100110101'.split(''), osRevealT = null, osRevealTP = null;
         function osBinDraw(flip) {
             const el = document.getElementById('osBin'); if (!el) return;
             el.innerHTML = osBits.map((b, i) => i === flip ? '<span class="f">' + b + '</span>' : b).join('');
+        }
+        function osBinDrawP(flip) {
+            const el = document.getElementById('osBinP'); if (!el) return;
+            el.innerHTML = osBitsP.map((b, i) => i === flip ? '<span class="f">' + b + '</span>' : b).join('');
         }
         setInterval(() => {
             const m = document.getElementById('scriptModal');
@@ -4858,18 +4865,25 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
             if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
             const i = Math.floor(Math.random() * osBits.length); osBits[i] = osBits[i] === '0' ? '1' : '0'; osBinDraw(i);
         }, 380);
-        function osReveal() {
-            const pre = document.querySelector('.os-binpre'), code = document.getElementById('osCode'), tag = pre && pre.querySelector('.os-tag');
+        setInterval(() => {
+            const m = document.getElementById('scriptModal');
+            if (!m || !m.classList.contains('open') || document.hidden || osRevealTP || !osPremOn) return;
+            if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const i = Math.floor(Math.random() * osBitsP.length); osBitsP[i] = osBitsP[i] === '0' ? '1' : '0'; osBinDrawP(i);
+        }, 410);
+        function osReveal(prem) {
+            const P = prem ? 'P' : '', pre = document.getElementById(prem ? 'osPreP' : 'osCode').closest('.os-binpre'), code = document.getElementById('osCode' + P), tag = pre && pre.querySelector('.os-tag');
             if (!pre) return;
-            clearTimeout(osRevealT);
-            const chars = '01', final = OUR_SCRIPT; let f = 0; const total = 18;
+            clearTimeout(prem ? osRevealTP : osRevealT);
+            const setT = v => { if (prem) osRevealTP = v; else osRevealT = v; };
+            const chars = '01', final = prem ? PREMIUM_SCRIPT : OUR_SCRIPT; let f = 0; const total = 18;
             pre.classList.add('reveal'); if (tag) tag.textContent = 'DECRYPTING\u2026';
             const iv = setInterval(() => {
                 f++; const fixed = Math.floor((f / total) * final.length);
                 code.textContent = final.split('').map((c, i) => (i < fixed || c === '\n' || c === ' ') ? c : chars[Math.floor(Math.random() * 2)]).join('');
                 if (f >= total) {
                     clearInterval(iv); code.innerHTML = osColor(final); if (tag) tag.textContent = 'DECRYPTED \u00b7 COPIED';
-                    osRevealT = setTimeout(() => {
+                    setT(setTimeout(() => {
                         /* fade back to binary: every character slowly turns into 0 / 1, in random order */
                         if (tag) tag.textContent = 'ENCRYPTING\u2026';
                         const order = final.split('').map((c, i) => i).filter(i => final[i] !== '\n' && final[i] !== ' ').sort(() => Math.random() - 0.5);
@@ -4879,20 +4893,22 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
                             g++; const gone = Math.floor((g / steps) * order.length);
                             code.textContent = final.split('').map((c, i) => (c === '\n' || c === ' ') ? c : (rank[i] < gone ? (Math.random() < 0.5 ? '0' : '1') : c)).join('');
                             if (g >= steps) {
-                                clearInterval(back); osRevealT = null; pre.classList.remove('reveal');
-                                code.innerHTML = '<span class="os-bin" id="osBin">' + osBits.join('') + '</span><i class="os-cur"></i>';
+                                clearInterval(back); setT(null); pre.classList.remove('reveal');
+                                code.innerHTML = '<span class="os-bin" id="osBin' + P + '">' + (prem ? osBitsP : osBits).join('') + '</span><i class="os-cur"></i>';
                                 if (tag) tag.textContent = 'ENCRYPTED \u00b7 TAP COPY TO REVEAL';
                             }
                         }, 55);
-                        osRevealT = back;
-                    }, 2200);
+                        setT(back);
+                    }, 2200));
                 }
             }, 40);
-            osRevealT = osRevealT || setTimeout(() => {}, 0);
+            if (!(prem ? osRevealTP : osRevealT)) setT(setTimeout(() => {}, 0));
         }
         function osTab(w) {
             if (w === 'prem' && !osPremOn) { try { if (localStorage.getItem('akariPremiumOn') === '1') osUnlock(true); } catch (e) {} }
             const prem = w === 'prem';
+            const tb = document.getElementById('osTabs'), prevT = tb && tb.dataset.t; if (tb) tb.dataset.t = prem ? 'prem' : 'free';
+            if (tb && prevT !== tb.dataset.t && !window.AKARI_LITE && typeof osBurst === 'function' && document.getElementById('scriptModal').classList.contains('open')) { try { osBurst(document.getElementById(prem ? 'osTabPrem' : 'osTabFree')); } catch (e) {} }
             document.getElementById('osPaneFree').hidden = prem; document.getElementById('osPanePrem').hidden = !prem;
             document.getElementById('osTabFree').classList.toggle('active', !prem); document.getElementById('osTabPrem').classList.toggle('active', prem);
             const t = document.getElementById('osTitle'); if (t) t.textContent = prem ? 'Redeem Premium' : 'Get the script';
@@ -4904,24 +4920,24 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         }
         function osUnlock(silent) {
             osPremOn = true;
-            document.getElementById('osCodeP').innerHTML = osColor(PREMIUM_SCRIPT);
+            osResetPremView();
             document.getElementById('osLocked').hidden = true;
             const w = document.getElementById('osWinP'); w.hidden = false;
             if (!silent) { w.classList.remove('pop'); void w.offsetWidth; w.classList.add('pop'); try { w.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {} setTimeout(() => osBurst(w), 350); }
         }
-        let osResetT = null;
         function osResetScript() {
-            const b = document.getElementById('osResetP'), t = document.getElementById('osResetTxt');
-            if (!b.classList.contains('arm')) {
-                b.classList.add('arm'); t.textContent = 'Click again to confirm';
-                clearTimeout(osResetT); osResetT = setTimeout(() => { b.classList.remove('arm'); t.textContent = 'Reset HWID Script'; }, 3500);
-                return;
-            }
-            clearTimeout(osResetT); b.classList.remove('arm'); t.textContent = 'Reset HWID Script';
             osLock();
             showNotify('RESET HWID SCRIPT', 'SCRIPT RESET - REDEEM A KEY AGAIN', true);
         }
+        function osResetPremView() {
+            clearTimeout(osRevealTP); osRevealTP = null;
+            const pre = document.getElementById('osPreP'); if (pre) pre.classList.remove('reveal');
+            const code = document.getElementById('osCodeP');
+            if (code) code.innerHTML = '<span class="os-bin" id="osBinP">' + osBitsP.join('') + '</span><i class="os-cur"></i>';
+            const tag = pre && pre.querySelector('.os-tag'); if (tag) tag.textContent = 'ENCRYPTED \u00b7 TAP COPY TO REVEAL';
+        }
         function osLock() {
+            osResetPremView();
             osPremOn = false;
             try { localStorage.removeItem('akariPremiumOn'); } catch (e) {}
             const l = document.getElementById('osLocked'), w = document.getElementById('osWinP');
@@ -4934,17 +4950,17 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         }
         function osPaste() {
             const i = document.getElementById('osPremInput');
-            if (navigator.clipboard && navigator.clipboard.readText) navigator.clipboard.readText().then(t => { i.value = t.trim().toUpperCase(); i.focus(); }, () => { i.focus(); showNotify('PASTE', 'PRESS CTRL+V TO PASTE YOUR KEY', false); });
+            if (navigator.clipboard && navigator.clipboard.readText) navigator.clipboard.readText().then(t => { i.value = t.replace(/\s+/g, '').toUpperCase(); i.focus(); }, () => { i.focus(); showNotify('PASTE', 'PRESS CTRL+V TO PASTE YOUR KEY', false); });
             else { i.focus(); showNotify('PASTE', 'PRESS CTRL+V TO PASTE YOUR KEY', false); }
         }
         function osValidKey(v) {
-            v = v.trim().toUpperCase();
+            v = v.replace(/\s+/g, '').toUpperCase();
             if (v === PREMIUM_KEY) return true;
             try { return PRODUCT_CATEGORIES.some(c => c.items.some(it => it.key && it.key.toUpperCase() === v)); } catch (e) { return false; }
         }
         function osRedeem() {
             if (osRedeeming) return;
-            const inp = document.getElementById('osPremInput'), v = inp.value.trim();
+            const inp = document.getElementById('osPremInput'), v = inp.value.replace(/\s+/g, '');
             if (!v) { osShake(); inp.focus(); showNotify('PREMIUM KEY', 'PLEASE ENTER YOUR PREMIUM KEY', false); return; }
             if (!osValidKey(v)) { osShake(); showNotify('INVALID KEY', 'THIS KEY IS NOT A VALID PREMIUM KEY', false); return; }
             osRedeeming = true; const go = document.getElementById('osRedeemGo'), tx = document.getElementById('osRedeemTxt'), bar = document.getElementById('osVbar'), f = document.getElementById('osVfill');
@@ -4968,7 +4984,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
                 ico.innerHTML = '<path d="M5 13l4 4L19 7"/>';
                 btn.classList.remove('done'); void btn.offsetWidth; btn.classList.add('done');
                 win.classList.remove('flash'); void win.offsetWidth; win.classList.add('flash');
-                osBurst(btn); if (!prem) osReveal();
+                osBurst(btn); osReveal(prem);
                 const st = document.getElementById('osStep1'); st.classList.add('done'); document.getElementById('osStep1Txt').textContent = 'Copied! Now join a map.';
                 showNotify('SCRIPT EXECUTOR', prem ? 'PREMIUM SCRIPT COPIED TO CLIPBOARD' : 'SCRIPT COPIED TO CLIPBOARD', true);
                 setTimeout(() => {
@@ -5115,7 +5131,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
 
         // Tabs behave like pages: opening one closes the others, marks its nav button active and hides the home page
         (function () {
-            const map = { scriptModal: 'ourScriptBtn', freeKeyModal: 'freeKeyBtn', universalModal: 'universalBtn', productModal: 'productBtn', backpackModal: 'backpackBtn', executorModal: 'executorBtn', randomModal: 'randomBtn' };
+            const map = { scriptModal: 'ourScriptBtn', freeKeyModal: 'freeKeyBtn', universalModal: 'universalBtn', productModal: 'productBtn', backpackModal: 'backpackBtn', executorModal: 'executorBtn' };
             const els = Object.keys(map).map(id => document.getElementById(id)).filter(Boolean);
             const sync = (openEl) => {
                 els.forEach(el => {
@@ -5191,9 +5207,37 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
             document.addEventListener('pointerdown', first, true);
         })();
 
+
+
+        function pickMode(m) {
+            const g = document.getElementById('modeGate'); if (g.classList.contains('go')) return;
+            g.classList.add('go'); document.getElementById(m === 'pc' ? 'mgPc' : 'mgMobile').classList.add('chosen');
+            document.getElementById('mgLoadTxt').textContent = (m === 'pc' ? 'LOADING PC MODE' : 'LOADING MOBILE MODE');
+            setTimeout(function () { setAkariMode(m); }, 950);
+        }
+        (function () {
+            document.querySelectorAll('.mg-card').forEach(function (c) {
+                c.addEventListener('pointermove', function (e) {
+                    const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+                    c.style.setProperty('--mx', (x * 100) + '%'); c.style.setProperty('--my', (y * 100) + '%');
+                    if (e.pointerType === 'mouse' && !window.AKARI_LITE) c.style.transform = 'rotateY(' + ((x - .5) * 12) + 'deg) rotateX(' + ((.5 - y) * 12) + 'deg) translateY(-3px)';
+                });
+                c.addEventListener('pointerleave', function () { c.style.transform = ''; });
+            });
+        })();
+        /* PC / Mobile picker: shown once, on the first visit */
+        (function () {
+            document.getElementById('modeTxt').textContent = 'Mode: ' + (window.AKARI_MODE === 'mobile' ? 'Mobile' : 'PC');
+            if (window.AKARI_MODE_SAVED) return;
+            document.getElementById('modeGate').classList.add('show');
+            document.getElementById(window.AKARI_MODE === 'mobile' ? 'mgMobile' : 'mgPc').classList.add('rec');
+            document.documentElement.style.overflow = 'hidden';
+        })();
+
+
         function goHome() {
             if (typeof closeOurScript === 'function') closeOurScript();
-            ['freeKeyModal', 'universalModal', 'productModal', 'backpackModal', 'executorModal', 'randomModal'].forEach(id => { const m = document.getElementById(id); if (m) m.classList.remove('open'); });
+            ['freeKeyModal', 'universalModal', 'productModal', 'backpackModal', 'executorModal'].forEach(id => { const m = document.getElementById(id); if (m) m.classList.remove('open'); });
             const h = document.getElementById('homePage'); if (h) h.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -6470,141 +6514,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
     if (window.MutationObserver) new MutationObserver(check).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 })();
 </script>
-<script>
-/* Random Key tab */
-(function () {
-    var $ = function (id) { return document.getElementById(id); };
-    var S = { prefix: 'AKARI', pat: 'f1', blocks: 3, chars: 8, up: true, low: false, num: true, hist: [], cur: '' };
-    var PAT = { f1: [6, 7, 6], f2: [9, 9, 10], f3: [4, 4, 4, 4] };
-    function pool() { return (S.up ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '') + (S.low ? 'abcdefghijklmnopqrstuvwxyz' : '') + (S.num ? '0123456789' : ''); }
-    function rstr(n) {
-        var p = pool(), b = new Uint32Array(n), o = '';
-        crypto.getRandomValues(b);
-        for (var i = 0; i < n; i++) o += p[b[i] % p.length];
-        return o;
-    }
-    function makeKey() {
-        var bl = S.pat === 'custom' ? Array(S.blocks).fill(S.chars) : PAT[S.pat];
-        return (S.prefix ? S.prefix + '-' : '') + bl.map(rstr).join('-');
-    }
-    function entropy(k) { return Math.round(k.replace(/[^a-zA-Z0-9]/g, '').length * Math.log2(pool().length)); }
-    function show(k, addHist) {
-        S.cur = k;
-        var o = $('rkOut'); o.textContent = k; o.classList.remove('idle');
-        $('rkEntropy').textContent = 'ENTROPY: ' + entropy(k) + ' BITS';
-        if (addHist) S.hist.unshift(k);
-        renderHist();
-    }
-    function renderHist() {
-        $('rkCount').textContent = S.hist.length;
-        var box = $('rkHist'); box.innerHTML = '';
-        if (!S.hist.length) { box.innerHTML = '<div class="text-center text-[11px] text-purple-400/50 py-4">No keys generated yet</div>'; return; }
-        S.hist.forEach(function (k) {
-            var row = document.createElement('div'); row.className = 'rk-item';
-            var sp = document.createElement('span'); sp.textContent = k;
-            var bt = document.createElement('button'); bt.type = 'button'; bt.title = 'Copy';
-            bt.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
-            bt.onclick = function () { copyTextRobust(k, function () { showNotify('RANDOM KEY', 'KEY COPIED TO CLIPBOARD', true); }, function () { showNotify('CLIPBOARD', 'COPY BLOCKED - SELECT THE KEY MANUALLY', false); }); };
-            row.appendChild(sp); row.appendChild(bt); box.appendChild(row);
-        });
-    }
-    function setOn(el, on) { el.classList.toggle('on', on); }
 
-    $('rkPrefix').addEventListener('input', function (e) {
-        S.prefix = e.target.value.trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
-        e.target.value = S.prefix; $('rkPrefixPrev').textContent = S.prefix || 'NONE';
-    });
-    document.querySelectorAll('[data-rk-pat]').forEach(function (b) {
-        b.addEventListener('click', function () {
-            S.pat = b.getAttribute('data-rk-pat');
-            document.querySelectorAll('[data-rk-pat]').forEach(function (x) { setOn(x, x === b); });
-            var c = $('rkCustom'); c.classList.toggle('hidden', S.pat !== 'custom'); c.classList.toggle('flex', S.pat === 'custom');
-        });
-    });
-    $('rkBlocks').addEventListener('input', function (e) { S.blocks = +e.target.value; $('rkBlocksVal').textContent = S.blocks; });
-    $('rkChars').addEventListener('input', function (e) { S.chars = +e.target.value; $('rkCharsVal').textContent = S.chars; });
-    document.querySelectorAll('[data-rk-chr]').forEach(function (b) {
-        b.addEventListener('click', function () {
-            var k = b.getAttribute('data-rk-chr'), old = S[k];
-            S[k] = !S[k];
-            if (!S.up && !S.low && !S.num) { S[k] = old; showNotify('RANDOM KEY', 'SELECT AT LEAST ONE CHARACTER SET', false); return; }
-            setOn(b, S[k]);
-        });
-    });
-    /* Spin: the key rolls through random characters (random duration), then locks in left to right */
-    var spinning = false;
-    function spinTo(finalKey, done) {
-        if (spinning) return;
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduce) { done(); return; }
-        spinning = true;
-        var out = $('rkOut'), P = pool(), n = finalKey.length;
-        var total = 900 + Math.random() * 1100;                /* random spin time: 0.9 - 2.0 s */
-        var t0 = performance.now(), lastTick = 0;
-        out.classList.remove('idle'); out.classList.add('spin');
-        $('rkGen').classList.add('busy'); $('rkBatch').classList.add('busy');
-        var plen = S.prefix ? S.prefix.length + 1 : 0;     /* the prefix never spins */
-        function lockAt(i) { return total * 0.35 + (i / n) * total * 0.65; }
-        function tick(now) {
-            var el = now - t0;
-            if (el >= total) {
-                spinning = false; out.classList.remove('spin');
-                $('rkGen').classList.remove('busy'); $('rkBatch').classList.remove('busy');
-                done(); return;
-            }
-            if (now - lastTick > 45) {                         /* ~22 reshuffles per second */
-                lastTick = now;
-                var html = '';
-                for (var i = 0; i < n; i++) {
-                    var ch = finalKey[i];
-                    if (ch === '-' || i < plen || el >= lockAt(i)) html += '<span class="rk-lock">' + ch + '</span>';
-                    else html += P[Math.floor(Math.random() * P.length)];
-                }
-                out.innerHTML = html;
-            }
-            requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-    }
-    $('rkGen').addEventListener('click', function () {
-        var k = makeKey(); spinTo(k, function () { show(k, true); });
-    });
-    $('rkBatch').addEventListener('click', function () {
-        var keys = []; for (var i = 0; i < 10; i++) keys.push(makeKey());
-        spinTo(keys[0], function () {
-            keys.slice().reverse().forEach(function (k) { S.hist.unshift(k); });
-            show(keys[0], false);
-            showNotify('RANDOM KEY', 'GENERATED 10 KEYS', true);
-        });
-    });
-    $('rkCopy').addEventListener('click', function () {
-        if (!S.cur) { showNotify('RANDOM KEY', 'GENERATE A KEY FIRST', false); return; }
-        var t = $('rkCopyText');
-        copyTextRobust(S.cur, function () {
-            t.textContent = 'Copied!'; setTimeout(function () { t.textContent = 'Copy Key'; }, 1500);
-            showNotify('RANDOM KEY', 'KEY COPIED TO CLIPBOARD', true);
-        }, function () { showNotify('CLIPBOARD', 'COPY BLOCKED - SELECT THE KEY MANUALLY', false); });
-    });
-    /* Checks the key against the real Akari key list (random keys will normally NOT match) */
-    $('rkTest').addEventListener('click', function () {
-        if (!S.cur) { showNotify('RANDOM KEY', 'GENERATE A KEY FIRST', false); return; }
-        var ok = validKeys.indexOf(S.cur) !== -1, t = $('rkTestText');
-        t.textContent = ok ? 'Valid key' : 'Not an Akari key'; setTimeout(function () { t.textContent = 'Check Key'; }, 2000);
-        showNotify('KEY CHECK', ok ? 'THIS IS A VALID AKARI KEY' : 'RANDOM KEYS DO NOT UNLOCK THE SCRIPT', ok);
-    });
-    $('rkCopyAll').addEventListener('click', function () {
-        if (!S.hist.length) { showNotify('RANDOM KEY', 'NO HISTORY TO COPY', false); return; }
-        copyTextRobust(S.hist.join('\n'), function () { showNotify('RANDOM KEY', 'COPIED ' + S.hist.length + ' KEYS', true); }, function () { showNotify('CLIPBOARD', 'COPY BLOCKED', false); });
-    });
-    $('rkExport').addEventListener('click', function () {
-        if (!S.hist.length) { showNotify('RANDOM KEY', 'NO HISTORY TO EXPORT', false); return; }
-        var ok = downloadText('AKARI_KEYS_' + Date.now() + '.txt', S.hist.map(function (k, i) { return '[' + (i + 1) + '] ' + k; }).join('\n'));
-        showNotify('RANDOM KEY', ok ? 'EXPORTED .TXT FILE' : 'EXPORT FAILED', ok);
-    });
-    $('rkClear').addEventListener('click', function () { if (!S.hist.length) return; S.hist = []; renderHist(); showNotify('RANDOM KEY', 'HISTORY CLEARED', true); });
-    show(makeKey(), false);
-})();
-</script>
 <script>
 /* Volcano theme: every 9-13 s the big volcano erupts. Fireballs and ash shoot out of the crater, then lava runs down the slopes */
 (function () {
