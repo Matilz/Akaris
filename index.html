@@ -2530,7 +2530,163 @@
         @media (max-width: 820px) { .os-acts { justify-content:stretch; } .os-acts > * { flex:1 1 100%; justify-content:center; } }
 
 
-    </style>
+    
+        /* ===== Universal Script polish ===== */
+        #universalModal .uni-card { background: linear-gradient(160deg, rgba(34,12,64,.62), rgba(8,4,22,.72)); border: 1px solid rgba(192,132,252,.28); box-shadow: 0 20px 60px rgba(88,28,135,.35), inset 0 1px 0 rgba(255,255,255,.07); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+        #universalModal .uni-grid { gap: 20px; }
+        #universalModal .uni-map { position: relative; background: linear-gradient(165deg, rgba(76,29,149,.28), rgba(10,5,26,.7)); border: 1px solid rgba(192,132,252,.22); box-shadow: 0 10px 28px rgba(0,0,0,.35); transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s, border-color .28s; overflow: hidden; }
+        #universalModal .uni-map::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(120% 80% at 50% 0%, rgba(192,132,252,.28), transparent 60%); opacity: 0; transition: opacity .3s; pointer-events: none; }
+        #universalModal .uni-map:hover, #universalModal .uni-map:focus-visible { transform: translateY(-6px) scale(1.015); border-color: rgba(232,121,249,.7); box-shadow: 0 18px 44px rgba(168,85,247,.45), 0 0 0 1px rgba(232,121,249,.35); }
+        #universalModal .uni-map:hover::before, #universalModal .uni-map:focus-visible::before { opacity: 1; }
+        #universalModal .uni-pic { box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 8px 22px rgba(0,0,0,.4); transition: transform .35s; }
+        #universalModal .uni-map:hover .uni-pic { transform: scale(1.03); }
+        #universalModal .uni-map-name { background: linear-gradient(90deg, #fff, #e9d5ff 55%, #d8b4fe); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; }
+        #universalModal .uni-info, #universalModal .uni-hero { background: linear-gradient(160deg, rgba(34,12,64,.6), rgba(8,4,22,.72)); border: 1px solid rgba(192,132,252,.28); box-shadow: 0 16px 48px rgba(88,28,135,.3), inset 0 1px 0 rgba(255,255,255,.06); }
+        #universalModal .uni-code { background: rgba(5,2,16,.85); border: 1px solid rgba(168,85,247,.3); box-shadow: inset 0 0 30px rgba(88,28,135,.25); }
+        #universalModal .uni-act { transition: transform .2s, box-shadow .2s, filter .2s; }
+        #universalModal .uni-act:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(168,85,247,.45); filter: brightness(1.1); }
+        #universalModal .uni-search-row { box-shadow: 0 6px 22px rgba(0,0,0,.35); transition: box-shadow .25s, border-color .25s; }
+        #universalModal .uni-search-row:focus-within { border-color: rgba(232,121,249,.7); box-shadow: 0 0 0 3px rgba(168,85,247,.25), 0 8px 28px rgba(168,85,247,.35); }
+        @media (prefers-reduced-motion: reduce) { #universalModal .uni-map, #universalModal .uni-pic, #universalModal .uni-act { transition: none; } }
+
+        /* ================= Universal redesign (ux-) ================= */
+        #universalModal .modal-card { background: radial-gradient(120% 60% at 50% -10%, rgba(126,34,206,.35), transparent 60%), linear-gradient(180deg, #14072b, #07030f) !important; }
+        #universalModal .sc-title { background: linear-gradient(90deg,#fff,#e9d5ff 40%,#e879f9 80%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: .02em; }
+        /* segmented tabs */
+        .ux-seg { position: relative; display: grid; grid-template-columns: 1fr 1fr; padding: 5px; margin: 10px 0 8px; border-radius: 18px; background: rgba(5,2,16,.8); border: 1px solid rgba(192,132,252,.25); box-shadow: inset 0 2px 12px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.3); isolation: isolate; }
+        .ux-seg-pill { position: absolute; z-index: -1; top: 5px; bottom: 5px; left: 5px; width: calc(50% - 5px); border-radius: 13px; background: linear-gradient(135deg,#9333ea,#c026d3 60%,#e879f9); box-shadow: 0 6px 22px rgba(192,38,211,.55), inset 0 1px 0 rgba(255,255,255,.35); transition: transform .5s cubic-bezier(.65,0,.2,1); }
+        .ux-seg[data-t="prem"] .ux-seg-pill { transform: translateX(100%); }
+        .ux-seg button { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 13px 10px; border: 0; background: transparent; cursor: pointer; border-radius: 13px; color: rgba(216,180,254,.75); font: 800 13.5px 'Plus Jakarta Sans', sans-serif; letter-spacing: .04em; transition: color .35s, transform .2s; -webkit-tap-highlight-color: transparent; }
+        .ux-seg button svg { width: 17px; height: 17px; transition: transform .5s cubic-bezier(.2,.9,.25,1); }
+        .ux-seg button:hover { color: #fff; } .ux-seg button:active { transform: scale(.97); }
+        .ux-seg button.active { color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.35); } .ux-seg button.active svg { transform: rotate(-12deg) scale(1.12); }
+        @media (max-width: 520px) { .ux-seg button { font-size: 11.5px; gap: 6px; padding: 12px 4px; } .ux-seg button svg { width: 14px; height: 14px; } }
+        /* smooth page switch */
+        @keyframes uxIn { from { opacity: 0; transform: translateY(16px) scale(.985); filter: blur(5px); } to { opacity: 1; transform: none; filter: none; } }
+        #universalList > * { animation: uxIn .55s cubic-bezier(.2,.8,.2,1) both; }
+        #universalList > *:nth-child(2) { animation-delay: .07s; }
+        /* map cards */
+        #universalModal .uni-grid { grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 20px; }
+        #universalModal .ux-card { padding: 12px 12px 16px; gap: 14px; border-radius: 24px; }
+        #universalModal .ux-card .uni-pic { border-radius: 17px; }
+        #universalModal .ux-card .uni-pic::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg, transparent 55%, rgba(7,3,15,.75)); z-index: 2; pointer-events:none; }
+        #universalModal .ux-card .uni-map-name { padding: 0 6px; font-size: 18px; }
+        #universalModal .ux-card .uni-tag { display: inline-flex; align-items: center; justify-content: space-between; gap: 10px; align-self: stretch; margin: 0 4px; padding: 10px 14px; border-radius: 12px; font-size: 11px; letter-spacing: .16em; color: #f5d0fe; background: rgba(168,85,247,.14); border: 1px solid rgba(192,132,252,.3); transition: background .35s, color .35s, border-color .35s; }
+        #universalModal .ux-card .uni-tag svg { transition: transform .4s cubic-bezier(.2,.9,.25,1); }
+        #universalModal .ux-card:hover .uni-tag { background: linear-gradient(90deg,#9333ea,#c026d3); color: #fff; border-color: transparent; }
+        #universalModal .ux-card:hover .uni-tag svg { transform: translateX(5px); }
+        /* back button */
+        #universalModal .ux-back { position: relative; gap: 10px; padding: 11px 20px 11px 14px; border-radius: 14px; background: rgba(5,2,16,.75); border: 1px solid rgba(192,132,252,.35); color: #e9d5ff; font: 800 12px 'Plus Jakarta Sans', sans-serif; letter-spacing: .16em; overflow: hidden; transition: color .3s, border-color .3s, box-shadow .3s, transform .3s; }
+        #universalModal .ux-back::before { content:''; position:absolute; inset:0; background: linear-gradient(90deg,#9333ea,#c026d3); transform: translateX(-101%); transition: transform .45s cubic-bezier(.65,0,.2,1); z-index: -1; }
+        #universalModal .ux-back { z-index: 0; isolation: isolate; }
+        #universalModal .ux-back:hover { color: #fff; border-color: transparent; transform: none; box-shadow: 0 8px 24px rgba(168,85,247,.45); }
+        #universalModal .ux-back:hover::before { transform: none; }
+        #universalModal .ux-back svg { transition: transform .4s cubic-bezier(.2,.9,.25,1); } #universalModal .ux-back:hover svg { transform: translateX(-4px); }
+        #universalModal .ux-back:active { transform: scale(.96); }
+        /* play game */
+        #universalModal .ux-play { position: relative; overflow: hidden; border: 0; color: #fff; padding: 15px 22px; border-radius: 16px; font: 900 14px 'Plus Jakarta Sans', sans-serif; letter-spacing: .1em; text-transform: uppercase; background: linear-gradient(120deg,#7e22ce,#c026d3 55%,#f0abfc); background-size: 200% 100%; box-shadow: 0 10px 30px rgba(192,38,211,.5), inset 0 1px 0 rgba(255,255,255,.4); transition: background-position .6s ease, transform .3s cubic-bezier(.2,.9,.25,1), box-shadow .3s; }
+        #universalModal .ux-play svg { transition: transform .4s cubic-bezier(.2,.9,.25,1); }
+        #universalModal .ux-play:hover { background-position: 100% 0; transform: translateY(-3px); box-shadow: 0 16px 40px rgba(232,121,249,.6), inset 0 1px 0 rgba(255,255,255,.5); filter: none; }
+        #universalModal .ux-play:hover svg { transform: scale(1.25) translateX(2px); } #universalModal .ux-play:active { transform: scale(.97); }
+        #universalModal .ux-shine { position:absolute; top:0; left:-60%; width:40%; height:100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-20deg); animation: uxShine 3.2s ease-in-out infinite; pointer-events:none; }
+        @keyframes uxShine { 0%,55% { left:-60%; } 100% { left:140%; } }
+        #universalModal .ux-how { border-radius: 16px; padding: 15px 20px; background: rgba(5,2,16,.7); border: 1px solid rgba(192,132,252,.35); color: #e9d5ff; transition: transform .3s, border-color .3s, background .3s, box-shadow .3s; }
+        #universalModal .ux-how:hover { transform: translateY(-3px); border-color: rgba(232,121,249,.7); background: rgba(126,34,206,.3); box-shadow: 0 12px 30px rgba(168,85,247,.35); filter: none; }
+        /* Back / Change switcher */
+        #universalModal .uni-switch { padding: 10px 12px; border-radius: 18px; background: rgba(5,2,16,.7); border: 1px solid rgba(192,132,252,.25); box-shadow: inset 0 2px 10px rgba(0,0,0,.4); }
+        #universalModal .uni-switch-lab { font-size: 11px; letter-spacing: .14em; color: #f0abfc; padding-left: 6px; }
+        #universalModal .uni-nav { gap: 8px; }
+        #universalModal .ux-nbtn { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 0 0 auto; padding: 11px 18px; border-radius: 13px; cursor: pointer; font: 800 12px 'Plus Jakarta Sans', sans-serif; letter-spacing: .14em; text-transform: uppercase; transition: transform .3s cubic-bezier(.2,.9,.25,1), box-shadow .3s, background .3s, border-color .3s; }
+        #universalModal .ux-prev { color: #e9d5ff; background: rgba(168,85,247,.12); border: 1px solid rgba(192,132,252,.4); }
+        #universalModal .ux-prev:hover { background: rgba(168,85,247,.28); border-color: #e879f9; transform: translateX(-3px); box-shadow: 0 8px 22px rgba(168,85,247,.35); filter: none; }
+        #universalModal .ux-next { color: #fff; border: 0; background: linear-gradient(120deg,#9333ea,#c026d3); box-shadow: 0 8px 24px rgba(192,38,211,.45), inset 0 1px 0 rgba(255,255,255,.35); }
+        #universalModal .ux-next:hover { transform: translateX(3px); box-shadow: 0 12px 30px rgba(232,121,249,.6), inset 0 1px 0 rgba(255,255,255,.45); filter: brightness(1.08); }
+        #universalModal .ux-nbtn:active { transform: scale(.94); }
+        #universalModal .ux-prev svg { transition: transform .4s cubic-bezier(.2,.9,.25,1); } #universalModal .ux-prev:hover svg { transform: translateX(-3px); }
+        #universalModal .ux-next svg { transition: transform .6s cubic-bezier(.2,.9,.25,1); } #universalModal .ux-next:hover svg { transform: rotate(180deg); }
+        #universalModal .uni-detail { gap: 22px; }
+        @media (prefers-reduced-motion: reduce) { #universalList > *, .ux-shine { animation: none !important; } .ux-seg-pill { transition: none; } }
+        #universalModal .ux-card .uni-tag::after, #universalModal .ux-card .uni-tag::before { content: none !important; display: none !important; }
+        #universalModal .ux-back { margin-top: 6px; }
+
+        /* ================= Top nav: floating sparkly capsule ================= */
+        html body #topNav { background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: 0 !important; box-shadow: none !important; pointer-events: none; }
+        html body #topNav::after { display: none !important; }
+        html body #topNav .tn-in { pointer-events: auto; position: relative; isolation: isolate; height: 52px; margin: 6px auto 0; width: calc(100% - 28px); max-width: 1240px; padding: 0 8px 0 10px; border-radius: 999px; background: linear-gradient(180deg, rgba(20,7,40,.86), rgba(7,3,16,.9)); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); box-shadow: 0 12px 40px rgba(88,28,135,.45), 0 0 0 1px rgba(192,132,252,.12), inset 0 1px 0 rgba(255,255,255,.07); }
+        /* animated gradient rim */
+        html body #topNav .tn-in::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; background: linear-gradient(110deg, rgba(168,85,247,.25), #e879f9 20%, rgba(168,85,247,.2) 40%, #c084fc 60%, rgba(168,85,247,.2) 80%, #f5d0fe); background-size: 300% 100%; animation: uxRim 6s linear infinite; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); filter: drop-shadow(0 0 6px rgba(192,132,252,.7)); pointer-events: none; }
+        /* twinkling sparkles */
+        html body #topNav .tn-in::after { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; background: radial-gradient(circle at 18% 30%, #fff 0 1px, transparent 2px), radial-gradient(circle at 36% 74%, #f5d0fe 0 1px, transparent 2px), radial-gradient(circle at 57% 22%, #fff 0 1.2px, transparent 2.4px), radial-gradient(circle at 74% 70%, #e9d5ff 0 1px, transparent 2px), radial-gradient(circle at 91% 28%, #fff 0 1px, transparent 2px); animation: uxTwinkle 3.2s ease-in-out infinite; }
+        @keyframes uxRim { to { background-position: 300% 0; } }
+        @keyframes uxTwinkle { 0%,100% { opacity: .15; } 50% { opacity: .95; } }
+        html body #topNav .tn-items { gap: 2px; padding: 0 4px !important; align-self: center; overflow: visible; }
+        html body #topNav .tn-brand { margin: 0 auto 0 4px; }
+        html body #topNav .tn-items .theme-btn:first-of-type, html body #topNav #ourScriptBtn { margin-left: auto !important; }
+        html body #topNav #executorBtn { margin-right: auto !important; }
+        /* plain text links with a glowing underline */
+        html body #topNav .theme-btn { background: transparent !important; border: 0 !important; box-shadow: none !important; text-shadow: none !important; color: rgba(233,213,255,.72) !important; font: 600 15px 'Plus Jakarta Sans', sans-serif !important; letter-spacing: .01em; padding: 10px 16px !important; border-radius: 999px !important; overflow: visible; transition: color .3s, text-shadow .3s, background .3s, transform .25s; }
+        html body #topNav .theme-btn svg { display: none !important; }
+        html body #topNav .theme-btn::after { display: none !important; }
+        html body #topNav .theme-btn::before { content: ''; position: absolute; left: 50%; bottom: 3px; width: 0; height: 2px; border-radius: 2px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, #f0abfc, #fff, #f0abfc, transparent); box-shadow: 0 0 10px 1px rgba(232,121,249,.9); transition: width .4s cubic-bezier(.2,.9,.25,1); z-index: 0; }
+        html body #topNav .theme-btn:hover { color: #fff !important; background: rgba(168,85,247,.12) !important; text-shadow: 0 0 14px rgba(233,213,255,.9) !important; transform: translateY(-1px); }
+        html body #topNav .theme-btn:hover::before { width: 55%; }
+        html body #topNav .theme-btn.tn-active { color: #fff !important; background: linear-gradient(180deg, rgba(168,85,247,.28), rgba(126,34,206,.14)) !important; box-shadow: inset 0 0 0 1px rgba(216,180,254,.35), 0 0 22px rgba(168,85,247,.5) !important; text-shadow: 0 0 14px rgba(245,208,254,.95) !important; }
+        html body #topNav .theme-btn.tn-active::before { width: 62%; }
+        html body #topNav .theme-btn:active { transform: scale(.96); }
+        html body #topNav .tn-dl { width: 38px; height: 38px; background: rgba(168,85,247,.14); box-shadow: inset 0 0 0 1px rgba(216,180,254,.4), 0 0 16px rgba(168,85,247,.4); }
+        @media (max-width: 720px) { html body #topNav .tn-in { width: calc(100% - 16px); height: 48px; margin-top: 5px; } }
+        @media (prefers-reduced-motion: reduce) { html body #topNav .tn-in::before, html body #topNav .tn-in::after { animation: none; } }
+
+        /* ---- centered links + purple border on every tab ---- */
+        html body #topNav .tn-items { overflow: visible !important; }
+        html body #topNav .tn-links { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+        html body #topNav #ourScriptBtn, html body #topNav #executorBtn { margin-left: 0 !important; margin-right: 0 !important; }
+        html body #topNav .theme-btn { border: 1px solid rgba(192,132,252,.55) !important; background: linear-gradient(180deg, rgba(168,85,247,.10), rgba(88,28,135,.14)) !important; box-shadow: 0 0 12px rgba(168,85,247,.22), inset 0 1px 0 rgba(255,255,255,.06) !important; }
+        html body #topNav .theme-btn:hover { border-color: #e879f9 !important; background: linear-gradient(180deg, rgba(192,38,211,.28), rgba(126,34,206,.2)) !important; box-shadow: 0 0 20px rgba(232,121,249,.55), inset 0 1px 0 rgba(255,255,255,.15) !important; }
+        html body #topNav .theme-btn.tn-active { border-color: #f5d0fe !important; box-shadow: 0 0 0 1px rgba(245,208,254,.5), 0 0 26px rgba(192,132,252,.75), inset 0 1px 0 rgba(255,255,255,.25) !important; }
+        @media (max-width: 1000px) { html body #topNav .tn-links { position: static; transform: none; margin-left: auto; } html body #topNav .theme-btn { padding: 9px 12px !important; font-size: 14px !important; } }
+
+        /* ================= Universal: extra cool layer ================= */
+        #universalModal .modal-card { position: relative; overflow-x: hidden; }
+        #universalModal .modal-card::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .5; background-image: linear-gradient(rgba(192,132,252,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(192,132,252,.07) 1px, transparent 1px); background-size: 38px 38px; -webkit-mask: radial-gradient(ellipse at 50% 0%, #000 10%, transparent 70%); mask: radial-gradient(ellipse at 50% 0%, #000 10%, transparent 70%); animation: uxGrid 14s linear infinite; }
+        @keyframes uxGrid { to { background-position: 0 38px, 38px 0; } }
+        #universalModal .modal-card > *:not(.modal-close):not(.glow-line) { position: relative; z-index: 1; }
+        #universalModal .modal-card > .modal-close { position: absolute; z-index: 5; }
+        #universalModal .sc-icon { position: relative; animation: uxFloat 4s ease-in-out infinite; box-shadow: 0 0 30px rgba(192,38,211,.7), inset 0 1px 0 rgba(255,255,255,.4); }
+        #universalModal .sc-icon::after { content: ''; position: absolute; inset: -7px; border-radius: inherit; border: 1.5px solid rgba(232,121,249,.7); animation: uxPing 2.6s ease-out infinite; pointer-events: none; }
+        @keyframes uxFloat { 50% { transform: translateY(-4px) rotate(-3deg); } }
+        @keyframes uxPing { 0% { opacity: .9; transform: scale(.9); } 100% { opacity: 0; transform: scale(1.35); } }
+        #universalModal .sc-title { font-size: clamp(1.9rem, 4.5vw, 2.6rem); filter: drop-shadow(0 0 18px rgba(192,38,211,.55)); }
+        /* search */
+        #universalModal .uni-search-row { border-radius: 18px; background: rgba(5,2,16,.85); border: 1px solid rgba(192,132,252,.4); }
+        #universalModal .uni-search-go { background: linear-gradient(120deg,#9333ea,#c026d3); letter-spacing: .12em; text-transform: uppercase; transition: filter .3s; } #universalModal .uni-search-go:hover { filter: brightness(1.2); }
+        #universalModal .uni-count { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 6px 14px; border-radius: 999px; background: rgba(168,85,247,.14); border: 1px solid rgba(192,132,252,.35); color: #f5d0fe; letter-spacing: .14em; text-transform: uppercase; }
+        #universalModal .uni-count::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #e879f9; box-shadow: 0 0 10px #e879f9; animation: uxBlink 1.6s ease-in-out infinite; }
+        @keyframes uxBlink { 50% { opacity: .25; } }
+        /* neon cards */
+        #universalModal .ux-card { transform-style: preserve-3d; }
+        #universalModal .ux-card::after { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; opacity: 0; transition: opacity .35s; background: linear-gradient(120deg, #f0abfc, #7e22ce, #e879f9, #7e22ce, #f0abfc); background-size: 300% 300%; animation: uxRim 4s linear infinite; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+        #universalModal .ux-card:hover::after { opacity: 1; }
+        #universalModal .ux-card .uni-pic::before { content: ''; position: absolute; left: 0; right: 0; top: -40%; height: 40%; z-index: 3; pointer-events: none; background: linear-gradient(180deg, transparent, rgba(240,171,252,.35), transparent); opacity: 0; }
+        #universalModal .ux-card:hover .uni-pic::before { opacity: 1; animation: uxScan 1.4s ease-in-out infinite; }
+        @keyframes uxScan { to { top: 110%; } }
+        #universalModal .ux-card .uni-fb.uni-fb-svg { transition: transform .5s cubic-bezier(.2,.9,.25,1); }
+        #universalModal .ux-card:hover .uni-fb.uni-fb-svg { transform: scale(1.18) rotate(-6deg); filter: drop-shadow(0 0 22px rgba(240,171,252,.95)); }
+        #universalModal .ux-num { position: absolute; top: 20px; right: 22px; z-index: 6; font: 800 11px 'Fira Code', monospace; letter-spacing: .12em; color: rgba(245,208,254,.9); padding: 3px 8px; border-radius: 8px; background: rgba(5,2,16,.7); border: 1px solid rgba(192,132,252,.4); }
+        /* detail page */
+        #universalModal .uni-title { font-size: clamp(26px, 4.5vw, 38px); background: linear-gradient(90deg,#fff,#f5d0fe 50%,#e879f9); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 16px rgba(192,38,211,.5)); text-shadow: none; }
+        #universalModal .uni-hero .uni-pic-lg { box-shadow: 0 0 0 1px rgba(232,121,249,.5), 0 0 40px rgba(168,85,247,.5), inset 0 0 40px rgba(88,28,135,.4); }
+        #universalModal .uni-hero .uni-pic-lg::before { content: ''; position: absolute; left: 0; right: 0; top: -30%; height: 30%; z-index: 3; pointer-events: none; background: linear-gradient(180deg, transparent, rgba(240,171,252,.3), transparent); animation: uxScan 3.4s ease-in-out infinite; }
+        #universalModal .uni-hero .uni-fb.uni-fb-svg { animation: uxFloat 4.5s ease-in-out infinite; }
+        #universalModal .uni-os { border: 1px solid rgba(232,121,249,.5); box-shadow: 0 0 34px rgba(168,85,247,.35), inset 0 0 24px rgba(88,28,135,.3); border-radius: 20px; }
+        #universalModal .uni-oscopy { box-shadow: 0 0 24px rgba(192,38,211,.6); }
+        @media (prefers-reduced-motion: reduce) { #universalModal .modal-card::before, #universalModal .sc-icon, #universalModal .sc-icon::after, #universalModal .ux-card::after, #universalModal .uni-hero .uni-pic-lg::before, #universalModal .uni-hero .uni-fb.uni-fb-svg, #universalModal .uni-count::before { animation: none !important; } }
+
+        /* ---- fix: keep 3D tilt working (no transform transition / hover override) ---- */
+        #universalModal .uni-map, #universalModal .ux-card, #universalModal .uni-map:hover, #universalModal .uni-map:focus-visible, #universalModal .ux-card:hover { transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--sc)) !important; transition: border-color .3s ease, box-shadow .3s ease !important; }
+        #universalModal .uni-grid .uni-map { animation-fill-mode: backwards !important; }
+        #universalList > * { animation-fill-mode: backwards; }
+</style>
 </head>
 <body class="relative flex flex-col items-center justify-center p-4 bg-grid" style="justify-content: safe center;">
     <div id="akariSplash" role="status" aria-label="Akari">
@@ -2891,6 +3047,7 @@
                 <canvas id="hatCanvas" class="keep-color" style="position:absolute;inset:0;width:150px;height:144px"></canvas>
                 </span></span>
                 <span class="tn-brand" role="button" tabindex="0" onclick="goHome()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goHome()}">𝒜𝓀𝒶𝓇𝒾 𝐻𝓊𝒷</span>
+                <div class="tn-links">
                 <button id="ourScriptBtn" type="button" class="theme-btn" onclick="openOurScript(event)" aria-haspopup="dialog">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg>
             <span>Our script</span>
@@ -2915,6 +3072,7 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 4h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"></path></svg>
             <span>Executor</span>
         </button>
+                </div>
 
             </div>
             <button id="dlBtn" type="button" class="tn-dl" data-label="Download" aria-label="Download website" title="Download website" onclick="openDownload(event)" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16"/></svg></button>
@@ -3028,13 +3186,13 @@
                 <button type="button" class="exec-sw" data-p="mobile" role="tab" aria-selected="false" onclick="setExecPlatform('mobile')"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg>MOBILE</button>
             </div>
             <div class="exec-list" data-platform="windows">
-                <button type="button" class="exec-copy" onclick="copyExecText('Version-445548190fe44ee2', this)" title="Copy WINDOWS version">
+                <button type="button" class="exec-copy" onclick="copyExecText('Version-2c6fd5e09aaf4cfa', this)" title="Copy WINDOWS version">
                     <span class="exec-copy-top"><span class="exec-copy-os"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span><span class="exec-status keep-color exec-mini"><i></i><b>ONLINE</b></span></span>
-                    <span class="exec-copy-row"><span class="exec-copy-text">Version-445548190fe44ee2</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
-                </button>
-                <button type="button" class="exec-copy" onclick="copyExecText('Version-2c6fd5e09aaf4cfa', this)" title="Copy MACBOOK version">
-                    <span class="exec-copy-top"><span class="exec-copy-os"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M2.5 19h19l-1.5-4H4z"/></svg>MACBOOK</span><span class="exec-status keep-color exec-mini"><i></i><b>ONLINE</b></span></span>
                     <span class="exec-copy-row"><span class="exec-copy-text">Version-2c6fd5e09aaf4cfa</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+                </button>
+                <button type="button" class="exec-copy" onclick="copyExecText('Version-445548190fe44ee2', this)" title="Copy MACBOOK version">
+                    <span class="exec-copy-top"><span class="exec-copy-os"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M2.5 19h19l-1.5-4H4z"/></svg>MACBOOK</span><span class="exec-status keep-color exec-mini"><i></i><b>ONLINE</b></span></span>
+                    <span class="exec-copy-row"><span class="exec-copy-text">Version-445548190fe44ee2</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
                 </button>
                 <button type="button" class="exec-copy" onclick="copyExecText('2.744.1081', this)" title="Copy MOBILE version">
                     <span class="exec-copy-top"><span class="exec-copy-os"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg>MOBILE</span><span class="exec-status keep-color exec-mini"><i></i><b>ONLINE</b></span></span>
@@ -3416,9 +3574,10 @@
                         <p class="sc-desc" id="universalDesc">Pick a map to get its script.</p>
                     </div>
                 </div>
-                <div class="os-tabs" role="tablist" id="uniTabs" data-t="free"><i class="os-tabs-ring"></i><i class="ot-p" style="left:18%"></i><i class="ot-p" style="left:32%"></i><i class="ot-p" style="left:62%"></i><i class="ot-p" style="left:80%"></i>
-                    <button type="button" id="uniTab1" class="active" role="tab" aria-selected="true" onclick="uniMode(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>Universal Mapping</button>
-                    <button type="button" id="uniTab2" role="tab" aria-selected="false" onclick="uniMode(2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.6L21 9l-5.2 4.2L17.5 20 12 16.2 6.5 20l1.7-6.8L3 9l6.6-.4z"/></svg>Universal Script</button>
+                <div class="ux-seg" role="tablist" id="uniTabs" data-t="free">
+                    <i class="ux-seg-pill"></i>
+                    <button type="button" id="uniTab1" class="active" role="tab" aria-selected="true" onclick="uniMode(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg><span>Universal Mapping</span></button>
+                    <button type="button" id="uniTab2" role="tab" aria-selected="false" onclick="uniMode(2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Universal Script</span></button>
                 </div>
                 <div id="universalList" class="flex flex-col gap-4 translate-z-lift"></div>
             </div>
@@ -4592,10 +4751,11 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
                 const grid = document.createElement('div'); grid.className = 'uni-grid'; let n = 0;
                 UNI_SRC.forEach((it, i) => {
                     if (!uniMatch(it, uniQuery)) return; n++;
-                    const card = document.createElement('button'); card.type = 'button'; card.className = 'uni-map';
+                    const card = document.createElement('button'); card.type = 'button'; card.className = 'uni-map ux-card';
                     card.appendChild(uniThumb(it, 'uni-pic'));
                     const nm = document.createElement('span'); nm.className = 'uni-map-name'; nm.textContent = it.name;
-                    const tg = document.createElement('span'); tg.className = 'uni-tag'; tg.textContent = 'OPEN SCRIPT';
+                    const tg = document.createElement('span'); tg.className = 'uni-tag'; tg.innerHTML = '<span>OPEN SCRIPT</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+                    const nu = document.createElement('span'); nu.className = 'ux-num'; nu.textContent = String(i + 1).padStart(2, '0'); card.appendChild(nu);
                     card.appendChild(nm); card.appendChild(tg);
                     card.onclick = (ev) => { ev.stopPropagation(); showUniversalScript(i); };
                     grid.appendChild(card);
@@ -4617,7 +4777,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             const list = document.getElementById('universalList'); list.innerHTML = '';
             document.getElementById('universalDesc').textContent = it.name + ' - copy the script and run it in your executor.';
             const el = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt) n.textContent = txt; return n; };
-            const back = el('button', 'uni-back'); back.type = 'button';
+            const back = el('button', 'uni-back ux-back'); back.type = 'button';
             back.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg><span>' + (it.pack ? 'ALL HUBS' : 'ALL MAPS') + '</span>';
             back.onclick = (ev) => { ev.stopPropagation(); showUniversalList(); };
 
@@ -4641,11 +4801,11 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             info.appendChild(el('div', 'uni-game', it.pack ? 'Universal Script 2' : it.name));
             const row = el('div', 'uni-actions');
             if (it.place) {
-                const play = el('a', 'uni-act uni-act-play'); play.href = 'https://www.roblox.com/games/' + it.place; play.target = '_blank'; play.rel = 'noopener noreferrer';
-                play.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"></circle><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor"></path></svg><span>Play game</span>';
+                const play = el('a', 'uni-act uni-act-play ux-play'); play.href = 'https://www.roblox.com/games/' + it.place; play.target = '_blank'; play.rel = 'noopener noreferrer';
+                play.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 4.5v15l13-7.5z" fill="currentColor"></path></svg><span>Play game</span><i class="ux-shine"></i>';
                 row.appendChild(play);
             }
-            const how = el('button', 'uni-act'); how.type = 'button';
+            const how = el('button', 'uni-act ux-how'); how.type = 'button';
             how.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 8l10 5 10-5-10-5zM6 10.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"></path></svg><span>How to run this script</span>';
             row.appendChild(how);
             info.appendChild(row);
@@ -4660,11 +4820,11 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             if (all.length > 1) {
                 const bar = el('div', 'uni-switch');
                 const lab = el('span', 'uni-switch-lab');
-                const chg = el('button', 'uni-act uni-change'); chg.type = 'button';
+                const chg = el('button', 'uni-act uni-change ux-nbtn ux-next'); chg.type = 'button';
                 chg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"></path></svg><span>Change</span>';
                 const upd = () => { const n = (uniSel[i] || 0) % all.length; lab.textContent = 'SCRIPT ' + (n + 1) + '/' + all.length + ' - ' + all[n].label; uniInitBin(pre, all[n].code); keyB.style.display = all[n].key ? '' : 'none'; crownB.style.display = all[n].best ? '' : 'none'; syncKey(); };
                 let swapT = null;
-                const prv = el('button', 'uni-act uni-prev'); prv.type = 'button'; prv.title = 'Previous script'; prv.setAttribute('aria-label', 'Previous script');
+                const prv = el('button', 'uni-act uni-prev ux-nbtn ux-prev'); prv.type = 'button'; prv.title = 'Previous script'; prv.setAttribute('aria-label', 'Previous script');
                 prv.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"></path></svg><span>Back</span>';
                 const go = (ev, d) => {
                     ev.stopPropagation(); uniSel[i] = ((uniSel[i] || 0) + d + all.length) % all.length;
@@ -4708,7 +4868,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             list.appendChild(back); list.appendChild(wrap);
             plTilt(wrap, '.uni-hero');
         }
-        const UNIVERSAL2_HUBS = [{ name: 'Sword Script', pack: true, icon: '<path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"/>', script: `loadstring(game:HttpGet("https://pastefy.app/Iy2DyEFf/raw"))()` }, { name: 'Rings Hub', pack: true, icon: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>', script: `loadstring(game:HttpGet("https://pastefy.app/PU6VWuJk/raw"))()` }, { name: 'Aimbot ZX', pack: true, icon: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/>', script: `loadstring(game:HttpGet("https://rscripts.net/raw/new-zumhub-aimbot-zab-og_1788575235771_FxNXhdyH2P.txt",true))()` }, { name: 'Infinite Yield', pack: true, icon: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()` }, { name: 'Animation Hub', pack: true, icon: '<circle cx="12" cy="5" r="2.500"/><path d="M12 7.500v6M7 10l5 1.500 5-1.500M9 21l3-7.500 3 7.500"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Daivd977/Coquettekk/refs/heads/main/valout%20Emot"))()` }, { name: 'Touch Fling Hub', pack: true, icon: '<path d="M5 12h14M13 6l6 6-6 6"/><circle cx="4" cy="12" r="1.500"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/LgZwZ7ZB",true))()` }, { name: 'Invisible Hub', pack: true, icon: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><path d="M4 4l16 16"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/0XUsv2Dq",true))()` }, { name: 'Invincible Hub', pack: true, icon: '<path d="M12 2.500l8 3v6c0 5-3.500 8.500-8 10-4.500-1.500-8-5-8-10v-6z"/><path d="M9 12l2 2 4-4"/>', script: '-- Invincible Hub: script not added yet' }, { name: 'Fling Hub', pack: true, icon: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/lucasilva864/fling-all/refs/heads/main/fling%20all "))()` }, { name: 'Anti Fling Hub', pack: true, icon: '<path d="M12 2.500l8 3v6c0 5-3.500 8.500-8 10-4.500-1.500-8-5-8-10v-6z"/><path d="M9 9l6 6M15 9l-6 6"/>', script: `loadstring(game:HttpGet("https://pastefy.app/wo2ipSp6/raw"))()` }, { name: 'Yokai Hub', pack: true, icon: '<path d="M12 3c3 3 6 3 6 8a6 6 0 01-12 0c0-5 3-5 6-8z"/><circle cx="10" cy="11" r="1"/><circle cx="14" cy="11" r="1"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/9CrGV1w4"))()` }, { name: 'Khen Hub', pack: true, icon: '<path d="M3 20V9l5 4 4-7 4 7 5-4v11z"/>', script: `getgenv().Setting = {
+        const UNIVERSAL2_HUBS = [{ name: 'Sword Script', pack: true, icon: '<path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"/>', script: `loadstring(game:HttpGet("https://pastefy.app/Iy2DyEFf/raw"))()` }, { name: 'Rings Hub', pack: true, icon: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>', script: `loadstring(game:HttpGet("https://pastefy.app/PU6VWuJk/raw"))()` }, { name: 'Aimbot ZX', pack: true, icon: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/>', script: `loadstring(game:HttpGet("https://rscripts.net/raw/new-zumhub-aimbot-zab-og_1788575235771_FxNXhdyH2P.txt",true))()` }, { name: 'Infinite Yield', pack: true, icon: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()` }, { name: 'Animation Hub', pack: true, icon: '<circle cx="12" cy="5" r="2.500"/><path d="M12 7.500v6M7 10l5 1.500 5-1.500M9 21l3-7.500 3 7.500"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Daivd977/Coquettekk/refs/heads/main/valout%20Emot"))()` }, { name: 'Touch Fling Hub', pack: true, icon: '<path d="M5 12h14M13 6l6 6-6 6"/><circle cx="4" cy="12" r="1.500"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/LgZwZ7ZB",true))()` }, { name: 'Invisible Hub', pack: true, icon: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><path d="M4 4l16 16"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/0XUsv2Dq",true))()` }, { name: 'Fling Hub', pack: true, icon: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/lucasilva864/fling-all/refs/heads/main/fling%20all "))()` }, { name: 'Anti Fling Hub', pack: true, icon: '<path d="M12 2.500l8 3v6c0 5-3.500 8.500-8 10-4.500-1.500-8-5-8-10v-6z"/><path d="M9 9l6 6M15 9l-6 6"/>', script: `loadstring(game:HttpGet("https://pastefy.app/wo2ipSp6/raw"))()` }, { name: 'Yokai Hub', pack: true, icon: '<path d="M12 3c3 3 6 3 6 8a6 6 0 01-12 0c0-5 3-5 6-8z"/><circle cx="10" cy="11" r="1"/><circle cx="14" cy="11" r="1"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/9CrGV1w4"))()` }, { name: 'Khen Hub', pack: true, icon: '<path d="M3 20V9l5 4 4-7 4 7 5-4v11z"/>', script: `getgenv().Setting = {
      ["Body"] = {
           ["Korblox"] = true,
           ["Headless"] = true,
@@ -5346,6 +5506,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
             document.getElementById('scriptModal').classList.add('open');
         }
         function closeOurScript() {
+            if (osRedeeming) return;   // don't close / reset while a key is being verified
             document.getElementById('scriptModal').classList.remove('open');
             const st = document.getElementById('osStep1'); if (st) { st.classList.remove('done'); document.getElementById('osStep1Txt').textContent = 'Press the copy button above.'; }
         }
@@ -5480,9 +5641,10 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
             go.disabled = true; inp.disabled = true; tx.textContent = 'Verifying\u2026'; bar.hidden = false;
             f.style.transition = 'none'; f.style.width = '0%'; void f.offsetWidth; f.style.transition = 'width 3s linear'; f.style.width = '100%';
             const stepsTxt = ['Checking key\u2026', 'Verifying signature\u2026', 'Unlocking Premium\u2026'], t0 = performance.now();
-            const pv = setInterval(() => { const pc = Math.min(100, Math.round((performance.now() - t0) / 30)); document.getElementById('osVpct').textContent = pc + '%'; document.getElementById('osVstep').textContent = stepsTxt[Math.min(2, Math.floor(pc / 34))]; if (pc >= 100) clearInterval(pv); }, 60);
+            let pv = setInterval(() => { const pc = Math.min(100, Math.round((performance.now() - t0) / 30)); document.getElementById('osVpct').textContent = pc + '%'; document.getElementById('osVstep').textContent = stepsTxt[Math.min(2, Math.floor(pc / 34))]; if (pc >= 100) clearInterval(pv); }, 60);
             showNotify('VERIFYING PREMIUM', 'AUTHENTICATING KEY... PLEASE WAIT', true);
             setTimeout(() => {
+                clearInterval(pv);
                 osRedeeming = false; go.disabled = false; inp.disabled = false; inp.value = ''; tx.textContent = 'Redeem Key'; bar.hidden = true; f.style.width = '0%';
                 try { localStorage.setItem('akariPremiumOn', '1'); } catch (e) {} osUnlock(false); showNotify('PREMIUM UNLOCKED', 'WELCOME, PREMIUM PLAYER!', true);
             }, 3000);
@@ -5820,9 +5982,9 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         function submitRedeem(e) {
             if (e) e.stopPropagation();
             if (isVerifyingRedeem) return;
-            const inp = document.getElementById('redeemInput'), val = inp.value.trim();
+            const inp = document.getElementById('redeemInput'), val = inp.value.replace(/\s+/g, '');
             if (!val) { showNotify("PREMIUM KEY", "PLEASE ENTER YOUR PREMIUM KEY", false); return; }
-            if (val.toUpperCase() !== PREMIUM_KEY) { showNotify("INVALID PREMIUM KEY", "THIS KEY IS NOT A PREMIUM KEY", false); return; }
+            if (!osValidKey(val)) { showNotify("INVALID PREMIUM KEY", "THIS KEY IS NOT A PREMIUM KEY", false); return; }
             isVerifyingRedeem = true;
             const go = document.getElementById('redeemGo'), txt = document.getElementById('redeemGoText');
             const bar = document.getElementById('redeemBar'), fill = document.getElementById('redeemFill'), lb = document.getElementById('redeemLabelV');
