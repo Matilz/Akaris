@@ -1305,6 +1305,79 @@
         .uni-os .os-binpre.reveal code { font-size: 13px; line-height: 1.7; }
         .uni-os .os-binpre.reveal .u2-l { padding-right: 14px; }
         .uni-os .os-copy.done { filter: hue-rotate(0deg) brightness(1.1); }
+
+        /* ===== Script copy page: "vault" redesign ===== */
+        .vt { display: flex; flex-direction: column; gap: 16px; }
+        .vt-hero { --px: 0; --py: 0; --mx: 50%; --my: 50%; position: relative; display: flex; align-items: center; gap: 28px; padding: 28px 30px; border-radius: 30px; overflow: hidden; isolation: isolate;
+            background: radial-gradient(70% 120% at 12% 20%, rgba(192,132,252,.5), transparent 60%), radial-gradient(60% 100% at 100% 100%, rgba(126,34,206,.45), transparent 60%), linear-gradient(150deg, #3b0f6b, #1a0836 55%, #0d0420);
+            border: 1px solid rgba(233,213,255,.6); box-shadow: 0 0 46px rgba(168,85,247,.45), inset 0 1px 1px rgba(255,255,255,.4), inset 0 0 60px rgba(168,85,247,.18); }
+        .vt-hero::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(320px circle at var(--mx) var(--my), rgba(255,255,255,.16), transparent 65%); }
+        .vt-hero::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,.1) 50%, transparent 62%); background-size: 260% 100%; background-position: 140% 0; animation: plSheen 5.5s ease-in-out infinite; }
+        .vt-emblem { position: relative; flex: 0 0 auto; width: 168px; height: 168px; display: grid; place-items: center; transform: translate(calc(var(--px) * 8px), calc(var(--py) * 8px)); transition: transform .25s ease-out; }
+        .vt-ring { position: absolute; inset: -6px; border-radius: 50%; border: 2px solid transparent; background: conic-gradient(from 0deg, #e879f9, transparent 30%, #c084fc 55%, transparent 80%, #e879f9) border-box; -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: vtSpin 6s linear infinite; filter: drop-shadow(0 0 8px #c084fc); }
+        .vt-ring.r2 { inset: -16px; animation-duration: 10s; animation-direction: reverse; opacity: .6; }
+        @keyframes vtSpin { to { transform: rotate(360deg); } }
+        .vt-pic.uni-pic { width: 100%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(80% 80% at 35% 25%, rgba(233,213,255,.65), rgba(147,51,234,.5) 55%, #1e1035); box-shadow: inset 0 0 36px rgba(255,255,255,.25), 0 0 40px rgba(168,85,247,.7); border: 1px solid rgba(255,255,255,.6); }
+        .vt-pic .uni-fb.uni-fb-svg svg { width: 76px; height: 76px; animation: dlFloat 3.6s ease-in-out infinite; filter: drop-shadow(0 0 16px rgba(255,255,255,.9)); }
+        .vt-pic .uni-ico { display: none; }
+        .vt-txt { position: relative; min-width: 0; flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+        .vt-eyebrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .vt-no { font: 800 11px 'Fira Code', monospace; letter-spacing: .28em; color: #e9d5ff; padding: 5px 12px; border-radius: 8px; background: rgba(0,0,0,.35); border: 1px solid rgba(216,180,254,.45); }
+        .vt-key { display: inline-flex; align-items: center; gap: 6px; font: 800 11px 'Plus Jakarta Sans', sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #fde68a; padding: 5px 12px; border-radius: 999px; background: rgba(245,158,11,.14); border: 1px solid rgba(251,191,36,.5); }
+        .vt-title { font-size: clamp(28px, 4.6vw, 46px) !important; line-height: 1.05 !important; }
+        .vt-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+        .vt-meta span { display: inline-flex; align-items: center; gap: 7px; padding: 6px 13px; border-radius: 999px; font: 700 12px 'Plus Jakarta Sans', sans-serif; color: #f5ebff; background: rgba(0,0,0,.3); border: 1px solid rgba(192,132,252,.5); }
+        .vt-meta i { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 10px #4ade80; animation: execPulse 1.8s ease-in-out infinite; }
+        .vt-play { display: inline-flex; align-items: center; gap: 9px; padding: 12px 22px; border-radius: 14px; text-decoration: none; font: 800 14px 'Plus Jakarta Sans', sans-serif; color: #2e0a4f; background: linear-gradient(120deg, #e9d5ff, #fff 50%, #d8b4fe); border: 1px solid #fff; box-shadow: 0 0 24px rgba(216,180,254,.7); transition: transform .25s ease, box-shadow .25s ease; }
+        .vt-play:hover { transform: translateY(-2px); box-shadow: 0 0 38px rgba(255,255,255,.9); }
+        .vt-star { position: absolute; left: var(--x); top: var(--y); z-index: 1; pointer-events: none; font: 400 16px/1 Arial, sans-serif; color: #f5d0fe; text-shadow: 0 0 8px #fff, 0 0 16px #c084fc; opacity: 0; animation: pdPriceTwinkle 2.6s ease-in-out infinite; animation-delay: var(--d); }
+
+        .vt-rail { display: flex; align-items: center; gap: 10px; padding: 16px 18px; border-radius: 22px; border: 1px solid rgba(192,132,252,.3); background: rgba(12,5,22,.7); }
+        .vt-step { display: flex; align-items: center; gap: 12px; min-width: 0; }
+        .vt-step > i { position: relative; flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 14px; font-style: normal; color: #e9d5ff; background: rgba(88,28,135,.5); border: 1px solid rgba(192,132,252,.5); transition: background .4s ease, box-shadow .4s ease, color .4s ease; }
+        .vt-step > i b { font: 800 16px 'Plus Jakarta Sans', sans-serif; }
+        .vt-step > i svg { position: absolute; width: 20px; height: 20px; opacity: 0; transform: scale(.4); transition: opacity .3s ease, transform .5s cubic-bezier(.34,1.45,.5,1); }
+        .vt-step strong { display: block; font: 800 14px 'Plus Jakarta Sans', sans-serif; color: #fff; }
+        .vt-step small { display: block; margin-top: 2px; font: 500 12px 'Plus Jakarta Sans', sans-serif; color: rgba(216,180,254,.65); }
+        .vt-line { flex: 1 1 20px; min-width: 14px; height: 2px; border-radius: 2px; background: rgba(192,132,252,.25); position: relative; overflow: hidden; }
+        .vt-line::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #e879f9, #c084fc); transform: scaleX(0); transform-origin: left; transition: transform .8s ease; }
+        .vt-rail.s1 .n1 > i { color: #2e0a4f; background: linear-gradient(135deg, #f5d0fe, #c084fc); box-shadow: 0 0 22px rgba(216,180,254,.9); }
+        .vt-rail.s1 .n1 > i b { opacity: 0; } .vt-rail.s1 .n1 > i svg { opacity: 1; transform: scale(1); }
+        .vt-rail.s1 .vt-line:nth-of-type(1)::after { transform: scaleX(1); }
+        .vt-rail.s1 .n2 > i { box-shadow: 0 0 18px rgba(192,132,252,.8); border-color: #e9d5ff; animation: execPulse 1.6s ease-in-out infinite; }
+
+        .vt-sw { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-radius: 20px; border: 1px solid rgba(192,132,252,.3); background: rgba(12,5,22,.7); }
+        .vt-sw .uni-switch-lab { font: 800 11px 'Fira Code', monospace; letter-spacing: .2em; color: #c084fc; text-transform: uppercase; }
+        .vt-chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; scrollbar-color: rgba(168,85,247,.6) transparent; }
+        .vt-chip { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 9px; padding: 8px 15px 8px 9px; border-radius: 14px; cursor: pointer; font: 700 13px 'Plus Jakarta Sans', sans-serif; color: #e9d5ff; background: rgba(88,28,135,.3); border: 1px solid rgba(192,132,252,.35); transition: all .25s ease; }
+        .vt-chip i { display: grid; place-items: center; min-width: 24px; height: 24px; padding: 0 5px; border-radius: 8px; font: 800 11px 'Fira Code', monospace; font-style: normal; color: #e9d5ff; background: rgba(0,0,0,.35); }
+        .vt-chip:hover { transform: translateY(-2px); border-color: rgba(233,213,255,.7); }
+        .vt-chip.on { color: #2e0a4f; background: linear-gradient(120deg, #f5d0fe, #c084fc); border-color: #fff; box-shadow: 0 0 22px rgba(216,180,254,.8); }
+        .vt-chip.on i { color: #fff; background: #7e22ce; }
+
+        .vt-ticket { border-radius: 20px; padding: 14px 18px; border: 1px dashed rgba(251,191,36,.6); background: linear-gradient(120deg, rgba(245,158,11,.12), rgba(88,28,135,.25)); }
+        .vt-win { border-radius: 24px; box-shadow: 0 0 44px rgba(168,85,247,.35), inset 0 1px 1px rgba(255,255,255,.2); border: 1px solid rgba(216,180,254,.55); }
+        .vt-win .os-binpre { min-height: 200px; }
+        .vt-win .os-bin { font-size: clamp(26px, 5vw, 44px); }
+        .vt-copy { position: relative; overflow: hidden; display: block; width: 100%; height: 72px; border-radius: 22px; cursor: pointer; border: 1px solid rgba(255,255,255,.65); color: #fff; -webkit-tap-highlight-color: transparent;
+            background: linear-gradient(120deg, #6d1fbd, #a855f7 45%, #c084fc 55%, #7e22ce); background-size: 200% 100%; animation: plBtn 4s linear infinite;
+            box-shadow: 0 0 40px rgba(168,85,247,.75), inset 0 1px 1px rgba(255,255,255,.6); transition: transform .2s ease, box-shadow .3s ease; }
+        .vt-copy:hover { transform: translateY(-3px); box-shadow: 0 0 60px rgba(216,180,254,.95), inset 0 1px 1px rgba(255,255,255,.7); }
+        .vt-copy:active { transform: scale(.985); }
+        .vt-fill { position: absolute; inset: 0; background: linear-gradient(120deg, #15803d, #4ade80); transform: scaleX(0); transform-origin: left; }
+        .vt-copy.done .vt-fill { animation: vtFill 2s ease forwards; }
+        @keyframes vtFill { 0% { transform: scaleX(0); } 20% { transform: scaleX(1); } 85% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+        .vt-ctx { position: relative; display: flex; align-items: center; justify-content: center; gap: 14px; height: 100%; font: 900 18px 'Plus Jakarta Sans', sans-serif; letter-spacing: .22em; text-transform: uppercase; text-shadow: 0 0 14px rgba(255,255,255,.7); }
+        .vt-ctx svg { width: 24px; height: 24px; }
+        @media (max-width: 759px) {
+            .vt-hero { flex-direction: column; text-align: center; padding: 24px 18px; gap: 18px; }
+            .vt-emblem { width: 130px; height: 130px; }
+            .vt-pic .uni-fb.uni-fb-svg svg { width: 58px; height: 58px; }
+            .vt-txt { align-items: center; } .vt-eyebrow, .vt-meta, .vt-hero .uni-titlerow { justify-content: center; }
+            .vt-rail { flex-direction: column; align-items: stretch; gap: 12px; } .vt-line { display: none; }
+            .vt-copy { height: 64px; } .vt-ctx { font-size: 16px; }
+        }
+        @media (prefers-reduced-motion: reduce) { .vt-ring, .vt-hero::after, .vt-star, .vt-copy, .vt-meta i, .vt-pic .uni-fb.uni-fb-svg svg { animation: none; } }
         /* ===== UNC / sUNC score bars ===== */
         .exec-scores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
         .exec-score { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(216,180,254,0.3); box-shadow: inset 0 1px 1px rgba(255,255,255,0.1); }
@@ -2168,6 +2241,9 @@
         .os-win.flash { animation: osFlash .9s ease-out; }
         .os-bar { display:flex; align-items:center; gap:12px; padding: 12px 16px; border-bottom: 1px solid rgba(192,132,252,.2); font: 12px 'JetBrains Mono', monospace; color:#b9a9cf; }
         .os-dots { display:flex; gap:6px; } .os-dots i { width:9px; height:9px; border-radius:50%; background: rgba(216,180,254,.35); display:block; }
+        .os-pastekey { margin-left:10px; display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px; border:1px solid rgba(216,180,254,.55); background:linear-gradient(135deg,rgba(168,85,247,.55),rgba(217,70,239,.35)); color:#fff; font:800 11px/1 inherit; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; box-shadow:0 0 14px rgba(192,132,252,.45), inset 0 1px 0 rgba(255,255,255,.35); transition:transform .15s, box-shadow .2s; }
+        .os-pastekey svg { width:13px; height:13px; } .os-pastekey:hover { transform:translateY(-1px); box-shadow:0 0 22px rgba(217,70,239,.7), inset 0 1px 0 rgba(255,255,255,.4); } .os-pastekey:active { transform:scale(.95); }
+        .os-win .os-bar { flex-wrap:wrap; }
         .os-online { margin-left:auto; display:flex; align-items:center; gap:6px; color:#e9d5ff; } .os-online b { width:7px; height:7px; border-radius:50%; background:#c084fc; box-shadow:0 0 8px #c084fc; animation: osPulse 1.6s infinite; }
         .os-code { margin:0; padding: 22px 18px; font: 13.5px/1.7 'JetBrains Mono', monospace; color:#ede9fe; white-space: pre-wrap; word-break: break-all; min-height: 96px; }
         .os-code .k { color:#f0abfc; } .os-code .f { color:#fff; font-weight:700; text-shadow: 0 0 10px rgba(192,132,252,.8); } .os-code .s { color:#c4b5fd; }
@@ -3449,7 +3525,7 @@
                     </div>
                     <div id="osPaneFree">
                     <div class="os-win" id="osWin">
-                        <div class="os-bar"><span class="os-dots"><i></i><i></i><i></i></span><span class="os-file">main.lua</span><span class="os-online"><b></b><span id="osOnline">21</span> online</span></div>
+                        <div class="os-bar"><span class="os-dots"><i></i><i></i><i></i></span><span class="os-file">main.lua</span><span class="os-online"><b></b><span id="osOnline">21</span> online</span><button type="button" id="osPasteKey" class="os-pastekey" onclick="osPasteKey(event)" title="Copy script with key already filled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg><span>Paste</span></button></div>
                         <pre class="os-code os-binpre"><code id="osCode"><span class="os-bin" id="osBin">011011010101</span><i class="os-cur"></i></code><span class="os-tag">ENCRYPTED · TAP COPY TO REVEAL</span></pre>
                         <div class="os-foot"><span class="os-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8M18 2v4h-4M6 22v-4h4"/></svg>Updates automatically. No need to copy again.</span>
                             <button id="osCopy" type="button" class="os-copy" onclick="copyOurScript(event)"><span class="os-fx"></span><svg id="osCopyIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><span id="osCopyTxt">Copy</span></button></div>
@@ -4620,93 +4696,93 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             const back = el('button', 'uni-back'); back.type = 'button';
             back.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg><span>' + (it.pack ? 'ALL HUBS' : 'ALL MAPS') + '</span>';
             back.onclick = (ev) => { ev.stopPropagation(); showUniversalList(); };
-
-            const wrap = el('div', 'uni-detail');
-            /* left: the map picture card */
-            const hero = el('div', 'uni-hero');
-            const pic = uniThumb(it, 'uni-pic uni-pic-lg'); hero.appendChild(pic);
-            hero.appendChild(el('span', 'uni-badge', (it.pack ? 'HUB ' : 'MAP ') + (i + 1)));
-            const chips = el('div', 'uni-chips');
-            chips.innerHTML = '<span><i></i>Executor ready</span><span>Lua</span><span class="uni-chip-lines"></span>';
-            hero.appendChild(chips);
-            ['\u2726', '\u2726', '\u2726'].forEach(function (c, k) { const st = el('span', 'uni-star', c); st.style.cssText = '--x:' + [12, 84, 70][k] + '%;--y:' + [14, 22, 62][k] + '%;--d:' + k * 0.8 + 's'; hero.appendChild(st); });
-            const keyB = el('span', 'uni-keybadge');
-            keyB.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"></circle><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"></path></svg><span>Key System</span>';
-            /* right: info card */
-            const info = el('div', 'uni-info');
-            const trow = el('div', 'uni-titlerow'); trow.appendChild(el('h3', 'uni-title', it.pack ? it.name : it.name + ' Script')); const crownB = el('span', 'uni-best');
-            crownB.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 7.5l4.8 4.2L12 4l4.7 7.7 4.8-4.2-1.9 11H4.4z"></path><rect x="4.4" y="20" width="15.2" height="2" rx="1"></rect></svg><span>THE BEST</span>';
-            trow.appendChild(crownB); trow.appendChild(keyB); info.appendChild(trow);
-            crownB.style.display = uniCur(i).best ? '' : 'none';
-            info.appendChild(el('div', 'uni-game', it.pack ? 'Universal Script 2' : it.name));
-            const row = el('div', 'uni-actions');
-            if (it.place) {
-                const play = el('a', 'uni-act uni-act-play'); play.href = 'https://www.roblox.com/games/' + it.place; play.target = '_blank'; play.rel = 'noopener noreferrer';
-                play.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"></circle><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor"></path></svg><span>Play game</span>';
-                row.appendChild(play);
-            }
-            const how = el('button', 'uni-act'); how.type = 'button';
-            how.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 8l10 5 10-5-10-5zM6 10.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"></path></svg><span>How to run this script</span>';
-            row.appendChild(how);
-            info.appendChild(row);
-            const steps = el('ol', 'uni-steps');
-            (it.pack ? ['Copy the script below.', 'Join any Roblox game.', 'Open your executor, paste the script and press Execute.'] : ['Copy the script below.', 'Open ' + it.name + ' in Roblox.', 'Open your executor, paste the script and press Execute.']).forEach(t => steps.appendChild(el('li', '', t)));
-            how.onclick = (ev) => { ev.stopPropagation(); steps.classList.toggle('open'); };
-            info.appendChild(steps);
             const all = uniAll(it);
             const pre = el('pre', 'os-code os-binpre uni-binpre'); uniInitBin(pre, uniCur(i).code);
-            keyB.style.display = uniCur(i).key ? '' : 'none';
-            let syncKey = () => {};
-            if (all.length > 1) {
-                const bar = el('div', 'uni-switch');
-                const lab = el('span', 'uni-switch-lab');
-                const chg = el('button', 'uni-act uni-change'); chg.type = 'button';
-                chg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"></path></svg><span>Change</span>';
-                const upd = () => { const n = (uniSel[i] || 0) % all.length; lab.textContent = 'SCRIPT ' + (n + 1) + '/' + all.length + ' - ' + all[n].label; uniInitBin(pre, all[n].code); keyB.style.display = all[n].key ? '' : 'none'; crownB.style.display = all[n].best ? '' : 'none'; syncKey(); };
-                let swapT = null;
-                const prv = el('button', 'uni-act uni-prev'); prv.type = 'button'; prv.title = 'Previous script'; prv.setAttribute('aria-label', 'Previous script');
-                prv.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"></path></svg><span>Back</span>';
-                const go = (ev, d) => {
-                    ev.stopPropagation(); uniSel[i] = ((uniSel[i] || 0) + d + all.length) % all.length;
-                    const fx = [pre, lab, keyB, crownB, kr]; clearTimeout(swapT);
-                    fx.forEach(n => { n.classList.remove('uni-in'); n.classList.add('uni-out'); });
-                    swapT = setTimeout(() => {
-                        upd();
-                        fx.forEach(n => { n.classList.remove('uni-out'); void n.offsetWidth; n.classList.add('uni-in'); });
-                    }, 170);
-                };
-                chg.onclick = (ev) => go(ev, 1); prv.onclick = (ev) => go(ev, -1);
-                const nav = el('div', 'uni-nav'); nav.appendChild(prv); nav.appendChild(chg);
-                upd(); bar.appendChild(lab); bar.appendChild(nav); info.appendChild(bar);
+            const root = el('div', 'vt');
+
+            /* ---- hero ---- */
+            const hero = el('div', 'vt-hero');
+            const emb = el('div', 'vt-emblem');
+            emb.appendChild(el('i', 'vt-ring')); emb.appendChild(el('i', 'vt-ring r2')); emb.appendChild(uniThumb(it, 'uni-pic vt-pic'));
+            const txt = el('div', 'vt-txt');
+            const eb = el('div', 'vt-eyebrow');
+            const keyB = el('span', 'vt-key');
+            keyB.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"></circle><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"></path></svg>Key system';
+            eb.appendChild(el('span', 'vt-no', (it.pack ? 'HUB ' : 'MAP ') + String(i + 1).padStart(2, '0'))); eb.appendChild(keyB);
+            const trow = el('div', 'uni-titlerow');
+            trow.appendChild(el('h3', 'uni-title vt-title', it.pack ? it.name : it.name + ' Script'));
+            const crownB = el('span', 'uni-best');
+            crownB.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 7.5l4.8 4.2L12 4l4.7 7.7 4.8-4.2-1.9 11H4.4z"></path><rect x="4.4" y="20" width="15.2" height="2" rx="1"></rect></svg><span>THE BEST</span>';
+            trow.appendChild(crownB);
+            const meta = el('div', 'vt-meta');
+            meta.innerHTML = '<span><i></i>Executor ready</span><span>Lua</span><span class="uni-chip-lines"></span>';
+            txt.appendChild(eb); txt.appendChild(trow); txt.appendChild(meta);
+            if (it.place) {
+                const play = el('a', 'vt-play'); play.href = 'https://www.roblox.com/games/' + it.place; play.target = '_blank'; play.rel = 'noopener noreferrer';
+                play.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"></circle><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor"></path></svg><span>Play game</span>';
+                txt.appendChild(play);
             }
-            const btn = el('button', 'os-copy uni-oscopy'); btn.type = 'button';
-            btn.innerHTML = '<span class="os-fx"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><span class="uc-txt">Copy</span>';
-            btn.onclick = (ev) => copyUniversal(ev, i, btn);
-            const kr = el('div', 'uni-keyrow');
-            kr.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"></circle><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"></path></svg><span class="uni-keyrow-lab">FREE KEY</span><code class="uni-keyrow-val"></code>';
+            hero.appendChild(emb); hero.appendChild(txt);
+            [[8, 18], [88, 14], [94, 70], [40, 86]].forEach(function (q, k) { const st = el('span', 'vt-star', '✦'); st.style.cssText = '--x:' + q[0] + '%;--y:' + q[1] + '%;--d:' + k * 0.7 + 's'; hero.appendChild(st); });
+            hero.addEventListener('pointermove', function (e) {
+                if (e.pointerType === 'touch') return; const r = hero.getBoundingClientRect();
+                hero.style.setProperty('--px', (((e.clientX - r.left) / r.width - 0.5) * 2).toFixed(3)); hero.style.setProperty('--py', (((e.clientY - r.top) / r.height - 0.5) * 2).toFixed(3));
+                hero.style.setProperty('--mx', (e.clientX - r.left) + 'px'); hero.style.setProperty('--my', (e.clientY - r.top) + 'px');
+            });
+            hero.addEventListener('pointerleave', function () { hero.style.setProperty('--px', 0); hero.style.setProperty('--py', 0); });
+
+            /* ---- 3-step rail ---- */
+            const rail = el('div', 'vt-rail');
+            rail.innerHTML = '<div class="vt-step n1"><i><b>1</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.500"/></svg></i><div><strong>Copy the script</strong><small>Tap the copy button below</small></div></div><span class="vt-line"></span>'
+                + '<div class="vt-step n2"><i><b>2</b></i><div><strong>' + (it.pack ? 'Join a game' : 'Open the game') + '</strong><small>' + (it.pack ? 'Any Roblox game works' : it.name + ' on Roblox') + '</small></div></div><span class="vt-line"></span>'
+                + '<div class="vt-step n3"><i><b>3</b></i><div><strong>Execute</strong><small>Paste it in your executor</small></div></div>';
+
+            /* ---- free key ticket ---- */
+            const kr = el('div', 'uni-keyrow vt-ticket');
+            kr.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"></circle><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"></path></svg><span class="uni-keyrow-lab">FREE KEY</span><code class="uni-keyrow-val"></code>';
             const kcopy = el('button', 'uni-act uni-keycopy'); kcopy.type = 'button'; kcopy.innerHTML = '<span>Copy key</span>';
             kcopy.onclick = (ev) => { ev.stopPropagation(); const k = uniCur(i).freeKey; if (!k) return; const t = kcopy.querySelector('span');
                 copyTextRobust(k, () => { t.textContent = 'Copied!'; setTimeout(() => { t.textContent = 'Copy key'; }, 2000); showNotify('FREE KEY', 'KEY COPIED', true); },
                     () => showNotify('CLIPBOARD', 'COPY BLOCKED - SELECT THE KEY AND COPY MANUALLY', false)); };
             kr.appendChild(kcopy);
-            syncKey = () => { const k = uniCur(i).freeKey; kr.style.display = k ? '' : 'none'; kr.querySelector('.uni-keyrow-val').textContent = k || ''; };
-            syncKey();
-            info.appendChild(kr);
-            const win = el('div', 'os-win uni-os');
-            const sc = document.getElementById('scOnline');
+            const syncKey = () => { const k = uniCur(i).freeKey; kr.style.display = k ? '' : 'none'; kr.querySelector('.uni-keyrow-val').textContent = k || ''; };
+
+            /* ---- script picker (only when a map has several scripts) ---- */
+            let sw = null, upd = () => {};
+            const kd = () => { const c = uniCur(i); keyB.style.display = c.key ? '' : 'none'; crownB.style.display = c.best ? '' : 'none'; syncKey(); };
+            if (all.length > 1) {
+                sw = el('div', 'vt-sw'); sw.appendChild(el('span', 'uni-switch-lab'));
+                const chipsW = el('div', 'vt-chips');
+                all.forEach((sc, n) => { const c = el('button', 'vt-chip'); c.type = 'button'; c.innerHTML = '<i>' + (n + 1) + '</i><span></span>'; c.querySelector('span').textContent = sc.label; c.onclick = (ev) => { ev.stopPropagation(); pick(n); }; chipsW.appendChild(c); });
+                sw.appendChild(chipsW);
+                upd = () => { const n = (uniSel[i] || 0) % all.length; sw.querySelector('.uni-switch-lab').textContent = 'SCRIPT ' + (n + 1) + '/' + all.length + ' - ' + all[n].label;
+                    chipsW.querySelectorAll('.vt-chip').forEach((c, k) => c.classList.toggle('on', k === n)); uniInitBin(pre, all[n].code); kd(); };
+                let swapT = null;
+                var pick = (n) => {
+                    if (n === ((uniSel[i] || 0) % all.length)) return; uniSel[i] = n; clearTimeout(swapT);
+                    const fx = [pre, keyB, crownB, kr]; fx.forEach(x => { x.classList.remove('uni-in'); x.classList.add('uni-out'); });
+                    swapT = setTimeout(() => { upd(); fx.forEach(x => { x.classList.remove('uni-out'); void x.offsetWidth; x.classList.add('uni-in'); }); }, 170);
+                };
+                upd();
+            } else kd();
+
+            /* ---- vault window + big copy ---- */
+            const win = el('div', 'os-win uni-os vt-win');
+            const sc2 = document.getElementById('scOnline');
             win.innerHTML = '<div class="os-bar"><span class="os-dots"><i></i><i></i><i></i></span><span class="os-file"></span><span class="os-online"><b></b><span class="uo-on"></span> online</span></div>';
             win.querySelector('.os-file').textContent = it.name;
-            win.querySelector('.uo-on').textContent = sc ? sc.textContent : '21';
+            win.querySelector('.uo-on').textContent = sc2 ? sc2.textContent : '21';
             win.appendChild(pre);
-            const foot = el('div', 'os-foot'); const note = el('span', 'os-note');
-            note.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8M18 2v4h-4M6 22v-4h4"/></svg>Tap copy to reveal and copy the script.';
-            foot.appendChild(note); foot.appendChild(btn); win.appendChild(foot);
-            info.appendChild(win);
-            wrap.appendChild(hero); wrap.appendChild(info);
+            const btn = el('button', 'uni-oscopy vt-copy'); btn.type = 'button';
+            btn.innerHTML = '<span class="vt-fill"></span><span class="vt-ctx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><span class="uc-txt">Copy</span></span>';
+            btn.onclick = (ev) => copyUniversal(ev, i, btn);
+
+            root.appendChild(hero); root.appendChild(rail);
+            if (sw) root.appendChild(sw);
+            root.appendChild(kr); root.appendChild(win); root.appendChild(btn);
             const lc = hero.querySelector('.uni-chip-lines'); const setLines = () => { lc.textContent = (pre.dataset.lines || '1') + ' lines'; }; setLines();
             pre.addEventListener('uni-lines', setLines);
-            list.appendChild(back); list.appendChild(wrap);
-            plTilt(wrap, '.uni-hero');
+            list.appendChild(back); list.appendChild(root);
         }
         const UNIVERSAL2_HUBS = [{ name: 'Sword Script', pack: true, icon: '<path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"/>', script: `loadstring(game:HttpGet("https://pastefy.app/Iy2DyEFf/raw"))()` }, { name: 'Rings Hub', pack: true, icon: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>', script: `loadstring(game:HttpGet("https://pastefy.app/PU6VWuJk/raw"))()` }, { name: 'Aimbot ZX', pack: true, icon: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/>', script: `loadstring(game:HttpGet("https://rscripts.net/raw/new-zumhub-aimbot-zab-og_1788575235771_FxNXhdyH2P.txt",true))()` }, { name: 'Infinite Yield', pack: true, icon: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()` }, { name: 'Animation Hub', pack: true, icon: '<circle cx="12" cy="5" r="2.500"/><path d="M12 7.500v6M7 10l5 1.500 5-1.500M9 21l3-7.500 3 7.500"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Daivd977/Coquettekk/refs/heads/main/valout%20Emot"))()` }, { name: 'Touch Fling Hub', pack: true, icon: '<path d="M5 12h14M13 6l6 6-6 6"/><circle cx="4" cy="12" r="1.500"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/LgZwZ7ZB",true))()` }, { name: 'Invisible Hub', pack: true, icon: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><path d="M4 4l16 16"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/0XUsv2Dq",true))()` }, { name: 'Invincible Hub', pack: true, icon: '<path d="M12 2.500l8 3v6c0 5-3.500 8.500-8 10-4.500-1.500-8-5-8-10v-6z"/><path d="M9 12l2 2 4-4"/>', script: '-- Invincible Hub: script not added yet' }, { name: 'Fling Hub', pack: true, icon: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/lucasilva864/fling-all/refs/heads/main/fling%20all "))()` }, { name: 'Anti Fling Hub', pack: true, icon: '<path d="M12 2.500l8 3v6c0 5-3.500 8.500-8 10-4.500-1.500-8-5-8-10v-6z"/><path d="M9 9l6 6M15 9l-6 6"/>', script: `loadstring(game:HttpGet("https://pastefy.app/wo2ipSp6/raw"))()` }, { name: 'Yokai Hub', pack: true, icon: '<path d="M12 3c3 3 6 3 6 8a6 6 0 01-12 0c0-5 3-5 6-8z"/><circle cx="10" cy="11" r="1"/><circle cx="14" cy="11" r="1"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/9CrGV1w4"))()` }, { name: 'Khen Hub', pack: true, icon: '<path d="M3 20V9l5 4 4-7 4 7 5-4v11z"/>', script: `getgenv().Setting = {
      ["Body"] = {
@@ -4741,7 +4817,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/khen791/script-khen/r
             const it = UNI_SRC[i]; if (!it) return;
             const t = btn.querySelector('.uc-txt'), pre = document.querySelector('#universalList .uni-binpre');
             copyTextRobust(uniCur(i).code, () => {
-                t.textContent = 'Copied!'; btn.classList.add('done'); try { osBurst(btn); } catch (er) {} uniReveal(pre); setTimeout(() => { t.textContent = 'Copy'; btn.classList.remove('done'); }, 2000);
+                t.textContent = 'Copied!'; btn.classList.add('done'); try { osBurst(btn); } catch (er) {} uniReveal(pre); const rl = document.querySelector('#universalList .vt-rail'); if (rl) rl.classList.add('s1'); setTimeout(() => { t.textContent = 'Copy'; btn.classList.remove('done'); }, 2000);
                 showNotify('UNIVERSAL SCRIPT', it.name.toUpperCase() + ' SCRIPT COPIED', true);
             }, () => showNotify('CLIPBOARD', 'COPY BLOCKED - SELECT THE SCRIPT AND COPY MANUALLY', false));
         }
@@ -5339,7 +5415,11 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
 
 
         // ===== Our script modal =====
-        const OUR_SCRIPT = '_G.Script_Key= "YOUR KEYS"\nloadstring(game:HttpGet("https://api.rubis.app/v2/scrap/n70axwi4pJXL6E55/raw"))()';
+        const OUR_SCRIPT_PLAIN = '_G.Script_Key= "YOUR KEYS"\nloadstring(game:HttpGet("https://api.rubis.app/v2/scrap/n70axwi4pJXL6E55/raw"))()';
+        const OUR_SCRIPT_KEYED = '_G.Script_Key= "AKARI-PEJ189-09JKU7A1"\nloadstring(game:HttpGet("https://api.rubis.app/v2/scrap/n70axwi4pJXL6E55/raw"))()';
+        let osUseKey = false;
+        const OUR_SCRIPT = { toString() { return osUseKey ? OUR_SCRIPT_KEYED : OUR_SCRIPT_PLAIN; } };
+        function osPasteKey(e) { if (e) e.stopPropagation(); osUseKey = true; copyOurScript(e); }
         function openOurScript(e) {
             if (e) e.stopPropagation();
             const n = document.getElementById('scOnline'); if (n) document.getElementById('osOnline').textContent = n.textContent;
@@ -5389,7 +5469,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
             if (!pre) return;
             clearTimeout(prem ? osRevealTP : osRevealT);
             const setT = v => { if (prem) osRevealTP = v; else osRevealT = v; };
-            const chars = '01', final = prem ? PREMIUM_SCRIPT : OUR_SCRIPT; let f = 0; const total = 18;
+            const chars = '01', final = prem ? PREMIUM_SCRIPT : String(OUR_SCRIPT); let f = 0; const total = 18;
             pre.classList.add('reveal'); if (tag) tag.textContent = 'DECRYPTING\u2026';
             const iv = setInterval(() => {
                 f++; const fixed = Math.floor((f / total) * final.length);
@@ -5434,9 +5514,10 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         function osUnlock(silent) {
             osPremOn = true;
             osResetPremView();
+            osRedeeming = false; { const i = document.getElementById('osPremInput'), g = document.getElementById('osRedeemGo'), b = document.getElementById('osVbar'); if (i) { i.disabled = false; i.value = ''; } if (g) g.disabled = false; if (b) b.hidden = true; }
             document.getElementById('osLocked').hidden = true;
             const w = document.getElementById('osWinP'); w.hidden = false;
-            if (!silent) { w.classList.remove('pop'); void w.offsetWidth; w.classList.add('pop'); try { w.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {} setTimeout(() => osBurst(w), 350); }
+            if (!silent) { w.classList.remove('pop'); void w.offsetWidth; w.classList.add('pop'); setTimeout(() => { try { osBurst(w); } catch (e) {} }, 350); }
         }
         function osResetScript() {
             osLock();
@@ -5491,7 +5572,8 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
             if (e) e.stopPropagation();
             const P = prem ? 'P' : '';
             const btn = document.getElementById('osCopy' + P), txt = document.getElementById('osCopyTxt' + P), win = document.getElementById(prem ? 'osWinP' : 'osWin'), ico = document.getElementById('osCopyIco' + P);
-            const text = prem ? PREMIUM_SCRIPT : OUR_SCRIPT;
+            if (!prem && e && e.currentTarget && e.currentTarget.id === 'osCopy') osUseKey = false;
+            const text = prem ? PREMIUM_SCRIPT : String(OUR_SCRIPT);
             copyTextRobust(text, () => {
                 txt.textContent = 'Copied!';
                 ico.innerHTML = '<path d="M5 13l4 4L19 7"/>';
@@ -5636,7 +5718,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         function copyHomeScript(e) {
             if (e) e.stopPropagation();
             const btn = document.getElementById('hpCopy'), t = document.getElementById('hpCopyTxt');
-            copyTextRobust(OUR_SCRIPT, () => { t.textContent = 'Copied!'; btn.classList.remove('done'); void btn.offsetWidth; btn.classList.add('done'); osBurst(btn); showNotify('SCRIPT EXECUTOR', 'SCRIPT COPIED TO CLIPBOARD', true); setTimeout(() => { t.textContent = 'Copy'; }, 2000); },
+            copyTextRobust(OUR_SCRIPT_PLAIN, () => { t.textContent = 'Copied!'; btn.classList.remove('done'); void btn.offsetWidth; btn.classList.add('done'); osBurst(btn); showNotify('SCRIPT EXECUTOR', 'SCRIPT COPIED TO CLIPBOARD', true); setTimeout(() => { t.textContent = 'Copy'; }, 2000); },
                 () => showNotify('SCRIPT EXECUTOR', 'COPY BLOCKED - OPEN OUR SCRIPT PAGE', false));
         }
         (function () { const o = document.getElementById('scOnline'), h = document.getElementById('hpOnline'); if (o && h) h.textContent = o.textContent; })();
