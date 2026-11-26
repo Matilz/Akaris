@@ -2686,6 +2686,201 @@
         #universalModal .uni-map, #universalModal .ux-card, #universalModal .uni-map:hover, #universalModal .uni-map:focus-visible, #universalModal .ux-card:hover { transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--sc)) !important; transition: border-color .3s ease, box-shadow .3s ease !important; }
         #universalModal .uni-grid .uni-map { animation-fill-mode: backwards !important; }
         #universalList > * { animation-fill-mode: backwards; }
+
+        /* ================= Universal NX redesign (HUD / cyber) ================= */
+        :root { --nx-cut: 14px; }
+        #universalList { gap: 18px !important; }
+        #universalList > * { animation: uxIn .55s cubic-bezier(.2,.8,.2,1) backwards; }
+        .nx-empty { padding: 34px 16px; text-align: center; font: 700 13px 'Fira Code', monospace; letter-spacing: .12em; color: #d8b4fe; border: 1px dashed rgba(192,132,252,.4); clip-path: polygon(var(--nx-cut) 0,100% 0,100% calc(100% - var(--nx-cut)),calc(100% - var(--nx-cut)) 100%,0 100%,0 var(--nx-cut)); }
+        /* command-line search */
+        .nx-cmd { display: flex; flex-direction: column; gap: 12px; }
+        .nx-cmd-row { display: flex; align-items: stretch; background: rgba(4,1,12,.9); border: 1px solid rgba(192,132,252,.45); border-radius: 6px; box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 0 24px rgba(168,85,247,.2); transition: border-color .25s, box-shadow .25s; position: relative; overflow: hidden; }
+        .nx-cmd-row:focus-within { border-color: #e879f9; box-shadow: 0 0 0 3px rgba(232,121,249,.18), 0 0 34px rgba(192,38,211,.45); }
+        .nx-cmd-row::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg,#e879f9,#7e22ce); }
+        .nx-prompt { display: grid; place-items: center; padding: 0 6px 0 18px; font: 800 16px 'Fira Code', monospace; color: #e879f9; text-shadow: 0 0 12px #e879f9; animation: uxBlink 1.6s steps(2) infinite; }
+        .nx-in { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; padding: 16px 10px; color: #f5e9ff; font: 600 14px 'Fira Code', monospace; letter-spacing: .02em; }
+        .nx-in::placeholder { color: rgba(196,181,253,.45); }
+        .nx-clear { display: none; border: 0; background: transparent; color: #c4b5fd; font-size: 22px; padding: 0 12px; cursor: pointer; } .nx-clear.show { display: block; } .nx-clear:hover { color: #fff; }
+        .nx-go { border: 0; cursor: pointer; padding: 0 22px; color: #fff; font: 800 12px 'Fira Code', monospace; letter-spacing: .18em; background: linear-gradient(120deg,#7e22ce,#c026d3); transition: filter .25s; } .nx-go:hover { filter: brightness(1.25); }
+        .nx-cmd-sub { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+        .nx-strict { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; font: 700 12px 'Fira Code', monospace; letter-spacing: .08em; color: #e9d5ff; }
+        .nx-strict input { position: absolute; opacity: 0; pointer-events: none; }
+        .nx-sw { position: relative; width: 38px; height: 20px; border-radius: 4px; background: rgba(88,28,135,.5); border: 1px solid rgba(192,132,252,.5); transition: background .3s; }
+        .nx-sw::after { content: ''; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 2px; background: #e9d5ff; transition: transform .3s cubic-bezier(.2,.9,.25,1); }
+        .nx-strict input:checked + .nx-sw { background: linear-gradient(90deg,#7e22ce,#e879f9); box-shadow: 0 0 14px rgba(232,121,249,.7); } .nx-strict input:checked + .nx-sw::after { transform: translateX(18px); }
+        .nx-count { font: 800 11px 'Fira Code', monospace; letter-spacing: .16em; color: #f0abfc; padding: 6px 12px; border: 1px solid rgba(192,132,252,.4); background: rgba(168,85,247,.12); }
+        /* result rows */
+        .nx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; margin-top: 4px; }
+        .nx-row { position: relative; isolation: isolate; display: flex; align-items: center; gap: 14px; padding: 12px 16px 12px 12px; text-align: left; cursor: pointer; border: 0; color: #f5e9ff; background: linear-gradient(100deg, rgba(40,14,76,.85), rgba(8,3,20,.9)); clip-path: polygon(var(--nx-cut) 0,100% 0,100% calc(100% - var(--nx-cut)),calc(100% - var(--nx-cut)) 100%,0 100%,0 var(--nx-cut)); --mx: 50%; --my: 50%; animation: uxIn .5s cubic-bezier(.2,.8,.2,1) backwards; transition: transform .3s cubic-bezier(.2,.9,.25,1), filter .3s; -webkit-tap-highlight-color: transparent; }
+        .nx-row::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(220px circle at var(--mx) var(--my), rgba(232,121,249,.4), transparent 70%); opacity: 0; transition: opacity .3s; }
+        .nx-row::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; z-index: 1; background: linear-gradient(180deg,#f0abfc,#7e22ce); box-shadow: 0 0 14px #e879f9; transform: scaleY(.25); transform-origin: center; transition: transform .4s cubic-bezier(.2,.9,.25,1); }
+        .nx-row:hover { transform: translateX(6px); filter: drop-shadow(0 0 14px rgba(192,38,211,.55)); } .nx-row:hover::before { opacity: 1; } .nx-row:hover::after { transform: scaleY(1); }
+        .nx-row:active { transform: translateX(6px) scale(.985); }
+        .nx-idx { position: absolute; right: 52px; top: 8px; font: 900 11px 'Fira Code', monospace; letter-spacing: .14em; color: rgba(216,180,254,.45); }
+        .nx-pic { position: relative; flex: 0 0 auto; width: 74px; height: 74px; display: grid; place-items: center; overflow: hidden; background: linear-gradient(145deg, #5b21b6, #1e0a3c); clip-path: polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); box-shadow: inset 0 0 20px rgba(0,0,0,.5); transition: transform .45s cubic-bezier(.2,.9,.25,1); }
+        .nx-row:hover .nx-pic { transform: rotate(8deg) scale(1.08); }
+        .nx-pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+        .nx-pic .uni-fb { position: relative; z-index: 0; display: flex; color: #f5d0fe; font: 900 22px 'Plus Jakarta Sans', sans-serif; filter: drop-shadow(0 0 10px rgba(232,121,249,.8)); }
+        .nx-pic .uni-fb svg { width: 34px; height: 34px; }
+        .nx-pic .uni-ico { display: none !important; }
+        .nx-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+        .nx-name { font: 800 18px 'Plus Jakarta Sans', sans-serif; letter-spacing: .02em; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .nx-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+        .nx-meta i { font: 800 9.5px 'Fira Code', monospace; font-style: normal; letter-spacing: .14em; padding: 3px 7px; color: #e9d5ff; border: 1px solid rgba(192,132,252,.4); background: rgba(168,85,247,.14); }
+        .nx-meta i.hot { color: #2e1065; background: linear-gradient(120deg,#fde68a,#fbbf24); border-color: transparent; }
+        .nx-arrow { flex: 0 0 auto; display: grid; place-items: center; width: 34px; height: 34px; color: #f0abfc; border: 1px solid rgba(192,132,252,.45); transition: transform .4s cubic-bezier(.2,.9,.25,1), background .3s, color .3s; }
+        .nx-row:hover .nx-arrow { background: linear-gradient(120deg,#9333ea,#c026d3); color: #fff; transform: translateX(4px); border-color: transparent; }
+        /* detail: back */
+        .nx-back { align-self: flex-start; position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: 10px; padding: 11px 22px 11px 14px; border: 0; cursor: pointer; color: #f5d0fe; font: 800 12px 'Fira Code', monospace; letter-spacing: .18em; background: rgba(168,85,247,.16); clip-path: polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px); transition: color .3s, transform .3s; overflow: hidden; }
+        .nx-back::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,#9333ea,#e879f9); transform: translateX(-101%); transition: transform .45s cubic-bezier(.65,0,.2,1); }
+        .nx-back:hover { color: #fff; } .nx-back:hover::before { transform: none; } .nx-back svg { transition: transform .4s cubic-bezier(.2,.9,.25,1); } .nx-back:hover svg { transform: translateX(-5px); } .nx-back:active { transform: scale(.95); }
+        /* banner */
+        .nx-banner { position: relative; isolation: isolate; display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: center; padding: 26px; overflow: hidden; background: linear-gradient(120deg, rgba(40,14,76,.9), rgba(6,2,16,.95)); border: 1px solid rgba(192,132,252,.35); clip-path: polygon(var(--nx-cut) 0,100% 0,100% calc(100% - var(--nx-cut)),calc(100% - var(--nx-cut)) 100%,0 100%,0 var(--nx-cut)); box-shadow: inset 0 0 60px rgba(88,28,135,.35); }
+        .nx-bg { position: absolute; inset: -20px; z-index: -2; background-size: cover; background-position: center; filter: blur(26px) saturate(1.5); opacity: .3; transform: scale(1.1); }
+        .nx-banner::after { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px); pointer-events: none; }
+        .nx-scan { position: absolute; left: 0; right: 0; height: 90px; top: -90px; z-index: -1; background: linear-gradient(180deg, transparent, rgba(232,121,249,.22), transparent); animation: uxScan 4.5s ease-in-out infinite; pointer-events: none; }
+        @keyframes uxScan { to { top: 110%; } }
+        .nx-pic-lg { width: 190px; height: 190px; clip-path: polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); animation: uxFloat 5s ease-in-out infinite; filter: drop-shadow(0 0 26px rgba(192,38,211,.7)); }
+        .nx-pic-lg .uni-fb svg { width: 74px; height: 74px; } .nx-pic-lg .uni-fb { font-size: 44px; }
+        .nx-head { min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+        .nx-eyebrow { font: 800 11px 'Fira Code', monospace; letter-spacing: .24em; color: #f0abfc; }
+        .nx-title { position: relative; margin: 0; font: 900 clamp(28px, 5vw, 46px)/1.05 'Plus Jakarta Sans', sans-serif; letter-spacing: -.01em; color: #fff; text-shadow: 0 0 28px rgba(192,38,211,.7); }
+        .nx-title::before, .nx-title::after { content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%; opacity: 0; pointer-events: none; }
+        .nx-title::before { color: #22d3ee; } .nx-title::after { color: #e879f9; }
+        .nx-banner:hover .nx-title::before { animation: nxGl1 .6s steps(2) 1; } .nx-banner:hover .nx-title::after { animation: nxGl2 .6s steps(2) 1; }
+        @keyframes nxGl1 { 0%,100% { opacity: 0; } 30% { opacity: .8; transform: translate(-3px,1px); } 60% { opacity: .6; transform: translate(2px,-1px); } }
+        @keyframes nxGl2 { 0%,100% { opacity: 0; } 30% { opacity: .8; transform: translate(3px,-1px); } 60% { opacity: .6; transform: translate(-2px,1px); } }
+        .nx-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .nx-chip { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; font: 800 10.5px 'Fira Code', monospace; letter-spacing: .12em; color: #e9d5ff; border: 1px solid rgba(192,132,252,.4); background: rgba(168,85,247,.14); }
+        .nx-chip-ok i { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 10px #4ade80; animation: uxBlink 1.6s ease-in-out infinite; }
+        .nx-chip-best { color: #2e1065; border-color: transparent; background: linear-gradient(120deg,#fde68a,#fbbf24); box-shadow: 0 0 18px rgba(251,191,36,.5); }
+        .nx-chip-key { color: #fbcfe8; border-color: rgba(244,114,182,.6); background: rgba(244,114,182,.14); }
+        .nx-acts { display: flex; flex-wrap: wrap; gap: 12px; }
+        .nx-play { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 12px; padding: 16px 34px; color: #fff; text-decoration: none; font: 900 14px 'Plus Jakarta Sans', sans-serif; letter-spacing: .16em; background: linear-gradient(120deg,#7e22ce,#c026d3 55%,#f0abfc); background-size: 200% 100%; clip-path: polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px); filter: drop-shadow(0 0 18px rgba(192,38,211,.7)); transition: background-position .6s, transform .3s cubic-bezier(.2,.9,.25,1); }
+        .nx-play:hover { background-position: 100% 0; transform: translateY(-3px) scale(1.03); } .nx-play:active { transform: scale(.96); }
+        .nx-play svg { transition: transform .4s cubic-bezier(.2,.9,.25,1); } .nx-play:hover svg { transform: scale(1.3) translateX(2px); }
+        .nx-shine { position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.6), transparent); transform: skewX(-20deg); animation: uxShine 3s ease-in-out infinite; pointer-events: none; }
+        .nx-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 16px 24px; cursor: pointer; color: #f5d0fe; font: 800 12.5px 'Fira Code', monospace; letter-spacing: .16em; background: rgba(168,85,247,.12); border: 1px solid rgba(192,132,252,.5); transition: background .3s, box-shadow .3s, transform .3s; }
+        .nx-ghost:hover, .nx-ghost.on { background: rgba(168,85,247,.3); box-shadow: 0 0 24px rgba(168,85,247,.5); transform: translateY(-2px); }
+        .nx-steps { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; counter-reset: s; max-height: 0; opacity: 0; overflow: hidden; transition: max-height .5s cubic-bezier(.2,.9,.25,1), opacity .4s, margin .4s; }
+        .nx-steps.open { max-height: 260px; opacity: 1; margin-top: 2px; }
+        .nx-steps li { counter-increment: s; display: flex; align-items: center; gap: 12px; padding: 10px 14px; font: 600 13.5px 'Plus Jakarta Sans', sans-serif; color: #f3e8ff; background: rgba(4,1,12,.6); border-left: 3px solid #e879f9; }
+        .nx-steps li::before { content: counter(s, decimal-leading-zero); font: 900 12px 'Fira Code', monospace; color: #f0abfc; }
+        /* terminal */
+        .nx-term { position: relative; display: flex; flex-direction: column; background: rgba(4,1,12,.92); border: 1px solid rgba(232,121,249,.5); box-shadow: 0 0 40px rgba(168,85,247,.3), inset 0 0 30px rgba(88,28,135,.25); clip-path: polygon(var(--nx-cut) 0,100% 0,100% calc(100% - var(--nx-cut)),calc(100% - var(--nx-cut)) 100%,0 100%,0 var(--nx-cut)); }
+        .nx-tbar { display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: linear-gradient(90deg, rgba(126,34,206,.45), rgba(40,14,76,.5)); border-bottom: 1px solid rgba(192,132,252,.35); font: 700 12px 'Fira Code', monospace; color: #e9d5ff; }
+        .nx-dots { display: inline-flex; gap: 6px; } .nx-dots i { width: 9px; height: 9px; border-radius: 50%; background: #f0abfc; opacity: .8; } .nx-dots i:nth-child(2) { opacity: .5; } .nx-dots i:nth-child(3) { opacity: .25; }
+        .nx-file { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: .06em; }
+        .nx-on { display: inline-flex; align-items: center; gap: 7px; color: #bbf7d0; } .nx-on b { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 10px #4ade80; animation: uxBlink 1.6s ease-in-out infinite; }
+        .nx-switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid rgba(192,132,252,.2); background: rgba(168,85,247,.07); }
+        .nx-switch-lab { font: 800 11.5px 'Fira Code', monospace; letter-spacing: .12em; color: #f5d0fe; }
+        .nx-nav { display: flex; gap: 8px; }
+        .nx-btn { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 9px; padding: 11px 20px; cursor: pointer; font: 800 11.5px 'Fira Code', monospace; letter-spacing: .16em; border: 0; clip-path: polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px); transition: transform .3s cubic-bezier(.2,.9,.25,1), filter .3s, background .3s; }
+        .nx-prev { color: #f5d0fe; background: rgba(168,85,247,.22); } .nx-prev:hover { background: rgba(168,85,247,.45); transform: translateX(-4px); }
+        .nx-next { color: #fff; background: linear-gradient(120deg,#9333ea,#d946ef); filter: drop-shadow(0 0 12px rgba(192,38,211,.6)); } .nx-next:hover { transform: translateX(4px); filter: drop-shadow(0 0 18px rgba(232,121,249,.9)) brightness(1.1); }
+        .nx-btn svg { transition: transform .5s cubic-bezier(.2,.9,.25,1); } .nx-prev:hover svg { transform: translateX(-3px); } .nx-next:hover svg { transform: rotate(180deg); } .nx-btn:active { transform: scale(.93); }
+        .nx-pre { margin: 0 !important; border-radius: 0 !important; }
+        .nx-key { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 16px; border-top: 1px solid rgba(192,132,252,.2); color: #f0abfc; }
+        .nx-key-lab { font: 800 11px 'Fira Code', monospace; letter-spacing: .16em; }
+        .nx-key-val { flex: 1 1 auto; min-width: 0; font: 700 14px 'Fira Code', monospace; color: #fff; word-break: break-all; }
+        .nx-mini { padding: 8px 14px; cursor: pointer; font: 800 10.5px 'Fira Code', monospace; letter-spacing: .14em; color: #f5d0fe; background: rgba(168,85,247,.2); border: 1px solid rgba(192,132,252,.5); transition: background .3s, box-shadow .3s; } .nx-mini:hover { background: rgba(168,85,247,.45); box-shadow: 0 0 16px rgba(168,85,247,.6); }
+        .nx-tfoot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 16px; border-top: 1px solid rgba(192,132,252,.3); }
+        .nx-hint { font: 600 11.5px 'Fira Code', monospace; color: rgba(216,180,254,.6); }
+        @media (max-width: 720px) {
+            .nx-grid { grid-template-columns: 1fr; }
+            .nx-banner { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 22px 16px; }
+            .nx-head { align-items: center; } .nx-chips, .nx-acts { justify-content: center; }
+            .nx-pic-lg { width: 140px; height: 140px; }
+            .nx-steps li { text-align: left; }
+            .nx-switch { flex-direction: column; align-items: stretch; text-align: center; } .nx-nav { justify-content: center; }
+        }
+        @media (prefers-reduced-motion: reduce) { .nx-scan, .nx-shine, .nx-pic-lg, .nx-prompt, .nx-chip-ok i, .nx-on b { animation: none !important; } }
+
+        /* ================= Smooth layer ================= */
+        :root { --nx-ease: cubic-bezier(.22,1,.36,1); --nx-spring: cubic-bezier(.34,1.56,.64,1); }
+        #universalList { transition: opacity .2s ease, transform .2s ease, filter .2s ease; }
+        #universalList.nx-leave { opacity: 0; transform: translateY(10px) scale(.992); filter: blur(4px); pointer-events: none; }
+        #universalList > * { animation: nxRise .7s var(--nx-ease) backwards !important; }
+        #universalList > *:nth-child(2) { animation-delay: .08s !important; } #universalList > *:nth-child(3) { animation-delay: .16s !important; }
+        @keyframes nxRise { from { opacity: 0; transform: translateY(22px) scale(.985); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
+        .nx-row { animation: nxRise .6s var(--nx-ease) backwards !important; will-change: transform; transition: transform .45s var(--nx-ease), filter .45s var(--nx-ease) !important; }
+        .nx-row:hover { transform: translateX(8px) !important; }
+        .nx-row::before { transition: opacity .5s var(--nx-ease); } .nx-row::after { transition: transform .5s var(--nx-ease); }
+        .nx-pic { transition: transform .6s var(--nx-spring) !important; } .nx-arrow { transition: transform .5s var(--nx-spring), background .4s, color .4s !important; }
+        .nx-banner .nx-pic-lg, .nx-banner .nx-head > * { animation: nxRise .8s var(--nx-ease) backwards; }
+        .nx-pic-lg { animation: nxRise .8s var(--nx-ease) backwards, uxFloat 5s ease-in-out .8s infinite !important; }
+        .nx-banner .nx-head > *:nth-child(1) { animation-delay: .12s; } .nx-banner .nx-head > *:nth-child(2) { animation-delay: .2s; } .nx-banner .nx-head > *:nth-child(3) { animation-delay: .28s; } .nx-banner .nx-head > *:nth-child(4) { animation-delay: .36s; }
+        .nx-btn, .nx-play, .nx-ghost, .nx-back, .nx-mini, .nx-go { transition-timing-function: var(--nx-ease) !important; transition-duration: .5s !important; }
+        .nx-play:hover, .nx-ghost:hover, .nx-btn:hover { transition-timing-function: var(--nx-spring) !important; }
+        .nx-btn:active, .nx-play:active, .nx-back:active, .nx-ghost:active { transition-duration: .12s !important; }
+        .nx-steps { transition: max-height .6s var(--nx-ease), opacity .5s ease, margin .5s var(--nx-ease) !important; }
+        .ux-seg-pill { transition: transform .6s var(--nx-spring) !important; }
+        .ux-seg button { transition: color .4s var(--nx-ease), transform .3s var(--nx-ease) !important; }
+        .nx-cmd-row, .nx-count, .nx-sw, .nx-sw::after { transition-timing-function: var(--nx-ease) !important; }
+        #universalModal .modal-card { scroll-behavior: smooth; }
+        .uni-out { transition: opacity .17s ease, transform .17s ease, filter .17s ease; }
+        @media (prefers-reduced-motion: reduce) { #universalList > *, .nx-row, .nx-banner .nx-head > * { animation: none !important; } #universalList { transition: none; } }
+
+        /* ================= Cyber tab switch ================= */
+        .ux-seg { padding: 6px; border-radius: 10px; margin: 12px 0 10px; background: linear-gradient(180deg, rgba(10,4,24,.95), rgba(4,1,12,.98)); border: 0; box-shadow: 0 0 30px rgba(126,34,206,.3), inset 0 0 24px rgba(88,28,135,.25); }
+        .ux-seg::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; background: linear-gradient(110deg, rgba(168,85,247,.2), #e879f9 20%, rgba(168,85,247,.15) 45%, #c084fc 70%, rgba(168,85,247,.2)); background-size: 300% 100%; animation: uxRim 6s linear infinite; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+        .ux-seg::after { content: ''; position: absolute; inset: 3px; border-radius: 8px; pointer-events: none; z-index: -1; background: repeating-linear-gradient(90deg, rgba(192,132,252,.05) 0 1px, transparent 1px 14px); }
+        .ux-seg-pill { top: 6px; bottom: 6px; left: 6px; width: calc(50% - 6px); border-radius: 7px; overflow: hidden; transform: skewX(-14deg); background: linear-gradient(110deg, #6d28d9, #c026d3 55%, #f0abfc); box-shadow: 0 0 28px rgba(192,38,211,.7), 0 0 60px rgba(168,85,247,.35), inset 0 1px 0 rgba(255,255,255,.45), inset 0 -2px 0 rgba(255,255,255,.35); transition: transform .65s var(--nx-spring, cubic-bezier(.34,1.56,.64,1)) !important; }
+        .ux-seg[data-t="prem"] .ux-seg-pill { transform: translateX(100%) skewX(-14deg); }
+        .ux-seg-pill::before { content: ''; position: absolute; top: 0; bottom: 0; left: -50%; width: 40%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); animation: uxShine 3.4s ease-in-out infinite; }
+        .ux-seg-pill::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(115deg, rgba(255,255,255,.1) 0 6px, transparent 6px 14px); mix-blend-mode: overlay; opacity: .7; }
+        .ux-seg button { font: 800 13px 'Fira Code', monospace !important; letter-spacing: .2em !important; text-transform: uppercase; padding: 15px 10px !important; color: rgba(196,181,253,.55); }
+        .ux-seg button span { position: relative; }
+        .ux-seg button::before { content: attr(id); display: none; }
+        #uniTab1 span::before { content: '01 '; } #uniTab2 span::before { content: '02 '; }
+        .ux-seg button span::before { color: #e879f9; opacity: .7; margin-right: 6px; letter-spacing: .1em; transition: color .4s, opacity .4s; }
+        .ux-seg button.active span::before { color: #fff; opacity: .85; }
+        .ux-seg button:hover:not(.active) { color: #f5d0fe; text-shadow: 0 0 14px rgba(232,121,249,.8); }
+        .ux-seg button.active { text-shadow: 0 0 12px rgba(255,255,255,.7), 0 0 24px rgba(88,28,135,.8); }
+        @media (max-width: 520px) { .ux-seg button { font-size: 10px !important; letter-spacing: .1em !important; } #uniTab1 span::before, #uniTab2 span::before { content: ''; } }
+
+        /* ================= Dark-purple sparkle tabs (all) ================= */
+        :root { --tb-dark: linear-gradient(180deg, rgba(14,5,30,.97), rgba(5,2,14,.99)); --tb-act: linear-gradient(115deg, #3b0a78 0%, #6b21a8 45%, #86198f 100%); --tb-spark: radial-gradient(circle at 12% 30%, #fff 0 1px, transparent 2px), radial-gradient(circle at 28% 72%, #f5d0fe 0 1px, transparent 2px), radial-gradient(circle at 46% 25%, #fff 0 1.3px, transparent 2.5px), radial-gradient(circle at 63% 78%, #e9d5ff 0 1px, transparent 2px), radial-gradient(circle at 80% 35%, #fff 0 1.2px, transparent 2.4px), radial-gradient(circle at 93% 70%, #f5d0fe 0 1px, transparent 2px); }
+        @keyframes tbTw { 0%,100% { opacity: .2; } 50% { opacity: 1; } }
+        @keyframes tbTw2 { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+        /* containers */
+        .ux-seg, .os-tabs, .exec-switch, #executorModal .exec-switch { background: var(--tb-dark) !important; border: 1px solid rgba(147,51,234,.45) !important; box-shadow: 0 0 26px rgba(88,28,135,.45), inset 0 0 22px rgba(59,10,120,.5) !important; }
+        .os-tabs, #executorModal .exec-switch, .exec-switch { position: relative; }
+        /* active fills: deep purple + sparkle */
+        .ux-seg-pill, .os-tabs-ring { background: var(--tb-act) !important; box-shadow: 0 0 24px rgba(126,34,206,.75), 0 0 50px rgba(88,28,135,.45), inset 0 1px 0 rgba(255,255,255,.28), inset 0 -2px 0 rgba(217,70,239,.7) !important; border: 1px solid rgba(192,132,252,.55); }
+        .ux-seg-pill::after { background: var(--tb-spark) !important; mix-blend-mode: normal !important; opacity: 1 !important; animation: tbTw 2.6s ease-in-out infinite; }
+        .os-tabs-ring::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: var(--tb-spark); animation: tbTw 2.6s ease-in-out infinite; pointer-events: none; }
+        #executorModal .exec-sw.active, .exec-sw.active { position: relative; overflow: hidden; background: var(--tb-act) !important; border-color: rgba(192,132,252,.6) !important; box-shadow: 0 0 22px rgba(126,34,206,.75), inset 0 1px 0 rgba(255,255,255,.28), inset 0 -2px 0 rgba(217,70,239,.7) !important; }
+        .exec-sw.active::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: var(--tb-spark); animation: tbTw2 2.6s ease-in-out infinite; pointer-events: none; }
+        /* inactive text */
+        .os-tabs button:not(.active), .exec-sw:not(.active) { color: rgba(196,181,253,.6); }
+        .os-tabs button:not(.active):hover, .exec-sw:not(.active):hover { color: #f5d0fe; text-shadow: 0 0 12px rgba(217,70,239,.8); }
+        /* top nav tabs: darker */
+        html body #topNav .theme-btn { background: linear-gradient(180deg, rgba(40,10,80,.55), rgba(10,3,24,.85)) !important; border-color: rgba(147,51,234,.6) !important; box-shadow: 0 0 12px rgba(88,28,135,.5), inset 0 0 12px rgba(59,10,120,.5) !important; }
+        html body #topNav .theme-btn:hover { background: linear-gradient(180deg, rgba(88,28,135,.6), rgba(30,6,60,.9)) !important; border-color: #c026d3 !important; box-shadow: 0 0 20px rgba(192,38,211,.55), inset 0 0 14px rgba(88,28,135,.6) !important; }
+        html body #topNav .theme-btn.tn-active { background: var(--tb-act) !important; border-color: #e879f9 !important; box-shadow: 0 0 0 1px rgba(232,121,249,.45), 0 0 26px rgba(147,51,234,.85), inset 0 -2px 0 rgba(217,70,239,.7) !important; }
+        html body #topNav .theme-btn.tn-active::after { content: ''; display: block !important; position: absolute; inset: 0; border-radius: inherit; background: var(--tb-spark); animation: tbTw 2.6s ease-in-out infinite; pointer-events: none; }
+        @media (prefers-reduced-motion: reduce) { .ux-seg-pill::after, .os-tabs-ring::before, .exec-sw.active::after, html body #topNav .theme-btn.tn-active::after { animation: none; } }
+
+        /* ================= Active tab = light-lavender "Start button" look ================= */
+        :root { --tb-act: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 40%, #a855f7 80%, #9333ea 100%); --tb-spark: radial-gradient(circle at 12% 30%, #7e22ce 0 1px, transparent 2px), radial-gradient(circle at 28% 72%, #fff 0 1.3px, transparent 2.4px), radial-gradient(circle at 46% 25%, #6b21a8 0 1.2px, transparent 2.4px), radial-gradient(circle at 63% 78%, #fff 0 1.3px, transparent 2.4px), radial-gradient(circle at 80% 35%, #7e22ce 0 1px, transparent 2px), radial-gradient(circle at 93% 70%, #fff 0 1.3px, transparent 2.4px); }
+        .ux-seg-pill, .os-tabs-ring, #executorModal .exec-sw.active, .exec-sw.active, html body #topNav .theme-btn.tn-active { background: var(--tb-act) !important; border: 1px solid rgba(255,255,255,.85) !important; box-shadow: 0 0 22px rgba(192,132,252,.7), 0 4px 14px rgba(88,28,135,.45), inset 0 1px 0 rgba(255,255,255,.7) !important; }
+        .ux-seg button.active, .os-tabs button.active, .exec-sw.active, html body #topNav .theme-btn.tn-active { color: #2e1065 !important; text-shadow: none !important; font-weight: 800; }
+        .ux-seg button.active svg, .os-tabs button.active svg, .exec-sw.active svg { filter: none !important; color: #2e1065; }
+        .ux-seg button.active span::before { color: #6b21a8; opacity: .8; }
+        html body #topNav .theme-btn.tn-active::before { background: linear-gradient(90deg, transparent, #6b21a8, transparent); box-shadow: none; }
+        .ux-seg-pill::before { background: linear-gradient(100deg, transparent, rgba(255,255,255,.7), transparent); }
+
+        /* ---- outer top-nav tabs: every tab uses the lavender "Start button" look ---- */
+        html body #topNav .theme-btn { background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 45%, #a855f7 85%, #9333ea 100%) !important; border: 1px solid rgba(255,255,255,.85) !important; color: #2e1065 !important; text-shadow: none !important; font-weight: 800 !important; box-shadow: 0 3px 12px rgba(88,28,135,.5), inset 0 1px 0 rgba(255,255,255,.7) !important; filter: saturate(.9) brightness(.9); transition: filter .4s var(--nx-ease, ease), transform .4s var(--nx-ease, ease), box-shadow .4s !important; }
+        html body #topNav .theme-btn:hover { background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 45%, #a855f7 85%, #9333ea 100%) !important; filter: none; transform: translateY(-2px); box-shadow: 0 0 22px rgba(192,132,252,.8), 0 6px 16px rgba(88,28,135,.5), inset 0 1px 0 rgba(255,255,255,.8) !important; text-shadow: none !important; color: #1e0a3c !important; }
+        html body #topNav .theme-btn.tn-active { filter: none; box-shadow: 0 0 0 2px rgba(245,208,254,.7), 0 0 28px rgba(192,132,252,.95), inset 0 1px 0 rgba(255,255,255,.9) !important; }
+        html body #topNav .theme-btn::before { background: linear-gradient(90deg, transparent, #6b21a8, transparent); box-shadow: none; }
+
+        /* ---- BEST badges: purple with smooth flowing text ---- */
+        .nx-meta i.hot, .nx-chip-best { position: relative; overflow: hidden; border: 1px solid rgba(192,132,252,.75) !important; box-shadow: 0 0 16px rgba(147,51,234,.65), inset 0 1px 0 rgba(255,255,255,.25) !important; background-image: linear-gradient(90deg, #f5d0fe, #ffffff, #c084fc, #f0abfc, #ffffff, #f5d0fe), linear-gradient(135deg, #2e1065, #5b21b6 60%, #86198f) !important; background-size: 200% 100%, 100% 100% !important; background-repeat: repeat-x, no-repeat !important; background-clip: text, padding-box !important; -webkit-background-clip: text, padding-box !important; background-color: transparent !important; color: transparent !important; -webkit-text-fill-color: transparent; font-weight: 900; letter-spacing: .16em; animation: nxBestFlow 3.2s linear infinite; }
+        @keyframes nxBestFlow { from { background-position: 0% 0, 0 0; } to { background-position: -200% 0, 0 0; } }
+        @media (prefers-reduced-motion: reduce) { .nx-meta i.hot, .nx-chip-best { animation: none; } }
 </style>
 </head>
 <body class="relative flex flex-col items-center justify-center p-4 bg-grid" style="justify-content: safe center;">
@@ -4730,144 +4925,160 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/97c3f6db55a2cf
             const hay = (name + ' ' + uniAll(it).map(x => x.label).join(' ')).toLowerCase();
             return q.split(/\s+/).every(t => hay.indexOf(t) !== -1);
         }
-        function showUniversalList() {
+        function _nxList() {
             const list = document.getElementById('universalList'); list.innerHTML = '';
-            document.getElementById('universalDesc').textContent = UNI_SRC === UNIVERSAL_SCRIPTS ? 'Pick a map to get its script.' : 'Pick a hub to get its script.';
-            if (!UNI_SRC.length) { const p = document.createElement('div'); p.className = 'code-box rounded-2xl p-4 text-xs text-purple-300/70 font-semibold'; p.textContent = '-- more maps coming soon'; list.appendChild(p); return; }
-            /* search bar */
-            const box = document.createElement('div'); box.className = 'uni-search';
-            box.innerHTML = '<div class="uni-search-row"><span class="uni-search-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></span>'
-                + '<input type="text" class="uni-search-in" placeholder="Search by map or hub, e.g. Blox Fruit" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Search maps">'
-                + '<button type="button" class="uni-search-clear" aria-label="Clear search">&times;</button>'
-                + '<button type="button" class="uni-search-go">Search</button></div>'
-                + '<label class="uni-strict"><input type="checkbox"><span class="uni-strict-sw"></span><span class="uni-strict-txt">Strict search<small>match the map name from the start</small></span></label>'
-                + '<div class="uni-count"></div>';
+            const isMap = UNI_SRC === UNIVERSAL_SCRIPTS;
+            document.getElementById('universalDesc').textContent = isMap ? 'Pick a map to get its script.' : 'Pick a hub to get its script.';
+            if (!UNI_SRC.length) { const p = document.createElement('div'); p.className = 'nx-empty'; p.textContent = '-- more maps coming soon'; list.appendChild(p); return; }
+            const box = document.createElement('div'); box.className = 'nx-cmd';
+            box.innerHTML = '<div class="nx-cmd-row"><span class="nx-prompt">&gt;_</span>'
+                + '<input type="text" class="nx-in" placeholder="search ' + (isMap ? 'map' : 'hub') + '... e.g. ' + (isMap ? 'Blox Fruit' : 'Infinite Yield') + '" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Search">'
+                + '<button type="button" class="nx-clear" aria-label="Clear search">&times;</button>'
+                + '<button type="button" class="nx-go">SEARCH</button></div>'
+                + '<div class="nx-cmd-sub"><label class="nx-strict"><input type="checkbox"><span class="nx-sw"></span><span>Strict match</span></label><span class="nx-count"></span></div>';
             list.appendChild(box);
-            const inp = box.querySelector('.uni-search-in'), clr = box.querySelector('.uni-search-clear'), cnt = box.querySelector('.uni-count'), chk = box.querySelector('.uni-strict input');
+            const inp = box.querySelector('.nx-in'), clr = box.querySelector('.nx-clear'), cnt = box.querySelector('.nx-count'), chk = box.querySelector('.nx-strict input');
             inp.value = uniQuery; chk.checked = uniStrict;
             const holder = document.createElement('div'); list.appendChild(holder);
+            const arrow = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
             const draw = () => {
                 holder.innerHTML = ''; clr.classList.toggle('show', !!inp.value);
-                const grid = document.createElement('div'); grid.className = 'uni-grid'; let n = 0;
+                const grid = document.createElement('div'); grid.className = 'nx-grid'; let n = 0;
                 UNI_SRC.forEach((it, i) => {
                     if (!uniMatch(it, uniQuery)) return; n++;
-                    const card = document.createElement('button'); card.type = 'button'; card.className = 'uni-map ux-card';
-                    card.appendChild(uniThumb(it, 'uni-pic'));
-                    const nm = document.createElement('span'); nm.className = 'uni-map-name'; nm.textContent = it.name;
-                    const tg = document.createElement('span'); tg.className = 'uni-tag'; tg.innerHTML = '<span>OPEN SCRIPT</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-                    const nu = document.createElement('span'); nu.className = 'ux-num'; nu.textContent = String(i + 1).padStart(2, '0'); card.appendChild(nu);
-                    card.appendChild(nm); card.appendChild(tg);
-                    card.onclick = (ev) => { ev.stopPropagation(); showUniversalScript(i); };
-                    grid.appendChild(card);
+                    const row = document.createElement('button'); row.type = 'button'; row.className = 'nx-row';
+                    row.style.animationDelay = Math.min(n, 14) * 40 + 'ms';
+                    const idx = document.createElement('span'); idx.className = 'nx-idx'; idx.textContent = String(i + 1).padStart(2, '0');
+                    const body = document.createElement('span'); body.className = 'nx-body';
+                    const cnum = uniAll(it).length, best = uniAll(it).some(x => x.best);
+                    body.innerHTML = '<b class="nx-name"></b><span class="nx-meta"><i>' + (it.pack ? 'HUB' : 'MAP') + '</i><i>' + cnum + (cnum > 1 ? ' SCRIPTS' : ' SCRIPT') + '</i>' + (best ? '<i class="hot">★ BEST</i>' : '') + '</span>';
+                    body.querySelector('.nx-name').textContent = it.name;
+                    const go = document.createElement('span'); go.className = 'nx-arrow'; go.innerHTML = arrow;
+                    row.appendChild(idx); row.appendChild(uniThumb(it, 'nx-pic')); row.appendChild(body); row.appendChild(go);
+                    row.addEventListener('pointermove', (ev) => { const r = row.getBoundingClientRect(); row.style.setProperty('--mx', (ev.clientX - r.left) + 'px'); row.style.setProperty('--my', (ev.clientY - r.top) + 'px'); });
+                    row.onclick = (ev) => { ev.stopPropagation(); showUniversalScript(i); };
+                    grid.appendChild(row);
                 });
-                const unit = UNI_SRC === UNIVERSAL_SCRIPTS ? 'maps' : 'hubs';
-                cnt.textContent = uniQuery.trim() ? (n + ' of ' + UNI_SRC.length + ' ' + unit) : (UNI_SRC.length + ' ' + unit);
-                if (n) { holder.appendChild(grid); Array.from(grid.children).forEach(function (c, k) { c.style.animationDelay = Math.min(k, 12) * 45 + 'ms'; }); plTilt(grid, '.uni-map'); }
-                else { const e = document.createElement('div'); e.className = 'uni-empty'; e.textContent = 'No maps found for "' + uniQuery.trim() + '"'; holder.appendChild(e); }
+                cnt.textContent = (uniQuery.trim() ? n + ' / ' + UNI_SRC.length : UNI_SRC.length) + (isMap ? ' MAPS' : ' HUBS');
+                if (n) holder.appendChild(grid);
+                else { const e = document.createElement('div'); e.className = 'nx-empty'; e.textContent = 'NO RESULT FOR "' + uniQuery.trim() + '"'; holder.appendChild(e); }
             };
             inp.oninput = () => { uniQuery = inp.value; draw(); };
             inp.onkeydown = (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); uniQuery = inp.value; draw(); inp.blur(); } };
-            box.querySelector('.uni-search-go').onclick = (ev) => { ev.stopPropagation(); uniQuery = inp.value; draw(); };
+            box.querySelector('.nx-go').onclick = (ev) => { ev.stopPropagation(); uniQuery = inp.value; draw(); };
             clr.onclick = (ev) => { ev.stopPropagation(); inp.value = ''; uniQuery = ''; draw(); inp.focus(); };
             chk.onchange = () => { uniStrict = chk.checked; draw(); };
             draw();
         }
-        function showUniversalScript(i) {
+        function _nxScript(i) {
             const it = UNI_SRC[i]; if (!it) return;
             const list = document.getElementById('universalList'); list.innerHTML = '';
             document.getElementById('universalDesc').textContent = it.name + ' - copy the script and run it in your executor.';
             const el = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt) n.textContent = txt; return n; };
-            const back = el('button', 'uni-back ux-back'); back.type = 'button';
-            back.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg><span>' + (it.pack ? 'ALL HUBS' : 'ALL MAPS') + '</span>';
+            const ico = (d, w) => '<svg width="' + (w || 16) + '" height="' + (w || 16) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>';
+            const all = uniAll(it);
+
+            const back = el('button', 'nx-back'); back.type = 'button';
+            back.innerHTML = ico('<path d="M15 19l-7-7 7-7"/>') + '<span>' + (it.pack ? 'ALL HUBS' : 'ALL MAPS') + '</span>';
             back.onclick = (ev) => { ev.stopPropagation(); showUniversalList(); };
 
-            const wrap = el('div', 'uni-detail');
-            /* left: the map picture card */
-            const hero = el('div', 'uni-hero');
-            const pic = uniThumb(it, 'uni-pic uni-pic-lg'); hero.appendChild(pic);
-            hero.appendChild(el('span', 'uni-badge', (it.pack ? 'HUB ' : 'MAP ') + (i + 1)));
-            const chips = el('div', 'uni-chips');
-            chips.innerHTML = '<span><i></i>Executor ready</span><span>Lua</span><span class="uni-chip-lines"></span>';
-            hero.appendChild(chips);
-            ['\u2726', '\u2726', '\u2726'].forEach(function (c, k) { const st = el('span', 'uni-star', c); st.style.cssText = '--x:' + [12, 84, 70][k] + '%;--y:' + [14, 22, 62][k] + '%;--d:' + k * 0.8 + 's'; hero.appendChild(st); });
-            const keyB = el('span', 'uni-keybadge');
-            keyB.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"></circle><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"></path></svg><span>Key System</span>';
-            /* right: info card */
-            const info = el('div', 'uni-info');
-            const trow = el('div', 'uni-titlerow'); trow.appendChild(el('h3', 'uni-title', it.pack ? it.name : it.name + ' Script')); const crownB = el('span', 'uni-best');
-            crownB.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 7.5l4.8 4.2L12 4l4.7 7.7 4.8-4.2-1.9 11H4.4z"></path><rect x="4.4" y="20" width="15.2" height="2" rx="1"></rect></svg><span>THE BEST</span>';
-            trow.appendChild(crownB); trow.appendChild(keyB); info.appendChild(trow);
-            crownB.style.display = uniCur(i).best ? '' : 'none';
-            info.appendChild(el('div', 'uni-game', it.pack ? 'Universal Script 2' : it.name));
-            const row = el('div', 'uni-actions');
+            /* ---- banner ---- */
+            const ban = el('section', 'nx-banner');
+            if (it.place) { const bg = el('div', 'nx-bg'); bg.style.backgroundImage = 'url("https://www.roblox.com/asset-thumbnail/image?assetId=' + it.place + '&width=420&height=420&format=png")'; ban.appendChild(bg); }
+            ban.appendChild(el('div', 'nx-scan'));
+            const pic = uniThumb(it, 'nx-pic nx-pic-lg'); ban.appendChild(pic);
+            const head = el('div', 'nx-head');
+            head.appendChild(el('div', 'nx-eyebrow', (it.pack ? 'HUB ' : 'MAP ') + String(i + 1).padStart(2, '0') + '  //  UNIVERSAL'));
+            const title = el('h3', 'nx-title', it.pack ? it.name : it.name + ' Script'); title.setAttribute('data-text', title.textContent); head.appendChild(title);
+            const chips = el('div', 'nx-chips');
+            const best = el('span', 'nx-chip nx-chip-best', '★ THE BEST');
+            const keyc = el('span', 'nx-chip nx-chip-key', 'KEY SYSTEM');
+            chips.innerHTML = '<span class="nx-chip nx-chip-ok"><i></i>EXECUTOR READY</span><span class="nx-chip">LUA</span><span class="nx-chip nx-lines"></span>';
+            chips.appendChild(best); chips.appendChild(keyc); head.appendChild(chips);
+            const acts = el('div', 'nx-acts');
             if (it.place) {
-                const play = el('a', 'uni-act uni-act-play ux-play'); play.href = 'https://www.roblox.com/games/' + it.place; play.target = '_blank'; play.rel = 'noopener noreferrer';
-                play.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 4.5v15l13-7.5z" fill="currentColor"></path></svg><span>Play game</span><i class="ux-shine"></i>';
-                row.appendChild(play);
+                const play = el('a', 'nx-play'); play.href = 'https://www.roblox.com/games/' + it.place; play.target = '_blank'; play.rel = 'noopener noreferrer';
+                play.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg><span>PLAY GAME</span><i class="nx-shine"></i>';
+                acts.appendChild(play);
             }
-            const how = el('button', 'uni-act ux-how'); how.type = 'button';
-            how.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 8l10 5 10-5-10-5zM6 10.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"></path></svg><span>How to run this script</span>';
-            row.appendChild(how);
-            info.appendChild(row);
-            const steps = el('ol', 'uni-steps');
+            const how = el('button', 'nx-ghost'); how.type = 'button';
+            how.innerHTML = ico('<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>', 17) + '<span>HOW TO RUN</span>';
+            acts.appendChild(how); head.appendChild(acts);
+            const steps = el('ol', 'nx-steps');
             (it.pack ? ['Copy the script below.', 'Join any Roblox game.', 'Open your executor, paste the script and press Execute.'] : ['Copy the script below.', 'Open ' + it.name + ' in Roblox.', 'Open your executor, paste the script and press Execute.']).forEach(t => steps.appendChild(el('li', '', t)));
-            how.onclick = (ev) => { ev.stopPropagation(); steps.classList.toggle('open'); };
-            info.appendChild(steps);
-            const all = uniAll(it);
-            const pre = el('pre', 'os-code os-binpre uni-binpre'); uniInitBin(pre, uniCur(i).code);
-            keyB.style.display = uniCur(i).key ? '' : 'none';
-            let syncKey = () => {};
+            how.onclick = (ev) => { ev.stopPropagation(); steps.classList.toggle('open'); how.classList.toggle('on'); };
+            head.appendChild(steps);
+            ban.appendChild(head);
+
+            /* ---- terminal ---- */
+            const term = el('section', 'nx-term');
+            const sc = document.getElementById('scOnline');
+            const bar = el('div', 'nx-tbar');
+            bar.innerHTML = '<span class="nx-dots"><i></i><i></i><i></i></span><span class="nx-file"></span><span class="nx-on"><b></b><span class="nx-onn"></span> online</span>';
+            bar.querySelector('.nx-file').textContent = it.name.replace(/\s+/g, '_').toLowerCase() + '.lua';
+            bar.querySelector('.nx-onn').textContent = sc ? sc.textContent : '21';
+            term.appendChild(bar);
+
+            const pre = el('pre', 'os-code os-binpre uni-binpre nx-pre'); uniInitBin(pre, uniCur(i).code);
+            const kr = el('div', 'nx-key');
+            kr.innerHTML = ico('<circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"/>') + '<span class="nx-key-lab">FREE KEY</span><code class="nx-key-val"></code>';
+            const kcopy = el('button', 'nx-mini'); kcopy.type = 'button'; kcopy.textContent = 'COPY KEY';
+            kcopy.onclick = (ev) => { ev.stopPropagation(); const k = uniCur(i).freeKey; if (!k) return;
+                copyTextRobust(k, () => { kcopy.textContent = 'COPIED!'; setTimeout(() => { kcopy.textContent = 'COPY KEY'; }, 2000); showNotify('FREE KEY', 'KEY COPIED', true); },
+                    () => showNotify('CLIPBOARD', 'COPY BLOCKED - SELECT THE KEY AND COPY MANUALLY', false)); };
+            kr.appendChild(kcopy);
+            const syncKey = () => { const c = uniCur(i), n = (uniSel[i] || 0) % all.length; kr.style.display = c.freeKey ? '' : 'none'; kr.querySelector('.nx-key-val').textContent = c.freeKey || ''; keyc.style.display = c.key ? '' : 'none'; best.style.display = c.best ? '' : 'none'; if (lab) lab.textContent = 'SCRIPT ' + String(n + 1).padStart(2, '0') + ' / ' + String(all.length).padStart(2, '0') + '  ·  ' + all[n].label; };
+            let lab = null;
             if (all.length > 1) {
-                const bar = el('div', 'uni-switch');
-                const lab = el('span', 'uni-switch-lab');
-                const chg = el('button', 'uni-act uni-change ux-nbtn ux-next'); chg.type = 'button';
-                chg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"></path></svg><span>Change</span>';
-                const upd = () => { const n = (uniSel[i] || 0) % all.length; lab.textContent = 'SCRIPT ' + (n + 1) + '/' + all.length + ' - ' + all[n].label; uniInitBin(pre, all[n].code); keyB.style.display = all[n].key ? '' : 'none'; crownB.style.display = all[n].best ? '' : 'none'; syncKey(); };
+                const sw = el('div', 'nx-switch');
+                lab = el('span', 'nx-switch-lab');
+                const prv = el('button', 'nx-btn nx-prev'); prv.type = 'button'; prv.setAttribute('aria-label', 'Previous script');
+                prv.innerHTML = ico('<path d="M15 19l-7-7 7-7"/>') + '<span>BACK</span>';
+                const chg = el('button', 'nx-btn nx-next'); chg.type = 'button';
+                chg.innerHTML = '<span>CHANGE</span>' + ico('<path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"/>');
                 let swapT = null;
-                const prv = el('button', 'uni-act uni-prev ux-nbtn ux-prev'); prv.type = 'button'; prv.title = 'Previous script'; prv.setAttribute('aria-label', 'Previous script');
-                prv.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"></path></svg><span>Back</span>';
                 const go = (ev, d) => {
                     ev.stopPropagation(); uniSel[i] = ((uniSel[i] || 0) + d + all.length) % all.length;
-                    const fx = [pre, lab, keyB, crownB, kr]; clearTimeout(swapT);
+                    const fx = [pre, lab, kr]; clearTimeout(swapT);
                     fx.forEach(n => { n.classList.remove('uni-in'); n.classList.add('uni-out'); });
                     swapT = setTimeout(() => {
-                        upd();
+                        uniInitBin(pre, uniCur(i).code); syncKey();
                         fx.forEach(n => { n.classList.remove('uni-out'); void n.offsetWidth; n.classList.add('uni-in'); });
                     }, 170);
                 };
-                chg.onclick = (ev) => go(ev, 1); prv.onclick = (ev) => go(ev, -1);
-                const nav = el('div', 'uni-nav'); nav.appendChild(prv); nav.appendChild(chg);
-                upd(); bar.appendChild(lab); bar.appendChild(nav); info.appendChild(bar);
+                prv.onclick = (ev) => go(ev, -1); chg.onclick = (ev) => go(ev, 1);
+                const nav = el('div', 'nx-nav'); nav.appendChild(prv); nav.appendChild(chg);
+                sw.appendChild(lab); sw.appendChild(nav); term.appendChild(sw);
             }
-            const btn = el('button', 'os-copy uni-oscopy'); btn.type = 'button';
+            term.appendChild(pre); term.appendChild(kr); syncKey();
+            const foot = el('div', 'nx-tfoot');
+            foot.appendChild(el('span', 'nx-hint', '// tap copy to decrypt & copy the script'));
+            const btn = el('button', 'os-copy uni-oscopy nx-copy'); btn.type = 'button';
             btn.innerHTML = '<span class="os-fx"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><span class="uc-txt">Copy</span>';
             btn.onclick = (ev) => copyUniversal(ev, i, btn);
-            const kr = el('div', 'uni-keyrow');
-            kr.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"></circle><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"></path></svg><span class="uni-keyrow-lab">FREE KEY</span><code class="uni-keyrow-val"></code>';
-            const kcopy = el('button', 'uni-act uni-keycopy'); kcopy.type = 'button'; kcopy.innerHTML = '<span>Copy key</span>';
-            kcopy.onclick = (ev) => { ev.stopPropagation(); const k = uniCur(i).freeKey; if (!k) return; const t = kcopy.querySelector('span');
-                copyTextRobust(k, () => { t.textContent = 'Copied!'; setTimeout(() => { t.textContent = 'Copy key'; }, 2000); showNotify('FREE KEY', 'KEY COPIED', true); },
-                    () => showNotify('CLIPBOARD', 'COPY BLOCKED - SELECT THE KEY AND COPY MANUALLY', false)); };
-            kr.appendChild(kcopy);
-            syncKey = () => { const k = uniCur(i).freeKey; kr.style.display = k ? '' : 'none'; kr.querySelector('.uni-keyrow-val').textContent = k || ''; };
-            syncKey();
-            info.appendChild(kr);
-            const win = el('div', 'os-win uni-os');
-            const sc = document.getElementById('scOnline');
-            win.innerHTML = '<div class="os-bar"><span class="os-dots"><i></i><i></i><i></i></span><span class="os-file"></span><span class="os-online"><b></b><span class="uo-on"></span> online</span></div>';
-            win.querySelector('.os-file').textContent = it.name;
-            win.querySelector('.uo-on').textContent = sc ? sc.textContent : '21';
-            win.appendChild(pre);
-            const foot = el('div', 'os-foot'); const note = el('span', 'os-note');
-            note.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8M18 2v4h-4M6 22v-4h4"/></svg>Tap copy to reveal and copy the script.';
-            foot.appendChild(note); foot.appendChild(btn); win.appendChild(foot);
-            info.appendChild(win);
-            wrap.appendChild(hero); wrap.appendChild(info);
-            const lc = hero.querySelector('.uni-chip-lines'); const setLines = () => { lc.textContent = (pre.dataset.lines || '1') + ' lines'; }; setLines();
+            foot.appendChild(btn); term.appendChild(foot);
+
+            const lc = ban.querySelector('.nx-lines'); const setLines = () => { lc.textContent = (pre.dataset.lines || '1') + ' LINES'; }; setLines();
             pre.addEventListener('uni-lines', setLines);
-            list.appendChild(back); list.appendChild(wrap);
-            plTilt(wrap, '.uni-hero');
+            list.appendChild(back); list.appendChild(ban); list.appendChild(term);
         }
+
+        /* smooth view switch: fade the old view out, then render the new one */
+        let _nxT = 0, _nxFirst = true;
+        function _nxSwap(fn) {
+            const list = document.getElementById('universalList');
+            clearTimeout(_nxT);
+            const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (_nxFirst || reduce || !list || !list.children.length || !list.offsetParent) { _nxFirst = false; fn(); return; }
+            list.classList.add('nx-leave');
+            _nxT = setTimeout(() => {
+                fn(); list.classList.remove('nx-leave');
+                const sc = list.closest('.modal-card') || list.parentElement;
+                if (sc && sc.scrollTo) sc.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 200);
+        }
+        function showUniversalList() { _nxSwap(() => _nxList()); }
+        function showUniversalScript(i) { _nxSwap(() => _nxScript(i)); }
         const UNIVERSAL2_HUBS = [{ name: 'Sword Script', pack: true, icon: '<path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"/>', script: `loadstring(game:HttpGet("https://pastefy.app/Iy2DyEFf/raw"))()` }, { name: 'Rings Hub', pack: true, icon: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>', script: `loadstring(game:HttpGet("https://pastefy.app/PU6VWuJk/raw"))()` }, { name: 'Aimbot ZX', pack: true, icon: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/>', script: `loadstring(game:HttpGet("https://rscripts.net/raw/new-zumhub-aimbot-zab-og_1788575235771_FxNXhdyH2P.txt",true))()` }, { name: 'Infinite Yield', pack: true, icon: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()` }, { name: 'Animation Hub', pack: true, icon: '<circle cx="12" cy="5" r="2.500"/><path d="M12 7.500v6M7 10l5 1.500 5-1.500M9 21l3-7.500 3 7.500"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Daivd977/Coquettekk/refs/heads/main/valout%20Emot"))()` }, { name: 'Touch Fling Hub', pack: true, icon: '<path d="M5 12h14M13 6l6 6-6 6"/><circle cx="4" cy="12" r="1.500"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/LgZwZ7ZB",true))()` }, { name: 'Invisible Hub', pack: true, icon: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><path d="M4 4l16 16"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/0XUsv2Dq",true))()` }, { name: 'Fling Hub', pack: true, icon: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/lucasilva864/fling-all/refs/heads/main/fling%20all "))()` }, { name: 'Anti Fling Hub', pack: true, icon: '<path d="M12 2.500l8 3v6c0 5-3.500 8.500-8 10-4.500-1.500-8-5-8-10v-6z"/><path d="M9 9l6 6M15 9l-6 6"/>', script: `loadstring(game:HttpGet("https://pastefy.app/wo2ipSp6/raw"))()` }, { name: 'Yokai Hub', pack: true, icon: '<path d="M12 3c3 3 6 3 6 8a6 6 0 01-12 0c0-5 3-5 6-8z"/><circle cx="10" cy="11" r="1"/><circle cx="14" cy="11" r="1"/>', script: `loadstring(game:HttpGet("https://pastebin.com/raw/9CrGV1w4"))()` }, { name: 'Khen Hub', pack: true, icon: '<path d="M3 20V9l5 4 4-7 4 7 5-4v11z"/>', script: `getgenv().Setting = {
      ["Body"] = {
           ["Korblox"] = true,
