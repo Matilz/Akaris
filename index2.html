@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AKARI $ 1.0.0</title>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#0c0c0c;color:#c4a7f5;overflow:hidden;
+    font-family:'Cascadia Mono','Cascadia Code',Consolas,'Courier New',monospace}
+  body{display:flex;flex-direction:column}
+
+  /* window title bar */
+  .tabbar{height:38px;background:#1f1f1f;display:flex;align-items:flex-end;justify-content:space-between;
+    user-select:none;flex-shrink:0;font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;position:relative;z-index:3}
+  .left{display:flex;align-items:flex-end;height:100%;padding-left:8px;gap:6px}
+  .tab{height:30px;min-width:200px;max-width:260px;background:#0c0c0c;border-radius:8px 8px 0 0;display:flex;
+    align-items:center;padding:0 10px;gap:8px;color:#f0f0f0;margin-top:8px}
+  .tab .ico{width:16px;height:14px;border:1px solid #bbb;border-radius:2px;font-size:8px;line-height:12px;
+    text-align:center;color:#ddd;flex-shrink:0}
+  .tab .t{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tab .x{color:#aaa;font-size:11px;padding:2px 4px}
+  .plus,.chev{color:#ddd;padding:0 8px;height:30px;display:flex;align-items:center;font-size:15px}
+  .chev{font-size:10px;padding:0 4px}
+  .ctl{display:flex;height:100%;align-self:flex-start}
+  .ctl span{width:46px;display:flex;align-items:center;justify-content:center;color:#ddd;font-size:13px}
+  .ctl span:hover{background:#333}.ctl span:last-child:hover{background:#c42b1c}
+
+  .stage{flex:1;position:relative;min-height:0;background:#0c0c0c}
+  #term{position:absolute;inset:0;z-index:2;overflow-y:auto;padding:16px 12px;font-size:15px;line-height:1.5;display:flex}
+  #out{width:min(660px,100%);margin:clamp(4px,5vh,48px) auto auto}
+  ::-webkit-scrollbar{width:12px}::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:#3a3a3d}
+
+  /* colours */
+  .idx{color:#a855f7;text-shadow:0 0 6px rgba(168,85,247,.55)}
+  .lbl{color:#a855f7}
+  .val{color:#e4d4ff}
+  .ok{color:#c4b5fd;text-shadow:0 0 8px rgba(167,139,250,.7)}
+  .er{color:#f14c4c}.wn{color:#e9b8ff}.dim{color:#8b6bb8}
+  .allow{color:#23d18b;font-weight:700;text-shadow:0 0 8px rgba(35,209,139,.6)}
+  .deny{color:#f14c4c;font-weight:700;text-shadow:0 0 8px rgba(241,76,76,.55)}
+  a{color:#c084fc}
+
+  /* header block, laid out like the reference dashboard */
+  .logo{text-align:center;margin:2px 0 10px}
+  .logo-svg{display:block;margin:0 auto;width:min(100%,380px);height:auto;
+    filter:drop-shadow(0 0 6px rgba(139,92,246,.75)) drop-shadow(0 0 16px rgba(91,33,182,.55))}
+  .sub{text-align:center;text-transform:uppercase;letter-spacing:.9em;word-spacing:1.1em;font-size:11px;color:#a78bfa;margin:0 0 12px;padding-left:.9em}
+  .status{text-align:center;font-size:13px;padding:7px 4px;margin:0 0 16px;
+    border-top:1px solid #2b2040;border-bottom:1px solid #2b2040;}
+  .status .dot{color:#23d18b}
+  .status .hwkey{color:#f3e8ff;font-weight:700;text-shadow:0 0 8px rgba(192,132,252,.8)}
+  .status .sep{color:#6b5a8a;margin:0 2px}
+
+  .qc{border:1px solid #8b5cf6;border-radius:4px;padding:8px 16px 10px;font-size:14px;
+    background:rgba(20,10,36,.45);box-shadow:0 0 12px rgba(139,92,246,.28),inset 0 0 10px rgba(91,33,182,.14)}
+  .qt{color:#e9d5ff;margin-bottom:2px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;column-gap:28px}
+  .qi{padding:1px 6px;margin:0 -6px;border-radius:3px;cursor:pointer;white-space:nowrap;transition:background .12s}
+  .qi:hover,.qi.hit{background:rgba(139,92,246,.22)}
+  .qi .n{color:#a855f7;margin-right:6px}
+  .hint{text-align:center;color:#8b6bb8;font-size:13px;margin:14px 0 4px}
+  .hint b{color:#e4d4ff;font-weight:700}
+
+  #log{margin-top:14px}
+  #log>div{white-space:pre-wrap;overflow-wrap:anywhere;min-height:1.5em}
+  .cur{display:inline-block;width:2px;height:1.2em;background:#c084fc;box-shadow:0 0 8px #a855f7;vertical-align:text-bottom;
+    margin-left:1px;animation:bl 1s step-end infinite}
+  @keyframes bl{50%{opacity:0}}
+  .key{display:inline-block;padding:1px 10px;border:1px dashed #a855f7;color:#f3e8ff;font-weight:700;user-select:all;
+    letter-spacing:.5px;text-shadow:0 0 8px rgba(192,132,252,.8)}
+  /* the typing field is a real <input> drawn like terminal text, so phone keyboards (and their delete key) just work */
+  .irow{display:flex;align-items:baseline;white-space:pre}
+  .ilab{flex-shrink:0}
+  .ti{flex:1;min-width:0;width:100%;background:transparent;border:0;outline:0;padding:0;margin:0 0 0 .6em;
+    font:inherit;color:#e4d4ff;caret-color:#c084fc;border-radius:0;-webkit-appearance:none;appearance:none}
+  .ti::selection{background:rgba(139,92,246,.5)}
+
+  @media(pointer:coarse){#term{font-size:16px}}   /* 16px stops iPhone from zooming in on the field */
+
+  @media(max-width:520px){
+    .grid{grid-template-columns:1fr}
+    .status .sep{margin:0}
+    .sub{letter-spacing:.5em;word-spacing:.7em;padding-left:.5em}
+  }
+</style>
+</head>
+<body>
+<div class="tabbar">
+  <div class="left">
+    <div class="tab"><span class="ico">&gt;_</span><span class="t">AKARI $ 1.0.0</span><span class="x">&#x2715;</span></div>
+    <div class="plus">+</div><div class="chev">&#x2335;</div>
+  </div>
+  <div class="ctl"><span>&#x2500;</span><span>&#x25A1;</span><span onclick="location.reload()">&#x2715;</span></div>
+</div>
+
+<div class="stage">
+  <main id="term">
+    <div id="out"></div>
+  </main>
+</div>
+
+<script>
+const SITE='https://matilz.github.io/Akaris/';
+const term=document.getElementById('term'), out=document.getElementById('out');
+const DB='akari_users_v1', SES='akari_session_v1';
+let pending=null, menuResolve=null, memUsers=null, session=null;
+let stEl, hintEl, logEl;
+
+/* ---------- utils ---------- */
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const down=()=>{term.scrollTop=term.scrollHeight};
+const has=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+
+/* storage (falls back to memory when the browser blocks it) */
+function users(){
+  if(memUsers)return memUsers;
+  try{return JSON.parse(localStorage.getItem(DB))||{}}catch{return {}}
+}
+function saveUsers(u){
+  try{localStorage.setItem(DB,JSON.stringify(u))}catch{memUsers=u}
+}
+function rnd(n){
+  const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='';
+  if(window.crypto&&crypto.getRandomValues){const a=new Uint8Array(n);crypto.getRandomValues(a);for(const x of a)s+=A[x%A.length]}
+  else for(let i=0;i<n;i++)s+=A[Math.floor(Math.random()*A.length)];
+  return s;
+}
+const makeKey=()=>`AKR-${rnd(4)}-${rnd(4)}-${rnd(4)}`;
+async function sha(s){
+  try{
+    if(window.crypto&&crypto.subtle){
+      const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
+      return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+    }
+  }catch{}
+  let h=5381;for(const c of s)h=((h<<5)+h+c.charCodeAt(0))>>>0;return'x'+h.toString(16);
+}
+function loadSession(){
+  try{
+    const s=JSON.parse(sessionStorage.getItem(SES));
+    if(s&&s.id){const db=users();if(has(db,s.id))return{id:s.id,name:db[s.id].name}}
+  }catch{}
+  return null;
+}
+function storeSession(){
+  try{
+    if(session)sessionStorage.setItem(SES,JSON.stringify({id:session.id}));
+    else sessionStorage.removeItem(SES);
+  }catch{}
+}
+
+/* ---------- screen ---------- */
+/* "AKARI $" drawn as an SVG pixel font, so it looks identical on every device */
+function logoSVG(){
+  const G={
+    A:['01110','10001','10001','11111','10001','10001','10001'],
+    K:['10001','10010','10100','11000','10100','10010','10001'],
+    R:['11110','10001','10001','11110','10100','10010','10001'],
+    I:['11111','00100','00100','00100','00100','00100','11111'],
+    $:['00100','01111','10100','01110','00101','11110','00100']
+  };
+  const seq=['A','K','A','R','I',null,'$'];
+  const C=10, W=9;
+  let x=0, rects='';
+  for(const ch of seq){
+    if(ch===null){x+=3;continue}
+    G[ch].forEach((row,r)=>{
+      [...row].forEach((bit,c)=>{
+        if(bit==='1')rects+=`<rect x="${(x+c)*C}" y="${r*C}" width="${W}" height="${W}" rx="1.5" fill="url(#lg)"/>`;
+      });
+    });
+    x+=6;
+  }
+  const width=(x-1)*C, height=7*C-1;
+  return `<svg class="logo-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="AKARI $" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="lg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="${height}">
+      <stop offset="0" stop-color="#ede9fe"/><stop offset=".45" stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/>
+    </linearGradient></defs>${rects}</svg>`;
+}
+
+const ITEMS=[['1','Sign In'],['2','Sign Up'],['3','Copy Key'],['4','Open Website'],['5','Sign Out'],['6','Clear Activity']];
+
+function render(){
+  out.innerHTML=`
+    <div class="logo">${logoSVG()}</div>
+    <div class="sub">AKARI AUTH · V1.0.0</div>
+    <div class="status" id="st"></div>
+    <div class="qc"><div class="qt">Quick Commands:</div><div class="grid">
+      ${ITEMS.map(([k,t])=>`<div class="qi" data-k="${k}" role="button"><span class="n">[${k}]</span><span class="val">${t}</span></div>`).join('')}
+    </div></div>
+    <div class="hint" id="hint"></div>
+    <div id="log"></div>`;
+  stEl=document.getElementById('st');hintEl=document.getElementById('hint');logEl=document.getElementById('log');
+  setStatus();
+}
+
+function setStatus(){
+  const a=!!session;
+  const db=users(), u=a&&has(db,session.id)?db[session.id]:null;
+  /* HWID slot shows the license key once signed in */
+  const hw=u?`<span class="hwkey">${esc(u.key)}</span>`:'<span class="dim">----</span>';
+  stEl.innerHTML=`<span style="white-space:nowrap"><span class="dot">●</span> System Online</span> <span class="sep">·</span> <span style="white-space:nowrap">HWID ${hw}</span> <span class="sep">·</span> ${a?'<span class="allow">Allowed</span>':'<span class="deny">Not Allowed</span>'}`;
+  hintEl.innerHTML=a
+    ? `Welcome, <b>${esc(session.name)}</b><span class="sep"> · </span>Press <b>4</b> to open the website`
+    : `Press <b>1</b> to sign in<span class="sep"> · </span><b>2</b> to sign up`;
+}
+
+function log(html=''){const d=document.createElement('div');d.innerHTML=html;logEl.appendChild(d);down();return d}
+const logClear=()=>{logEl.innerHTML=''};
+
+/* ---------- prompts ---------- */
+/* resolves the typed string, or null on Ctrl+C */
+function input(labelHTML,{mask=false}={}){
+  return new Promise(resolve=>{
+    const row=document.createElement('div');row.className='irow';
+    row.innerHTML=`<span class="ilab">${labelHTML}</span><input class="ti" type="${mask?'password':'text'}" maxlength="64"
+      autocomplete="${mask?'new-password':'off'}" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" aria-label="input">`;
+    logEl.appendChild(row);
+    const inp=row.querySelector('input');
+    const finish=v=>{                       /* v = typed text, or null when cancelled */
+      if(!pending)return;
+      const shown=inp.value;pending=null;
+      const sp=document.createElement('span');sp.className='val';sp.style.marginLeft='.6em';
+      sp.textContent=mask?'*'.repeat(shown.length):shown;
+      inp.replaceWith(sp);resolve(v);
+    };
+    pending={done:finish,focus(){inp.focus()},value:()=>inp.value};
+    inp.addEventListener('keydown',e=>{
+      if((e.key==='Enter'||e.keyCode===13)&&!e.isComposing){e.preventDefault();finish(inp.value)}
+    });
+    inp.focus();down();
+  });
+}
+const field=(n,label,o)=>input(`<span class="idx">[${n}]</span> <span class="lbl">${esc(label.padEnd(11,' '))}:</span>`,o);
+const cancelled=()=>{log('<span class="wn">[!] Cancelled.</span>')};
+
+/* wait for a number key (or a click on a command) */
+function choose(){
+  return new Promise(r=>{menuResolve=r});
+}
+function pick(k){
+  if(!menuResolve)return;
+  const el=out.querySelector(`.qi[data-k="${k}"]`);
+  if(el){el.classList.add('hit');setTimeout(()=>el.classList.remove('hit'),180)}
+  const r=menuResolve;menuResolve=null;r(k);
+}
+
+/* ---------- actions ---------- */
+function keyBox(key){
+  log('');
+  log(`    <span class="key">${esc(key)}</span>`);
+  log('');
+}
+
+async function signUp(){
+  if(session){log(`<span class="wn">[!] Already signed in as ${esc(session.name)}. Press 5 to sign out first.</span>`);return}
+  log('<span class="dim">Create your account  (Esc to go back)</span>');
+  let uname,id;
+  for(;;){
+    const n=await field(1,'Username');
+    if(n===null)return cancelled();
+    uname=n.trim();id=uname.toLowerCase();
+    if(!/^[A-Za-z0-9_.-]{2,20}$/.test(uname)||/^(__proto__|constructor|prototype)$/.test(id)){
+      log('<span class="er">[x] 2-20 chars: letters, numbers, _ . -  (no spaces)</span>');continue}
+    if(has(users(),id)){log('<span class="er">[x] That name is already taken.</span>');continue}
+    break;
+  }
+  let pw;
+  for(;;){
+    pw=await field(2,'Password',{mask:true});
+    if(pw===null)return cancelled();
+    if(pw.length<4){log('<span class="er">[x] At least 4 characters.</span>');continue}
+    break;
+  }
+  log('<span class="dim">Generating license key...</span>');
+  const salt=rnd(12), key=makeKey(), hash=await sha(salt+pw);
+  await wait(500);
+  const db=users();
+  if(has(db,id)){log('<span class="er">[x] That name was just taken. Try again.</span>');return}
+  db[id]={name:uname,salt,hash,key,created:Date.now()};
+  saveUsers(db);
+  session={id,name:uname};storeSession();setStatus();
+  log('<span class="allow">[+] Account created.</span> <span class="val">Your License Key:</span>');
+  keyBox(key);
+  log('<span class="dim">Keep it safe — you need it to sign in next time. Press 3 to copy it.</span>');
+  log('<span class="allow">[+] Status: Allowed.</span> <span class="dim">Press 4 to open the website.</span>');
+}
+
+async function signIn(){
+  if(session){log(`<span class="wn">[!] Already signed in as ${esc(session.name)}. Press 5 to sign out first.</span>`);return}
+  log('<span class="dim">Sign in  (Esc to go back)</span>');
+  const n=await field(1,'Username');if(n===null)return cancelled();
+  const pw=await field(2,'Password',{mask:true});if(pw===null)return cancelled();
+  log('<span class="dim">Verifying...</span>');
+  const id=n.trim().toLowerCase(), db=users(), u=has(db,id)?db[id]:null;
+  const hashOk=u?(await sha(u.salt+pw))===u.hash:false;
+  await wait(450);
+  if(!(u&&hashOk)){
+    log('<span class="er">[x] Invalid username or password. Status: Not Allowed.</span>');return}
+  session={id,name:u.name};storeSession();setStatus();
+  log(`<span class="allow">[+] Signed in as ${esc(u.name)}. Status: Allowed.</span>`);
+  log('<span class="val">Your License Key:</span>');
+  keyBox(u.key);
+  log('<span class="dim">Press 4 to open the website.</span>');
+}
+
+async function copyKey(){
+  if(!session){log('<span class="er">[x] Not Allowed — sign up or sign in first.</span>');return}
+  const db=users(), u=has(db,session.id)?db[session.id]:null;
+  if(!u){log('<span class="er">[x] Account not found.</span>');return}
+  let copied=false;
+  try{await navigator.clipboard.writeText(u.key);copied=true}catch{}
+  if(!copied){
+    try{
+      const t=document.createElement('textarea');t.value=u.key;t.style.cssText='position:fixed;opacity:0';
+      document.body.appendChild(t);t.select();copied=document.execCommand('copy');t.remove();
+    }catch{}
+  }
+  log(`<span class="val">Your License Key:</span>`);
+  keyBox(u.key);
+  log(copied?'<span class="allow">[+] Copied to clipboard.</span>':'<span class="wn">[!] Could not copy automatically — select the key above and copy it.</span>');
+}
+
+function openSite(){
+  if(!session){log('<span class="er">[x] Not Allowed — sign up or sign in first.</span>');return}
+  log(`<span class="allow">[+] Allowed.</span> <span class="val">Opening</span> <a href="${SITE}">${SITE}</a>`);
+  setTimeout(()=>{if(session)location.href=SITE},500);
+}
+
+function signOut(){
+  if(!session){log('<span class="wn">[!] You are not signed in.</span>');return}
+  const n=session.name;
+  session=null;storeSession();setStatus();
+  log(`<span class="wn">[!] Signed out of ${esc(n)}.</span> <span class="deny">Status: Not Allowed.</span>`);
+}
+
+async function run(k){
+  try{await run1(k)}finally{try{document.activeElement.blur()}catch{}}
+}
+async function run1(k){
+  logClear();
+  if(k==='1')await signIn();
+  else if(k==='2')await signUp();
+  else if(k==='3')await copyKey();
+  else if(k==='4')openSite();
+  else if(k==='5')signOut();
+  /* 6 = clear activity: log is already empty */
+}
+
+async function main(){
+  session=loadSession();
+  render();
+  for(;;){
+    const k=await choose();
+    await run(k);
+  }
+}
+
+/* which number key was pressed, by physical key position — works on Thai and any other keyboard layout */
+function digitOf(e){
+  const m=/^(?:Digit|Numpad)([0-9])$/.exec(e.code||'');
+  if(m)return m[1];
+  return /^[0-9]$/.test(e.key)?e.key:'';
+}
+const isKey=(e,code,ch)=>e.code===code||(e.key&&e.key.toLowerCase()===ch);
+
+/* ---------- input handling ---------- */
+function doBack(){if(pending){const p=pending;log('<span class="er">^C</span>');p.done(null)}}
+document.addEventListener('keydown',e=>{
+  /* Ctrl+C or Esc: back out of the current prompt */
+  const ae=document.activeElement;
+  const fieldSel=ae&&ae.tagName==='INPUT'&&ae.selectionStart!==ae.selectionEnd;   /* text selected inside the field */
+  if((e.key==='Escape'||(e.ctrlKey&&isKey(e,'KeyC','c')&&!fieldSel&&getSelection().toString()===''))){
+    e.preventDefault();doBack();return;
+  }
+  if(pending)return;                         /* typing in a field: let the browser handle every key */
+  if(e.key==='Tab'){e.preventDefault();return}
+  /* number keys choose a command, like pressing a menu key */
+  if(menuResolve&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+    const d=digitOf(e);
+    if(d>='1'&&d<='6'){e.preventDefault();pick(d)}
+  }
+});
+out.addEventListener('click',e=>{
+  const q=e.target.closest&&e.target.closest('.qi');
+  if(!q)return;
+  if(menuResolve){pick(q.dataset.k);return}
+  if(pending){                               /* tapping a command while typing = go back and run it */
+    const k=q.dataset.k;doBack();setTimeout(()=>pick(k),60);
+  }
+});
+term.addEventListener('click',e=>{
+  if(pending&&!(e.target.closest&&e.target.closest('.qi'))&&getSelection().toString()==='')pending.focus();
+});
+/* coming back with the browser Back button: restart cleanly */
+window.addEventListener('pageshow',e=>{if(e.persisted)location.reload()});
+window.addEventListener('DOMContentLoaded',()=>{try{window.focus()}catch{}main()});
+/* first click anywhere gives the page keyboard focus */
+window.addEventListener('pointerdown',()=>{try{window.focus()}catch{}},{capture:true});
+</script>
+</body>
+</html>
