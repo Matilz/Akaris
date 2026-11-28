@@ -3114,6 +3114,174 @@
             100% { transform: none; filter: drop-shadow(0 0 3px rgba(168,85,247,.55)); }
         }
         @media (prefers-reduced-motion: reduce) { #pdPrice.pd-bump, .pd-tn.pd-bump { animation: none; } }
+
+        /* ================= Log in button + modal ================= */
+        .tn-login { position: relative; overflow: hidden; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 9px; height: 38px; padding: 0 18px 0 14px; margin-right: 8px; border-radius: 999px; cursor: pointer; border: 1px solid rgba(255,255,255,.85); color: #2e1065; font: 800 14px 'Plus Jakarta Sans', sans-serif; background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 45%, #a855f7 85%, #9333ea 100%); box-shadow: 0 0 20px rgba(192,132,252,.65), inset 0 1px 0 rgba(255,255,255,.7); transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s; }
+        .tn-login svg { width: 17px; height: 17px; transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+        .tn-login::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(circle at 20% 30%, #7e22ce 0 1px, transparent 2px), radial-gradient(circle at 58% 72%, #fff 0 1.3px, transparent 2.4px), radial-gradient(circle at 86% 30%, #6b21a8 0 1px, transparent 2px); animation: tbTw 2.6s ease-in-out infinite; pointer-events: none; }
+        .tl-shine, .lg-shine { position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.7), transparent); transform: skewX(-20deg); animation: uxShine 3.2s ease-in-out infinite; pointer-events: none; }
+        .tn-login:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 0 30px rgba(232,121,249,.9), 0 6px 16px rgba(88,28,135,.5), inset 0 1px 0 rgba(255,255,255,.9); }
+        .tn-login:hover svg { transform: scale(1.2) rotate(-8deg); } .tn-login:active { transform: scale(.95); transition-duration: .1s; }
+        @media (max-width: 720px) { .tn-login { height: 34px; padding: 0 12px 0 10px; margin-right: 4px; font-size: 13px; gap: 6px; } }
+        @media (max-width: 380px) { .tn-login span { display: none; } .tn-login { padding: 0 10px; } }
+        #loginModal .modal-card { background: radial-gradient(90% 40% at 50% -10%, rgba(147,51,234,.4), transparent 65%), linear-gradient(180deg, #120622, #06020e) !important; border: 1px solid rgba(168,85,247,.5) !important; border-radius: 26px !important; box-shadow: 0 0 60px rgba(126,34,206,.45), 0 30px 80px rgba(0,0,0,.6) !important; overflow: hidden; }
+        #loginModal .modal-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; background: radial-gradient(circle at 14% 18%, #fff 0 1px, transparent 2px), radial-gradient(circle at 82% 12%, #e9d5ff 0 1.2px, transparent 2.4px), radial-gradient(circle at 90% 62%, #fff 0 1px, transparent 2px), radial-gradient(circle at 8% 78%, #f5d0fe 0 1px, transparent 2px), radial-gradient(circle at 52% 94%, #fff 0 1.2px, transparent 2.4px); animation: tbTw 3.2s ease-in-out infinite; }
+        .lg-in { position: relative; display: flex; flex-direction: column; gap: 16px; padding: 30px 30px 32px; animation: nxRise .7s cubic-bezier(.22,1,.36,1) backwards; }
+        .lg-logo { position: relative; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; color: #fff; background: linear-gradient(135deg, #7c3aed, #c026d3); box-shadow: 0 0 30px rgba(192,38,211,.7), inset 0 1px 0 rgba(255,255,255,.4); animation: uxFloat 4.5s ease-in-out infinite; }
+        .lg-logo::after { content: ''; position: absolute; inset: -6px; border-radius: 20px; border: 1.5px solid rgba(232,121,249,.7); animation: uxPing 2.6s ease-out infinite; }
+        .lg-logo svg { width: 28px; height: 28px; filter: drop-shadow(0 0 6px rgba(255,255,255,.7)); }
+        .lg-title { margin: 6px 0 0; font: 800 34px/1.05 'Plus Jakarta Sans', sans-serif; letter-spacing: -.02em; background: linear-gradient(180deg, #fff 30%, #d8b4fe); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 16px rgba(168,85,247,.5)); }
+        .lg-desc { margin: -4px 0 4px; font: 500 14.5px/1.5 'Plus Jakarta Sans', sans-serif; color: rgba(216,180,254,.75); }
+        .lg-discord { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; gap: 12px; height: 54px; border-radius: 999px; cursor: pointer; border: 1px solid rgba(255,255,255,.85); color: #2e1065; font: 800 15.5px 'Plus Jakarta Sans', sans-serif; background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 40%, #a855f7 80%, #9333ea 100%); box-shadow: 0 0 28px rgba(192,132,252,.6), inset 0 1px 0 rgba(255,255,255,.7); transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s; }
+        .lg-discord svg { width: 22px; height: 22px; transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+        .lg-discord:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 40px rgba(232,121,249,.85), 0 10px 24px rgba(88,28,135,.5), inset 0 1px 0 rgba(255,255,255,.9); }
+        .lg-discord:hover svg { transform: scale(1.2) rotate(-10deg); } .lg-discord:active { transform: scale(.97); transition-duration: .1s; }
+        .lg-list { list-style: none; margin: 4px 0 0; padding: 18px 0 0; display: flex; flex-direction: column; gap: 14px; border-top: 1px solid rgba(147,51,234,.3); }
+        .lg-list li { display: flex; align-items: center; gap: 14px; font: 500 14px/1.4 'Plus Jakarta Sans', sans-serif; color: rgba(233,213,255,.85); }
+        .lg-list svg { flex: 0 0 auto; width: 30px; height: 30px; padding: 7px; border-radius: 10px; color: #f0abfc; background: rgba(168,85,247,.16); border: 1px solid rgba(192,132,252,.3); transition: transform .4s cubic-bezier(.34,1.56,.64,1), background .3s; }
+        .lg-list li:hover svg { transform: scale(1.15) rotate(-8deg); background: rgba(168,85,247,.35); }
+        .lg-or { display: flex; align-items: center; gap: 14px; color: rgba(216,180,254,.55); font: 600 12px 'Plus Jakarta Sans', sans-serif; }
+        .lg-or::before, .lg-or::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(147,51,234,.5)); } .lg-or::after { transform: scaleX(-1); }
+        .lg-free { display: flex; align-items: center; justify-content: center; gap: 10px; height: 50px; border-radius: 999px; cursor: pointer; color: #f5d0fe; font: 700 14.5px 'Plus Jakarta Sans', sans-serif; background: rgba(168,85,247,.1); border: 1px solid rgba(192,132,252,.55); box-shadow: inset 0 0 18px rgba(88,28,135,.35); transition: transform .4s cubic-bezier(.34,1.56,.64,1), background .3s, box-shadow .3s, border-color .3s; }
+        .lg-free svg { width: 18px; height: 18px; transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+        .lg-free:hover { transform: translateY(-2px); background: rgba(168,85,247,.25); border-color: #e879f9; box-shadow: 0 0 26px rgba(168,85,247,.55), inset 0 0 18px rgba(88,28,135,.35); } .lg-free:hover svg { transform: rotate(-12deg) scale(1.2); } .lg-free:active { transform: scale(.97); }
+        @media (max-width: 480px) { .lg-in { padding: 26px 20px 28px; } }
+        @media (prefers-reduced-motion: reduce) { .tn-login::before, .tl-shine, .lg-shine, .lg-logo, .lg-logo::after, #loginModal .modal-card::before, .lg-in { animation: none !important; } }
+
+        .lg-form { display: flex; gap: 8px; animation: nxRise .4s ease backwards; } .lg-form[hidden], .lg-user[hidden], .lg-discord[hidden] { display: none !important; }
+        .lg-form input { flex: 1; min-width: 0; height: 48px; padding: 0 18px; border-radius: 999px; color: #fff; font: 600 14.5px 'Plus Jakarta Sans', sans-serif; background: rgba(168,85,247,.12); border: 1px solid rgba(192,132,252,.55); outline: none; } .lg-form input:focus { border-color: #e879f9; box-shadow: 0 0 20px rgba(192,38,211,.45); }
+        .lg-form button, .lg-user button { height: 48px; padding: 0 20px; border-radius: 999px; cursor: pointer; font: 800 14px 'Plus Jakarta Sans', sans-serif; color: #2e1065; border: 1px solid rgba(255,255,255,.8); background: linear-gradient(135deg, #f3e8ff, #c084fc 60%, #9333ea); }
+        .lg-user { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 8px 8px 20px; border-radius: 999px; background: rgba(168,85,247,.14); border: 1px solid rgba(192,132,252,.5); color: #f5d0fe; font: 700 15px 'Plus Jakarta Sans', sans-serif; } .lg-user b { overflow: hidden; text-overflow: ellipsis; } .lg-user button { height: 38px; padding: 0 16px; }
+
+
+        /* ===== Log in as a full tab page ===== */
+        #loginModal { top: 58px; z-index: 55; align-items: flex-start; padding: 24px 16px 32px; overflow-y: auto; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; transition: opacity .3s ease, visibility .3s; }
+        #loginModal > .modal-card { margin: auto !important; transform: none !important; max-height: none !important; width: 100%; max-width: 1060px !important; border-radius: 28px !important; }
+        #loginModal .modal-close { display: none; }
+        #loginModal .lg-in { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: 56px; row-gap: 16px; align-items: start; padding: 56px 56px 60px; }
+        #loginModal .lg-logo, #loginModal .lg-title, #loginModal .lg-desc, #loginModal .lg-discord, #loginModal .lg-form, #loginModal .lg-user { grid-column: 1; }
+        #loginModal .lg-list { grid-column: 2; grid-row: 1 / span 4; margin-top: 0; padding: 26px; border: 1px solid rgba(147,51,234,.35); border-radius: 22px; background: rgba(88,28,135,.14); gap: 20px; }
+        #loginModal .lg-or { grid-column: 1; } #loginModal .lg-free { grid-column: 1; }
+        #loginModal .lg-title { font-size: 3rem; } #loginModal .lg-desc { font-size: 16px; }
+        @media (max-width: 760px) { #loginModal { top: 54px; padding: 14px 8px 24px; } #loginModal .lg-in { display: flex; padding: 28px 20px 30px; } #loginModal .lg-title { font-size: 2.2rem; } #loginModal .lg-list { order: 5; padding: 18px; } }
+        html body #topNav .tn-login.tn-active { box-shadow: 0 0 0 2px rgba(245,208,254,.95), 0 0 34px rgba(232,121,249,.95), inset 0 1px 0 rgba(255,255,255,.9); }
+
+        /* ---- Log in page: extra flair ---- */
+        #loginModal .lg-side { grid-column: 2; grid-row: 1 / span 5; display: flex; flex-direction: column; gap: 14px; }
+        #loginModal .lg-list { grid-column: auto; grid-row: auto; padding: 0; border: 0; background: none; gap: 12px; }
+        #loginModal .lg-list li { position: relative; overflow: hidden; align-items: center; gap: 16px; padding: 16px 18px; border-radius: 20px; background: linear-gradient(135deg, rgba(126,34,206,.22), rgba(20,8,40,.6)); border: 1px solid rgba(168,85,247,.38); transition: transform .45s cubic-bezier(.34,1.56,.64,1), border-color .3s, box-shadow .3s; }
+        #loginModal .lg-list li:hover { transform: translateX(8px) scale(1.01); border-color: #e9d5ff; box-shadow: 0 0 28px rgba(168,85,247,.5); }
+        #loginModal .lg-list li svg { width: 46px; height: 46px; padding: 12px; border-radius: 15px; color: #fff; background: linear-gradient(145deg, #7e22ce, #c084fc 70%); border: 1px solid rgba(255,255,255,.4); box-shadow: 0 0 20px rgba(168,85,247,.6); }
+        #loginModal .lg-list b { display: block; color: #fff; font: 800 15.5px 'Plus Jakarta Sans', sans-serif; } #loginModal .lg-list small { display: block; margin-top: 3px; color: rgba(216,180,254,.65); font: 500 12.5px 'Plus Jakarta Sans', sans-serif; }
+        .lg-tag { display: flex; align-items: center; gap: 10px; margin-top: 4px; color: #e9d5ff; font: 800 11px 'Plus Jakarta Sans', sans-serif; letter-spacing: .24em; text-transform: uppercase; }
+        .lg-tag i { width: 8px; height: 8px; border-radius: 2px; transform: rotate(45deg); background: #e879f9; box-shadow: 0 0 10px #e879f9; animation: uxBlink 2s ease-in-out infinite; }
+        .lg-tag::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(168,85,247,.6), transparent); }
+        .lg-quick { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+        .lg-q { position: relative; overflow: hidden; display: flex; align-items: center; gap: 11px; height: 56px; padding: 0 16px; border-radius: 18px; cursor: pointer; color: #2e1065; font: 800 14.5px 'Plus Jakarta Sans', sans-serif; border: 1px solid rgba(255,255,255,.75); background: linear-gradient(135deg, #f3e8ff, #d8b4fe 50%, #a855f7); box-shadow: 0 0 18px rgba(192,132,252,.45), inset 0 1px 0 rgba(255,255,255,.7); transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+        .lg-q svg { width: 20px; height: 20px; transition: transform .45s cubic-bezier(.34,1.56,.64,1); }
+        .lg-q:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 0 32px rgba(232,121,249,.85), 0 10px 20px rgba(88,28,135,.45); } .lg-q:hover svg { transform: rotate(-14deg) scale(1.25); } .lg-q:active { transform: scale(.95); }
+        .lg-q-shine { position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.75), transparent); transform: skewX(-20deg); transition: left .7s ease; pointer-events: none; } .lg-q:hover .lg-q-shine { left: 130%; }
+        .lg-orb { position: absolute; inset: -12px; border-radius: 50%; border: 1px dashed rgba(216,180,254,.55); animation: lgSpin 9s linear infinite; pointer-events: none; }
+        .lg-orb.o2 { inset: -22px; border-style: dotted; border-color: rgba(232,121,249,.4); animation-duration: 14s; animation-direction: reverse; }
+        .lg-orb::after { content: ''; position: absolute; top: -3px; left: 50%; width: 7px; height: 7px; border-radius: 50%; background: #fff; box-shadow: 0 0 12px 3px #e879f9; }
+        @keyframes lgSpin { to { transform: rotate(360deg); } }
+        #loginModal .lg-logo { width: 64px; height: 64px; margin: 14px 0 12px 14px; border-radius: 20px; } #loginModal .lg-logo::after { border-radius: 24px; }
+        #loginModal .lg-title { background: linear-gradient(110deg, #fff 0%, #e9d5ff 30%, #c084fc 55%, #fff 75%, #e9d5ff 100%); background-size: 240% 100%; -webkit-background-clip: text; background-clip: text; animation: uxShine2 6s linear infinite; }
+        @keyframes uxShine2 { to { background-position: -240% 0; } }
+        @media (max-width: 760px) { #loginModal .lg-side { order: 5; } #loginModal .lg-quick { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+        @media (prefers-reduced-motion: reduce) { .lg-orb, .lg-tag i, #loginModal .lg-title { animation: none !important; } }
+
+        #loginModal .lg-in { align-content: start; grid-template-rows: none; grid-auto-rows: min-content; }
+        #loginModal .lg-side { align-self: start; }
+        @media (max-width: 760px) { #loginModal .lg-in { align-items: stretch; } #loginModal .lg-logo { align-self: flex-start; } }
+
+        @media (min-width: 761px) { #loginModal .lg-in { grid-template-rows: repeat(8, auto) 1fr; grid-auto-rows: auto; } #loginModal .lg-side { grid-row: 1 / 10; } }
+        @media (max-width: 760px) { #loginModal .lg-list { order: 0; } }
+
+        /* custom Akari emblem (own design, no stock icon) */
+        #loginModal .lg-logo { width: 96px; height: 96px; margin: 8px 0 10px 8px; border-radius: 0; background: none !important; box-shadow: none !important; border: 0; animation: uxFloat 4.5s ease-in-out infinite; }
+        #loginModal .lg-logo::after { display: none; }
+        #loginModal .lg-orb { inset: -10px; }
+        #loginModal .lg-orb.o2 { inset: -20px; }
+        #loginModal .lg-emb { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 14px rgba(192,38,211,.85)); transition: transform .6s cubic-bezier(.34,1.56,.64,1); }
+        #loginModal .lg-logo:hover .lg-emb { transform: scale(1.12) rotate(-4deg); }
+        .lg-e-glow { transform-origin: 60px 64px; animation: lgBreath 3.4s ease-in-out infinite; }
+        .lg-e-base { animation: lgEdge 3.4s ease-in-out infinite; }
+        .lg-e-line { stroke-dasharray: 160; stroke-dashoffset: 160; animation: lgDraw 3.6s ease-in-out infinite; }
+        .lg-e-eye { transform-origin: 60px 56px; animation: lgBreath 1.8s ease-in-out infinite; filter: drop-shadow(0 0 6px #fff); }
+        .lg-e-star { transform-box: fill-box; transform-origin: center; animation: lgTwinkle 2.2s ease-in-out infinite; } .lg-e-star.s2 { animation-delay: 1.1s; }
+        @keyframes lgBreath { 0%,100% { transform: scale(.88); opacity: .7; } 50% { transform: scale(1.12); opacity: 1; } }
+        @keyframes lgEdge { 0%,100% { stroke-width: 3; } 50% { stroke-width: 4.5; } }
+        @keyframes lgDraw { 0% { stroke-dashoffset: 160; } 45%,80% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -160; } }
+        @keyframes lgTwinkle { 0%,100% { transform: scale(.3) rotate(0); opacity: .3; } 50% { transform: scale(1.1) rotate(45deg); opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) { .lg-e-glow, .lg-e-base, .lg-e-line, .lg-e-eye, .lg-e-star, #loginModal .lg-logo { animation: none !important; } .lg-e-line { stroke-dashoffset: 0; } }
+
+        /* custom hand-drawn perk icons */
+        #loginModal .lg-list li .lg-ico { flex: 0 0 auto; position: relative; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 17px; background: linear-gradient(145deg, #7e22ce, #c084fc 70%, #9333ea); border: 1px solid rgba(255,255,255,.45); box-shadow: 0 0 22px rgba(168,85,247,.65), inset 0 1px 0 rgba(255,255,255,.5); transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+        #loginModal .lg-list li .lg-ico svg { width: 34px; height: 34px; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; color: #fff; overflow: visible; filter: drop-shadow(0 0 5px rgba(255,255,255,.7)); }
+        #loginModal .lg-list li:hover .lg-ico { transform: rotate(-8deg) scale(1.12); }
+        #loginModal .lg-list li:hover svg { transform: none; background: none; }
+        .ic-spin { transform-origin: 24px 24px; animation: lgSpin 7s linear infinite; }
+        .ic-pop { transform-box: fill-box; transform-origin: center; animation: lgBreath 2.8s ease-in-out infinite; }
+        .ic-tw { transform-box: fill-box; transform-origin: center; animation: lgTwinkle 2.2s ease-in-out infinite; }
+        .lg-list li:nth-child(2) .ic-tw { animation-delay: .7s; } .lg-list li:nth-child(3) .ic-tw { animation-delay: 1.4s; }
+        @media (prefers-reduced-motion: reduce) { .ic-spin, .ic-pop, .ic-tw { animation: none !important; } }
+
+        /* password sign up / log in */
+        .lg-auth { grid-column: 1; display: flex; flex-direction: column; gap: 12px; } .lg-auth[hidden] { display: none !important; }
+        .lg-or2 { margin: 2px 0 0; }
+        .lg-tabs { position: relative; display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: rgba(10,4,20,.7); border: 1px solid rgba(168,85,247,.4); }
+        .lg-tabs i { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 999px; background: linear-gradient(135deg, #f3e8ff, #c084fc 60%, #9333ea); box-shadow: 0 0 18px rgba(192,132,252,.7); transition: transform .45s cubic-bezier(.34,1.45,.5,1); }
+        .lg-tabs[data-m="up"] i { transform: translateX(100%); }
+        .lg-tabs button { position: relative; z-index: 1; height: 40px; border-radius: 999px; cursor: pointer; font: 800 14px 'Plus Jakarta Sans', sans-serif; color: #d8b4fe; transition: color .3s; } .lg-tabs button.on { color: #2e1065; }
+        #authForm { display: flex; flex-direction: column; gap: 12px; }
+        .lg-field { position: relative; display: flex; align-items: center; height: 52px; border-radius: 16px; background: rgba(168,85,247,.1); border: 1px solid rgba(192,132,252,.4); transition: border-color .3s, box-shadow .3s; animation: nxRise .4s ease backwards; } .lg-field[hidden] { display: none !important; }
+        .lg-field:focus-within { border-color: #e879f9; box-shadow: 0 0 22px rgba(192,38,211,.5); }
+        .lg-field > svg { flex: 0 0 auto; width: 20px; height: 20px; margin-left: 16px; color: #d8b4fe; }
+        .lg-field input { flex: 1; min-width: 0; height: 100%; padding: 0 14px; background: none; border: 0; outline: none; color: #fff; font: 600 15px 'Plus Jakarta Sans', sans-serif; } .lg-field input::placeholder { color: rgba(216,180,254,.5); }
+        .lg-eye { display: grid; place-items: center; width: 48px; height: 100%; cursor: pointer; color: #d8b4fe; } .lg-eye svg { width: 20px; height: 20px; } .lg-eye:hover { color: #fff; }
+        .lg-msg { min-height: 0; color: #fda4af; font: 700 13px 'Plus Jakarta Sans', sans-serif; } .lg-msg:empty { display: none; } .lg-msg.shake { animation: lgShake .4s; }
+        @keyframes lgShake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+        .lg-go { position: relative; overflow: hidden; height: 54px; border-radius: 999px; cursor: pointer; font: 800 15.5px 'Plus Jakarta Sans', sans-serif; color: #fff; border: 1px solid rgba(233,213,255,.7); background: linear-gradient(120deg, #7e22ce, #c026d3 55%, #9333ea); box-shadow: 0 0 26px rgba(168,85,247,.6), inset 0 1px 0 rgba(255,255,255,.4); transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+        .lg-go:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 40px rgba(232,121,249,.85); } .lg-go:active { transform: scale(.97); }
+        .lg-go .lg-shine { position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-20deg); animation: uxShine 3.2s ease-in-out infinite; }
+        @media (min-width: 761px) { #loginModal .lg-in { grid-template-rows: repeat(9, auto) 1fr; } #loginModal .lg-side { grid-row: 1 / 11; } #loginModal .lg-or, #loginModal .lg-free { grid-column: 1; } }
+
+        html body #loginModal .lg-tabs button, html body #loginModal .lg-eye { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+        html body #loginModal .lg-tabs button.on { color: #2e1065 !important; }
+
+        /* ===== cooler Log in nav button: dark glass + spinning neon rim ===== */
+        @property --lgA { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+        html body #topNav .tn-login { height: 42px; padding: 0 22px 0 16px; gap: 10px; color: #fff; border: 0; letter-spacing: .02em; background: linear-gradient(135deg, rgba(88,28,135,.85), rgba(20,6,40,.95)); box-shadow: 0 0 22px rgba(168,85,247,.6), inset 0 0 16px rgba(192,132,252,.35); isolation: isolate; }
+        html body #topNav .tn-login::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 2px; background: conic-gradient(from var(--lgA), #f5d0fe, #a855f7, #3b0764 35%, #e879f9 60%, #fff 75%, #a855f7, #f5d0fe); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: lgRim 3.2s linear infinite; }
+        html body #topNav .tn-login::after { content: ''; position: absolute; inset: 2px; z-index: -1; border-radius: inherit; background: radial-gradient(circle at 20% 25%, #fff 0 1px, transparent 2px), radial-gradient(circle at 70% 75%, #f0abfc 0 1.2px, transparent 2.4px), radial-gradient(circle at 90% 30%, #fff 0 1px, transparent 2px); animation: tbTw 2.4s ease-in-out infinite; }
+        @keyframes lgRim { to { --lgA: 360deg; } }
+        html body #topNav .tn-login svg { width: 20px; height: 20px; padding: 3px; border-radius: 50%; color: #2e1065; background: linear-gradient(145deg, #fff, #d8b4fe); box-shadow: 0 0 12px rgba(232,121,249,.9); }
+        html body #topNav .tn-login span { background: linear-gradient(110deg, #fff, #f5d0fe 50%, #fff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+        html body #topNav .tn-login .tl-shine { background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent); }
+        html body #topNav .tn-login:hover { transform: translateY(-2px) scale(1.07); box-shadow: 0 0 36px rgba(232,121,249,.95), 0 8px 18px rgba(88,28,135,.55), inset 0 0 20px rgba(192,132,252,.6); }
+        html body #topNav .tn-login:hover svg { transform: scale(1.18) rotate(-10deg); }
+        html body #topNav .tn-login.tn-active { background: linear-gradient(135deg, #7e22ce, #c026d3); box-shadow: 0 0 36px rgba(232,121,249,.95), inset 0 0 18px rgba(255,255,255,.35); }
+        @media (max-width: 720px) { html body #topNav .tn-login { height: 36px; padding: 0 14px 0 11px; gap: 7px; } html body #topNav .tn-login svg { width: 18px; height: 18px; } }
+        @media (max-width: 380px) { html body #topNav .tn-login { padding: 0 9px; } }
+        @media (prefers-reduced-motion: reduce) { html body #topNav .tn-login::before, html body #topNav .tn-login::after { animation: none !important; } }
+        /* form Log in button: same spinning rim */
+        .lg-go::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 2px; background: conic-gradient(from var(--lgA), #fff, #a855f7 30%, #e879f9 60%, #fff); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: lgRim 3s linear infinite; pointer-events: none; }
+
+        /* ===== cooler Log in / Sign up switch ===== */
+        .lg-tabs { padding: 5px; border-radius: 20px; background: linear-gradient(180deg, rgba(10,4,20,.9), rgba(30,10,55,.7)); border: 1px solid rgba(192,132,252,.5); box-shadow: inset 0 0 22px rgba(88,28,135,.5), 0 0 24px rgba(126,34,206,.35); }
+        .lg-tabs > i.lg-ind { position: absolute; top: 5px; bottom: 5px; left: 5px; width: calc(50% - 5px); border-radius: 15px; background: none; box-shadow: none; transform: none; transition: left .55s cubic-bezier(.34,1.4,.5,1); z-index: 0; }
+        .lg-tabs[data-m="up"] > i.lg-ind { left: 50%; transform: none; }
+        .lg-ind b { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 45%, #a855f7 90%); box-shadow: 0 0 24px rgba(192,132,252,.9), 0 0 0 1px rgba(255,255,255,.8), inset 0 1px 0 rgba(255,255,255,.8); }
+        .lg-ind b::before { content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.85), transparent); transform: skewX(-20deg); animation: uxShine 2.8s ease-in-out infinite; }
+        .lg-ind b::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 18% 30%, #7e22ce 0 1px, transparent 2px), radial-gradient(circle at 62% 72%, #fff 0 1.3px, transparent 2.4px), radial-gradient(circle at 88% 28%, #6b21a8 0 1px, transparent 2px); animation: tbTw 2.4s ease-in-out infinite; }
+        .lg-tabs button { display: flex; align-items: center; justify-content: center; gap: 9px; height: 46px; border-radius: 15px; font-size: 14.5px; transition: color .3s, transform .3s; }
+        .lg-tabs button svg { width: 19px; height: 19px; transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+        .lg-tabs button:not(.on):hover { color: #fff; transform: translateY(-1px); text-shadow: 0 0 12px rgba(232,121,249,.9); }
+        .lg-tabs button.on svg { transform: scale(1.18) rotate(-8deg); }
+        #authForm.swap { animation: lgSwap .5s cubic-bezier(.22,1,.36,1); }
+        @keyframes lgSwap { from { opacity: 0; transform: translateY(14px) scale(.98); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+        @media (prefers-reduced-motion: reduce) { .lg-ind b::before, .lg-ind b::after, #authForm.swap { animation: none !important; } }
 </style>
 </head>
 <body class="relative flex flex-col items-center justify-center p-4 bg-grid" style="justify-content: safe center;">
@@ -3503,6 +3671,7 @@
                 </div>
 
             </div>
+            <button id="loginBtn" type="button" class="tn-login" onclick="openLogin(event)" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>Log in</span><i class="tl-shine"></i></button>
             <button id="dlBtn" type="button" class="tn-dl" data-label="Download" aria-label="Download website" title="Download website" onclick="openDownload(event)" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16"/></svg></button>
             <button id="tnMenuBtn" type="button" class="tn-menu" aria-label="Menu" aria-expanded="false" aria-controls="tnSheet" onclick="tnMenu()"><i></i><i></i><i></i></button>
         </div>
@@ -3578,6 +3747,52 @@
             <div class="pd-scroll">
                 <div id="productHead" class="pd-head"></div>
                 <div id="productGrid" class="pd-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="lgTitle" onclick="if(event.target===this)closeLogin()">
+        <div class="themed modal-card lg-card" style="max-width:420px;padding:0">
+            <button type="button" class="modal-close" onclick="closeLogin()" aria-label="Close">&times;</button>
+            <div class="lg-in">
+                <span class="lg-logo"><b class="lg-orb o1"></b><b class="lg-orb o2"></b>
+                    <svg class="lg-emb" viewBox="0 0 120 120" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="lgG1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5d0fe"/><stop offset=".5" stop-color="#c084fc"/><stop offset="1" stop-color="#7e22ce"/></linearGradient>
+                            <linearGradient id="lgG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#d8b4fe"/></linearGradient>
+                            <radialGradient id="lgG3" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#e879f9" stop-opacity="0"/></radialGradient>
+                        </defs>
+                        <circle class="lg-e-glow" cx="60" cy="64" r="44" fill="url(#lgG3)"/>
+                        <polygon class="lg-e-base" points="60,14 100,92 20,92" fill="rgba(88,28,135,.55)" stroke="url(#lgG1)" stroke-width="3" stroke-linejoin="round"/>
+                        <polygon points="60,14 100,92 60,78" fill="url(#lgG1)" opacity=".85"/>
+                        <polygon points="60,14 20,92 60,78" fill="url(#lgG2)" opacity=".55"/>
+                        <path class="lg-e-line" d="M60 14 L60 78 M20 92 L60 78 L100 92" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+                        <path class="lg-e-star s1" d="M96 24 l2.4 6.6 6.6 2.4 -6.6 2.4 -2.4 6.6 -2.4 -6.6 -6.6 -2.4 6.6 -2.4z" fill="#fff"/>
+                        <path class="lg-e-star s2" d="M24 40 l1.6 4.4 4.4 1.6 -4.4 1.6 -1.6 4.4 -1.6 -4.4 -4.4 -1.6 4.4 -1.6z" fill="#f0abfc"/>
+                        <circle class="lg-e-eye" cx="60" cy="56" r="5" fill="#fff"/>
+                    </svg></span>
+                <h2 id="lgTitle" class="lg-title">Log in</h2>
+                <p class="lg-desc">Log in to buy keys, renew them and manage your account.</p>
+                <button type="button" class="lg-discord" onclick="loginDiscord()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.1 1.7 16.9A16.8 16.8 0 006.800 19.500l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.200 0l.4.300c-.5.400-1.100.700-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.600-11.500zM9.500 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm5 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg><span>Continue with Discord</span><i class="lg-shine"></i></button>
+                <form id="lgForm" class="lg-form" onsubmit="return loginSubmit(event)" hidden>
+                    <input id="lgName" type="text" maxlength="32" autocomplete="off" placeholder="Your Discord username" aria-label="Discord username">
+                    <button type="submit">Log in</button>
+                </form>
+                <div id="lgAuth" class="lg-auth">
+                    <div class="lg-or lg-or2"><span>or use a password</span></div>
+                    <div class="lg-tabs" role="tablist"><i class="lg-ind"><b></b></i><button type="button" class="on" data-m="in" onclick="authMode('in')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 012 2v12a2 2 0 01-2 2h-3M10 17l5-5-5-5M15 12H4"/></svg><span>Log in</span></button><button type="button" data-m="up" onclick="authMode('up')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-3.900 3-6 7-6s7 2.100 7 6M19 8v6M16 11h6"/></svg><span>Sign up</span></button></div>
+                    <form id="authForm" onsubmit="return authSubmit(event)" autocomplete="off">
+                        <label class="lg-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><input id="auName" type="text" maxlength="24" placeholder="Username" autocomplete="username"></label>
+                        <label class="lg-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg><input id="auPass" type="password" maxlength="64" placeholder="Password" autocomplete="current-password"><button type="button" class="lg-eye" onclick="authEye()" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></label>
+                        <label class="lg-field lg-conf" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><input id="auPass2" type="password" maxlength="64" placeholder="Confirm password" autocomplete="new-password"></label>
+                        <div id="auMsg" class="lg-msg" role="alert"></div>
+                        <button type="submit" class="lg-go"><span id="auGoTxt">Log in</span><i class="lg-shine"></i></button>
+                    </form>
+                </div>
+                <div id="lgUser" class="lg-user" hidden><b id="lgUserName"></b><button type="button" onclick="loginOut()">Log out</button></div>
+                <div class="lg-side"><div class="lg-tag"><i></i>Member perks</div><ul class="lg-list"><li><span class="lg-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path class="ic-spin" d="M38 20a15 15 0 00-27-5M10 28a15 15 0 0027 5" /><path class="ic-spin" d="M11 8v7h7M37 40v-7h-7"/><path class="ic-pop" d="M24 15l7 9-7 9-7-9z" fill="rgba(255,255,255,.28)"/><path d="M17 24h14"/></svg></span><div><b>Buy and renew keys</b><small>Re-buy the same key to extend its time</small></div></li><li><span class="lg-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-38 24 24)"><path class="ic-pop" d="M4 24l9-11 9 11-9 11z" fill="rgba(255,255,255,.3)"/><circle cx="13" cy="24" r="2.2" fill="#fff" stroke="none"/><path d="M22 24h20M34 24v7M41 24v5"/></g><path class="ic-tw" d="M38 6v8M34 10h8" stroke-width="2"/></svg></span><div><b>Manage your keys</b><small>Every key lives in your Backpack</small></div></li><li><span class="lg-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="20" width="32" height="8" rx="2" fill="rgba(255,255,255,.28)"/><path d="M11 28v11a3 3 0 003 3h20a3 3 0 003-3V28M24 20v22"/><path class="ic-pop" d="M24 20c-6 0-9-6-5-8s5 4 5 8c0-4 1-10 5-8s1 8-5 8z"/><path class="ic-tw" d="M40 6v6M37 9h6" stroke-width="2"/></svg></span><div><b>Free keys anytime</b><small>Finish a few tasks and get one free</small></div></li></ul><div class="lg-tag"><i></i>Quick access</div><div class="lg-quick"><button type="button" class="lg-q" onclick="openProduct(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Products</span><i class="lg-q-shine"></i></button><button type="button" class="lg-q" onclick="openBackpack(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"/></svg><span>Backpack</span><i class="lg-q-shine"></i></button><button type="button" class="lg-q" onclick="openFreeKey(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7M7.5 8a2.5 2.5 0 010-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 010 5"/></svg><span>Get Key</span><i class="lg-q-shine"></i></button><button type="button" class="lg-q" onclick="openStatus(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span>Status</span><i class="lg-q-shine"></i></button></div></div>
+                <div class="lg-or"><span>or</span></div>
+                <button type="button" class="lg-free" onclick="closeLogin(); openFreeKey();"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7M7.500 8a2.500 2.500 0 010-5C11 3 12 8 12 8s1-5 4.500-5a2.500 2.500 0 010 5"/></svg><span>Get a free key</span></button>
             </div>
         </div>
     </div>
@@ -4965,7 +5180,7 @@
                 + '<div class="pd-code"><div class="pd-label">Discount code</div><div class="pd-codebox"><input id="pdCode" type="text" placeholder="Enter a code" autocomplete="off" spellcheck="false"><button type="button" class="pd-codecopy" onclick="pdCopyCode(this)" aria-label="Copy code"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><span>Copy</span></button><button type="button" onclick="pdApply(' + ci + ',' + i + ')">Apply</button></div></div></div>'
                 + '<div class="pd-hint">' + (it.days ? 'Each extra quantity adds ' + it.duration + ' to your key (same key, no extra keys) &middot; ' : '') + 'Up to ' + pdMax(it) + ' per order &middot; ' + it.stock + ' in stock</div>'
                 + '<div class="pd-totalrow"><span>Total</span><b id="pdTotal"></b></div>'
-                + '<button id="pdBuyBtn" type="button" class="pd-buy pd-buy-wide" ' + (out ? 'disabled>Out of stock' : 'onclick="startPurchase(' + ci + ',' + i + ')"><span class="pd-buy-txt">Buy now</span>') + '</button>'
+                + '<button id="pdBuyBtn" type="button" class="pd-buy pd-buy-wide' + (loginUser() ? '' : ' pd-buy-guest') + '" ' + (out ? 'disabled>Out of stock' : 'onclick="startPurchase(' + ci + ',' + i + ')"><span class="pd-buy-txt">' + (loginUser() ? 'Buy now' : 'Log in to buy') + '</span>') + '</button>'
                 + '</div></div>';
             const pdIn = document.getElementById('pdCode');
             pdIn.value = code;
@@ -5033,6 +5248,7 @@
         function startPurchase(ci, i) {
             const btn = document.getElementById('pdBuyBtn');
             if (!btn || btn.dataset.busy) return;
+            if (!loginUser()) { showNotify('LOG IN', 'LOG IN TO BUY KEYS', false); window.__afterLogin = function () { startPurchase(ci, i); }; openLogin(); return; }
             btn.dataset.busy = '1';
             /* same purple verifying bar as the intro and the Get Script tab: fills linearly over 3 seconds */
             const box = document.createElement('div');
@@ -5134,7 +5350,7 @@
             const grid = document.getElementById('productGrid');
             const qty = parseInt(grid.dataset.qty, 10) || 1;
             const bkId = bkAdd(it, qty);
-            showProductCategories(); openBackpack(null, bkId);
+            closeProduct(); showProductCategories(); openBackpack(null, bkId);
             setTimeout(function () {
                 const msg = bkLastRenew === 'renew' ? 'KEY RENEWED - TIME ADDED TO YOUR KEY' : bkLastRenew === 'upgrade' ? 'KEY UPGRADED TO LIFETIME' : bkLastRenew === 'life' ? 'YOU ALREADY OWN THIS KEY FOR LIFETIME' : 'PURCHASE COMPLETE - KEY SAVED IN BACKPACK';
                 showNotify('BACKPACK PRODUCT', msg, bkLastRenew !== 'life');
@@ -5333,6 +5549,79 @@
         })();
 
 
+        /* put your Discord login / invite link here (https://discord.gg/...). While it is empty the button just shows a notice. */
+        const LOGIN_DISCORD_URL = '';
+        function openLogin(e) { if (e) e.stopPropagation(); loginRefresh(); const m = document.getElementById('loginModal'); m.classList.add('open'); }
+        function closeLogin() { const m = document.getElementById('loginModal'); if (m) m.classList.remove('open'); }
+        /* local profile only (no server): the name is kept in this browser */
+        function loginUser() { try { return localStorage.getItem('akariUser') || ''; } catch (e) { return ''; } }
+        function loginRefresh() {
+            const bt = document.querySelector('#pdBuyBtn .pd-buy-txt'); if (bt) { bt.textContent = loginUser() ? 'Buy now' : 'Log in to buy'; bt.closest('#pdBuyBtn').classList.toggle('pd-buy-guest', !loginUser()); }
+            const u = loginUser();
+            const sp = document.querySelector('#loginBtn span'); if (sp) sp.textContent = u ? u.slice(0, 12) : 'Log in';
+            const d = document.querySelector('.lg-discord'), f = document.getElementById('lgForm'), w = document.getElementById('lgUser');
+            if (d) d.hidden = !!u; const au = document.getElementById('lgAuth'); if (au) au.hidden = !!u; if (f) f.hidden = true; if (w) w.hidden = !u;
+            const n = document.getElementById('lgUserName'); if (n) n.textContent = u;
+            const t = document.getElementById('lgTitle'); if (t) t.textContent = u ? 'Welcome' : 'Log in';
+            const ds = document.querySelector('.lg-desc'); if (ds) ds.textContent = u ? 'You are logged in. You can buy and renew keys now.' : 'Log in to buy keys, renew them and manage your account.';
+        }
+        function loginDiscord() {
+            if (LOGIN_DISCORD_URL) window.open(LOGIN_DISCORD_URL, '_blank', 'noopener');
+            document.getElementById('lgForm').hidden = false;
+            setTimeout(function () { document.getElementById('lgName').focus(); }, 50);
+        }
+        function loginSubmit(e) {
+            e.preventDefault();
+            const v = document.getElementById('lgName').value.trim();
+            if (!v) { document.getElementById('lgName').focus(); return false; }
+            try { localStorage.setItem('akariUser', v); } catch (x) {}
+            loginRefresh(); closeLogin(); showNotify('LOG IN', 'WELCOME, ' + v.toUpperCase(), true);
+            if (window.__afterLogin) { const f = window.__afterLogin; window.__afterLogin = null; f(); }
+            return false;
+        }
+        let auMode = 'in';
+        function authMode(m) {
+            auMode = m;
+            document.querySelectorAll('.lg-tabs button').forEach(b => b.classList.toggle('on', b.dataset.m === m));
+            document.querySelector('.lg-tabs').dataset.m = m;
+            document.querySelector('.lg-conf').hidden = m !== 'up';
+            document.getElementById('auGoTxt').textContent = m === 'up' ? 'Create account' : 'Log in';
+            document.getElementById('auPass').autocomplete = m === 'up' ? 'new-password' : 'current-password';
+            document.getElementById('auMsg').textContent = '';
+            const f = document.getElementById('authForm'); f.classList.remove('swap'); void f.offsetWidth; f.classList.add('swap');
+        }
+        function authEye() { const p = document.getElementById('auPass'); p.type = p.type === 'password' ? 'text' : 'password'; }
+        async function authHash(name, pass) {
+            const data = new TextEncoder().encode('akari:' + name.toLowerCase() + ':' + pass);
+            if (window.crypto && crypto.subtle) { const h = await crypto.subtle.digest('SHA-256', data); return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, '0')).join(''); }
+            let x = 5381; for (const c of data) x = ((x << 5) + x + c) >>> 0; return 'x' + x;
+        }
+        function authAccts() { try { return JSON.parse(localStorage.getItem('akariAccts') || '{}'); } catch (e) { return {}; } }
+        async function authSubmit(e) {
+            e.preventDefault();
+            const msg = document.getElementById('auMsg'), name = document.getElementById('auName').value.trim(), pass = document.getElementById('auPass').value;
+            const bad = t => { msg.textContent = t; msg.classList.remove('shake'); void msg.offsetWidth; msg.classList.add('shake'); return false; };
+            if (name.length < 3) return bad('Username must be at least 3 characters');
+            if (pass.length < 6) return bad('Password must be at least 6 characters');
+            const acc = authAccts(), key = name.toLowerCase(), hash = await authHash(name, pass);
+            if (auMode === 'up') {
+                if (pass !== document.getElementById('auPass2').value) return bad('Passwords do not match');
+                if (acc[key]) return bad('This username is already taken');
+                acc[key] = { n: name, h: hash };
+                try { localStorage.setItem('akariAccts', JSON.stringify(acc)); } catch (x) { return bad('Cannot save the account in this browser'); }
+            } else {
+                if (!acc[key]) return bad('No account with this username');
+                if (acc[key].h !== hash) return bad('Wrong password');
+            }
+            const shown = acc[key].n;
+            try { localStorage.setItem('akariUser', shown); } catch (x) {}
+            document.getElementById('authForm').reset(); msg.textContent = '';
+            loginRefresh(); showNotify('LOG IN', (auMode === 'up' ? 'ACCOUNT CREATED - WELCOME, ' : 'WELCOME BACK, ') + shown.toUpperCase(), true);
+            if (window.__afterLogin) { closeLogin(); const f = window.__afterLogin; window.__afterLogin = null; f(); }
+            return false;
+        }
+        function loginOut() { try { localStorage.removeItem('akariUser'); } catch (x) {} loginRefresh(); showNotify('LOG IN', 'LOGGED OUT', false); }
+        document.addEventListener('DOMContentLoaded', loginRefresh);
         function openDownload(e) { if (e) e.stopPropagation(); document.getElementById('downloadModal').classList.add('open'); }
         function closeDownload() { const m = document.getElementById('downloadModal'); if (m) m.classList.remove('open'); }
         function dlSite(btn) {
@@ -5357,7 +5646,7 @@
         function closeExecutor() { document.getElementById('executorModal').classList.remove('open'); }
 
         document.addEventListener('keydown', (ev) => {
-            if (ev.key === 'Escape') { closeDownload(); closeExecutor(); closeProduct(); closeStatus(); if (typeof closeBackpack === 'function') closeBackpack(); if (typeof closeFreeKey === 'function') closeFreeKey(); if (typeof closeOurScript === 'function' && !osRedeeming) closeOurScript(); }
+            if (ev.key === 'Escape') { closeLogin(); closeDownload(); closeExecutor(); closeProduct(); closeStatus(); if (typeof closeBackpack === 'function') closeBackpack(); if (typeof closeFreeKey === 'function') closeFreeKey(); if (typeof closeOurScript === 'function' && !osRedeeming) closeOurScript(); }
         });
 
         let isPremium = false;
@@ -5678,7 +5967,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
 
         // Tabs behave like pages: opening one closes the others, marks its nav button active and hides the home page
         (function () {
-            const map = { scriptModal: 'ourScriptBtn', freeKeyModal: 'freeKeyBtn', statusModal: 'statusBtn', productModal: 'productBtn', backpackModal: 'backpackBtn', executorModal: 'executorBtn', downloadModal: 'dlBtn' };
+            const map = { scriptModal: 'ourScriptBtn', freeKeyModal: 'freeKeyBtn', statusModal: 'statusBtn', productModal: 'productBtn', backpackModal: 'backpackBtn', executorModal: 'executorBtn', downloadModal: 'dlBtn', loginModal: 'loginBtn' };
             const els = Object.keys(map).map(id => document.getElementById(id)).filter(Boolean);
             const sync = (openEl) => {
                 els.forEach(el => {
