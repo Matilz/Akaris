@@ -2911,7 +2911,7 @@
         .st-glyph { position: relative; z-index: 0; display: grid; place-items: center; width: 74px; height: 74px; border-radius: 24px; color: #fff; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); box-shadow: 0 8px 26px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.4); transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
         .st-glyph svg { width: 38px; height: 38px; }
         .st-card:hover .st-glyph { transform: scale(1.12) rotate(-6deg); }
-        .st-ok { position: absolute; top: 12px; right: 12px; z-index: 3; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #052e16; background: #4ade80; box-shadow: 0 4px 14px rgba(74,222,128,.55); }
+        .rd-ok { position: absolute; top: 12px; right: 12px; z-index: 3; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #052e16; background: #4ade80; box-shadow: 0 4px 14px rgba(74,222,128,.55); }
         .st-ok svg { width: 15px; height: 15px; }
         .st-info { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px 18px 18px; }
         .st-name { margin: 0; font: 800 18px/1.25 'Plus Jakarta Sans', sans-serif; color: #fff; }
@@ -2937,7 +2937,7 @@
         .st-art::before { content: ''; position: absolute; left: -60%; top: 0; width: 40%; height: 100%; z-index: 3; background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); transform: skewX(-20deg); opacity: 0; pointer-events: none; }
         .st-card:hover .st-art::before { opacity: 1; animation: stSweep 1.1s cubic-bezier(.22,1,.36,1); }
         @keyframes stSweep { to { left: 140%; } }
-        .st-ok { animation: stPop .6s cubic-bezier(.34,1.56,.64,1) backwards; animation-delay: inherit; }
+        .rd-ok { animation: stPop .6s cubic-bezier(.34,1.56,.64,1) backwards; animation-delay: inherit; }
         @keyframes stPop { from { transform: scale(0) rotate(-90deg); } to { transform: none; } }
         /* header summary: radar rings */
         .st-sum { position: relative; overflow: hidden; border-color: rgba(192,132,252,.4); box-shadow: 0 10px 40px rgba(0,0,0,.35), 0 0 40px rgba(168,85,247,.2), inset 0 1px 0 rgba(255,255,255,.15); }
@@ -3282,6 +3282,163 @@
         #authForm.swap { animation: lgSwap .5s cubic-bezier(.22,1,.36,1); }
         @keyframes lgSwap { from { opacity: 0; transform: translateY(14px) scale(.98); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
         @media (prefers-reduced-motion: reduce) { .lg-ind b::before, .lg-ind b::after, #authForm.swap { animation: none !important; } }
+
+        /* name chip in the middle of the tabs after log in */
+        html body #topNav .tn-user { flex: 0 0 auto; position: relative; display: inline-flex; align-items: center; gap: 9px; height: 38px; max-width: 190px; padding: 0 16px 0 5px; margin: 0 4px; border-radius: 999px; cursor: pointer; color: #fff; font: 800 14px 'Plus Jakarta Sans', sans-serif; background: linear-gradient(135deg, rgba(126,34,206,.55), rgba(20,6,40,.9)); border: 1px solid rgba(232,121,249,.7); box-shadow: 0 0 22px rgba(192,38,211,.55), inset 0 0 14px rgba(192,132,252,.3); animation: lgChipIn .7s cubic-bezier(.34,1.56,.64,1) backwards, lgChipGlow 3s ease-in-out infinite; transition: transform .4s cubic-bezier(.34,1.56,.64,1); }
+        html body #topNav .tn-user[hidden] { display: none; }
+        html body #topNav .tn-user:hover { transform: translateY(-2px) scale(1.06); }
+        .tn-user .tu-av { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; font-style: normal; font-weight: 900; color: #2e1065; background: linear-gradient(145deg, #fff, #d8b4fe 60%, #a855f7); box-shadow: 0 0 12px rgba(232,121,249,.9); }
+        .tn-user span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: linear-gradient(110deg, #fff, #f5d0fe 50%, #fff); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: uxShine2 5s linear infinite; }
+        .tn-user .tu-dot { position: absolute; left: 27px; bottom: 3px; width: 9px; height: 9px; border-radius: 50%; background: #e879f9; border: 2px solid #12061f; box-shadow: 0 0 8px #e879f9; }
+        @keyframes lgChipIn { from { opacity: 0; transform: scale(.4) translateY(-10px); } to { opacity: 1; transform: none; } }
+        @keyframes lgChipGlow { 0%,100% { box-shadow: 0 0 18px rgba(192,38,211,.45), inset 0 0 14px rgba(192,132,252,.3); } 50% { box-shadow: 0 0 32px rgba(232,121,249,.85), inset 0 0 18px rgba(192,132,252,.5); } }
+        @media (max-width: 720px) { html body #topNav .tn-user { height: 34px; max-width: 130px; font-size: 13px; } }
+        @media (prefers-reduced-motion: reduce) { html body #topNav .tn-user, .tn-user span { animation: none !important; } }
+
+        /* name chip hangs centered under the tabs */
+        html body .tn-user-below { position: fixed; top: 70px; left: 50%; z-index: 80; margin: 0; transform: translateX(-50%); animation: lgDrop .7s cubic-bezier(.34,1.56,.64,1) backwards, lgChipGlow 3s ease-in-out infinite; }
+        html body .tn-user-below[hidden] { display: none; }
+        html body .tn-user-below:hover { transform: translateX(-50%) translateY(-2px) scale(1.06); }
+        html body.page-open .tn-user-below { opacity: 0; pointer-events: none; }
+        .tn-user-below::before { content: ''; position: absolute; left: 50%; top: -9px; width: 2px; height: 9px; background: linear-gradient(#a855f7, transparent); transform: translateX(-50%); box-shadow: 0 0 8px #e879f9; }
+        @keyframes lgDrop { from { opacity: 0; transform: translateX(-50%) translateY(-24px) scale(.5); } to { opacity: 1; transform: translateX(-50%); } }
+
+        html body .tn-user-below { display: inline-flex; align-items: center; gap: 9px; height: 40px; width: auto; max-width: 220px; padding: 0 20px 0 5px; border-radius: 999px; cursor: pointer; color: #fff; font: 800 14px 'Plus Jakarta Sans', sans-serif; background: linear-gradient(135deg, rgba(126,34,206,.7), rgba(20,6,40,.92)) !important; border: 1px solid rgba(232,121,249,.75); }
+        html body .tn-user-below[hidden] { display: none !important; }
+        @media (max-width: 720px) { html body .tn-user-below { top: 62px; height: 34px; font-size: 13px; } }
+
+        /* Log in nav button = same lavender as the other tabs */
+        html body #topNav .tn-login { background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 45%, #a855f7 85%, #9333ea 100%) !important; border: 1px solid rgba(255,255,255,.85) !important; color: #2e1065 !important; box-shadow: 0 0 20px rgba(192,132,252,.6), inset 0 1px 0 rgba(255,255,255,.7) !important; }
+        html body #topNav .tn-login::before { inset: 0; padding: 0; background: radial-gradient(circle at 20% 30%, #7e22ce 0 1px, transparent 2px), radial-gradient(circle at 58% 72%, #fff 0 1.3px, transparent 2.4px), radial-gradient(circle at 86% 30%, #6b21a8 0 1px, transparent 2px); -webkit-mask: none; mask: none; z-index: 0; animation: tbTw 2.6s ease-in-out infinite; }
+        html body #topNav .tn-login::after { display: none; }
+        html body #topNav .tn-login svg { width: 17px; height: 17px; padding: 0; border-radius: 0; background: none; box-shadow: none; color: #2e1065; }
+        html body #topNav .tn-login span { background: none; -webkit-background-clip: border-box; background-clip: border-box; -webkit-text-fill-color: #2e1065; color: #2e1065; position: relative; z-index: 1; }
+        html body #topNav .tn-login:hover { box-shadow: 0 0 30px rgba(232,121,249,.9), 0 6px 16px rgba(88,28,135,.5), inset 0 1px 0 rgba(255,255,255,.9) !important; }
+        html body #topNav .tn-login.tn-active { background: var(--tb-act, linear-gradient(135deg, #f3e8ff, #c084fc 60%, #9333ea)) !important; }
+
+        html body #topNav .tn-login:not(.tn-active) { filter: saturate(.9) brightness(.9); box-shadow: 0 3px 12px rgba(88,28,135,.5), inset 0 1px 0 rgba(255,255,255,.7) !important; height: 39px; }
+        html body #topNav .tn-login:not(.tn-active):hover { filter: none; }
+        html body #topNav .tn-login.tn-active { filter: none; }
+
+        /* ===== redesigned password panel ===== */
+        .lg-auth { position: relative; padding: 18px 18px 20px; border-radius: 26px; gap: 14px; background: linear-gradient(160deg, rgba(88,28,135,.3), rgba(10,4,22,.85) 60%); box-shadow: 0 0 40px rgba(126,34,206,.3), inset 0 0 30px rgba(88,28,135,.25); isolation: isolate; }
+        .lg-auth::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; background: conic-gradient(from var(--lgA), rgba(192,132,252,.15), #e879f9, rgba(192,132,252,.15) 30%, rgba(147,51,234,.2) 60%, #fff 80%, rgba(192,132,252,.15)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: lgRim 5s linear infinite; pointer-events: none; }
+        .lg-auth::after { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; background: radial-gradient(circle at 8% 12%, #fff 0 1px, transparent 2px), radial-gradient(circle at 92% 18%, #f5d0fe 0 1.2px, transparent 2.4px), radial-gradient(circle at 85% 88%, #fff 0 1px, transparent 2px), radial-gradient(circle at 14% 80%, #e9d5ff 0 1.2px, transparent 2.4px); animation: tbTw 3s ease-in-out infinite; }
+        .lg-or2 { margin: 0; } .lg-or2 span { display: inline-flex; align-items: center; gap: 10px; letter-spacing: .08em; } .lg-or2 span::before, .lg-or2 span::after { content: ''; width: 6px; height: 6px; transform: rotate(45deg); background: #e879f9; box-shadow: 0 0 10px #e879f9; animation: uxBlink 2s ease-in-out infinite; } .lg-or2 span::after { animation-delay: 1s; }
+        .lg-field { height: 58px; border-radius: 18px; background: linear-gradient(180deg, rgba(10,4,22,.8), rgba(40,14,70,.45)); border: 1px solid rgba(168,85,247,.4); box-shadow: inset 0 2px 10px rgba(0,0,0,.45); overflow: hidden; }
+        .lg-field > svg { box-sizing: content-box; width: 18px; height: 18px; padding: 8px; margin-left: 10px; border-radius: 12px; color: #f5d0fe; background: linear-gradient(145deg, rgba(126,34,206,.7), rgba(192,38,211,.45)); border: 1px solid rgba(232,121,249,.4); box-shadow: 0 0 14px rgba(168,85,247,.45); transition: transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+        .lg-field::after { content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: linear-gradient(90deg, transparent, #e879f9, #fff, #e879f9, transparent); transform: scaleX(0); transition: transform .5s cubic-bezier(.22,1,.36,1); }
+        .lg-field:focus-within { border-color: rgba(232,121,249,.85); box-shadow: 0 0 26px rgba(192,38,211,.5), inset 0 2px 10px rgba(0,0,0,.4); } .lg-field:focus-within::after { transform: scaleX(1); } .lg-field:focus-within > svg { transform: scale(1.1) rotate(-6deg); box-shadow: 0 0 22px rgba(232,121,249,.9); }
+        .lg-str { display: grid; grid-template-columns: repeat(4, 1fr) auto; align-items: center; gap: 6px; margin: -4px 4px 0; } .lg-str[hidden] { display: none !important; }
+        .lg-str i { height: 5px; border-radius: 9px; background: rgba(168,85,247,.2); transition: background .4s, box-shadow .4s; }
+        .lg-str[data-n="1"] i:nth-child(-n+1), .lg-str[data-n="2"] i:nth-child(-n+2), .lg-str[data-n="3"] i:nth-child(-n+3), .lg-str[data-n="4"] i:nth-child(-n+4) { background: linear-gradient(90deg, #a855f7, #f0abfc); box-shadow: 0 0 10px #c084fc; }
+        .lg-str em { margin-left: 6px; min-width: 44px; font: 700 11.5px 'Plus Jakarta Sans', sans-serif; font-style: normal; letter-spacing: .06em; color: #e9d5ff; text-transform: uppercase; }
+        .lg-go { display: flex; align-items: center; justify-content: center; gap: 10px; height: 58px; font-size: 16px; letter-spacing: .02em; background: linear-gradient(110deg, #6d28d9, #c026d3, #9333ea, #c026d3); background-size: 250% 100%; animation: lgShift 5s ease-in-out infinite; text-shadow: 0 0 14px rgba(255,255,255,.6); }
+        .lg-go svg { width: 20px; height: 20px; transition: transform .45s cubic-bezier(.34,1.56,.64,1); } .lg-go:hover svg { transform: translateX(6px); }
+        @keyframes lgShift { 0%,100% { background-position: 0 0; } 50% { background-position: 100% 0; } }
+        .lg-tabs { margin-bottom: 2px; }
+        @media (prefers-reduced-motion: reduce) { .lg-auth::before, .lg-auth::after, .lg-go, .lg-or2 span::before, .lg-or2 span::after { animation: none !important; } }
+
+        /* no sparkle dots on the Log in page / button */
+        .lg-auth::after, #loginModal .modal-card::before, .lg-ind b::after, .lg-orb::after, html body #topNav .tn-login::before { display: none !important; }
+
+        /* ===== premium lavender submit button ===== */
+        html body #loginModal .lg-go { color: #2e1065; text-shadow: 0 1px 0 rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.95); background: linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 48%), linear-gradient(120deg, #faf5ff 0%, #e9d5ff 22%, #c084fc 55%, #a855f7 80%, #d8b4fe 100%); background-size: 100% 100%, 220% 100%; animation: lgMetal 6s ease-in-out infinite, lgGlow 3.2s ease-in-out infinite; box-shadow: 0 0 30px rgba(192,132,252,.7), 0 10px 26px rgba(88,28,135,.55), inset 0 1px 0 #fff, inset 0 -3px 8px rgba(126,34,206,.4); font-weight: 900; letter-spacing: .04em; }
+        html body #loginModal .lg-go::before { content: ''; position: absolute; inset: 4px; border-radius: inherit; padding: 0; background: none; -webkit-mask: none; mask: none; border: 1px solid rgba(255,255,255,.55); animation: none; pointer-events: none; }
+        html body #loginModal .lg-go .lg-shine { width: 34%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.95), transparent); animation: uxShine 2.6s ease-in-out infinite; }
+        html body #loginModal .lg-go svg { box-sizing: content-box; width: 16px; height: 16px; padding: 6px; border-radius: 50%; color: #f5d0fe; background: linear-gradient(145deg, #5b21b6, #2e1065); box-shadow: 0 0 12px rgba(88,28,135,.8), inset 0 1px 0 rgba(255,255,255,.35); }
+        html body #loginModal .lg-go:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0 46px rgba(232,121,249,.95), 0 14px 30px rgba(88,28,135,.6), inset 0 1px 0 #fff, inset 0 -3px 8px rgba(126,34,206,.4); }
+        @keyframes lgMetal { 0%,100% { background-position: 0 0, 0 0; } 50% { background-position: 0 0, 100% 0; } }
+        @keyframes lgGlow { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.08) saturate(1.1); } }
+        @media (prefers-reduced-motion: reduce) { html body #loginModal .lg-go, html body #loginModal .lg-go .lg-shine { animation: none !important; } }
+
+        /* ===== dark purple premium submit button (matches the dark panels) ===== */
+        html body #loginModal .lg-go { color: #fff; text-shadow: 0 0 14px rgba(216,180,254,.7); border: 1px solid rgba(192,132,252,.75); background: linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 50%), linear-gradient(120deg, #1e0a3c 0%, #3b0f70 40%, #581c87 65%, #2e1065 100%); background-size: 100% 100%, 220% 100%; box-shadow: 0 0 26px rgba(147,51,234,.55), 0 8px 22px rgba(0,0,0,.5), inset 0 1px 0 rgba(233,213,255,.45), inset 0 0 18px rgba(126,34,206,.45); }
+        html body #loginModal .lg-go::before { border: 1px solid rgba(192,132,252,.3); }
+        html body #loginModal .lg-go .lg-shine { background: linear-gradient(100deg, transparent, rgba(216,180,254,.55), transparent); }
+        html body #loginModal .lg-go svg { color: #2e1065; background: linear-gradient(145deg, #fff, #d8b4fe 60%, #a855f7); box-shadow: 0 0 14px rgba(232,121,249,.8), inset 0 1px 0 #fff; }
+        html body #loginModal .lg-go:hover { border-color: #f0abfc; box-shadow: 0 0 42px rgba(192,38,211,.8), 0 12px 28px rgba(0,0,0,.55), inset 0 1px 0 rgba(233,213,255,.6), inset 0 0 22px rgba(168,85,247,.6); }
+
+        /* ===== premium serif headline ===== */
+        html body .hp-title { font-family: 'Playfair Display', 'Cinzel', Georgia, 'Times New Roman', serif; font-weight: 700; letter-spacing: -.01em; line-height: 1.08; position: relative; padding-bottom: 22px; background: linear-gradient(105deg, #a855f7 0%, #e9d5ff 22%, #fff 38%, #f0abfc 52%, #c084fc 68%, #fff 82%, #a855f7 100%); background-size: 260% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 0 rgba(88,28,135,.55)) drop-shadow(0 0 26px rgba(168,85,247,.55)); animation: hpShine 7s linear infinite; }
+        html body .hp-title .hp-l2 { font-style: italic; font-weight: 700; letter-spacing: 0; padding-left: .08em; }
+        html body .hp-title::after { content: ''; position: absolute; left: 4px; bottom: 0; width: min(300px, 70%); height: 3px; border-radius: 3px; background: linear-gradient(90deg, #e879f9, #c084fc 50%, transparent); box-shadow: 0 0 14px #c084fc; animation: lgLine 3.4s ease-in-out infinite; transform-origin: left; }
+        @keyframes lgLine { 0%,100% { transform: scaleX(.35); opacity: .6; } 50% { transform: scaleX(1); opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) { html body .hp-title, html body .hp-title::after { animation: none !important; } }
+
+        /* ===== cooler key field ===== */
+        html body .os-redeem .rd-field { height: 64px; border-radius: 20px; border: 0; background: linear-gradient(180deg, rgba(8,3,18,.95), rgba(36,12,66,.6)); box-shadow: inset 0 2px 14px rgba(0,0,0,.55), 0 0 26px rgba(126,34,206,.35); isolation: isolate; overflow: hidden; }
+        html body .os-redeem .rd-field::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; background: conic-gradient(from var(--lgA), rgba(192,132,252,.25), #e879f9, rgba(192,132,252,.2) 30%, rgba(147,51,234,.25) 60%, #fff 80%, rgba(192,132,252,.25)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: lgRim 4.5s linear infinite; pointer-events: none; }
+        html body .os-redeem .rd-field:focus-within { box-shadow: inset 0 2px 14px rgba(0,0,0,.5), 0 0 38px rgba(192,38,211,.6); }
+        html body .os-redeem .rd-field .rd-ico { box-sizing: content-box; width: 19px; height: 19px; padding: 9px; margin-left: 12px; border-radius: 14px; color: #f5d0fe; filter: none; background: linear-gradient(145deg, rgba(126,34,206,.8), rgba(192,38,211,.5)); border: 1px solid rgba(232,121,249,.5); box-shadow: 0 0 16px rgba(168,85,247,.55); transition: transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+        html body .os-redeem .rd-field:focus-within .rd-ico { transform: scale(1.1) rotate(-8deg); box-shadow: 0 0 26px rgba(232,121,249,.95); }
+        html body .os-redeem .rd-field input { height: 100%; padding: 0 14px; font-size: 15px; letter-spacing: .12em; }
+        html body .os-redeem .rd-field::after { content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: linear-gradient(90deg, transparent, #e879f9, #fff, #e879f9, transparent); transform: scaleX(0); transition: transform .5s cubic-bezier(.22,1,.36,1); pointer-events: none; }
+        html body .os-redeem .rd-field:focus-within::after { transform: scaleX(1); }
+        html body .rd-paste { display: inline-flex; align-items: center; gap: 7px; height: 42px; padding: 0 16px; margin-right: 10px; border-radius: 14px; font-weight: 800; font-size: 13px; color: #2e1065; border: 1px solid rgba(255,255,255,.85); background: linear-gradient(135deg, #f3e8ff, #d8b4fe 50%, #a855f7); box-shadow: 0 0 16px rgba(192,132,252,.5), inset 0 1px 0 rgba(255,255,255,.7); transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+        html body .rd-paste svg { width: 16px; height: 16px; } html body .rd-paste:hover { transform: translateY(-2px) scale(1.06); box-shadow: 0 0 26px rgba(232,121,249,.9); } html body .rd-paste:active { transform: scale(.94); }
+        .rd-state { flex: none; position: relative; width: 28px; height: 28px; margin-right: 8px; border-radius: 50%; display: grid; place-items: center; opacity: 0; transform: scale(.4); transition: opacity .3s, transform .5s cubic-bezier(.34,1.56,.64,1); }
+        .rd-state svg { position: absolute; top: 50%; left: 50%; width: 15px; height: 15px; margin: -7.5px 0 0 -7.5px; display: none; stroke: currentColor; }
+        .rd-field[data-s="ok"] .rd-state, .rd-field[data-s="bad"] .rd-state { opacity: 1; transform: none; }
+        .rd-field[data-s="ok"] .rd-state { background: linear-gradient(145deg, #e9d5ff, #a855f7); color: #2e1065; box-shadow: 0 0 16px #c084fc; } .rd-field[data-s="ok"] .rdv-ok { display: block; }
+        .rd-field[data-s="bad"] .rd-state { background: linear-gradient(145deg, #fda4af, #e11d48); color: #fff; box-shadow: 0 0 16px #fb7185; } .rd-field[data-s="bad"] .rdv-bad { display: block; }
+        .rd-field[data-s="ok"] { box-shadow: inset 0 2px 14px rgba(0,0,0,.5), 0 0 34px rgba(232,121,249,.65); }
+        @media (prefers-reduced-motion: reduce) { html body .os-redeem .rd-field::before { animation: none !important; } }
+
+        /* script-copy notification: bottom-right corner */
+        html body #toastBanner.toast-br { top: auto !important; bottom: 20px !important; right: 20px !important; transform: translateY(140%) scale(.92) !important; }
+        html body #toastBanner.toast-br.show { transform: none !important; }
+        @media (max-width: 520px) { html body #toastBanner.toast-br { top: auto !important; bottom: 14px !important; right: 14px !important; left: 14px !important; } }
+
+        /* ===== binary ticker at the bottom of the home page ===== */
+        .hp-bin { position: relative; margin: 46px auto 70px; max-width: 1200px; padding: 18px 0; display: flex; flex-direction: column; gap: 8px; overflow: hidden; border-top: 1px solid rgba(168,85,247,.25); border-bottom: 1px solid rgba(168,85,247,.25); -webkit-mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+        .bn-row { display: flex; width: max-content; font: 700 20px/1.2 'Fira Code', 'JetBrains Mono', monospace; letter-spacing: .38em; white-space: nowrap; color: rgba(192,132,252,.5); text-shadow: 0 0 12px rgba(168,85,247,.6); }
+        .bn-track { display: flex; flex: none; padding-right: .38em; }
+        .bn-row .bn-track span { transition: color .3s; } .bn-row .bn-track span.on { color: #fff; text-shadow: 0 0 14px #e879f9, 0 0 26px #a855f7; animation: bnBlink 2.4s ease-in-out infinite; }
+        .bn-l { animation: bnLeft 26s linear infinite; } .bn-r { animation: bnRight 32s linear infinite; } .bn-s { font-size: 13px; opacity: .55; animation-duration: 40s; }
+        @keyframes bnLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes bnRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+        @keyframes bnBlink { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) { .bn-l, .bn-r, .bn-row .bn-track span.on { animation: none !important; } }
+
+        /* ================= NAV v3: neon rim, gliding spotlight tabs, scroll progress ================= */
+        html body #topNav .tn-in { height: 58px; margin-top: 8px; background: linear-gradient(180deg, rgba(24,8,48,.82), rgba(6,2,14,.9)); box-shadow: 0 14px 44px rgba(88,28,135,.5), 0 0 60px rgba(147,51,234,.22), inset 0 1px 0 rgba(255,255,255,.1), inset 0 0 30px rgba(126,34,206,.18); }
+        html body #topNav .tn-in::before { padding: 1.5px; background: conic-gradient(from var(--lgA), rgba(168,85,247,.15), #e879f9 12%, rgba(168,85,247,.12) 28%, rgba(147,51,234,.2) 55%, #fff 70%, #c084fc 80%, rgba(168,85,247,.15)) !important; animation: lgRim 7s linear infinite !important; opacity: 1 !important; }
+        html body #topNav .tn-in::after { display: block !important; background: radial-gradient(60% 140% at 50% 130%, rgba(192,38,211,.35), transparent 70%) !important; animation: none !important; }
+        html body #topNav .tn-prog { position: absolute; left: 26px; right: 26px; bottom: 0; height: 2px; z-index: 3; pointer-events: none; transform-origin: left; transform: scaleX(var(--sp, 0)); background: linear-gradient(90deg, #a855f7, #f0abfc, #fff); box-shadow: 0 0 12px #e879f9, 0 0 22px #a855f7; border-radius: 2px; transition: transform .15s linear; }
+        /* the tab track */
+        html body #topNav .tn-links { position: absolute; gap: 2px; padding: 5px; border-radius: 999px; background: linear-gradient(180deg, rgba(4,1,10,.75), rgba(36,12,66,.45)); border: 1px solid rgba(168,85,247,.4); box-shadow: inset 0 2px 10px rgba(0,0,0,.5), 0 0 24px rgba(126,34,206,.3); }
+        html body #topNav .tn-glide { position: absolute; top: 5px; bottom: 5px; left: 0; width: 0; z-index: 0; pointer-events: none; opacity: 0; transition: transform .55s cubic-bezier(.34,1.35,.5,1), width .55s cubic-bezier(.34,1.35,.5,1), opacity .3s; }
+        html body #topNav .tn-glide.on { opacity: 1; }
+        html body #topNav .tn-glide b { position: absolute; inset: 0; border-radius: 999px; overflow: hidden; background: linear-gradient(135deg, #faf5ff 0%, #e9d5ff 30%, #c084fc 70%, #a855f7 100%); box-shadow: 0 0 0 1px rgba(255,255,255,.85), 0 0 26px rgba(192,132,252,.85), 0 6px 16px rgba(88,28,135,.5), inset 0 1px 0 #fff, inset 0 -3px 6px rgba(126,34,206,.35); }
+        html body #topNav .tn-glide b::before { content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.85), transparent); transform: skewX(-20deg); animation: uxShine 2.8s ease-in-out infinite; }
+        html body #topNav .tn-links .theme-btn { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 18px 0 15px !important; border: 0 !important; border-radius: 999px !important; background: transparent !important; box-shadow: none !important; filter: none !important; color: rgba(233,213,255,.78) !important; font: 800 14.5px 'Plus Jakarta Sans', sans-serif; letter-spacing: .01em; text-shadow: none !important; transition: color .3s, transform .35s cubic-bezier(.34,1.56,.64,1) !important; }
+        html body #topNav .tn-links .theme-btn svg { display: block !important; width: 16px !important; height: 16px !important; padding: 0 !important; flex: none; transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+        html body #topNav .tn-links .theme-btn::before, html body #topNav .tn-links .theme-btn::after { display: none !important; }
+        html body #topNav .tn-links .theme-btn:hover { color: #2e1065 !important; transform: translateY(-1px) !important; background: transparent !important; box-shadow: none !important; }
+        html body #topNav .tn-links .theme-btn:hover svg { transform: scale(1.25) rotate(-12deg); }
+        html body #topNav .tn-links .theme-btn.tn-active { color: #2e1065 !important; background: transparent !important; box-shadow: none !important; }
+        html body #topNav .tn-links .theme-btn.tn-active svg { transform: scale(1.12); }
+        html body #topNav .tn-links:hover .theme-btn.tn-active:not(:hover) { color: rgba(233,213,255,.78) !important; }
+        html body #topNav .tn-links:hover .theme-btn.tn-active:not(:hover) svg { transform: none; }
+        html body #topNav .tn-links .theme-btn:active { transform: scale(.95) !important; }
+        /* brand + logo + download */
+        html body #topNav .tn-pyr { filter: drop-shadow(0 0 10px rgba(192,38,211,.75)); animation: uxFloat 5s ease-in-out infinite; transition: transform .6s cubic-bezier(.34,1.56,.64,1), filter .3s; }
+        html body #topNav .tn-pyr:hover { transform: scale(1.15) rotate(-6deg); filter: drop-shadow(0 0 18px rgba(232,121,249,.95)); }
+        html body #topNav .tn-brand { transition: transform .45s cubic-bezier(.34,1.56,.64,1), filter .3s; filter: drop-shadow(0 0 10px rgba(168,85,247,.6)); } html body #topNav .tn-brand:hover { transform: scale(1.06) translateX(2px); filter: drop-shadow(0 0 16px rgba(232,121,249,.95)); }
+        html body #topNav .tn-dl { position: relative; width: 42px; height: 42px; border: 0; background: linear-gradient(145deg, rgba(88,28,135,.7), rgba(20,6,40,.9)); box-shadow: 0 0 18px rgba(168,85,247,.5), inset 0 0 12px rgba(192,132,252,.3); isolation: isolate; transition: transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+        html body #topNav .tn-dl::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: 50%; padding: 1.5px; background: conic-gradient(from var(--lgA), #f5d0fe, #7e22ce 30%, #e879f9 60%, #fff 80%, #f5d0fe); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: lgRim 3.6s linear infinite; }
+        html body #topNav .tn-dl:hover { transform: translateY(-2px) scale(1.1); box-shadow: 0 0 30px rgba(232,121,249,.9), inset 0 0 14px rgba(192,132,252,.5); }
+        @media (max-width: 1000px) { html body #topNav .tn-links { position: static; transform: none; margin-left: auto; } }
+        @media (max-width: 720px) { html body #topNav .tn-in { height: 50px; } html body #topNav .tn-links { padding: 3px; } html body #topNav .tn-links .theme-btn { height: 36px; padding: 0 11px !important; font-size: 12px; } html body #topNav .tn-links .theme-btn svg { display: none !important; } html body #topNav .tn-glide { top: 3px; bottom: 3px; } }
+        @media (prefers-reduced-motion: reduce) { html body #topNav .tn-in::before, html body #topNav .tn-pyr, html body #topNav .tn-glide b::before, html body #topNav .tn-dl::before { animation: none !important; } }
+
+        html body #topNav .tn-links .theme-btn svg { color: #d8b4fe !important; stroke: currentColor !important; opacity: .95; }
+        html body #topNav .tn-links .theme-btn:hover svg, html body #topNav .tn-links .theme-btn.tn-active svg { color: #2e1065 !important; }
+        html body #topNav .tn-links:hover .theme-btn.tn-active:not(:hover) svg { color: #d8b4fe !important; }
+
+        @media (max-width: 720px) and (pointer: coarse) { html body #topNav .tn-links { display: none !important; } }
+        @media (max-width: 720px) { html body #topNav .tn-links .theme-btn { padding: 0 9px !important; font-size: 11.5px; } }
 </style>
 </head>
 <body class="relative flex flex-col items-center justify-center p-4 bg-grid" style="justify-content: safe center;">
@@ -3637,13 +3794,14 @@
     <!-- Top navigation (sparkly purple) -->
     <nav id="topNav" class="themed" aria-label="Main">
         <div class="tn-in">
+            <i class="tn-prog" aria-hidden="true"></i>
             <div class="tn-items">
                 <span class="tn-pyr" role="button" tabindex="0" aria-label="Home" title="Home" onclick="goHome()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goHome()}"><span class="tn-pyr-in" style="position:absolute;left:0;top:0;width:150px;height:144px;transform:scale(.36);transform-origin:0 0;pointer-events:none">
                 <canvas id="pyramidCanvas" style="position:absolute;inset:0;width:150px;height:144px"></canvas>
                 <canvas id="hatCanvas" class="keep-color" style="position:absolute;inset:0;width:150px;height:144px"></canvas>
                 </span></span>
                 <span class="tn-brand" role="button" tabindex="0" onclick="goHome()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goHome()}">𝒜𝓀𝒶𝓇𝒾 𝐻𝓊𝒷</span>
-                <div class="tn-links">
+                <div class="tn-links"><i class="tn-glide" aria-hidden="true"><b></b></i>
                 <button id="ourScriptBtn" type="button" class="theme-btn" onclick="openOurScript(event)" aria-haspopup="dialog">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg>
             <span>Our script</span>
@@ -3664,19 +3822,14 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 4h6a3 3 0 013 3v13H6V7a3 3 0 013-3zM9 4V3h6v1M9 13h6M9 17h6M6 10h12"/></svg>
             <span>Backpack Product</span>
         </button>
-                <button id="executorBtn" type="button" class="theme-btn" onclick="openExecutor(event)" aria-haspopup="dialog">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 4h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"></path></svg>
-            <span>Executor</span>
-        </button>
                 </div>
 
             </div>
-            <button id="loginBtn" type="button" class="tn-login" onclick="openLogin(event)" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>Log in</span><i class="tl-shine"></i></button>
             <button id="dlBtn" type="button" class="tn-dl" data-label="Download" aria-label="Download website" title="Download website" onclick="openDownload(event)" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16"/></svg></button>
             <button id="tnMenuBtn" type="button" class="tn-menu" aria-label="Menu" aria-expanded="false" aria-controls="tnSheet" onclick="tnMenu()"><i></i><i></i><i></i></button>
         </div>
     </nav>
-    <div id="tnSheet" class="tn-sheet" role="dialog" aria-label="Menu" aria-hidden="true">
+        <div id="tnSheet" class="tn-sheet" role="dialog" aria-label="Menu" aria-hidden="true">
         <i class="tn-spk" style="left:12%;top:20%"></i><i class="tn-spk" style="left:86%;top:12%;animation-delay:.9s"></i><i class="tn-spk" style="left:70%;top:64%;animation-delay:1.7s"></i><i class="tn-spk" style="left:8%;top:78%;animation-delay:2.4s"></i>
         <div class="tn-sheet-in">
             <div class="tn-card" style="--k:0">
@@ -3696,7 +3849,7 @@
         <section class="hp-hero">
             <div class="hp-copy">
                 <span class="hp-chip"><i></i>Always updated automatically</span>
-                <h1 class="hp-title">One script.<br>Many maps.</h1>
+                <h1 class="hp-title"><span class="hp-l1">One script.</span><br><em class="hp-l2">Many maps.</em></h1>
                 <p class="hp-desc">Akari Hub is a Roblox script that supports many maps in one package. Install it with a single line of code, receive updates automatically and check system status at any time.</p>
                 <div class="hp-cta">
                     <button type="button" class="hp-btn primary" onclick="openFreeKey()"><span class="hp-fx"></span>Get a free key <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -3738,6 +3891,11 @@
                 <article><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><h3>Script link works in game only</h3><p>The link shows no content in a regular browser, which keeps the code protected.</p></article>
             </div>
         </section>
+            <section class="hp-bin" aria-hidden="true">
+                <div class="bn-row bn-l"><div class="bn-track" data-bits></div></div>
+                <div class="bn-row bn-r"><div class="bn-track" data-bits></div></div>
+                <div class="bn-row bn-l bn-s"><div class="bn-track" data-bits></div></div>
+            </section>
     </main>
 
     <div id="productModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="productTitle" onclick="if(event.target===this)closeProduct()">
@@ -3751,51 +3909,6 @@
         </div>
     </div>
 
-    <div id="loginModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="lgTitle" onclick="if(event.target===this)closeLogin()">
-        <div class="themed modal-card lg-card" style="max-width:420px;padding:0">
-            <button type="button" class="modal-close" onclick="closeLogin()" aria-label="Close">&times;</button>
-            <div class="lg-in">
-                <span class="lg-logo"><b class="lg-orb o1"></b><b class="lg-orb o2"></b>
-                    <svg class="lg-emb" viewBox="0 0 120 120" aria-hidden="true">
-                        <defs>
-                            <linearGradient id="lgG1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5d0fe"/><stop offset=".5" stop-color="#c084fc"/><stop offset="1" stop-color="#7e22ce"/></linearGradient>
-                            <linearGradient id="lgG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#d8b4fe"/></linearGradient>
-                            <radialGradient id="lgG3" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#e879f9" stop-opacity="0"/></radialGradient>
-                        </defs>
-                        <circle class="lg-e-glow" cx="60" cy="64" r="44" fill="url(#lgG3)"/>
-                        <polygon class="lg-e-base" points="60,14 100,92 20,92" fill="rgba(88,28,135,.55)" stroke="url(#lgG1)" stroke-width="3" stroke-linejoin="round"/>
-                        <polygon points="60,14 100,92 60,78" fill="url(#lgG1)" opacity=".85"/>
-                        <polygon points="60,14 20,92 60,78" fill="url(#lgG2)" opacity=".55"/>
-                        <path class="lg-e-line" d="M60 14 L60 78 M20 92 L60 78 L100 92" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
-                        <path class="lg-e-star s1" d="M96 24 l2.4 6.6 6.6 2.4 -6.6 2.4 -2.4 6.6 -2.4 -6.6 -6.6 -2.4 6.6 -2.4z" fill="#fff"/>
-                        <path class="lg-e-star s2" d="M24 40 l1.6 4.4 4.4 1.6 -4.4 1.6 -1.6 4.4 -1.6 -4.4 -4.4 -1.6 4.4 -1.6z" fill="#f0abfc"/>
-                        <circle class="lg-e-eye" cx="60" cy="56" r="5" fill="#fff"/>
-                    </svg></span>
-                <h2 id="lgTitle" class="lg-title">Log in</h2>
-                <p class="lg-desc">Log in to buy keys, renew them and manage your account.</p>
-                <button type="button" class="lg-discord" onclick="loginDiscord()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.1 1.7 16.9A16.8 16.8 0 006.800 19.500l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.200 0l.4.300c-.5.400-1.100.700-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.600-11.500zM9.500 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm5 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg><span>Continue with Discord</span><i class="lg-shine"></i></button>
-                <form id="lgForm" class="lg-form" onsubmit="return loginSubmit(event)" hidden>
-                    <input id="lgName" type="text" maxlength="32" autocomplete="off" placeholder="Your Discord username" aria-label="Discord username">
-                    <button type="submit">Log in</button>
-                </form>
-                <div id="lgAuth" class="lg-auth">
-                    <div class="lg-or lg-or2"><span>or use a password</span></div>
-                    <div class="lg-tabs" role="tablist"><i class="lg-ind"><b></b></i><button type="button" class="on" data-m="in" onclick="authMode('in')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 012 2v12a2 2 0 01-2 2h-3M10 17l5-5-5-5M15 12H4"/></svg><span>Log in</span></button><button type="button" data-m="up" onclick="authMode('up')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-3.900 3-6 7-6s7 2.100 7 6M19 8v6M16 11h6"/></svg><span>Sign up</span></button></div>
-                    <form id="authForm" onsubmit="return authSubmit(event)" autocomplete="off">
-                        <label class="lg-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><input id="auName" type="text" maxlength="24" placeholder="Username" autocomplete="username"></label>
-                        <label class="lg-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg><input id="auPass" type="password" maxlength="64" placeholder="Password" autocomplete="current-password"><button type="button" class="lg-eye" onclick="authEye()" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></label>
-                        <label class="lg-field lg-conf" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><input id="auPass2" type="password" maxlength="64" placeholder="Confirm password" autocomplete="new-password"></label>
-                        <div id="auMsg" class="lg-msg" role="alert"></div>
-                        <button type="submit" class="lg-go"><span id="auGoTxt">Log in</span><i class="lg-shine"></i></button>
-                    </form>
-                </div>
-                <div id="lgUser" class="lg-user" hidden><b id="lgUserName"></b><button type="button" onclick="loginOut()">Log out</button></div>
-                <div class="lg-side"><div class="lg-tag"><i></i>Member perks</div><ul class="lg-list"><li><span class="lg-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path class="ic-spin" d="M38 20a15 15 0 00-27-5M10 28a15 15 0 0027 5" /><path class="ic-spin" d="M11 8v7h7M37 40v-7h-7"/><path class="ic-pop" d="M24 15l7 9-7 9-7-9z" fill="rgba(255,255,255,.28)"/><path d="M17 24h14"/></svg></span><div><b>Buy and renew keys</b><small>Re-buy the same key to extend its time</small></div></li><li><span class="lg-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-38 24 24)"><path class="ic-pop" d="M4 24l9-11 9 11-9 11z" fill="rgba(255,255,255,.3)"/><circle cx="13" cy="24" r="2.2" fill="#fff" stroke="none"/><path d="M22 24h20M34 24v7M41 24v5"/></g><path class="ic-tw" d="M38 6v8M34 10h8" stroke-width="2"/></svg></span><div><b>Manage your keys</b><small>Every key lives in your Backpack</small></div></li><li><span class="lg-ico"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="20" width="32" height="8" rx="2" fill="rgba(255,255,255,.28)"/><path d="M11 28v11a3 3 0 003 3h20a3 3 0 003-3V28M24 20v22"/><path class="ic-pop" d="M24 20c-6 0-9-6-5-8s5 4 5 8c0-4 1-10 5-8s1 8-5 8z"/><path class="ic-tw" d="M40 6v6M37 9h6" stroke-width="2"/></svg></span><div><b>Free keys anytime</b><small>Finish a few tasks and get one free</small></div></li></ul><div class="lg-tag"><i></i>Quick access</div><div class="lg-quick"><button type="button" class="lg-q" onclick="openProduct(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Products</span><i class="lg-q-shine"></i></button><button type="button" class="lg-q" onclick="openBackpack(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3M16 7l3 3M13 10l2 2"/></svg><span>Backpack</span><i class="lg-q-shine"></i></button><button type="button" class="lg-q" onclick="openFreeKey(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7M7.5 8a2.5 2.5 0 010-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 010 5"/></svg><span>Get Key</span><i class="lg-q-shine"></i></button><button type="button" class="lg-q" onclick="openStatus(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span>Status</span><i class="lg-q-shine"></i></button></div></div>
-                <div class="lg-or"><span>or</span></div>
-                <button type="button" class="lg-free" onclick="closeLogin(); openFreeKey();"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7M7.500 8a2.500 2.500 0 010-5C11 3 12 8 12 8s1-5 4.500-5a2.500 2.500 0 010 5"/></svg><span>Get a free key</span></button>
-            </div>
-        </div>
-    </div>
 
     <div id="downloadModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="dlTitle" onclick="if(event.target===this)closeDownload()">
         <div class="themed modal-card dl-card">
@@ -3813,397 +3926,6 @@
         </div>
     </div>
 
-    <div id="executorModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="executorTitle" onclick="if(event.target===this)closeExecutor()">
-        <div class="themed modal-card">
-            <button type="button" class="modal-close" onclick="closeExecutor()" aria-label="Close">&times;</button>
-            <div class="glow-line"></div>
-            <div class="ex-hero">
-                <span class="ex-eyebrow">Executors</span>
-                <h3 id="executorTitle">Supported executors</h3>
-                <p>Pick your platform, copy the latest version and open the executor you want. Status is checked live.</p>
-                <span class="ex-live"><i></i><b id="exLiveCount">0</b> online now</span>
-            </div>
-            <div class="exec-switch" role="tablist" aria-label="Platform">
-                <button type="button" class="exec-sw active" data-p="windows" role="tab" aria-selected="true" onclick="setExecPlatform('windows')"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</button>
-                <button type="button" class="exec-sw" data-p="macbook" role="tab" aria-selected="false" onclick="setExecPlatform('macbook')"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M2.5 19h19l-1.5-4H4z"/></svg>MACBOOK</button>
-                <button type="button" class="exec-sw" data-p="mobile" role="tab" aria-selected="false" onclick="setExecPlatform('mobile')"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg>MOBILE</button>
-            </div>
-            <div class="exec-list" data-platform="windows">
-                <button type="button" class="exec-copy" onclick="copyExecText('Version-2c6fd5e09aaf4cfa', this)" title="Copy WINDOWS version">
-                    <span class="exec-copy-top"><span class="exec-copy-os"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span><span class="exec-status keep-color exec-mini"><i></i><b>ONLINE</b></span></span>
-                    <span class="exec-copy-row"><span class="exec-copy-text">Version-2c6fd5e09aaf4cfa</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
-                </button>
-                <button type="button" class="exec-copy" onclick="copyExecText('Version-445548190fe44ee2', this)" title="Copy MACBOOK version">
-                    <span class="exec-copy-top"><span class="exec-copy-os"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M2.5 19h19l-1.5-4H4z"/></svg>MACBOOK</span><span class="exec-status keep-color exec-mini"><i></i><b>ONLINE</b></span></span>
-                    <span class="exec-copy-row"><span class="exec-copy-text">Version-445548190fe44ee2</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
-                </button>
-                <button type="button" class="exec-copy" onclick="copyExecText('2.744.1081', this)" title="Copy MOBILE version">
-                    <span class="exec-copy-top"><span class="exec-copy-os"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg>MOBILE</span><span class="exec-status keep-color exec-mini"><i></i><b>ONLINE</b></span></span>
-                    <span class="exec-copy-row"><span class="exec-copy-text">2.744.1081</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
-                </button>
-                <div class="exec-card exec-card-best" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
-                    <div class="exec-head">
-                        <span class="exec-name exec-best">Volt</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span>
-                        <span class="exec-badge exec-key keep-color"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg>KEY</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://voltbz.net/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link exec-buy keep-color" href="https://voltbz.net/pricing" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a1 1 0 001 .8h9.2a1 1 0 001-.8L21 7H6"/></svg>
-                            Purchase
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.com/invite/voltbz" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-<div class="exec-card exec-card-best" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
-                    <div class="exec-head">
-                        <span class="exec-name exec-best">Potassium</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span>
-                        <span class="exec-badge exec-key keep-color"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg>KEY</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://www.potassium.pro/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link exec-buy keep-color" href="https://discord.com/invite/potassium" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a1 1 0 001 .8h9.2a1 1 0 001-.8L21 7H6"/></svg>
-                            Purchase
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.gg/potassium" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-<div class="exec-card" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
-                    <div class="exec-head">
-                        <span class="exec-name">Wave</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span>
-                        <span class="exec-badge exec-key keep-color"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg>KEY</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://getwave.gg/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link exec-buy keep-color" href="https://getwave.gg/resellers" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a1 1 0 001 .8h9.2a1 1 0 001-.8L21 7H6"/></svg>
-                            Purchase
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.com/invite/rARhPpN7fY" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                </div>
-<div class="exec-card exec-card-best" data-status="online" data-platform="windows" data-unc="98" data-sunc="96">
-                    <div class="exec-head">
-                        <span class="exec-name exec-best">Lucid</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span>
-                        <span class="exec-badge exec-key keep-color"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg>KEY</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://getlucid.gg/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link exec-buy keep-color" href="https://getlucid.gg/resellers?plan=weekly" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a1 1 0 001 .8h9.2a1 1 0 001-.8L21 7H6"/></svg>
-                            Purchase
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.com/invite/Jup2CS3nE8" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                </div>
-<div class="exec-card" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
-                    <div class="exec-head">
-                        <span class="exec-name">Project Real</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span>
-                        <span class="exec-badge exec-key keep-color"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg>KEY</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://projectreal.gg/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link" href="https://work.ink/2znc/real-setup?sr=MTEzcHhXZkF2OVk5ZmpmbFBvNmhJbHAwa0Ftd1prVGkyTkE5YS9DWEY3NzVjbmFGMnZoM05RZEhNK0tXWlhQT2tnYTZ4cGFKUTFjNkJqQmV0Wkp4alBWYzR1Ykg3dkV5QldxcmlSNEhzZUczbVB6SEUyWXQ0d2tsOXpDREdJNHBmcUxoQk51cHRBK2VxMnRQOE5ScmJLZGxyd2hzSExlUWlJMFdkazVLYTIwaTlWN1NhVzE1RXZnY1pCdHVxYzQzd01rZzVOeDk%3D" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
-                            Download
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.gg/projectreal" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-                <div class="exec-card" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
-                    <div class="exec-head">
-                        <span class="exec-name">Madium</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span>
-                        <span class="exec-badge exec-key keep-color"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg>KEY</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://getmadium.net/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link" href="https://olemad.fromsmash.com/MadiumFileDownloadThanks" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
-                            Download
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.gg/olemad" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-                <div class="exec-card" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
-                    <div class="exec-head">
-                        <span class="exec-name">Velocity</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span>
-                        <span class="exec-badge exec-key keep-color"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg>KEY</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://realvelocity.xyz" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link" href="https://work.ink/1ZRk/5b05f400-db3c-4014-ad98-eb40779b1256" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
-                            Download
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.gg/velocityide" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat exec-feat-no"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-<div class="exec-card" data-status="online" data-platform="windows" data-unc="99" data-sunc="100">
-                    <div class="exec-head">
-                        <span class="exec-name">SirHurt</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span>
-                        <span class="exec-badge exec-key keep-color"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg>KEY</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://sirhurt.net/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link exec-buy keep-color" href="https://sirhurt.net/#purchase" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a1 1 0 001 .8h9.2a1 1 0 001-.8L21 7H6"/></svg>
-                            Purchase
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.com/invite/CPKvWTgFdV" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-<div class="exec-card" data-status="online" data-platform="windows" data-unc="66" data-sunc="59">
-                    <div class="exec-head">
-                        <span class="exec-name">Solara</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://getsolara.dev/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link" href="https://getsolara.dev/download/static/files/SolaraV3.exe" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
-                            Download
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://getsolara.dev/discord" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat exec-feat-no"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-<div class="exec-card" data-status="online" data-platform="windows" data-unc="84" data-sunc="40">
-                    <div class="exec-head">
-                        <span class="exec-name">Xeno</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>WINDOWS</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://www.xeno.now/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link" href="https://xeno.now/99aca0c5/3734fe27c699/73662e3d135f" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
-                            Download
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.gg/xe-no" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat exec-feat-no"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-                <div class="exec-card exec-card-best" data-status="online" data-platform="mobile" data-unc="99" data-sunc="100">
-                    <div class="exec-head">
-                        <span class="exec-name exec-best">Delta</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg>MOBILE</span>
-                        <span class="exec-badge exec-key keep-color"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg>KEY</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://deltaexploits.gg/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link" href="https://www.mediafire.com/file/2vjongrr50yjfw6/Delta-2.745.1142.apk/file" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
-                            Download
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.gg/deltax" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-<div class="exec-card exec-card-best" data-status="online" data-platform="mobile" data-unc="99" data-sunc="100">
-                    <div class="exec-head">
-                        <span class="exec-name exec-best">Arceus X Neo</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg>MOBILE</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://spdmteam.com/neo#downloads" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link" href="https://www.mediafire.com/file/iy7jfea6nf9r4vg/Roblox.Arceus.X.NEO.2.3.9.apk/file" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
-                            Download
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.com/invite/wQKjUYf99A" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-<div class="exec-card exec-card-best" data-status="online" data-platform="macbook" data-unc="99" data-sunc="100">
-                    <div class="exec-head">
-                        <span class="exec-name exec-best">MacSploit</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M2.5 19h19l-1.5-4H4z"/></svg>MACBOOK</span>
-                        <span class="exec-badge exec-key keep-color"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9m-3 3l3 3m-6 0l2 2"/></svg>KEY</span>
-                    </div>
-                    <div class="exec-links exec-links-3">
-                        <a class="exec-link" href="https://www.raptor.fun/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <button type="button" class="exec-link exec-buy keep-color" onclick="showNotify('MACSPLOIT', 'PURCHASE LINK COMING SOON', true)">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a1 1 0 001 .8h9.2a1 1 0 001-.8L21 7H6"/></svg>
-                            Purchase
-                        </button>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.com/invite/macsploit" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-<div class="exec-card" data-status="online" data-platform="macbook" data-unc="99" data-sunc="100">
-                    <div class="exec-head">
-                        <span class="exec-name">Opiumware</span>
-                        <span class="exec-status keep-color"><i></i><b>ONLINE</b></span>
-                        <span class="exec-badge"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M2.5 19h19l-1.5-4H4z"/></svg>MACBOOK</span>
-                    </div>
-                    <div class="exec-links">
-                        <a class="exec-link" href="https://use.opiumware.today/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-                            Website
-                        </a>
-                        <a class="exec-link exec-discord keep-color" href="https://discord.com/invite/opiumware" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.3 5.4A16.6 16.6 0 0015.2 4l-.5 1a15.3 15.3 0 00-5.4 0l-.5-1a16.6 16.6 0 00-4.1 1.4C2.1 9.3 1.4 13.100 1.700 16.900a16.800 16.800 0 005.100 2.600l1.100-1.800c-.6-.2-1.200-.5-1.700-.9l.4-.3a11.900 11.900 0 0010.800 0l.4.300c-.5.400-1.100.7-1.700.900l1.100 1.800a16.800 16.800 0 005.100-2.600c.4-4.400-.7-8.200-2.900-11.500zM8.700 14.600c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>
-                            Discord
-                        </a>
-                    </div>
-                    <div class="exec-features">
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Decompile</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Multi Instance</span>
-                        <span class="exec-feat"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Raknet Library</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div id="statusModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Status" onclick="if(event.target===this)closeStatus()">
         <div class="themed modal-card" style="max-width:940px;padding:40px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto">
@@ -4263,8 +3985,9 @@
                             <label for="osPremInput">KEY FROM PRODUCT</label>
                             <div class="rd-field">
                                 <svg class="rd-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
-                                <input id="osPremInput" type="text" placeholder="011001110101" autocomplete="off" spellcheck="false" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')osRedeem()">
-                                <button type="button" class="rd-paste" onclick="osPaste()">Paste</button>
+                                <input id="osPremInput" type="text" placeholder="011001110101" autocomplete="off" spellcheck="false" oninput="this.value=this.value.replace(/[\s\u200b-\u200d\ufeff]+/g,'').replace(/[\u2010-\u2015\u2212]/g,'-').toUpperCase();osLive()" onkeydown="if(event.key==='Enter')osRedeem()" maxlength="64">
+                                <span class="rd-state" aria-hidden="true"><svg class="rdv-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><svg class="rdv-bad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+                                <button type="button" class="rd-paste" onclick="osPaste()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="3" width="8" height="4" rx="1"/><path d="M16 5h2a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h2"/></svg>Paste</button>
                                 <i class="rd-scan"></i>
                             </div>
                             <div class="rd-prog" id="osVbar" hidden><div class="rd-steps"><span id="osVstep">Checking key…</span><span id="osVpct">0%</span></div><div class="rd-track"><u id="osVfill"></u></div></div>
@@ -4286,7 +4009,7 @@
                 </div>
                 <div class="os-side">
                     <section class="os-box"><h3>Requirements</h3><ul class="os-ck"><li>An executor that supports HttpGet and loadstring</li><li>Be in a map from the supported list</li><li>A working internet connection</li></ul></section>
-                    <section class="os-box"><h3>Need a key?</h3><p>Get a free key by finishing a few short tasks, or buy a longer one in the shop.</p><div class="os-btns"><button type="button" class="os-pill white" onclick="closeOurScript();openFreeKey()">Get a free key</button><button type="button" class="os-pill" onclick="closeOurScript();document.getElementById('productBtn').click()">Shop</button></div></section>
+                    <section class="os-box"><h3>Need a key?</h3><p>Get a free key by finishing a few short tasks, or buy a longer one in the shop.</p><div class="os-btns"><button type="button" class="os-pill white" onclick="closeOurScript();openFreeKey()">Get a free key</button><button type="button" class="os-pill" onclick="closeOurScript();openStatus()">Status</button><button type="button" class="os-pill" onclick="closeOurScript();document.getElementById('productBtn').click()">Shop</button></div></section>
                     <section class="os-box"><h3>Troubleshooting</h3><ul class="os-tr"><li>Nothing happens: check that your executor supports HttpGet and that you copied the whole line.</li><li>"Map not supported" window: see the Universal script list.</li><li>"Updating" notice: that map is being worked on, try again later.</li></ul></section>
                 </div>
             </div>
@@ -4424,6 +4147,7 @@
             toastMessage.textContent = message;
 
             toast.classList.toggle('toast-error', !isSuccess);
+            toast.classList.toggle('toast-br', title === 'SCRIPT EXECUTOR');   // script-copy notices pop up at the bottom right
             const svg = toastIco.querySelector('svg');
             if (svg) svg.innerHTML = isSuccess ? '<path d="M5 13l4 4L19 7"/>' : '<path d="M12 4 2.5 20h19L12 4Z"/><path d="M12 10v4.5M12 17.5v.01"/>';
             toast.classList.remove('show'); void toast.offsetWidth;
@@ -5180,7 +4904,7 @@
                 + '<div class="pd-code"><div class="pd-label">Discount code</div><div class="pd-codebox"><input id="pdCode" type="text" placeholder="Enter a code" autocomplete="off" spellcheck="false"><button type="button" class="pd-codecopy" onclick="pdCopyCode(this)" aria-label="Copy code"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><span>Copy</span></button><button type="button" onclick="pdApply(' + ci + ',' + i + ')">Apply</button></div></div></div>'
                 + '<div class="pd-hint">' + (it.days ? 'Each extra quantity adds ' + it.duration + ' to your key (same key, no extra keys) &middot; ' : '') + 'Up to ' + pdMax(it) + ' per order &middot; ' + it.stock + ' in stock</div>'
                 + '<div class="pd-totalrow"><span>Total</span><b id="pdTotal"></b></div>'
-                + '<button id="pdBuyBtn" type="button" class="pd-buy pd-buy-wide' + (loginUser() ? '' : ' pd-buy-guest') + '" ' + (out ? 'disabled>Out of stock' : 'onclick="startPurchase(' + ci + ',' + i + ')"><span class="pd-buy-txt">' + (loginUser() ? 'Buy now' : 'Log in to buy') + '</span>') + '</button>'
+                + '<button id="pdBuyBtn" type="button" class="pd-buy pd-buy-wide' + '' + '" ' + (out ? 'disabled>Out of stock' : 'onclick="startPurchase(' + ci + ',' + i + ')"><span class="pd-buy-txt">' + 'Buy now' + '</span>') + '</button>'
                 + '</div></div>';
             const pdIn = document.getElementById('pdCode');
             pdIn.value = code;
@@ -5248,7 +4972,6 @@
         function startPurchase(ci, i) {
             const btn = document.getElementById('pdBuyBtn');
             if (!btn || btn.dataset.busy) return;
-            if (!loginUser()) { showNotify('LOG IN', 'LOG IN TO BUY KEYS', false); window.__afterLogin = function () { startPurchase(ci, i); }; openLogin(); return; }
             btn.dataset.busy = '1';
             /* same purple verifying bar as the intro and the Get Script tab: fills linearly over 3 seconds */
             const box = document.createElement('div');
@@ -5549,79 +5272,7 @@
         })();
 
 
-        /* put your Discord login / invite link here (https://discord.gg/...). While it is empty the button just shows a notice. */
-        const LOGIN_DISCORD_URL = '';
-        function openLogin(e) { if (e) e.stopPropagation(); loginRefresh(); const m = document.getElementById('loginModal'); m.classList.add('open'); }
-        function closeLogin() { const m = document.getElementById('loginModal'); if (m) m.classList.remove('open'); }
-        /* local profile only (no server): the name is kept in this browser */
-        function loginUser() { try { return localStorage.getItem('akariUser') || ''; } catch (e) { return ''; } }
-        function loginRefresh() {
-            const bt = document.querySelector('#pdBuyBtn .pd-buy-txt'); if (bt) { bt.textContent = loginUser() ? 'Buy now' : 'Log in to buy'; bt.closest('#pdBuyBtn').classList.toggle('pd-buy-guest', !loginUser()); }
-            const u = loginUser();
-            const sp = document.querySelector('#loginBtn span'); if (sp) sp.textContent = u ? u.slice(0, 12) : 'Log in';
-            const d = document.querySelector('.lg-discord'), f = document.getElementById('lgForm'), w = document.getElementById('lgUser');
-            if (d) d.hidden = !!u; const au = document.getElementById('lgAuth'); if (au) au.hidden = !!u; if (f) f.hidden = true; if (w) w.hidden = !u;
-            const n = document.getElementById('lgUserName'); if (n) n.textContent = u;
-            const t = document.getElementById('lgTitle'); if (t) t.textContent = u ? 'Welcome' : 'Log in';
-            const ds = document.querySelector('.lg-desc'); if (ds) ds.textContent = u ? 'You are logged in. You can buy and renew keys now.' : 'Log in to buy keys, renew them and manage your account.';
-        }
-        function loginDiscord() {
-            if (LOGIN_DISCORD_URL) window.open(LOGIN_DISCORD_URL, '_blank', 'noopener');
-            document.getElementById('lgForm').hidden = false;
-            setTimeout(function () { document.getElementById('lgName').focus(); }, 50);
-        }
-        function loginSubmit(e) {
-            e.preventDefault();
-            const v = document.getElementById('lgName').value.trim();
-            if (!v) { document.getElementById('lgName').focus(); return false; }
-            try { localStorage.setItem('akariUser', v); } catch (x) {}
-            loginRefresh(); closeLogin(); showNotify('LOG IN', 'WELCOME, ' + v.toUpperCase(), true);
-            if (window.__afterLogin) { const f = window.__afterLogin; window.__afterLogin = null; f(); }
-            return false;
-        }
-        let auMode = 'in';
-        function authMode(m) {
-            auMode = m;
-            document.querySelectorAll('.lg-tabs button').forEach(b => b.classList.toggle('on', b.dataset.m === m));
-            document.querySelector('.lg-tabs').dataset.m = m;
-            document.querySelector('.lg-conf').hidden = m !== 'up';
-            document.getElementById('auGoTxt').textContent = m === 'up' ? 'Create account' : 'Log in';
-            document.getElementById('auPass').autocomplete = m === 'up' ? 'new-password' : 'current-password';
-            document.getElementById('auMsg').textContent = '';
-            const f = document.getElementById('authForm'); f.classList.remove('swap'); void f.offsetWidth; f.classList.add('swap');
-        }
-        function authEye() { const p = document.getElementById('auPass'); p.type = p.type === 'password' ? 'text' : 'password'; }
-        async function authHash(name, pass) {
-            const data = new TextEncoder().encode('akari:' + name.toLowerCase() + ':' + pass);
-            if (window.crypto && crypto.subtle) { const h = await crypto.subtle.digest('SHA-256', data); return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, '0')).join(''); }
-            let x = 5381; for (const c of data) x = ((x << 5) + x + c) >>> 0; return 'x' + x;
-        }
-        function authAccts() { try { return JSON.parse(localStorage.getItem('akariAccts') || '{}'); } catch (e) { return {}; } }
-        async function authSubmit(e) {
-            e.preventDefault();
-            const msg = document.getElementById('auMsg'), name = document.getElementById('auName').value.trim(), pass = document.getElementById('auPass').value;
-            const bad = t => { msg.textContent = t; msg.classList.remove('shake'); void msg.offsetWidth; msg.classList.add('shake'); return false; };
-            if (name.length < 3) return bad('Username must be at least 3 characters');
-            if (pass.length < 6) return bad('Password must be at least 6 characters');
-            const acc = authAccts(), key = name.toLowerCase(), hash = await authHash(name, pass);
-            if (auMode === 'up') {
-                if (pass !== document.getElementById('auPass2').value) return bad('Passwords do not match');
-                if (acc[key]) return bad('This username is already taken');
-                acc[key] = { n: name, h: hash };
-                try { localStorage.setItem('akariAccts', JSON.stringify(acc)); } catch (x) { return bad('Cannot save the account in this browser'); }
-            } else {
-                if (!acc[key]) return bad('No account with this username');
-                if (acc[key].h !== hash) return bad('Wrong password');
-            }
-            const shown = acc[key].n;
-            try { localStorage.setItem('akariUser', shown); } catch (x) {}
-            document.getElementById('authForm').reset(); msg.textContent = '';
-            loginRefresh(); showNotify('LOG IN', (auMode === 'up' ? 'ACCOUNT CREATED - WELCOME, ' : 'WELCOME BACK, ') + shown.toUpperCase(), true);
-            if (window.__afterLogin) { closeLogin(); const f = window.__afterLogin; window.__afterLogin = null; f(); }
-            return false;
-        }
-        function loginOut() { try { localStorage.removeItem('akariUser'); } catch (x) {} loginRefresh(); showNotify('LOG IN', 'LOGGED OUT', false); }
-        document.addEventListener('DOMContentLoaded', loginRefresh);
+        
         function openDownload(e) { if (e) e.stopPropagation(); document.getElementById('downloadModal').classList.add('open'); }
         function closeDownload() { const m = document.getElementById('downloadModal'); if (m) m.classList.remove('open'); }
         function dlSite(btn) {
@@ -5636,17 +5287,10 @@
             const fallback = function () { done('<!DOCTYPE html>\n' + document.documentElement.outerHTML); };
             if (/^https?:/.test(location.protocol)) fetch(location.href).then(function (r) { return r.ok ? r.text() : Promise.reject(); }).then(done, fallback); else fallback();
         }
-        function openExecutor(e) {
-            if (e) e.stopPropagation();
-            exLiveCount();
-            const L = document.querySelector('#executorModal .exec-list');
-            if (L && !L.dataset.tilt) { L.dataset.tilt = '1'; plTilt(L, '.exec-card'); }
-            document.getElementById('executorModal').classList.add('open');
-        }
-        function closeExecutor() { document.getElementById('executorModal').classList.remove('open'); }
+        
 
         document.addEventListener('keydown', (ev) => {
-            if (ev.key === 'Escape') { closeLogin(); closeDownload(); closeExecutor(); closeProduct(); closeStatus(); if (typeof closeBackpack === 'function') closeBackpack(); if (typeof closeFreeKey === 'function') closeFreeKey(); if (typeof closeOurScript === 'function' && !osRedeeming) closeOurScript(); }
+            if (ev.key === 'Escape') { closeDownload(); closeProduct(); closeStatus(); if (typeof closeBackpack === 'function') closeBackpack(); if (typeof closeFreeKey === 'function') closeFreeKey(); if (typeof closeOurScript === 'function' && !osRedeeming) closeOurScript(); }
         });
 
         let isPremium = false;
@@ -5785,19 +5429,27 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         }
         function osPaste() {
             const i = document.getElementById('osPremInput');
-            if (navigator.clipboard && navigator.clipboard.readText) navigator.clipboard.readText().then(t => { i.value = t.replace(/\s+/g, '').toUpperCase(); i.focus(); }, () => { i.focus(); showNotify('PASTE', 'PRESS CTRL+V TO PASTE YOUR KEY', false); });
+            if (navigator.clipboard && navigator.clipboard.readText) navigator.clipboard.readText().then(t => { i.value = t.replace(/[\s\u200b-\u200d\ufeff]+/g, '').replace(/[\u2010-\u2015\u2212]/g, '-').toUpperCase(); osLive(); i.focus(); }, () => { i.focus(); showNotify('PASTE', 'PRESS CTRL+V TO PASTE YOUR KEY', false); });
             else { i.focus(); showNotify('PASTE', 'PRESS CTRL+V TO PASTE YOUR KEY', false); }
         }
+        /* ignore case, spaces, zero-width chars, odd dashes and missing hyphens when comparing keys */
+        function osNorm(v) { return String(v || '').toUpperCase().replace(/[^A-Z0-9]/g, ''); }
         function osValidKey(v) {
-            v = v.replace(/\s+/g, '').toUpperCase();
-            if (v === PREMIUM_KEY) return true;
-            try { return PRODUCT_CATEGORIES.some(c => c.items.some(it => it.key && it.key.toUpperCase() === v)); } catch (e) { return false; }
+            v = osNorm(v);
+            if (!v) return false;
+            if (v === osNorm(PREMIUM_KEY)) return true;
+            try { return PRODUCT_CATEGORIES.some(c => c.items.some(it => it.key && osNorm(it.key) === v)); } catch (e) { return false; }
+        }
+        function osLive() {
+            const i = document.getElementById('osPremInput'), f = i && i.closest('.rd-field'); if (!f) return;
+            const n = osNorm(i.value);
+            f.dataset.s = !n ? '' : osValidKey(n) ? 'ok' : (n.length >= 18 ? 'bad' : 'typing');
         }
         function osRedeem() {
             if (osRedeeming) return;
             const inp = document.getElementById('osPremInput'), v = inp.value.replace(/\s+/g, '');
             if (!v) { osShake(); inp.focus(); showNotify('PREMIUM KEY', 'PLEASE ENTER YOUR PREMIUM KEY', false); return; }
-            if (!osValidKey(v)) { osShake(); showNotify('INVALID KEY', 'THIS KEY IS NOT A VALID PREMIUM KEY', false); return; }
+            if (!osValidKey(v)) { osShake(); osLive(); showNotify('INVALID KEY', 'THIS KEY IS NOT A VALID PREMIUM KEY', false); return; }
             osRedeeming = true; const go = document.getElementById('osRedeemGo'), tx = document.getElementById('osRedeemTxt'), bar = document.getElementById('osVbar'), f = document.getElementById('osVfill');
             go.disabled = true; inp.disabled = true; tx.textContent = 'Verifying\u2026'; bar.hidden = false;
             f.style.transition = 'none'; f.style.width = '0%'; void f.offsetWidth; f.style.transition = 'width 3s linear'; f.style.width = '100%';
@@ -5806,7 +5458,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
             showNotify('VERIFYING PREMIUM', 'AUTHENTICATING KEY... PLEASE WAIT', true);
             setTimeout(() => {
                 clearInterval(pv);
-                osRedeeming = false; go.disabled = false; inp.disabled = false; inp.value = ''; tx.textContent = 'Redeem Key'; bar.hidden = true; f.style.width = '0%';
+                osRedeeming = false; go.disabled = false; inp.disabled = false; inp.value = ''; osLive(); tx.textContent = 'Redeem Key'; bar.hidden = true; f.style.width = '0%';
                 try { localStorage.setItem('akariPremiumOn', '1'); } catch (e) {} osUnlock(false); showNotify('PREMIUM UNLOCKED', 'WELCOME, PREMIUM PLAYER!', true);
             }, 3000);
         }
@@ -5967,7 +5619,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
 
         // Tabs behave like pages: opening one closes the others, marks its nav button active and hides the home page
         (function () {
-            const map = { scriptModal: 'ourScriptBtn', freeKeyModal: 'freeKeyBtn', statusModal: 'statusBtn', productModal: 'productBtn', backpackModal: 'backpackBtn', executorModal: 'executorBtn', downloadModal: 'dlBtn', loginModal: 'loginBtn' };
+            const map = { scriptModal: 'ourScriptBtn', freeKeyModal: 'freeKeyBtn', statusModal: 'statusBtn', productModal: 'productBtn', backpackModal: 'backpackBtn', downloadModal: 'dlBtn' };
             const els = Object.keys(map).map(id => document.getElementById(id)).filter(Boolean);
             const sync = (openEl) => {
                 els.forEach(el => {
@@ -6058,7 +5710,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         function tnBuild() {
             const list = document.getElementById('tnList'); if (!list) return;
             const rows = [{ id: '', label: 'Home', ico: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg>' }];
-            ['ourScriptBtn', 'freeKeyBtn', 'statusBtn', 'productBtn', 'backpackBtn', 'executorBtn', 'dlBtn'].forEach(function (id) {
+            ['ourScriptBtn', 'freeKeyBtn', 'statusBtn', 'productBtn', 'backpackBtn', 'dlBtn'].forEach(function (id) {
                 const b = document.getElementById(id); if (!b || b.classList.contains('bk-hide')) return;
                 const svg = b.querySelector('svg'), lab = b.querySelector('span');
                 rows.push({ id: id, label: b.dataset.label || (lab ? lab.textContent.trim() : id), ico: svg ? svg.outerHTML : '' });
@@ -6095,7 +5747,7 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') tnMenu(false); });
         function goHome() {
             if (typeof closeOurScript === 'function') closeOurScript();
-            ['freeKeyModal', 'statusModal', 'productModal', 'backpackModal', 'executorModal', 'downloadModal'].forEach(id => { const m = document.getElementById(id); if (m) m.classList.remove('open'); });
+            ['freeKeyModal', 'statusModal', 'productModal', 'backpackModal', 'downloadModal'].forEach(id => { const m = document.getElementById(id); if (m) m.classList.remove('open'); });
             const h = document.getElementById('homePage'); if (h) h.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -7486,6 +7138,42 @@ loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/MeurfldCOiYdw5xN/raw"))(
     size(); window.addEventListener('resize', size);
     raf = requestAnimationFrame(frame);
 })();
+
+        (function () {
+            const rows = document.querySelectorAll('.hp-bin .bn-track[data-bits]');
+            rows.forEach(function (t, n) {
+                let h = '';
+                for (let i = 0; i < 90; i++) { const b = Math.random() < .5 ? 0 : 1; h += '<span' + (Math.random() < .08 ? ' class="on"' : '') + '>' + b + '</span>'; }
+                t.innerHTML = h; t.parentNode.appendChild(t.cloneNode(true));   // duplicate so the loop is seamless
+            });
+        })();
+
+        /* nav: gliding spotlight + scroll progress */
+        (function () {
+            const links = document.querySelector('#topNav .tn-links'), glide = links && links.querySelector('.tn-glide'), nav = document.querySelector('#topNav .tn-in');
+            if (!links || !glide) return;
+            function move(el) {
+                if (!el) { glide.classList.remove('on'); return; }
+                glide.style.width = el.offsetWidth + 'px';
+                glide.style.transform = 'translateX(' + el.offsetLeft + 'px)';
+                glide.classList.add('on');
+            }
+            function active() { return links.querySelector('.theme-btn.tn-active'); }
+            function rest() { move(active()); }
+            links.addEventListener('mouseover', function (e) { const b = e.target.closest('.theme-btn'); if (b) move(b); });
+            links.addEventListener('mouseleave', rest);
+            links.addEventListener('focusin', function (e) { const b = e.target.closest('.theme-btn'); if (b) move(b); });
+            links.addEventListener('focusout', rest);
+            let raf = 0; const sched = function () { if (!raf) raf = requestAnimationFrame(function () { raf = 0; if (!links.matches(':hover')) rest(); }); };
+            const mo = new MutationObserver(sched);
+            links.querySelectorAll('.theme-btn').forEach(function (b) { mo.observe(b, { attributes: true, attributeFilter: ['class'] }); });
+            window.addEventListener('resize', rest);
+            window.addEventListener('load', function () { setTimeout(rest, 100); });
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(rest);
+            setTimeout(rest, 300); setTimeout(rest, 1200);
+            const hp = document.getElementById('homePage');
+            if (hp && nav) hp.addEventListener('scroll', function () { const m = hp.scrollHeight - hp.clientHeight; nav.style.setProperty('--sp', m > 0 ? Math.min(1, hp.scrollTop / m) : 0); }, { passive: true });
+        })();
 </script>
 
 </body>
